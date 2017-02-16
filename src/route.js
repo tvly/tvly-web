@@ -7,7 +7,9 @@ const routes = [{
   path: '/',
   component: App,
 }, {
-  path: '/list',
+  name: 'list',
+  path: '/list/:category',
+  props: true,
   component: ListView,
 }]
 
