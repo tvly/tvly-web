@@ -53,6 +53,11 @@ module.exports = {
   performance: {
     hints: false,
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+    }),
+  ],
   devtool: '#eval-source-map',
 }
 
@@ -74,8 +79,5 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-    })
   ])
 }
