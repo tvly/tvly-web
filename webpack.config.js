@@ -1,11 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: ['jquery', './src/main.js'],
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
     filename: 'build.js',
   },
   module: {
@@ -74,5 +74,8 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+    })
   ])
 }
