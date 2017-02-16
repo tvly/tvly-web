@@ -1,11 +1,21 @@
 import VueRouter from 'vue-router'
 
-import App from './App.vue'
 import ListView from './ListView.vue'
+
+import channels from './channels.json'
+
+const categories = channels['Categories']
 
 const routes = [{
   path: '/',
-  component: App,
+  redirect: (to) => {
+    return {
+      name: 'list',
+      params: {
+        category: categories[0]['Name'],
+      },
+    }
+  },
 }, {
   name: 'list',
   path: '/list/:category',
