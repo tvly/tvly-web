@@ -11,6 +11,12 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(vue|js)$/,
+        enforce: 'pre',
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
