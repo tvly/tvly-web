@@ -27,7 +27,14 @@ module.exports = {
       loader: 'babel-loader',
       exclude: /node_modules/,
     }, {
-      test: /\.(png|jpg|gif|svg)$/,
+      test: /\.css$/,
+      loader: 'css-loader',
+    }, {
+      enforce: 'post',
+      test: /\.css$/,
+      loader: 'style-loader',
+    }, {
+      test: /\.(png|jpg|gif|svg|woff2|ttf|woff|eot)$/,
       loader: 'file-loader',
       options: {
         name: '[name].[ext]?[hash]',
