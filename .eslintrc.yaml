@@ -1,3 +1,5 @@
 extends:
     - vue
     - google
+env:
+    browser: true
