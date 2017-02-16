@@ -6,6 +6,7 @@
       <li role="presentation"><a href="#">Messages</a></li>
     </ul>
     <p>{{category}}</p>
+    <p>{{channels}}</p>
   </div>
 </template>
 
@@ -13,7 +14,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 
 export default {
-  props: ['category'],
+  props: ['category', 'channels'],
   name: 'list-view',
 }
 </script>
