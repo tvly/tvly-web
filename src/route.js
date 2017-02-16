@@ -1,7 +1,7 @@
-import VueRouter from 'vue-router';
+import VueRouter from 'vue-router'
 
-import App from './App.vue';
-import ListView from './ListView.vue';
+import App from './App.vue'
+import ListView from './ListView.vue'
 
 const routes = [{
   path: '/',
@@ -11,4 +11,6 @@ const routes = [{
   component: ListView,
 }]
 
-export default new VueRouter({routes});
+export default new VueRouter({
+  routes,
+})
