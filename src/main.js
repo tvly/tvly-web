@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import router from './route.js'
+import { router } from './route.js'
 import channels from './channels.json'
 
 new Vue({
