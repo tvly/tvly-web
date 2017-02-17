@@ -6,7 +6,7 @@
         <a class="brand-logo center">{{title}}<span class="badge green">{{engine}}</span></a>
       </div>
     </nav>
-    <div class="player"></div>
+    <div class="player fp-mute"></div>
     <iptv-footer></iptv-footer>
   </div>
 </template>
