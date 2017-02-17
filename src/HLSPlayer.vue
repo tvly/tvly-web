@@ -30,15 +30,16 @@ export default {
     })
 
     flowplayer(this.$el.getElementsByClassName('player')[0], {
+      autoplay: true,
       swf,
       swfHls,
       clip: {
+        live: true,
         sources: [{
           type: 'application/x-mpegurl',
-          src: '//edge.flowplayer.org/FlowplayerHTML5forWordPress.m3u8',
+          src: `//iptv.tsinghua.edu.cn/hls/${this.channel}.m3u8`,
         }],
       },
-      debug: true,
     })
   },
 }
