@@ -7,14 +7,12 @@
       </div>
     </nav>
     <div class="player fp-mute"></div>
-    <iptv-footer></iptv-footer>
   </div>
 </template>
 
 <script>
 import 'material-design-icons/iconfont/material-icons.css'
 import 'flowplayer/dist/skin/skin.css'
-import IPTVFooter from './IPTVFooter.vue'
 import flowplayer from 'flowplayer'
 import engine from 'flowplayer-hlsjs'
 engine(flowplayer)
@@ -23,9 +21,6 @@ import swfHls from 'flowplayer/dist/flowplayerhls.swf'
 
 export default {
   props: ['channel', 'channels'],
-  components: {
-    'iptv-footer': IPTVFooter,
-  },
   name: 'hls-player',
   data() {
     return {
