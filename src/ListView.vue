@@ -24,15 +24,20 @@
         <router-link :to="linkChannel(c)" class="btn btn-block btn-primary">{{c['Name']}}</router-link>
       </div>
     </div>
+    <channel-thumbnail></channel-thumbnail>
   </div>
 </template>
 
 <script>
 import 'materialize-css/dist/css/materialize.css'
 import 'material-design-icons/iconfont/material-icons.css'
+import ChannelThumbnail from './ChannelThumbnail.vue'
 
 export default {
   props: ['category', 'channels'],
+  components: {
+    ChannelThumbnail,
+  },
   name: 'list-view',
   methods: {
     linkCategory(category) {
