@@ -33,9 +33,9 @@ export default {
         name: 'play',
         params: {
           channel: channel['Vid'],
-        }
+        },
       }
-    }
+    },
   },
   computed: {
     channelsOfCurrentCategory() {
