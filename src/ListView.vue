@@ -1,10 +1,28 @@
 <template>
   <div class="container">
-    <ul class="nav nav-tabs">
-      <li v-for="c in channels['Categories']" role="presentation" :class="{active: c['Name'] == category}">
-        <router-link :to="linkCategory(c)">{{c['Name']}}</router-link>
-      </li>
-    </ul>
+    <nav class="nav-extended">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">清华IPTV</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="sass.html">Sass</a></li>
+          <li><a href="badges.html">Components</a></li>
+          <li><a href="collapsible.html">JavaScript</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="sass.html">Sass</a></li>
+          <li><a href="badges.html">Components</a></li>
+          <li><a href="collapsible.html">JavaScript</a></li>
+        </ul>
+      </div>
+      <div class="nav-content">
+        <ul class="tabs tabs-transparent">
+          <li v-for="c in channels['Categories']" class="tab">
+            <router-link :to="linkCategory(c)" :class="{active: c['Name'] == category}">{{c['Name']}}</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <div class="row">
       <div v-for="c in channelsOfCurrentCategory" class="col-xs-4 col-md-3">
         <router-link :to="linkChannel(c)" class="btn btn-block btn-primary">{{c['Name']}}</router-link>
@@ -14,7 +32,7 @@
 </template>
 
 <script>
-import 'bootstrap/dist/css/bootstrap.css'
+import 'materialize-css/dist/css/materialize.css'
 
 export default {
   props: ['category', 'channels'],

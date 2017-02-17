@@ -11,6 +11,7 @@
   "dependencies": {
     "flowplayer": "^7.0.2",
     "flowplayer-hlsjs": "flowplayer/flowplayer-hlsjs",
+    "materialize-css": "^0.98.0",
     "vue": "^2.1.0",
     "vue-router": "^2.2.1"
   },
