@@ -23,12 +23,8 @@ export default {
   },
   mounted() {
     flowplayer((api) => {
-      console.log(this)
       api.on('ready', (e, api, video) => {
         const engineName = api.engine.engineName
-        console.log(this)
-        console.log(engineName)
-        console.log('===>', engineName)
         this.engine = engineName
       })
     })
