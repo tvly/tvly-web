@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div class="player"></div>
+    <p>Engine: {{engine}}</p>
   </div>
 </template>
 
@@ -15,9 +16,24 @@ import swfHls from 'flowplayer/dist/flowplayerhls.swf'
 export default {
   props: ['channel', 'channels'],
   name: 'hls-player',
+  data() {
+    return {
+      engine: '',
+    }
+  },
   mounted() {
-    console.log(this.$el.childNodes[0])
-    flowplayer(this.$el.childNodes[0], {
+    flowplayer((api) => {
+      console.log(this)
+      api.on('ready', (e, api, video) => {
+        const engineName = api.engine.engineName
+        console.log(this)
+        console.log(engineName)
+        console.log('===>', engineName)
+        this.engine = engineName
+      })
+    })
+
+    flowplayer(this.$el.getElementsByClassName('player')[0], {
       swf,
       swfHls,
       clip: {
