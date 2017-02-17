@@ -1,26 +1,12 @@
 {  
    "Categories":[  
       {  
-         "Name":"活动直播",
-         "Hidden":true,
-         "Channels":[  
-            {  
-               "Name":"2017年新年联欢晚会（12月31日21时）",
-               "Vid":"tsinghuatv1"
-            }
-         ]
-      },
-      {  
          "Name":"高清频道",
          "Hidden":false,
          "Channels":[  
             {  
                "Name":"CCTV-1高清",
                "Vid":"cctv1hd"
-            },
-            {  
-               "Name":"CCTV-2高清",
-               "Vid":"cctv2hd"
             },
             {  
                "Name":"CCTV-3高清",
