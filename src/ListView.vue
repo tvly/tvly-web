@@ -3,11 +3,7 @@
     <nav class="nav-extended">
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">清华IPTV</a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="#">Logout</a></li>
-        </ul>
-        <ul class="side-nav" id="mobile-demo">
+        <ul class="right">
           <li><a href="#">Logout</a></li>
         </ul>
       </div>
