@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="card-image">
-        <img src="http://thecatapi.com/api/images/get?format=src&type=jpg">
+        <img :src="snapshot">
         <span class="card-title">{{channel['Name']}}</span>
       </div>
       <div class="card-action">
@@ -17,6 +17,9 @@ export default {
   name: 'channel-thumbnail',
   props: ['channel'],
   computed: {
+    snapshot() {
+      return `https://iptv.tsinghua.edu.cn/snapshot/${this.channel['Vid']}.jpg`
+    },
     channelLink() {
       return {
         name: 'play',
