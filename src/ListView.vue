@@ -2,12 +2,12 @@
   <div class="container">
     <ul class="nav nav-tabs">
       <li v-for="c in channels['Categories']" role="presentation" :class="{active: c['Name'] == category}">
-        <router-link :to="link(c)">{{c['Name']}}</router-link>
+        <router-link :to="linkCategory(c)">{{c['Name']}}</router-link>
       </li>
     </ul>
     <div class="row">
       <div v-for="c in channelsOfCurrentCategory" class="col-xs-4 col-md-3">
-        <a :href="c['Vid']" class="btn btn-block btn-primary">{{c['Name']}}</a>
+        <router-link :to="linkChannel(c)" class="btn btn-block btn-primary">{{c['Name']}}</router-link>
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@ export default {
   props: ['category', 'channels'],
   name: 'list-view',
   methods: {
-    link(category) {
+    linkCategory(category) {
       return {
         name: 'list',
         params: {
@@ -28,6 +28,14 @@ export default {
         },
       }
     },
+    linkChannel(channel) {
+      return {
+        name: 'play',
+        params: {
+          channel: channel['Vid'],
+        }
+      }
+    }
   },
   computed: {
     channelsOfCurrentCategory() {
