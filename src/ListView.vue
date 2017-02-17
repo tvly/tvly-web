@@ -6,7 +6,7 @@
           <div class="nav-wrapper">
             <a href="#" class="brand-logo">清华IPTV</a>
             <ul class="right">
-              <li><a href="#">Logout</a></li>
+              <li><a href="#">登出</a></li>
             </ul>
           </div>
           <div class="nav-content">
