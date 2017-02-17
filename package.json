@@ -9,10 +9,8 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
     "flowplayer": "^7.0.2",
     "flowplayer-hlsjs": "flowplayer/flowplayer-hlsjs",
-    "jquery": "^3.1.1",
     "vue": "^2.1.0",
     "vue-router": "^2.2.1"
   },
