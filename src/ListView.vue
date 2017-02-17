@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <nav class="nav-extended">
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">清华IPTV</a>
