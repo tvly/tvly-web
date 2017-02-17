@@ -66,3 +66,12 @@ export default {
   },
 }
 </script>
+
+<style>
+.flowplayer {
+   margin-top: 10px;
+   max-width: 70%;
+   left: 50%;
+   transform: translate(-50%, 0)
+}
+</style>
