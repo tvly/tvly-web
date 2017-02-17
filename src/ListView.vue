@@ -1,25 +1,28 @@
 <template>
   <div>
-    <div class="navbar-fixed">
-      <nav class="nav-extended">
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo">清华IPTV</a>
-          <ul class="right">
-            <li><a href="#">Logout</a></li>
-          </ul>
-        </div>
-        <div class="nav-content">
-          <ul class="tabs tabs-transparent">
-            <li v-for="c in channels['Categories']" class="tab">
-              <router-link :to="linkCategory(c)" :class="{active: c['Name'] == category}">{{c['Name']}}</router-link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-    <div class="row" id="list">
-      <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col s4" :channel="c"></channel-thumbnail>
-    </div>
+    <main>
+      <div class="navbar-fixed">
+        <nav class="nav-extended">
+          <div class="nav-wrapper">
+            <a href="#" class="brand-logo">清华IPTV</a>
+            <ul class="right">
+              <li><a href="#">Logout</a></li>
+            </ul>
+          </div>
+          <div class="nav-content">
+            <ul class="tabs tabs-transparent">
+              <li v-for="c in channels['Categories']" class="tab">
+                <router-link :to="linkCategory(c)" :class="{active: c['Name'] == category}">{{c['Name']}}</router-link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="row" id="list">
+        <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col s4" :channel="c"></channel-thumbnail>
+      </div>
+    </main>
+    <iptv-footer></iptv-footer>
   </div>
 </template>
 
@@ -27,11 +30,13 @@
 import 'materialize-css/dist/css/materialize.css'
 import 'material-design-icons/iconfont/material-icons.css'
 import ChannelThumbnail from './ChannelThumbnail.vue'
+import IPTVFooter from './IPTVFooter.vue'
 
 export default {
   props: ['category', 'channels'],
   components: {
     ChannelThumbnail,
+    'iptv-footer': IPTVFooter,
   },
   name: 'list-view',
   methods: {
