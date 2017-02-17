@@ -1,12 +1,20 @@
 <template>
-  <div class="container">
+  <div>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="button-collapse" style="display: block"><i class="material-icons">arrow_back</i></a>
+        <a class="brand-logo center">{{title}}<span class="badge green">{{engine}}</span></a>
+      </div>
+    </nav>
     <div class="player"></div>
-    <p>Engine: {{engine}}</p>
+    <iptv-footer></iptv-footer>
   </div>
 </template>
 
 <script>
+import 'material-design-icons/iconfont/material-icons.css'
 import 'flowplayer/dist/skin/skin.css'
+import IPTVFooter from './IPTVFooter.vue'
 import flowplayer from 'flowplayer'
 import engine from 'flowplayer-hlsjs'
 engine(flowplayer)
@@ -15,11 +23,25 @@ import swfHls from 'flowplayer/dist/flowplayerhls.swf'
 
 export default {
   props: ['channel', 'channels'],
+  components: {
+    'iptv-footer': IPTVFooter,
+  },
   name: 'hls-player',
   data() {
     return {
       engine: '',
     }
+  },
+  computed: {
+    title() {
+      for (const category of this.channels['Categories']) {
+        for (const c of category['Channels']) {
+          if (c['Vid'] === this.channel) {
+            return c['Name']
+          }
+        }
+      }
+    },
   },
   mounted() {
     flowplayer((api) => {

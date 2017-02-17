@@ -12,6 +12,7 @@
     "flowplayer": "^7.0.2",
     "flowplayer-hlsjs": "flowplayer/flowplayer-hlsjs",
     "font-awesome": "^4.7.0",
+    "material-design-icons": "^3.0.1",
     "materialize-css": "^0.98.0",
     "vue": "^2.1.0",
     "vue-router": "^2.2.1"
