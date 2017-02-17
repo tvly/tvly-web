@@ -20,11 +20,8 @@
       </div>
     </nav>
     <div class="row">
-      <div v-for="c in channelsOfCurrentCategory" class="col-xs-4 col-md-3">
-        <router-link :to="linkChannel(c)" class="btn btn-block btn-primary">{{c['Name']}}</router-link>
-      </div>
+      <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col s4" :channel="c"></channel-thumbnail>
     </div>
-    <channel-thumbnail></channel-thumbnail>
   </div>
 </template>
 
@@ -45,14 +42,6 @@ export default {
         name: 'list',
         params: {
           category: category['Name'],
-        },
-      }
-    },
-    linkChannel(channel) {
-      return {
-        name: 'play',
-        params: {
-          channel: channel['Vid'],
         },
       }
     },
