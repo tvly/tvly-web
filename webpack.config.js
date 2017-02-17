@@ -34,7 +34,7 @@ module.exports = {
       test: /\.css$/,
       loader: 'style-loader',
     }, {
-      test: /\.(png|jpg|gif|svg|woff2|ttf|woff|eot)$/,
+      test: /\.(png|jpg|gif|svg|woff2|ttf|woff|eot|swf)$/,
       loader: 'file-loader',
       options: {
         name: '[name].[ext]?[hash]',
