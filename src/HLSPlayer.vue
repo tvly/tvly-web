@@ -3,7 +3,7 @@
     <nav>
       <div class="nav-wrapper">
         <a href="#" class="button-collapse" style="display: block"><i class="material-icons">arrow_back</i></a>
-        <a class="brand-logo center">{{title}}<span class="badge green">{{engine}}</span></a>
+        <a class="brand-logo center">{{title}}<span v-if="engine.length" class="badge green">{{engine}}</span></a>
       </div>
     </nav>
     <div class="player fp-mute"></div>
