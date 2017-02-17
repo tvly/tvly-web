@@ -38,6 +38,9 @@ export default {
     'iptv-footer': IPTVFooter,
   },
   name: 'list-view',
+  updated() {
+    window.scrollTo(0, 0)
+  },
   methods: {
     linkCategory(category) {
       return {
