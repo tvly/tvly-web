@@ -69,10 +69,12 @@ export default {
 </script>
 
 <style scoped>
-.flowplayer {
-   margin-top: 10px;
-   max-width: 70%;
-   left: 50%;
-   transform: translate(-50%, 0)
+@media only screen and (min-width: 500px) {
+  .flowplayer {
+    margin-top: 10px;
+    max-width: 70%;
+    left: 50%;
+    transform: translate(-50%, 0)
+  }
 }
 </style>
