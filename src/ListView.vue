@@ -1,21 +1,23 @@
 <template>
   <div>
-    <nav class="nav-extended">
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo">清华IPTV</a>
-        <ul class="right">
-          <li><a href="#">Logout</a></li>
-        </ul>
-      </div>
-      <div class="nav-content">
-        <ul class="tabs tabs-transparent">
-          <li v-for="c in channels['Categories']" class="tab">
-            <router-link :to="linkCategory(c)" :class="{active: c['Name'] == category}">{{c['Name']}}</router-link>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class="row">
+    <div class="navbar-fixed">
+      <nav class="nav-extended">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">清华IPTV</a>
+          <ul class="right">
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li v-for="c in channels['Categories']" class="tab">
+              <router-link :to="linkCategory(c)" :class="{active: c['Name'] == category}">{{c['Name']}}</router-link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="row" id="list">
       <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col s4" :channel="c"></channel-thumbnail>
     </div>
   </div>
@@ -53,3 +55,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+div#list {
+  margin-top: 55px
+}
+</style>
