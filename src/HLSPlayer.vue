@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .flowplayer {
    margin-top: 10px;
    max-width: 70%;
