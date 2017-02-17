@@ -1,12 +1,15 @@
 <template>
-  <div>
+  <div class="container">
     <ul class="nav nav-tabs">
       <li v-for="c in channels['Categories']" role="presentation" :class="{active: c['Name'] == category}">
         <router-link :to="link(c)">{{c['Name']}}</router-link>
       </li>
     </ul>
-    <p>{{category}}</p>
-    <p>{{channels}}</p>
+    <div class="row">
+      <div v-for="c in channelsOfCurrentCategory" class="col-xs-4 col-md-3">
+        <a :href="c['Vid']" class="btn btn-block btn-primary">{{c['Name']}}</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,6 +28,15 @@ export default {
         },
       }
     },
-  }
+  },
+  computed: {
+    channelsOfCurrentCategory() {
+      for (const c of this.channels['Categories']) {
+        if (c['Name'] === this.category) {
+          return c['Channels']
+        }
+      }
+    },
+  },
 }
 </script>
