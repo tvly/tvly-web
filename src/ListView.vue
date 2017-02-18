@@ -9,10 +9,10 @@
         </div>
       </nav>
       <div class="container">
-        <a href="#" class="top-nav full button-collapse"><i class="material-icons">menu</i></a>
+        <a href="#" class="top-nav full button-collapse" @click.prevent="menuVisible = true"><i class="material-icons">menu</i></a>
       </div>
 
-      <ul id="slide-out" class="side-nav fixed">
+      <ul id="slide-out" class="side-nav fixed" :style="sideNavStyle">
         <li><div class="userView">
             <div class="background">
               <img src="http://thecatapi.com/api/images/get?format=src&type=gif&size=med">
@@ -21,7 +21,7 @@
             <a href="#!name"><span class="white-text name">John Doe</span></a>
             <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
         </div></li>
-        <li v-for="c in channels['Categories']"  :class="{active: c['Name'] == category}">
+        <li v-for="c in channels['Categories']"  :class="{active: c['Name'] == category}" @click="menuVisible = false">
           <router-link :to="linkCategory(c)">{{c['Name']}}</router-link>
         </li>
         <li><div class="divider"></div></li>
@@ -37,6 +37,7 @@
       </div>
     </main>
     <iptv-footer></iptv-footer>
+    <div v-if="menuVisible" @click.prevent="menuVisible = false" id="sidenav-overlay" style="opacity: 1;"></div>
   </div>
 </template>
 
@@ -54,6 +55,11 @@ export default {
     'iptv-footer': IPTVFooter,
   },
   name: 'list-view',
+  data() {
+    return {
+      menuVisible: false,
+    }
+  },
   updated() {
     window.scrollTo(0, 0)
   },
@@ -68,6 +74,13 @@ export default {
     },
   },
   computed: {
+    sideNavStyle() {
+      if (this.menuVisible) {
+        return {
+          transform: 'translateX(0)',
+        }
+      }
+    },
     channelsOfCurrentCategory() {
       for (const c of this.channels['Categories']) {
         if (c['Name'] === this.category) {
