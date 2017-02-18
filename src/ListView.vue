@@ -19,7 +19,7 @@
             <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
         </div></li>
         <li v-for="c in channels['Categories']"  :class="{active: c['Name'] == category}" @click="menuVisible = false">
-          <router-link :to="linkCategory(c)">{{c['Name']}}</router-link>
+          <router-link :to="categoryLink(c)">{{c['Name']}}</router-link>
         </li>
         <li><div class="divider"></div></li>
         <li><a href="#">登出</a></li>
@@ -45,6 +45,8 @@ import 'material-design-icons/iconfont/material-icons.css'
 import ChannelThumbnail from './ChannelThumbnail.vue'
 import IPTVFooter from './IPTVFooter.vue'
 
+import { categoryLink } from './link.js'
+
 export default {
   props: ['category', 'channels'],
   components: {
@@ -61,14 +63,7 @@ export default {
     window.scrollTo(0, 0)
   },
   methods: {
-    linkCategory(category) {
-      return {
-        name: 'list',
-        params: {
-          category: category['Name'],
-        },
-      }
-    },
+    categoryLink,
   },
   computed: {
     sideNavStyle() {

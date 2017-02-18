@@ -14,6 +14,7 @@
 
 <script>
 import 'material-design-icons/iconfont/material-icons.css'
+import { channelLink } from './link.js'
 
 export default {
   name: 'channel-thumbnail',
@@ -23,12 +24,7 @@ export default {
       return `https://iptv.tsinghua.edu.cn/snapshot/${this.channel['Vid']}.jpg`
     },
     channelLink() {
-      return {
-        name: 'play',
-        params: {
-          channel: this.channel['Vid'],
-        },
-      }
+      return channelLink(this.channel)
     },
   },
 }
