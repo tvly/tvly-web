@@ -21,7 +21,7 @@ engine(flowplayer)
 import swf from 'flowplayer/dist/flowplayer.swf'
 import swfHls from 'flowplayer/dist/flowplayerhls.swf'
 
-import { categoryLink } from '../route/link.js'
+import { categoryLink, channelLink } from '../route/link.js'
 
 export default {
   props: ['channel', 'channels'],
@@ -35,8 +35,21 @@ export default {
     keyHandler(event) {
       if (event.key === 'Escape') {
         this.$router.go(-1)
+      } else if (event.key === 'ArrowLeft' || event.key === 'h') {
+        this.switchChannel(-1)
+      } else if (event.key === 'ArrowRight' || event.key === 'l') {
+        this.switchChannel(1)
       } else {
         console.log(`Unkown key event: ${event.key}`)
+      }
+    },
+    switchChannel(offset) {
+      const currentCategory = this.channels.Categories[this.categoryIndex]
+      const nextChannelIndex = this.channelIndex + offset
+      if (nextChannelIndex >= 0 &&
+            nextChannelIndex < currentCategory.Channels.length) {
+        this.$router.replace(
+          channelLink(currentCategory.Channels[nextChannelIndex]))
       }
     },
   },
@@ -63,6 +76,15 @@ export default {
       const category = this.channels.Categories[this.categoryIndex]
       return categoryLink(category)
     },
+    clip() {
+      return {
+        live: true,
+        sources: [{
+          type: 'application/x-mpegurl',
+          src: `//iptv.tsinghua.edu.cn/hls/${this.channel}.m3u8`,
+        }],
+      }
+    },
   },
   mounted() {
     flowplayer((api) => {
@@ -77,15 +99,13 @@ export default {
       share: false,
       swf,
       swfHls,
-      clip: {
-        live: true,
-        sources: [{
-          type: 'application/x-mpegurl',
-          src: `//iptv.tsinghua.edu.cn/hls/${this.channel}.m3u8`,
-        }],
-      },
+      clip: this.clip,
     })
     window.addEventListener('keyup', this.keyHandler)
+  },
+  updated() {
+    const player = flowplayer(this.$el.getElementsByClassName('player')[0])
+    player.load(this.clip)
   },
   beforeDestroy() {
     window.removeEventListener('keyup', this.keyHandler)
