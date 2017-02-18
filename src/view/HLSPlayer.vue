@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       engine: '',
+      player: null,
     }
   },
   methods: {
@@ -112,7 +113,7 @@ export default {
       })
     })
 
-    flowplayer(this.$el.getElementsByClassName('player')[0], {
+    this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
       autoplay: true,
       share: false,
       keyboard: false,
@@ -123,8 +124,7 @@ export default {
     window.addEventListener('keyup', this.keyHandler)
   },
   updated() {
-    const player = flowplayer(this.$el.getElementsByClassName('player')[0])
-    player.load(this.clip)
+    this.player.load(this.clip)
   },
   beforeDestroy() {
     window.removeEventListener('keyup', this.keyHandler)
