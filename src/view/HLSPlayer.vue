@@ -115,6 +115,7 @@ export default {
     flowplayer(this.$el.getElementsByClassName('player')[0], {
       autoplay: true,
       share: false,
+      keyboard: false,
       swf,
       swfHls,
       clip: this.clip,
