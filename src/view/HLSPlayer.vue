@@ -34,29 +34,41 @@ export default {
   },
   methods: {
     keyHandler(event) {
-      switch(event.key) {
+      // workaround for safari
+      switch(event.key || event.keyIdentifier) {
+        case 'Esc': // keyIdentifier
         case 'Escape':
           this.$router.go(-1)
           break
+        case 'Left': // keyIdentifier
+        case 'H': // keyIdentifier
         case 'ArrowLeft':
         case 'h':
           this.switchChannel(-1)
           break
+        case 'Right': // keyIdentifier
+        case 'L': // keyIdentifier
         case 'ArrowRight':
         case 'l':
           this.switchChannel(1)
           break
+        case 'Up': // keyIdentifier
+        case 'K': // keyIdentifier
         case 'ArrowUp':
         case 'k':
           this.switchCategory(-1)
           break
+        case 'Down': // keyIdentifier
+        case 'J': // keyIdentifier
         case 'ArrowDown':
         case 'j':
           this.switchCategory(1)
           break
+        case 'Plus': // keyIdentifier
         case '+':
           this.player.volume(Math.min(this.player.volumeLevel + 0.1, 1))
           break
+        case 'HyphenMinus': // keyIdentifier
         case '-':
           this.player.volume(Math.max(this.player.volumeLevel - 0.1, 0))
           break
