@@ -5,7 +5,7 @@
         <div class="container">
           <div class="nav-wrapper">
             <a href="#" class="full button-collapse" @click.prevent="menuVisible = true"><i class="material-icons">menu</i></a>
-            <a class="brand-logo">清华IPTV</a>
+            <a class="brand-logo">清华大学IPTV</a>
           </div>
         </div>
       </nav>
