@@ -44,7 +44,7 @@ export default {
       } else if (event.key === 'ArrowDown' || event.key === 'j') {
         this.switchCategory(1)
       } else {
-        console.log(`Unkown key event: ${event.key}`)
+        console.log(`Unkown key event: ${event.key}(${event.code})`, event)
       }
     },
     switchChannel(offset) {
