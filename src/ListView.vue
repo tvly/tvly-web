@@ -1,25 +1,37 @@
 <template>
   <div>
-    <main>
-      <div class="navbar-fixed">
-        <nav class="nav-extended">
+    <header>
+      <nav class="top-nav">
+        <a href="#" class="button-collapse"><i class="material-icons">menu</i></a>
+        <div class="container">
           <div class="nav-wrapper">
-            <a href="#" class="brand-logo">清华IPTV</a>
-            <ul class="right">
-              <li><a href="#">登出</a></li>
-            </ul>
+            <a class="page-title">清华IPTV</a>
           </div>
-          <div class="nav-content">
-            <ul class="tabs tabs-transparent">
-              <li v-for="c in channels['Categories']" class="tab">
-                <router-link :to="linkCategory(c)" :class="{active: c['Name'] == category}">{{c['Name']}}</router-link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-      <div class="row" id="list">
-        <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col l3 m4 s12" :channel="c"></channel-thumbnail>
+        </div>
+      </nav>
+
+      <ul id="slide-out" class="side-nav fixed">
+        <li><div class="userView">
+            <div class="background">
+              <img src="http://thecatapi.com/api/images/get?format=src&type=gif&size=med">
+            </div>
+            <a href="#!user"><img class="circle" src="http://thecatapi.com/api/images/get?format=src&type=gif&size=small"></a>
+            <a href="#!name"><span class="white-text name">John Doe</span></a>
+            <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+        </div></li>
+        <li v-for="c in channels['Categories']"  :class="{active: c['Name'] == category}">
+          <router-link :to="linkCategory(c)">{{c['Name']}}</router-link>
+        </li>
+        <li><div class="divider"></div></li>
+        <li><a href="#">登出</a></li>
+      </ul>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="row" id="list">
+          <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col l3 m4 s12" :channel="c"></channel-thumbnail>
+        </div>
       </div>
     </main>
     <iptv-footer></iptv-footer>
@@ -28,6 +40,8 @@
 
 <script>
 import 'materialize-css/dist/css/materialize.css'
+import 'materialize-css/css/ghpages-materialize.css'
+import 'material-design-icons/iconfont/material-icons.css'
 import ChannelThumbnail from './ChannelThumbnail.vue'
 import IPTVFooter from './IPTVFooter.vue'
 
@@ -64,7 +78,13 @@ export default {
 </script>
 
 <style scoped>
-div#list {
-  margin-top: 55px
+header, main, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
 }
 </style>
