@@ -34,24 +34,34 @@ export default {
   },
   methods: {
     keyHandler(event) {
-      if (event.key === 'Escape') {
-        this.$router.go(-1)
-      } else if (event.key === 'ArrowLeft' || event.key === 'h') {
-        this.switchChannel(-1)
-      } else if (event.key === 'ArrowRight' || event.key === 'l') {
-        this.switchChannel(1)
-      } else if (event.key === 'ArrowUp' || event.key === 'k') {
-        this.switchCategory(-1)
-      } else if (event.key === 'ArrowDown' || event.key === 'j') {
-        this.switchCategory(1)
-      } else if (event.key === '+') {
-        const volume = Math.min(this.player.volumeLevel + 0.1, 1)
-        this.player.volume(volume)
-      } else if (event.key === '-') {
-        const volume = Math.max(this.player.volumeLevel - 0.1, 0)
-        this.player.volume(volume)
-      } else {
-        console.log(`Unkown key event: ${event.key}(${event.keyIdentifier})`)
+      switch(event.key) {
+        case 'Escape':
+          this.$router.go(-1)
+          break
+        case 'ArrowLeft':
+        case 'h':
+          this.switchChannel(-1)
+          break
+        case 'ArrowRight':
+        case 'l':
+          this.switchChannel(1)
+          break
+        case 'ArrowUp':
+        case 'k':
+          this.switchCategory(-1)
+          break
+        case 'ArrowDown':
+        case 'j':
+          this.switchCategory(1)
+          break
+        case '+':
+          this.player.volume(Math.min(this.player.volumeLevel + 0.1, 1))
+          break
+        case '-':
+          this.player.volume(Math.max(this.player.volumeLevel - 0.1, 0))
+          break
+        default:
+          console.log(`Unkown key event: ${event.key}(${event.keyIdentifier})`)
       }
     },
     switchChannel(offset) {
