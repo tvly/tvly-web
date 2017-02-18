@@ -19,7 +19,7 @@
             <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
         </div></li>
         <li v-for="c in channels['Categories']"  :class="{active: c['Name'] == category}" @click="menuVisible = false">
-          <router-link :to="categoryLink(c)">{{c['Name']}}</router-link>
+          <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
         </li>
         <li><div class="divider"></div></li>
         <li><a href="#">登出</a></li>
