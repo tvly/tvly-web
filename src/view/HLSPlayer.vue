@@ -5,7 +5,7 @@
         <a href="#"  class="button-collapse" style="display: block" @click.prevent="$router.go(-1)">
           <i class="material-icons">arrow_back</i>
         </a>
-        <a class="brand-logo center">{{title}}<span v-if="engine.length" class="badge green">{{engine}}</span></a>
+        <a class="brand-logo center">{{categoryTitle}}/{{channelTitle}}<span v-if="engine.length" class="badge green">{{engine}}</span></a>
       </div>
     </nav>
     <div class="player fp-mute"></div>
@@ -81,10 +81,14 @@ export default {
         return channel['Vid'] === this.channel
       })
     },
-    title() {
+    channelTitle() {
       const category = this.channels.Categories[this.categoryIndex]
       const channel = category.Channels[this.channelIndex]
       return channel.Name
+    },
+    categoryTitle() {
+      const category = this.channels.Categories[this.categoryIndex]
+      return category.Name
     },
     categoryLink() {
       const category = this.channels.Categories[this.categoryIndex]
