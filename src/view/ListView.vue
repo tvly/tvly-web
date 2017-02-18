@@ -60,9 +60,6 @@ export default {
       menuVisible: false,
     }
   },
-  updated() {
-    window.scrollTo(0, 0)
-  },
   methods: {
     categoryLink,
   },
