@@ -39,6 +39,10 @@ export default {
         this.switchChannel(-1)
       } else if (event.key === 'ArrowRight' || event.key === 'l') {
         this.switchChannel(1)
+      } else if (event.key === 'ArrowUp' || event.key === 'k') {
+        this.switchCategory(-1)
+      } else if (event.key === 'ArrowDown' || event.key === 'j') {
+        this.switchCategory(1)
       } else {
         console.log(`Unkown key event: ${event.key}`)
       }
@@ -50,6 +54,16 @@ export default {
             nextChannelIndex < currentCategory.Channels.length) {
         this.$router.replace(
           channelLink(currentCategory.Channels[nextChannelIndex]))
+      }
+    },
+    switchCategory(offset) {
+      const categories = this.channels.Categories
+      const nextCategoryIndex = this.categoryIndex + offset
+      if (nextCategoryIndex >= 0 &&
+            nextCategoryIndex < categories.length) {
+        const category = categories[nextCategoryIndex]
+        this.$router.replace(
+          channelLink(category.Channels[0]))
       }
     },
   },
