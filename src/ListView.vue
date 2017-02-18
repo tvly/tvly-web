@@ -102,4 +102,8 @@ header, main, footer {
     padding-left: 0;
   }
 }
+
+#slide-out {
+  transition: transform 0.3s;
+}
 </style>
