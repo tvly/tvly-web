@@ -1,17 +1,14 @@
 <template>
   <div>
     <header>
-      <nav class="top-nav">
+      <nav>
         <div class="container">
           <div class="nav-wrapper">
-            <a class="page-title">清华IPTV</a>
+            <a href="#" class="full button-collapse" @click.prevent="menuVisible = true"><i class="material-icons">menu</i></a>
+            <a class="brand-logo">清华IPTV</a>
           </div>
         </div>
       </nav>
-      <div class="container">
-        <a href="#" class="top-nav full button-collapse" @click.prevent="menuVisible = true"><i class="material-icons">menu</i></a>
-      </div>
-
       <ul id="slide-out" class="side-nav fixed" :style="sideNavStyle">
         <li><div class="userView">
             <div class="background">
