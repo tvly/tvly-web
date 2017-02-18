@@ -44,6 +44,12 @@ export default {
         this.switchCategory(-1)
       } else if (event.key === 'ArrowDown' || event.key === 'j') {
         this.switchCategory(1)
+      } else if (event.key === '+') {
+        const volume = Math.min(this.player.volumeLevel + 0.1, 1)
+        this.player.volume(volume)
+      } else if (event.key === '-') {
+        const volume = Math.max(this.player.volumeLevel - 0.1, 0)
+        this.player.volume(volume)
       } else {
         console.log(`Unkown key event: ${event.key}(${event.keyIdentifier})`)
       }
