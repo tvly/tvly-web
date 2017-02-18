@@ -31,6 +31,15 @@ export default {
       engine: '',
     }
   },
+  methods: {
+    keyHandler(event) {
+      if (event.key === 'Escape') {
+        this.$router.go(-1)
+      } else {
+        console.log(`Unkown key event: ${event.key}`)
+      }
+    },
+  },
   computed: {
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
@@ -76,6 +85,10 @@ export default {
         }],
       },
     })
+    window.addEventListener('keyup', this.keyHandler)
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyup', this.keyHandler)
   },
 }
 </script>
