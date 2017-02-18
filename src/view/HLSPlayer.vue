@@ -105,14 +105,15 @@ export default {
       }
     },
   },
-  mounted() {
+  created() {
     flowplayer((api) => {
       api.on('ready', (e, api, video) => {
         const engineName = api.engine.engineName
         this.engine = engineName
       })
     })
-
+  },
+  mounted() {
     this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
       autoplay: true,
       share: false,
