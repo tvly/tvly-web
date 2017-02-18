@@ -2,13 +2,15 @@
   <div>
     <header>
       <nav class="top-nav">
-        <a href="#" class="button-collapse"><i class="material-icons">menu</i></a>
         <div class="container">
           <div class="nav-wrapper">
             <a class="page-title">清华IPTV</a>
           </div>
         </div>
       </nav>
+      <div class="container">
+        <a href="#" class="top-nav full button-collapse"><i class="material-icons">menu</i></a>
+      </div>
 
       <ul id="slide-out" class="side-nav fixed">
         <li><div class="userView">
