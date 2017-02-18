@@ -28,14 +28,23 @@ export default {
     }
   },
   computed: {
+    categoryIndex() {
+      return this.channels.Categories.findIndex((category) => {
+        return category.Channels.findIndex((channel) => {
+          channel['Vid'] === this.channel
+        }) !== -1
+      })
+    },
+    channelIndex() {
+      const category = this.channels.Categories[this.categoryIndex]
+      return category.Channels.findIndex((channel) => {
+        return channel['Vid'] === this.channel
+      })
+    },
     title() {
-      for (const category of this.channels['Categories']) {
-        for (const c of category['Channels']) {
-          if (c['Vid'] === this.channel) {
-            return c['Name']
-          }
-        }
-      }
+      const category = this.channels.Categories[this.categoryIndex]
+      const channel = category.Channels[this.channelIndex]
+      return channel.Name
     },
   },
   mounted() {
