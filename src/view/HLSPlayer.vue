@@ -2,7 +2,7 @@
   <div>
     <nav>
       <div class="nav-wrapper">
-        <a href="#" class="button-collapse" style="display: block"><i class="material-icons">arrow_back</i></a>
+        <router-link :to="categoryLink" class="button-collapse" style="display: block"><i class="material-icons">arrow_back</i></router-link>
         <a class="brand-logo center">{{title}}<span v-if="engine.length" class="badge green">{{engine}}</span></a>
       </div>
     </nav>
@@ -19,6 +19,8 @@ engine(flowplayer)
 import swf from 'flowplayer/dist/flowplayer.swf'
 import swfHls from 'flowplayer/dist/flowplayerhls.swf'
 
+import { categoryLink } from '../route/link.js'
+
 export default {
   props: ['channel', 'channels'],
   name: 'hls-player',
@@ -31,7 +33,7 @@ export default {
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
         return category.Channels.findIndex((channel) => {
-          channel['Vid'] === this.channel
+          return channel['Vid'] === this.channel
         }) !== -1
       })
     },
@@ -45,6 +47,10 @@ export default {
       const category = this.channels.Categories[this.categoryIndex]
       const channel = category.Channels[this.channelIndex]
       return channel.Name
+    },
+    categoryLink() {
+      const category = this.channels.Categories[this.categoryIndex]
+      return categoryLink(category)
     },
   },
   mounted() {
