@@ -42,10 +42,11 @@
 import 'materialize-css/dist/css/materialize.css'
 import 'materialize-css/css/ghpages-materialize.css'
 import 'material-design-icons/iconfont/material-icons.css'
+
 import ChannelThumbnail from './ChannelThumbnail.vue'
 import IPTVFooter from './IPTVFooter.vue'
 
-import { categoryLink } from './link.js'
+import { categoryLink } from '../route/link.js'
 
 export default {
   props: ['category', 'channels'],

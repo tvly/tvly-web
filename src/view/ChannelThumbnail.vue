@@ -14,7 +14,8 @@
 
 <script>
 import 'material-design-icons/iconfont/material-icons.css'
-import { channelLink } from './link.js'
+
+import { channelLink } from '../route/link.js'
 
 export default {
   name: 'channel-thumbnail',

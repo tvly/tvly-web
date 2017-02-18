@@ -1,9 +1,9 @@
 import VueRouter from 'vue-router'
 
-import ListView from './ListView.vue'
-import HLSPlayer from './HLSPlayer.vue'
+import ListView from '../view/ListView.vue'
+import HLSPlayer from '../view/HLSPlayer.vue'
 
-import channels from './channels.json'
+import channels from '../data/channels.json'
 
 const categories = channels['Categories']
 
