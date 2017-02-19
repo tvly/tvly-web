@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav>
+    <nav class="purple">
       <div class="nav-wrapper">
         <router-link :to="categoryLink" class="button-collapse" style="display: block">
           <i class="material-icons">arrow_back</i>

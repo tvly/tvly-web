@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <nav>
+      <nav class="purple">
         <div class="container">
           <div class="nav-wrapper">
             <a href="#" class="full button-collapse" @click.prevent="menuVisible = true"><i class="material-icons">menu</i></a>
@@ -11,9 +11,7 @@
       </nav>
       <ul id="slide-out" class="side-nav fixed" :style="sideNavStyle">
         <li><div class="userView">
-            <div class="background">
-              <img src="//thecatapi.com/api/images/get?format=src&type=gif">
-            </div>
+            <div class="background purple lighten-3"></div>
             <a href="#!user"><img class="circle" src="//thecatapi.com/api/images/get?format=src&type=gif&size=small"></a>
             <a href="#!name"><span class="white-text name">John Doe</span></a>
             <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
