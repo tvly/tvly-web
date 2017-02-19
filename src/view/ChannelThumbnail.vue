@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="card-image">
-        <img :src="snapshot">
+        <img :src="snapshot" @click="$router.push(channelLink)">
         <router-link :to="channelLink" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">play_arrow</i></router-link>
       </div>
       <div class="card-content">
