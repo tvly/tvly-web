@@ -12,9 +12,9 @@
       <ul id="slide-out" class="side-nav fixed" :style="sideNavStyle">
         <li><div class="userView">
             <div class="background">
-              <img src="http://thecatapi.com/api/images/get?format=src&type=gif&size=med">
+              <img src="//thecatapi.com/api/images/get?format=src&type=gif">
             </div>
-            <a href="#!user"><img class="circle" src="http://thecatapi.com/api/images/get?format=src&type=gif&size=small"></a>
+            <a href="#!user"><img class="circle" src="//thecatapi.com/api/images/get?format=src&type=gif&size=small"></a>
             <a href="#!name"><span class="white-text name">John Doe</span></a>
             <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
         </div></li>
