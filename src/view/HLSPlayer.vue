@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     keyHandler(event) {
+      let captured = true
       // workaround for safari
       switch(event.key || event.keyIdentifier) {
         case 'Esc': // keyIdentifier
@@ -73,7 +74,12 @@ export default {
           this.player.volume(Math.max(this.player.volumeLevel - 0.1, 0))
           break
         default:
-          console.log(`Unkown key event: ${event.key}(${event.keyIdentifier})`)
+          captured = false
+          console.log(`Unkown key event: ${event.key}(${event.keyIdentifier})`,
+                      event)
+      }
+      if (captured) {
+        event.preventDefault()
       }
     },
     switchChannel(offset) {
@@ -150,13 +156,13 @@ export default {
       swfHls,
       clip: this.clip,
     })
-    window.addEventListener('keyup', this.keyHandler)
+    window.addEventListener('keydown', this.keyHandler)
   },
   updated() {
     this.player.load(this.clip)
   },
   beforeDestroy() {
-    window.removeEventListener('keyup', this.keyHandler)
+    window.removeEventListener('keydown', this.keyHandler)
   },
 }
 </script>
