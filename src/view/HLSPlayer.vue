@@ -2,7 +2,7 @@
   <div>
     <nav>
       <div class="nav-wrapper">
-        <a href="#"  class="button-collapse" style="display: block" @click.prevent="$router.go(-1)">
+        <a href="#"  class="button-collapse" style="display: block" @click.prevent.once="$router.go(-1)">
           <i class="material-icons">arrow_back</i>
         </a>
         <a class="brand-logo center">{{categoryTitle}}/{{channelTitle}}<span v-if="engine.length" class="badge green">{{engine}}</span></a>
