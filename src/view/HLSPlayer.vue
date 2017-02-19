@@ -39,7 +39,9 @@ export default {
       switch(event.key || event.keyIdentifier) {
         case 'Esc': // keyIdentifier
         case 'Escape':
-          this.$router.go(-1)
+          if (!this.player.isFullscreen) {
+            this.$router.go(-1)
+          }
           break
         case 'Left': // keyIdentifier
         case 'H': // keyIdentifier
