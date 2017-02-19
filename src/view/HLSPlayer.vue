@@ -82,6 +82,11 @@ export default {
         case '-':
           this.player.volume(Math.max(this.player.volumeLevel - 0.1, 0))
           break
+        case 'f':
+        case 'F': // keyIdentifier
+        case 'U+0046': // keyIdentifier
+          this.player.fullscreen()
+          break
         default:
           captured = false
           console.log(`Unkown key event: ${event.key}(${event.keyIdentifier})`,
