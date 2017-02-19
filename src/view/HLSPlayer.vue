@@ -2,9 +2,9 @@
   <div>
     <nav>
       <div class="nav-wrapper">
-        <a href="#"  class="button-collapse" style="display: block" @click.prevent.once="$router.go(-1)">
+        <router-link :to="categoryLink" class="button-collapse" style="display: block">
           <i class="material-icons">arrow_back</i>
-        </a>
+        </router-link>
         <a class="brand-logo center">{{categoryTitle}}/{{channelTitle}}<span v-if="engine.length" class="badge green">{{engine}}</span></a>
       </div>
     </nav>
@@ -41,7 +41,7 @@ export default {
         case 'U+001B': // keyIdentifier
         case 'Escape':
           if (!this.player.isFullscreen) {
-            this.$router.go(-1)
+            this.$router.push(this.categoryLink)
           }
           break
         case 'Left': // keyIdentifier
