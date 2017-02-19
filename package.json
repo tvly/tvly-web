@@ -9,6 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "flowplayer": "^7.0.2",
     "flowplayer-hlsjs": "flowplayer/flowplayer-hlsjs",
     "font-awesome": "^4.7.0",
