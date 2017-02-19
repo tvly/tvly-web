@@ -38,6 +38,7 @@ export default {
       // workaround for safari
       switch(event.key || event.keyIdentifier) {
         case 'Esc': // keyIdentifier
+        case 'U+001B': // keyIdentifier
         case 'Escape':
           if (!this.player.isFullscreen) {
             this.$router.go(-1)
@@ -45,33 +46,39 @@ export default {
           break
         case 'Left': // keyIdentifier
         case 'H': // keyIdentifier
+        case 'U+0048': // keyIdentifier
         case 'ArrowLeft':
         case 'h':
           this.switchChannel(-1)
           break
         case 'Right': // keyIdentifier
         case 'L': // keyIdentifier
+        case 'U+004C': // keyIdentifier
         case 'ArrowRight':
         case 'l':
           this.switchChannel(1)
           break
         case 'Up': // keyIdentifier
         case 'K': // keyIdentifier
+        case 'U+004B': // keyIdentifier
         case 'ArrowUp':
         case 'k':
           this.switchCategory(-1)
           break
         case 'Down': // keyIdentifier
         case 'J': // keyIdentifier
+        case 'U+004A': // keyIdentifier
         case 'ArrowDown':
         case 'j':
           this.switchCategory(1)
           break
         case 'Plus': // keyIdentifier
+        case 'U+002B': // keyIdentifier
         case '+':
           this.player.volume(Math.min(this.player.volumeLevel + 0.1, 1))
           break
         case 'HyphenMinus': // keyIdentifier
+        case 'U+002D': // keyIdentifier
         case '-':
           this.player.volume(Math.max(this.player.volumeLevel - 0.1, 0))
           break
