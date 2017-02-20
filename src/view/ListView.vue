@@ -27,7 +27,7 @@
     <main>
       <div class="container">
         <div class="row" id="list">
-          <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col l3 m4 s12" :channel="c"></channel-thumbnail>
+          <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col l4 m6 s12" :channel="c"></channel-thumbnail>
         </div>
       </div>
     </main>
