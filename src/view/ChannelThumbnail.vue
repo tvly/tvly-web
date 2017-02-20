@@ -13,22 +13,22 @@
 </template>
 
 <script>
-import 'material-design-icons/iconfont/material-icons.css'
+import 'material-design-icons/iconfont/material-icons.css';
 
-import { channelLink } from '../route/link.js'
+import {channelLink} from '../route/link.js';
 
 export default {
   name: 'channel-thumbnail',
   props: ['channel'],
   computed: {
     snapshot() {
-      return `https://iptv.tsinghua.edu.cn/snapshot/${this.channel['Vid']}.jpg`
+      return `https://iptv.tsinghua.edu.cn/snapshot/${this.channel['Vid']}.jpg`;
     },
     channelLink() {
-      return channelLink(this.channel)
+      return channelLink(this.channel);
     },
   },
-}
+};
 </script>
 
 <style scoped>

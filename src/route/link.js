@@ -9,7 +9,7 @@ function categoryLink(category) {
     params: {
       category: category['Name'],
     },
-  }
+  };
 }
 
 /**
@@ -23,7 +23,7 @@ function channelLink(channel) {
     params: {
       channel: channel['Vid'],
     },
-  }
+  };
 }
 
-export { channelLink, categoryLink }
+export {channelLink, categoryLink};

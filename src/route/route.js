@@ -1,11 +1,11 @@
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router';
 
-import ListView from '../view/ListView.vue'
-import HLSPlayer from '../view/HLSPlayer.vue'
+import ListView from '../view/ListView.vue';
+import HLSPlayer from '../view/HLSPlayer.vue';
 
-import channels from '../data/channels.json'
+import channels from '../data/channels.json';
 
-const categories = channels['Categories']
+const categories = channels['Categories'];
 
 const routes = [{
   path: '/',
@@ -15,7 +15,7 @@ const routes = [{
       params: {
         category: categories[0]['Name'],
       },
-    }
+    };
   },
 }, {
   name: 'list',
@@ -27,18 +27,17 @@ const routes = [{
   path: '/play/:channel',
   props: true,
   component: HLSPlayer,
-}]
+}];
 
 export const router = new VueRouter({
   mode: 'history',
   scrollBehavior(to, from, savedPosition) {
-    console.log(to, from, savedPosition)
     if (savedPosition) {
-      return savedPosition
+      return savedPosition;
     } else {
-      return { x: 0, y: 0 }
+      return {x: 0, y: 0};
     }
   },
   routes,
-})
+});
 

@@ -37,14 +37,14 @@
 </template>
 
 <script>
-import 'materialize-css/dist/css/materialize.css'
-import 'materialize-css/css/ghpages-materialize.css'
-import 'material-design-icons/iconfont/material-icons.css'
+import 'materialize-css/dist/css/materialize.css';
+import 'materialize-css/css/ghpages-materialize.css';
+import 'material-design-icons/iconfont/material-icons.css';
 
-import ChannelThumbnail from './ChannelThumbnail.vue'
-import IPTVFooter from './IPTVFooter.vue'
+import ChannelThumbnail from './ChannelThumbnail.vue';
+import IPTVFooter from './IPTVFooter.vue';
 
-import { categoryLink } from '../route/link.js'
+import {categoryLink} from '../route/link.js';
 
 export default {
   props: ['category', 'channels'],
@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       menuVisible: false,
-    }
+    };
   },
   methods: {
     categoryLink,
@@ -66,18 +66,18 @@ export default {
       if (this.menuVisible) {
         return {
           transform: 'translateX(0)',
-        }
+        };
       }
     },
     channelsOfCurrentCategory() {
       for (const c of this.channels['Categories']) {
         if (c['Name'] === this.category) {
-          return c['Channels']
+          return c['Channels'];
         }
       }
     },
   },
-}
+};
 </script>
 
 <style scoped>

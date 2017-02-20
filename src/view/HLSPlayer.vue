@@ -13,15 +13,16 @@
 </template>
 
 <script>
-import 'material-design-icons/iconfont/material-icons.css'
-import 'flowplayer/dist/skin/skin.css'
-import flowplayer from 'flowplayer'
-import engine from 'flowplayer-hlsjs'
-engine(flowplayer)
-import swf from 'flowplayer/dist/flowplayer.swf'
-import swfHls from 'flowplayer/dist/flowplayerhls.swf'
+import 'material-design-icons/iconfont/material-icons.css';
+import 'flowplayer/dist/skin/skin.css';
+import flowplayer from 'flowplayer';
+import engine from 'flowplayer-hlsjs';
+import swf from 'flowplayer/dist/flowplayer.swf';
+import swfHls from 'flowplayer/dist/flowplayerhls.swf';
 
-import { categoryLink, channelLink } from '../route/link.js'
+import {categoryLink, channelLink} from '../route/link.js';
+
+engine(flowplayer);
 
 export default {
   props: ['channel', 'channels'],
@@ -30,89 +31,89 @@ export default {
     return {
       engine: '',
       player: null,
-    }
+    };
   },
   methods: {
     keyHandler(event) {
-      let captured = true
+      let captured = true;
       // workaround for safari
       switch(event.key || event.keyIdentifier) {
         case 'Esc': // keyIdentifier
         case 'U+001B': // keyIdentifier
         case 'Escape':
           if (!this.player.isFullscreen) {
-            this.$router.push(this.categoryLink)
+            this.$router.push(this.categoryLink);
           }
-          break
+          break;
         case 'Left': // keyIdentifier
         case 'H': // keyIdentifier
         case 'U+0048': // keyIdentifier
         case 'ArrowLeft':
         case 'h':
-          this.switchChannel(-1)
-          break
+          this.switchChannel(-1);
+          break;
         case 'Right': // keyIdentifier
         case 'L': // keyIdentifier
         case 'U+004C': // keyIdentifier
         case 'ArrowRight':
         case 'l':
-          this.switchChannel(1)
-          break
+          this.switchChannel(1);
+          break;
         case 'Up': // keyIdentifier
         case 'K': // keyIdentifier
         case 'U+004B': // keyIdentifier
         case 'ArrowUp':
         case 'k':
-          this.switchCategory(-1)
-          break
+          this.switchCategory(-1);
+          break;
         case 'Down': // keyIdentifier
         case 'J': // keyIdentifier
         case 'U+004A': // keyIdentifier
         case 'ArrowDown':
         case 'j':
-          this.switchCategory(1)
-          break
+          this.switchCategory(1);
+          break;
         case 'Plus': // keyIdentifier
         case 'U+002B': // keyIdentifier
         case '+':
-          this.player.volume(Math.min(this.player.volumeLevel + 0.1, 1))
-          break
+          this.player.volume(Math.min(this.player.volumeLevel + 0.1, 1));
+          break;
         case 'HyphenMinus': // keyIdentifier
         case 'U+002D': // keyIdentifier
         case '-':
-          this.player.volume(Math.max(this.player.volumeLevel - 0.1, 0))
-          break
+          this.player.volume(Math.max(this.player.volumeLevel - 0.1, 0));
+          break;
         case 'f':
         case 'F': // keyIdentifier
         case 'U+0046': // keyIdentifier
-          this.player.fullscreen()
-          break
+          this.player.fullscreen();
+          break;
         default:
-          captured = false
-          console.log(`Unkown key event: ${event.key}(${event.keyIdentifier})`,
-                      event)
+          captured = false;
+          console.warn(`Unkown key event: ${event.key}(${event.keyIdentifier})`,
+                       event);
       }
       if (captured) {
-        event.preventDefault()
+        event.preventDefault();
       }
     },
     switchChannel(offset) {
-      const currentCategory = this.channels.Categories[this.categoryIndex]
-      const nextChannelIndex = this.channelIndex + offset
+      const currentCategory = this.channels.Categories[this.categoryIndex];
+      const nextChannelIndex = this.channelIndex + offset;
       if (nextChannelIndex >= 0 &&
             nextChannelIndex < currentCategory.Channels.length) {
         this.$router.replace(
-          channelLink(currentCategory.Channels[nextChannelIndex]))
+          channelLink(currentCategory.Channels[nextChannelIndex]));
       }
     },
     switchCategory(offset) {
-      const categories = this.channels.Categories
-      const nextCategoryIndex = this.categoryIndex + offset
+      const categories = this.channels.Categories;
+      const nextCategoryIndex = this.categoryIndex + offset;
       if (nextCategoryIndex >= 0 &&
             nextCategoryIndex < categories.length) {
-        const category = categories[nextCategoryIndex]
+        const category = categories[nextCategoryIndex];
         this.$router.replace(
-          channelLink(category.Channels[0]))
+          channelLink(category.Channels[0]));
       }
     },
   },
@@ -120,28 +121,28 @@ export default {
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
         return category.Channels.findIndex((channel) => {
-          return channel['Vid'] === this.channel
-        }) !== -1
-      })
+          return channel['Vid'] === this.channel;
+        }) !== -1;
+      });
     },
     channelIndex() {
-      const category = this.channels.Categories[this.categoryIndex]
+      const category = this.channels.Categories[this.categoryIndex];
       return category.Channels.findIndex((channel) => {
-        return channel['Vid'] === this.channel
-      })
+        return channel['Vid'] === this.channel;
+      });
     },
     channelTitle() {
-      const category = this.channels.Categories[this.categoryIndex]
-      const channel = category.Channels[this.channelIndex]
-      return channel.Name
+      const category = this.channels.Categories[this.categoryIndex];
+      const channel = category.Channels[this.channelIndex];
+      return channel.Name;
     },
     categoryTitle() {
-      const category = this.channels.Categories[this.categoryIndex]
-      return category.Name
+      const category = this.channels.Categories[this.categoryIndex];
+      return category.Name;
     },
     categoryLink() {
-      const category = this.channels.Categories[this.categoryIndex]
-      return categoryLink(category)
+      const category = this.channels.Categories[this.categoryIndex];
+      return categoryLink(category);
     },
     clip() {
       return {
@@ -150,16 +151,16 @@ export default {
           type: 'application/x-mpegurl',
           src: `//iptv.tsinghua.edu.cn/hls/${this.channel}.m3u8`,
         }],
-      }
+      };
     },
   },
   created() {
     flowplayer((api) => {
       api.on('ready', (e, api, video) => {
-        const engineName = api.engine.engineName
-        this.engine = engineName
-      })
-    })
+        const engineName = api.engine.engineName;
+        this.engine = engineName;
+      });
+    });
   },
   mounted() {
     this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
@@ -169,16 +170,16 @@ export default {
       swf,
       swfHls,
       clip: this.clip,
-    })
-    window.addEventListener('keydown', this.keyHandler)
+    });
+    window.addEventListener('keydown', this.keyHandler);
   },
   updated() {
-    this.player.load(this.clip)
+    this.player.load(this.clip);
   },
   beforeDestroy() {
-    window.removeEventListener('keydown', this.keyHandler)
+    window.removeEventListener('keydown', this.keyHandler);
   },
-}
+};
 </script>
 
 <style scoped>

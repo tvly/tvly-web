@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
+import {router} from './route/route.js';
+import channels from './data/channels.json';
 
-import { router } from './route/route.js'
-import channels from './data/channels.json'
+Vue.use(VueRouter);
 
 new Vue({
   el: '#app',
@@ -14,8 +14,5 @@ new Vue({
   data: {
     channels,
   },
-  created() {
-    this.$route.go
-  },
   router,
-})
+});
