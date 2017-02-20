@@ -6,7 +6,7 @@
         <router-link :to="channelLink" class="btn-floating halfway-fab pink"><i class="material-icons">play_arrow</i></router-link>
       </div>
       <div class="card-content">
-        <p>{{channel['Name']}}</p>
+        <p class=“title”>{{channel['Name']}}</p>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@ export default {
   transform: scale(1.1, 1.1);
   transform-origin: 20% -300%;
 }
-div.card-content > p {
+title {
   font-size: 13px;
 }
 div.card-content {
