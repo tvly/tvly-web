@@ -36,4 +36,10 @@ export default {
   transform: scale(1.1, 1.1);
   transform-origin: 20% -300%;
 }
+div.card-content > p {
+  font-size: 13px;
+}
+div.card-content {
+  padding: 21px;
+}
 </style>
