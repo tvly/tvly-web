@@ -82,7 +82,7 @@ export default {
 
 <style scoped>
 header, main, footer {
-  padding-left: 300px;
+  padding-left: 250px;
 }
 
 @media only screen and (max-width : 992px) {
@@ -93,5 +93,6 @@ header, main, footer {
 
 #slide-out {
   transition: transform 0.3s;
+  width: 250px;
 }
 </style>
