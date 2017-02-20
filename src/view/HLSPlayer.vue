@@ -2,7 +2,7 @@
   <div>
     <nav class="purple">
       <div class="nav-wrapper">
-        <router-link :to="categoryLink" class="button-collapse" style="display: block">
+        <router-link :to="categoryLink" class="button-collapse show-on-large">
           <i class="material-icons">arrow_back</i>
         </router-link>
         <a class="brand-logo center">{{categoryTitle}}/{{channelTitle}}<span v-if="engine.length" class="badge green">{{engine}}</span></a>
