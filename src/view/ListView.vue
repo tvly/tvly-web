@@ -16,7 +16,7 @@
             <a href="#!name"><span class="white-text name">John Doe</span></a>
             <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
         </div></li>
-        <li v-for="c in channels['Categories']" @click="hideMenu" :class="{active: c['Name'] == category}">
+        <li v-for="c in channels['Categories']" :class="{active: c['Name'] == category}">
           <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
         </li>
         <li><div class="divider"></div></li>
@@ -57,9 +57,6 @@ export default {
   name: 'list-view',
   methods: {
     categoryLink,
-    hideMenu() {
-      jQuery('.button-collapse').sideNav('hide');
-    },
   },
   computed: {
     channelsOfCurrentCategory() {
@@ -71,7 +68,10 @@ export default {
     },
   },
   mounted() {
-    jQuery('.button-collapse').sideNav();
+    jQuery('.button-collapse').sideNav({
+      menuWidth: 250,
+      closeOnClick: true,
+    });
   },
 };
 </script>
@@ -85,9 +85,5 @@ header, main, footer {
   header, main, footer {
     padding-left: 0;
   }
-}
-
-#slide-out {
-  width: 250px;
 }
 </style>
