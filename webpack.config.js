@@ -2,12 +2,14 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const config = require('./config.json')
+
 module.exports = {
   entry: ['babel-polyfill', './src/main.js'],
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'build.js',
-    publicPath: '/',
+    publicPath: config.baseUrl,
   },
   module: {
     rules: [{

@@ -1,14 +1,16 @@
 import VueRouter from 'vue-router';
+import URI from 'urijs';
 
 import ListView from '../view/ListView.vue';
 import HLSPlayer from '../view/HLSPlayer.vue';
 
 import channels from '../data/channels.json';
+import config from '../../config.json';
 
 const categories = channels['Categories'];
 
 const routes = [{
-  path: '/',
+  path: URI('./').absoluteTo(config.baseUrl).toString(),
   redirect: (to) => {
     return {
       name: 'list',
@@ -19,12 +21,12 @@ const routes = [{
   },
 }, {
   name: 'list',
-  path: '/list/:category',
+  path: URI('./list/:category').absoluteTo(config.baseUrl).toString(),
   props: true,
   component: ListView,
 }, {
   name: 'play',
-  path: '/play/:channel',
+  path: URI('./play/:channel').absoluteTo(config.baseUrl).toString(),
   props: true,
   component: HLSPlayer,
 }];
