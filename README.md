@@ -2,6 +2,16 @@
 
 > A Vue.js based iptv frontend
 
+## Config
+
+The configurations should be put in `config.json`:
+
+```json
+{
+    "baseUrl": "/beta/" # It should end with '/'
+}
+```
+
 ## Build Setup
 
 ``` bash
