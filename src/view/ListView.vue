@@ -13,13 +13,11 @@
         <li><div class="userView">
             <div class="background purple lighten-3"></div>
             <a><img class="circle" :src="avatar"></a>
-            <a><span class="white-text name">Tsinghua User</span></a>
+            <a><span class="white-text name"></span></a>
         </div></li>
         <li v-for="c in channels['Categories']" @click="hideMenu" :class="{active: c['Name'] == category}">
           <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
         </li>
-        <li><div class="divider"></div></li>
-        <li><a href="#">登出</a></li>
       </ul>
     </header>
 
