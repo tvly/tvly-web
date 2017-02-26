@@ -22,7 +22,7 @@ export default {
   props: ['channel'],
   computed: {
     snapshot() {
-      return `https://iptv.tsinghua.edu.cn/snapshot/${this.channel['Vid']}.jpg`;
+      return `//iptv.tsinghua.edu.cn/snapshot/${this.channel['Vid']}.jpg`;
     },
     channelLink() {
       return channelLink(this.channel);
