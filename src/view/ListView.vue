@@ -12,9 +12,8 @@
       <ul id="slide-out" class="side-nav fixed">
         <li><div class="userView">
             <div class="background purple lighten-3"></div>
-            <a href="#!user"><img class="circle" src="//thecatapi.com/api/images/get?format=src&type=gif&size=small"></a>
-            <a href="#!name"><span class="white-text name">John Doe</span></a>
-            <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+            <a><img class="circle" :src="avatar"></a>
+            <a><span class="white-text name">Tsinghua User</span></a>
         </div></li>
         <li v-for="c in channels['Categories']" @click="hideMenu" :class="{active: c['Name'] == category}">
           <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
@@ -46,6 +45,7 @@ import jQuery from 'jquery';
 import ChannelThumbnail from './ChannelThumbnail.vue';
 import IPTVFooter from './IPTVFooter.vue';
 
+import thuLogo from '../image/thu.svg';
 import {categoryLink} from '../route/link.js';
 
 export default {
@@ -55,6 +55,11 @@ export default {
     'iptv-footer': IPTVFooter,
   },
   name: 'list-view',
+  data() {
+    return {
+      avatar: thuLogo,
+    };
+  },
   methods: {
     categoryLink,
     hideMenu() {
