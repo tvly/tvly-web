@@ -1,17 +1,17 @@
 <template>
   <div>
     <header>
-      <nav class="purple">
+      <nav class="teal">
         <div class="container">
           <div class="nav-wrapper">
             <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a class="brand-logo">清华大学IPTV<span class="badge purple accent-2">beta</span></a>
+            <a class="brand-logo">清华大学IPTV<span class="badge pink accent-1">beta</span></a>
           </div>
         </div>
       </nav>
       <ul id="slide-out" class="side-nav fixed">
         <li><div class="userView">
-            <div class="background purple lighten-3"></div>
+            <div class="background teal"></div>
             <a><img class="circle" :src="avatar"></a>
             <a><span class="white-text name"></span></a>
         </div></li>
