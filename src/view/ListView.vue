@@ -80,6 +80,7 @@ export default {
       menuWidth: 250,
       // There is a known [issue](https://github.com/Dogfalo/materialize/issues/4118)
       closeOnClick: false,
+      draggable: false,
     });
   },
 };
