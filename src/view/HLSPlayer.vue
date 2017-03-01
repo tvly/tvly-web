@@ -7,19 +7,60 @@
         </router-link>
         <a class="brand-logo center"><span class="hide-on-small-only">{{categoryTitle}}/</span>{{channelTitle}}<span v-if="engine.length" class="badge pink">{{engine}}</span></a>
         <ul class="right">
-          <li class="hide-on-small-only"><a class="btn"><i class="material-icons">keyboard</i></a></li>
+          <li class="hide-on-small-only"><a href="#help-modal" class="btn" id="help"><i class="material-icons">keyboard</i></a></li>
         </ul>
       </div>
     </nav>
     <div class="player fp-mute"></div>
+    <div id="help-modal" class="modal">
+      <div class="modal-content">
+        <h4>键盘绑定</h4>
+        <table class="centered highlight">
+          <thead>
+            <tr>
+              <th data-field="key">按键</th>
+              <th data-field="function">功能</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>ESC</td>
+              <td>返回列表</td>
+            </tr>
+            <tr>
+              <td>+/-</td>
+              <td>增减音量</td>
+            </tr>
+            <tr>
+              <td>左右</td>
+              <td>切换频道</td>
+            </tr>
+            <tr>
+              <td>上下</td>
+              <td>切换分类</td>
+            </tr>
+            <tr>
+              <td>f</td>
+              <td>切换全屏</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import 'materialize-css/dist/css/materialize.css';
+import 'materialize-css/css/ghpages-materialize.css';
 import 'material-design-icons/iconfont/material-icons.css';
 import 'flowplayer/dist/skin/skin.css';
 import flowplayer from 'flowplayer';
 import engine from 'flowplayer-hlsjs';
+import 'materialize-css';
+import jQuery from 'jquery';
+
 import swf from 'flowplayer/dist/flowplayer.swf';
 import swfHls from 'flowplayer/dist/flowplayerhls.swf';
 
@@ -174,6 +215,7 @@ export default {
       swfHls,
       clip: this.clip,
     });
+    jQuery('.modal').modal();
     window.addEventListener('keydown', this.keyHandler);
   },
   updated() {
