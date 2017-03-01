@@ -6,6 +6,9 @@
           <i class="material-icons">arrow_back</i>
         </router-link>
         <a class="brand-logo center"><span class="hide-on-small-only">{{categoryTitle}}/</span>{{channelTitle}}<span v-if="engine.length" class="badge pink">{{engine}}</span></a>
+        <ul class="right">
+          <li class="hide-on-small-only"><a><i class="material-icons">keyboard</i></a></li>
+        </ul>
       </div>
     </nav>
     <div class="player fp-mute"></div>
