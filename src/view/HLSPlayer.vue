@@ -5,7 +5,7 @@
         <router-link :to="categoryLink" class="button-collapse show-on-large">
           <i class="material-icons">arrow_back</i>
         </router-link>
-        <a class="brand-logo center"><span class="hide-on-small-only">{{categoryTitle}}/</span>{{channelTitle}}<span v-if="engine.length" class="badge pink">{{engine}}</span></a>
+        <a class="brand-logo center"><span class="hide-on-small-only">{{categoryTitle}}/</span>{{channelTitle}}<span v-if="engine.length" class="hide-on-small-only badge pink">{{engine}}</span></a>
         <ul class="right">
           <li class="hide-on-small-only"><a href="#help-modal" class="btn" id="help"><i class="material-icons">keyboard</i></a></li>
         </ul>
