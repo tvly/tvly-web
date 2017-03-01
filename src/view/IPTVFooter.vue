@@ -8,9 +8,9 @@
         </div>
         <div class="col l4 offset-l2 s12">
           <h5 class="white-text">联系我们</h5>
-          <ul>
-            <li><a class="grey-text text-lighten-3" target="_blank" href="https://github.com/huiyiqun/iptv"><i class="fa fa-github fa-fw"></i>Github</a></li>
-            <li><a class="grey-text text-lighten-3" target="_blank" href="mailto:its@tsinghua.edu.cn"><i class="fa fa-envelope fa-fw"></i>Email</a></li>
+          <ul class="zmdi-hc-ul">
+            <li><a class="grey-text text-lighten-3" target="_blank" href="https://github.com/huiyiqun/iptv"><i class="zmdi zmdi-github zmdi-hc-li"></i>Github</a></li>
+            <li><a class="grey-text text-lighten-3" target="_blank" href="mailto:its@tsinghua.edu.cn"><i class="zmdi zmdi-email zmdi-hc-li"></i>Email</a></li>
           </ul>
         </div>
       </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import 'font-awesome/css/font-awesome.css';
+import 'material-design-iconic-font/dist/css/material-design-iconic-font.css';
 export default {
   name: 'iptv-footer',
 };
