@@ -5,7 +5,7 @@
         <div class="container">
           <div class="nav-wrapper">
             <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a class="brand-logo">清华大学IPTV<span class="badge pink accent-1">beta</span></a>
+            <a class="brand-logo">清华大学IPTV<span class="hide-on-small-only badge pink accent-1">beta</span></a>
           </div>
         </div>
       </nav>
