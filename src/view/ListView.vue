@@ -11,7 +11,9 @@
       </nav>
       <ul id="slide-out" class="side-nav fixed">
         <li><div class="userView">
-            <div class="background teal lighten-3"></div>
+            <div class="background">
+              <img :src="background">
+            </div>
             <a><img class="circle" :src="avatar"></a>
             <a><span class="white-text name"></span></a>
         </div></li>
@@ -46,6 +48,8 @@ import IPTVFooter from './IPTVFooter.vue';
 import thuLogo from '../image/thu.svg';
 import {categoryLink} from '../route/link.js';
 
+import background from '../image/background.jpg';
+
 export default {
   props: ['category', 'channels'],
   components: {
@@ -56,6 +60,7 @@ export default {
   data() {
     return {
       avatar: thuLogo,
+      background,
     };
   },
   methods: {
@@ -89,6 +94,10 @@ export default {
 <style scoped>
 header, main, footer {
   padding-left: 250px;
+}
+
+img {
+  width: 100%;
 }
 
 @media only screen and (max-width : 992px) {
