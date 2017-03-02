@@ -66,6 +66,7 @@ import swf from 'flowplayer/dist/flowplayer.swf';
 import swfHls from 'flowplayer/dist/flowplayerhls.swf';
 
 import {categoryLink, channelLink} from '../route/link.js';
+import {hasFavorite, addFavorite, delFavorite} from '../favorite.js';
 
 engine(flowplayer);
 
@@ -76,12 +77,15 @@ export default {
     return {
       engine: '',
       player: null,
-      favorite: false,
     };
   },
   methods: {
     toggleFavorite() {
-      this.favorite = !this.favorite;
+      if (this.favorite) {
+        delFavorite(this.channel);
+      } else {
+        addFavorite(this.channel);
+      }
     },
     keyHandler(event) {
       let captured = true;
@@ -208,6 +212,9 @@ export default {
           src: `//iptv.tsinghua.edu.cn/hls/${this.channel}.m3u8`,
         }],
       };
+    },
+    favorite() {
+      return hasFavorite(this.channel);
     },
   },
   created() {
