@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="grey lighten-4">
     <header>
       <nav class="teal lighten-2">
         <div class="container">
@@ -21,7 +21,7 @@
       </ul>
     </header>
 
-    <main class="grey lighten-4">
+    <main>
       <div class="container">
         <div class="row" id="list">
           <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col l4 m6 s12" :channel="c" :key="c.Vid"></channel-thumbnail>
