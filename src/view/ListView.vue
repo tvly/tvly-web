@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <nav class="teal">
+      <nav class="teal lighten-2">
         <div class="container">
           <div class="nav-wrapper">
             <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -11,7 +11,7 @@
       </nav>
       <ul id="slide-out" class="side-nav fixed">
         <li><div class="userView">
-            <div class="background teal"></div>
+            <div class="background teal lighten-3"></div>
             <a><img class="circle" :src="avatar"></a>
             <a><span class="white-text name"></span></a>
         </div></li>
@@ -21,7 +21,7 @@
       </ul>
     </header>
 
-    <main>
+    <main class="grey lighten-4">
       <div class="container">
         <div class="row" id="list">
           <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col l4 m6 s12" :channel="c" :key="c.Vid"></channel-thumbnail>

@@ -1,10 +1,10 @@
 <template>
-  <footer class="page-footer teal">
+  <footer class="page-footer teal lighten-2">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">鸣谢</h5>
-          <p class="grey-text text-lighten-4">感谢北邮人提供视频源.</p>
+          <p class="grey-text text-lighten-5">感谢北邮人提供视频源.</p>
         </div>
         <div class="col l4 offset-l2 s12">
           <h5 class="white-text">联系我们</h5>
