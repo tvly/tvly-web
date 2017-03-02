@@ -7,6 +7,7 @@
         </router-link>
         <a class="brand-logo center"><span class="hide-on-small-only">{{categoryTitle}}/</span>{{channelTitle}}<span v-if="engine.length" class="hide-on-small-only badge pink accent-1">{{engine}}</span></a>
         <ul class="right">
+          <li><a @click="toggleFavorite"><i class="material-icons">{{favoriteIcon}}</i></a></li>
           <li class="hide-on-small-only"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
         </ul>
       </div>
@@ -75,9 +76,13 @@ export default {
     return {
       engine: '',
       player: null,
+      favorite: false,
     };
   },
   methods: {
+    toggleFavorite() {
+      this.favorite = !this.favorite;
+    },
     keyHandler(event) {
       let captured = true;
       // workaround for safari
@@ -162,6 +167,13 @@ export default {
     },
   },
   computed: {
+    favoriteIcon() {
+      if (this.favorite) {
+        return 'favorite';
+      } else {
+        return 'favorite_border';
+      }
+    },
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
         return category.Channels.findIndex((channel) => {
