@@ -7,7 +7,7 @@
         </router-link>
         <a class="brand-logo center"><span class="hide-on-small-only">{{categoryTitle}}/</span>{{channelTitle}}<span v-if="engine.length" class="hide-on-small-only badge pink accent-1">{{engine}}</span></a>
         <ul class="right">
-          <li class="hide-on-small-only"><a href="#help-modal" class="btn" id="help"><i class="material-icons">keyboard</i></a></li>
+          <li class="hide-on-small-only"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
         </ul>
       </div>
     </nav>
