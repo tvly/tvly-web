@@ -77,6 +77,7 @@ export default {
     return {
       engine: '',
       player: null,
+      favorite: false,
     };
   },
   methods: {
@@ -86,6 +87,7 @@ export default {
       } else {
         addFavorite(this.channel);
       }
+      this.favorite = !this.favorite;
     },
     keyHandler(event) {
       let captured = true;
@@ -213,9 +215,6 @@ export default {
         }],
       };
     },
-    favorite() {
-      return hasFavorite(this.channel);
-    },
   },
   created() {
     flowplayer((api) => {
@@ -240,6 +239,9 @@ export default {
   watch: {
     clip(val) {
       this.player.load(val);
+    },
+    channel(val) {
+      this.favorite = hasFavorite(val);
     },
   },
   beforeDestroy() {
