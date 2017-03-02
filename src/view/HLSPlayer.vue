@@ -230,8 +230,10 @@ export default {
     jQuery('.modal').modal();
     window.addEventListener('keydown', this.keyHandler);
   },
-  updated() {
-    this.player.load(this.clip);
+  watch: {
+    clip(val) {
+      this.player.load(val);
+    },
   },
   beforeDestroy() {
     window.removeEventListener('keydown', this.keyHandler);
