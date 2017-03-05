@@ -20,6 +20,18 @@
         <li v-for="c in channels['Categories']" @click="hideMenu" :class="{active: c['Name'] == category}">
           <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
         </li>
+        <li><div class="divider"></div></li>
+        <li>
+          <a>
+            显示缩略图
+            <div class="switch right">
+              <label class="switch">
+                <input type="checkbox" v-model="detail">
+                <span class="lever"></span>
+              </label>
+            </div>
+          </a>
+        </li>
       </ul>
     </header>
 
