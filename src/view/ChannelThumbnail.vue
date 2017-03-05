@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="card">
-      <div class="card-image">
+      <div class="card-image" v-if="detail">
         <img :src="snapshot" @click="$router.push(channelLink)">
         <router-link :to="channelLink" class="btn-floating halfway-fab pink"><i class="material-icons">play_arrow</i></router-link>
       </div>
-      <div class="card-content">
+      <div class="card-content" @click="$router.push(channelLink)">
         <p class=“title”>{{channel['Name']}}</p>
       </div>
     </div>
@@ -19,7 +19,7 @@ import {channelLink} from '../route/link.js';
 
 export default {
   name: 'channel-thumbnail',
-  props: ['channel'],
+  props: ['channel', 'detail'],
   computed: {
     snapshot() {
       return `https://iptv.tsinghua.edu.cn/snapshot/${this.channel['Vid']}.jpg`;

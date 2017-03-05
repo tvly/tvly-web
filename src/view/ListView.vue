@@ -26,7 +26,7 @@
     <main>
       <div class="container">
         <div class="row" id="list">
-          <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col l4 m6 s12" :channel="c" :key="c.Vid"></channel-thumbnail>
+          <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col l4 m6 s12" :channel="c" :key="c.Vid" :detail="detail"></channel-thumbnail>
         </div>
       </div>
     </main>
@@ -60,6 +60,7 @@ export default {
   data() {
     return {
       avatar: thuLogo,
+      detail: false,
       background,
     };
   },
