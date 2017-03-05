@@ -72,7 +72,7 @@ export default {
   data() {
     return {
       avatar: thuLogo,
-      detail: false,
+      detail: window.localStorage.iptvDetail === 'true',
       background,
     };
   },
@@ -91,6 +91,11 @@ export default {
           return c['Channels'];
         }
       }
+    },
+  },
+  watch: {
+    detail(val) {
+      window.localStorage.iptvDetail = val.toString();
     },
   },
   mounted() {
