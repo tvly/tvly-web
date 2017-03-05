@@ -22,7 +22,7 @@
         </li>
         <li><div class="divider"></div></li>
         <li>
-          <a>
+          <a @click="detail = !detail">
             显示缩略图
             <div class="switch right">
               <label class="switch">
@@ -116,6 +116,10 @@ header, main, footer {
 
 img {
   width: 100%;
+}
+
+a {
+  cursor: pointer;
 }
 
 @media only screen and (max-width : 992px) {
