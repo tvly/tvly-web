@@ -7,7 +7,6 @@
         </router-link>
         <a class="brand-logo center"><span class="hide-on-small-only">{{categoryTitle}}/</span>{{channelTitle}}<span v-if="engine.length" class="hide-on-small-only badge pink accent-1">{{engine}}</span></a>
         <ul class="right">
-          <li><a @click="toggleFavorite"><i class="material-icons">{{favoriteIcon}}</i></a></li>
           <li class="hide-on-small-only"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
         </ul>
       </div>
@@ -66,7 +65,6 @@ import swf from 'flowplayer/dist/flowplayer.swf';
 import swfHls from 'flowplayer/dist/flowplayerhls.swf';
 
 import {categoryLink, channelLink} from '../route/link.js';
-import {hasFavorite, addFavorite, delFavorite} from '../favorite.js';
 
 engine(flowplayer);
 
@@ -77,18 +75,9 @@ export default {
     return {
       engine: '',
       player: null,
-      favorite: false,
     };
   },
   methods: {
-    toggleFavorite() {
-      if (this.favorite) {
-        delFavorite(this.channel);
-      } else {
-        addFavorite(this.channel);
-      }
-      this.favorite = !this.favorite;
-    },
     keyHandler(event) {
       let captured = true;
       // workaround for safari
@@ -173,13 +162,6 @@ export default {
     },
   },
   computed: {
-    favoriteIcon() {
-      if (this.favorite) {
-        return 'favorite';
-      } else {
-        return 'favorite_border';
-      }
-    },
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
         return category.Channels.findIndex((channel) => {
@@ -239,9 +221,6 @@ export default {
   watch: {
     clip(val) {
       this.player.load(val);
-    },
-    channel(val) {
-      this.favorite = hasFavorite(val);
     },
   },
   beforeDestroy() {
