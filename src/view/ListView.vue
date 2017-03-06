@@ -122,6 +122,10 @@ a {
   cursor: pointer;
 }
 
+main {
+  padding-top: 10px;
+}
+
 @media only screen and (max-width : 992px) {
   header, main, footer {
     padding-left: 0;
