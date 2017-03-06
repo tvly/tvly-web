@@ -32,10 +32,6 @@ export default {
 </script>
 
 <style scoped>
-.btn-floating:hover {
-  transform: scale(1.1, 1.1);
-  transform-origin: 20% -300%;
-}
 title {
   font-size: 13px;
 }
