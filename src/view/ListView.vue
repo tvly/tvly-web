@@ -46,7 +46,7 @@
     <main>
       <div class="container">
         <div class="row" id="list">
-          <channel-thumbnail v-for="c in channelsOfCurrentCategory" class="col l4 m6 s12" :channel="c" :key="c.Vid" :detail="detail"></channel-thumbnail>
+          <channel-thumbnail v-for="c in filteredList" class="col l4 m6 s12" :channel="c" :key="c.Vid" :detail="detail"></channel-thumbnail>
         </div>
       </div>
     </main>
@@ -95,12 +95,17 @@ export default {
     },
   },
   computed: {
-    channelsOfCurrentCategory() {
+    channelList() {
       for (const c of this.channels['Categories']) {
         if (c['Name'] === this.category) {
           return c['Channels'];
         }
       }
+    },
+    filteredList() {
+      return this.channelList.filter((channel) => {
+        return !this.filter.length || channel.Name.includes(this.filter);
+      });
     },
   },
   watch: {
