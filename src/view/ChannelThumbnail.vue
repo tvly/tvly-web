@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{compact: !detail}">
     <div class="card">
       <div class="card-image" v-if="detail">
         <img :src="snapshot" @click="$router.push(channelLink)">
@@ -41,5 +41,12 @@ title {
 }
 div.card-content {
   padding: 21px;
+}
+div.compact div.card {
+  margin: 0.5px;
+  border: 1px;
+}
+div.compact {
+  padding: 0px;
 }
 </style>
