@@ -4,19 +4,27 @@
       <nav class="teal lighten-2">
         <div class="container">
           <div class="nav-wrapper">
-            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             <a class="brand-logo">清华大学IPTV<span class="hide-on-small-only badge pink accent-1">beta</span></a>
           </div>
         </div>
       </nav>
-      <ul id="slide-out" class="side-nav fixed">
-        <li><div class="userView">
+      <ul id="nav-mobile" class="side-nav fixed">
+        <li>
+          <div class="userView">
             <div class="background">
               <img :src="background">
             </div>
             <a><img class="circle" :src="avatar"></a>
-            <a><span class="white-text name"></span></a>
-        </div></li>
+          </div>
+        </li>
+        <li class="search">
+          <div class="search-wrapper card" :class="{focused: filter.length || searching}">
+            <input id="search" type="search" v-model="filter" @focus="searching = true" @blur="searching = false">
+            <i class="material-icons" v-if="filter.length" @click="filter = ''">close</i>
+            <i class="material-icons" v-else>search</i>
+          </div>
+        </li>
         <li v-for="c in channels['Categories']" @click="hideMenu" :class="{active: c['Name'] == category}">
           <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
         </li>
@@ -73,6 +81,8 @@ export default {
     return {
       avatar: thuLogo,
       detail: window.localStorage.iptvDetail === 'true',
+      filter: '',
+      searching: false,
       background,
     };
   },
@@ -115,7 +125,7 @@ header, main, footer {
 }
 
 img {
-  width: 100%;
+  width: 120%;
 }
 
 a {
@@ -124,6 +134,18 @@ a {
 
 main {
   padding-top: 10px;
+}
+
+div.userView {
+  height: 180px;
+}
+
+input#search {
+  width: 200px!important;
+}
+
+li.search:hover {
+  background-color: rgba(0, 0, 0, 0)!important;
 }
 
 @media only screen and (max-width : 992px) {
