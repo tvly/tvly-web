@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-4">
+  <div id="body" class="grey lighten-4">
     <header>
       <nav class="teal lighten-2">
         <div class="container">
