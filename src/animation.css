@@ -1,0 +1,13 @@
+.slide-left-enter-active, .slide-left-leave-active, .slide-right-enter-active, .slide-right-leave-active {
+    position: fixed;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.slide-left-enter, .slide-right-leave-to {
+    transform: translateX(100%);
+}
+
+.slide-left-leave-to, .slide-right-enter {
+    transform: translateX(-100%);
+}
