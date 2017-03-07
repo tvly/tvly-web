@@ -45,4 +45,7 @@ div.compact div.card {
 div.compact {
   padding: 0px;
 }
+div.card {
+  cursor: pointer;
+}
 </style>
