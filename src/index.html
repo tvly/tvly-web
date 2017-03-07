@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>清华大学IPTV</title>
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>清华大学IPTV</title>
+    </head>
+    <body>
+        <div id="app">
+            <transition :name="transition">
+                <router-view :channels="channels">
+                </router-view>
+            </transition>,
+        </div>
+    </body>
 </html>

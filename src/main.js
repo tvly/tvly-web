@@ -10,11 +10,6 @@ Vue.use(VueRouter);
 
 new Vue({
   el: '#app',
-  template: '' +
-    '<transition :name="transition">' +
-      '<router-view :channels="channels">' +
-      '</router-view>' +
-    '</transition>',
   data: {
     channels,
     transition: '',
