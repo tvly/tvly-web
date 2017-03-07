@@ -61,6 +61,7 @@ import 'material-design-icons/iconfont/material-icons.css';
 
 import 'materialize-css';
 import jQuery from 'jquery';
+import fuzzy from 'fuzzy';
 
 import ChannelThumbnail from './ChannelThumbnail.vue';
 import IPTVFooter from './IPTVFooter.vue';
@@ -104,7 +105,9 @@ export default {
     },
     filteredList() {
       return this.channelList.filter((channel) => {
-        return !this.filter.length || channel.Name.includes(this.filter);
+        return (!this.filter.length ||
+                fuzzy.test(this.filter, channel.Name) ||
+                fuzzy.test(this.filter, channel.Vid));
       });
     },
   },
