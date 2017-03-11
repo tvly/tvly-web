@@ -100,8 +100,9 @@ export default {
     },
   },
   created() {
-    window.fetch('https://iptv.tsinghua.edu.cn/thauth/userinfo.php')
-    .then((response) => {
+    window.fetch('https://iptv.tsinghua.edu.cn/thauth/userinfo.php', {
+      credentials: 'include',
+    }).then((response) => {
       if (response.status === 200) {
         return response.text();
       } else if (response.status === 403) {
