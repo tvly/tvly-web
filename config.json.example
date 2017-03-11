@@ -1,3 +1,4 @@
 {
-    "baseUrl": "/"
+    "baseUrl": "/",
+    "authUrl": "https://example.com/auth"
 }

@@ -8,7 +8,8 @@ The configurations should be put in `config.json`:
 
 ```json
 {
-    "baseUrl": "/beta/" # It should end with '/'
+    "baseUrl": "/beta/", # It should end with '/'
+    "authUrl": "https://example.com/auth" # where to redirect when 403 is found
 }
 ```
 
