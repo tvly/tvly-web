@@ -84,6 +84,8 @@ export default {
       detail: window.localStorage.iptvDetail === 'true',
       filter: '',
       searching: false,
+      inCampus: false,
+      uid: '',
       background,
     };
   },
@@ -94,6 +96,20 @@ export default {
         jQuery('.button-collapse').sideNav('hide');
       }
     },
+  },
+  created() {
+    window.fetch('https://iptv.tsinghua.edu.cn/thauth/userinfo.php')
+    .then((response) => {
+      if (response.status === 200) {
+        return response.text();
+      } else if (response.status === 403) {
+        // TODO: Redirect
+      }
+    }).then((text) => {
+      const [type, value] = text.split(':');
+      this.inCampus = (type === 'ip');
+      this.uid = value;
+    });
   },
   computed: {
     channelList() {
