@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import {router} from './route/route.js';
 import channels from './data/channels.json';
+import config from '../config.json';
 
 import './animation.css';
 
@@ -13,6 +14,11 @@ new Vue({
   data: {
     channels,
     transition: '',
+  },
+  methods: {
+    doLogin() {
+      window.location.assign(config.authUrl);
+    },
   },
   watch: {
     '$route'(to, from) {

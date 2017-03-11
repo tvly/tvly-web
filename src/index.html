@@ -8,7 +8,7 @@
     <body>
         <div id="app">
             <transition :name="transition">
-                <router-view :channels="channels">
+                <router-view :channels="channels" @unauth="doLogin">
                 </router-view>
             </transition>,
         </div>

@@ -67,9 +67,10 @@ import fuzzy from 'fuzzy';
 import ChannelThumbnail from './ChannelThumbnail.vue';
 import IPTVFooter from './IPTVFooter.vue';
 
-import thuLogo from '../image/thu.svg';
 import {categoryLink} from '../route/link.js';
+import {UNAUTHORIZED, UNKNOWN} from '../error.js';
 
+import thuLogo from '../image/thu.svg';
 import background from '../image/background.jpg';
 
 export default {
@@ -104,12 +105,18 @@ export default {
       if (response.status === 200) {
         return response.text();
       } else if (response.status === 403) {
-        // TODO: Redirect
+        throw UNAUTHORIZED;
+      } else {
+        throw UNKNOWN;
       }
     }).then((text) => {
       const [type, value] = text.split(':');
       this.inCampus = (type === 'ip');
       this.uid = value;
+    }).catch((e) => {
+      if (e == UNAUTHORIZED) {
+        this.$emit('unauth');
+      }
     });
   },
   computed: {
