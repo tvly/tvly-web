@@ -204,6 +204,12 @@ export default {
         const engineName = api.engine.engineName;
         this.engine = engineName;
       });
+      api.on('error', (e, api, error) => {
+        if (error.code === 4) {
+          // TODO: how about a 404 response?
+          this.$emit('unauth');
+        }
+      });
     });
   },
   mounted() {
