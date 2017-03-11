@@ -219,6 +219,11 @@ export default {
       keyboard: false,
       swf,
       swfHls,
+      hlsjs: {
+        xhrSetup: (xhr) => {
+          xhr.withCredentials = true;
+        },
+      },
       clip: this.clip,
     });
     jQuery('.modal').modal();
