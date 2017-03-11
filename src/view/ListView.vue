@@ -16,6 +16,7 @@
               <img :src="background">
             </div>
             <a><img class="circle" :src="avatar"></a>
+            <a class="uid"><span class="white-text name">{{uid}}</span></a>
           </div>
         </li>
         <li class="search">
@@ -148,8 +149,8 @@ header, main, footer {
   padding-left: 250px;
 }
 
-img {
-  width: 120%;
+div.background img {
+  height: 100%;
 }
 
 a {
@@ -161,15 +162,23 @@ main {
 }
 
 div.userView {
-  height: 180px;
+  height: 210px;
 }
 
 input#search {
   width: 200px!important;
 }
 
+li.search {
+  margin-top: 30px!important;
+}
+
 li.search:hover {
   background-color: rgba(0, 0, 0, 0)!important;
+}
+
+a.uid {
+  margin-top: 30px;
 }
 
 @media only screen and (max-width : 992px) {
