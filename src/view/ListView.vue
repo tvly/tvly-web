@@ -42,7 +42,7 @@
             </div>
           </a>
         </li>
-        <li v-if="uid.length && !inCampus">
+        <li v-if="uid.length && !withIP">
           <a @click="$emit('logout')">
             登出
           </a>
@@ -92,7 +92,7 @@ export default {
       detail: window.localStorage.iptvDetail === 'true',
       filter: '',
       searching: false,
-      inCampus: false,
+      withIP: false,
       uid: '',
       background,
     };
@@ -122,7 +122,7 @@ export default {
         throw UNKNOWN;
       }
       const [type, value] = [text.slice(0, iSeq), text.slice(iSeq+1)];
-      this.inCampus = (type === 'ip');
+      this.withIP = (type === 'ip');
       this.uid = value;
     }).catch((e) => {
       if (e == UNAUTHORIZED) {
