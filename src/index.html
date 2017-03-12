@@ -8,7 +8,7 @@
     <body>
         <div id="app">
             <transition :name="transition">
-                <router-view :channels="channels" @unauth="notify">
+                <router-view :channels="channels" @unauth="notify" @logout="logout">
                 </router-view>
             </transition>
             <auth-notification ref="auth"></auth-notification>

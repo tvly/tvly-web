@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import {router} from './route/route.js';
 import channels from './data/channels.json';
+import config from '../config.json';
 
 import AuthorizationNotification from './view/AuthorizationNotification.vue';
 
@@ -22,6 +23,11 @@ new Vue({
   methods: {
     notify() {
       this.$refs.auth.notify();
+    },
+    logout() {
+      window.fetch(config.logoutUrl, {
+        credentials: 'include',
+      }).then(() => { window.location.reload(); });
     },
   },
   watch: {

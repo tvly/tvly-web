@@ -41,6 +41,11 @@
             </div>
           </a>
         </li>
+        <li v-if="!inCampus">
+          <a @click="$emit('logout')">
+            登出
+          </a>
+        </li>
       </ul>
     </header>
 
