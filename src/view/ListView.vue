@@ -41,7 +41,7 @@
             </div>
           </a>
         </li>
-        <li v-if="!inCampus">
+        <li v-if="uid.length && !inCampus">
           <a @click="$emit('logout')">
             登出
           </a>
