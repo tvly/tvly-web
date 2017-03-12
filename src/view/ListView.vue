@@ -16,8 +16,8 @@
               <img :src="background">
             </div>
             <a><img class="circle" :src="avatar"></a>
-            <a><span class="white-text name">{{uid}}</span></a>
-            <a><span class="white-text email">{{uid}}</span></a>
+            <a><span class="white-text type">{{userType}}</span></a>
+            <a><span class="white-text uid">{{uid}}</span></a>
           </div>
         </li>
         <li class="search">
@@ -131,6 +131,19 @@ export default {
     });
   },
   computed: {
+    userType() {
+      if (!this.uid.length) {
+        return '';
+      } else if (this.withIP) {
+        if (this.uid.includes(':')) {
+          return 'IPv6用户';
+        } else {
+          return '校内用户';
+        }
+      } else {
+        return '登录用户';
+      }
+    },
     channelList() {
       for (const c of this.channels['Categories']) {
         if (c['Name'] === this.category) {
@@ -234,6 +247,23 @@ li.search:hover {
 
 .container {
   width: 93%;
+}
+
+.side-nav .userView .type, .side-nav .userView .uid {
+    line-height: 24px;
+    display: block;
+}
+
+.side-nav .userView .type {
+    font-size: 14px;
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.side-nav .userView .uid {
+    font-size: 11px;
+    padding-bottom: 16px;
+    font-weight: 300;
 }
 
 @media only screen and (max-width : 992px) {
