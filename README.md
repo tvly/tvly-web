@@ -9,7 +9,8 @@ The configurations should be put in `config.json`:
 ```json
 {
     "baseUrl": "/beta/", # It should end with '/'
-    "authUrl": "https://example.com/auth" # where to redirect when 403 is found
+    "authUrl": "https://example.com/auth", # where to redirect when 403 is found
+    "logoutUrl": "https://example.com/logout" # url used to logout
 }
 ```
 
