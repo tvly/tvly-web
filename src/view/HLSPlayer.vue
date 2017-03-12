@@ -243,13 +243,18 @@ export default {
 .page {
   height: 100vh;
 }
-@media only screen and (min-width: 500px) {
+
+.flowplayer {
+  margin-top: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  max-height: calc(100% - 76px);
+  max-width: 95%;
+}
+
+@media only screen and (min-width: 601px) {
   .flowplayer {
-    margin-top: 10px;
-    left: 50%;
-    transform: translate(-50%, 0);
     max-height: calc(100% - 84px);
-    max-width: 95%;
   }
 }
 </style>
