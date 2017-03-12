@@ -3,7 +3,8 @@ import VueRouter from 'vue-router';
 
 import {router} from './route/route.js';
 import channels from './data/channels.json';
-import config from '../config.json';
+
+import AuthorizationNotification from './view/AuthorizationNotification.vue';
 
 import './animation.css';
 
@@ -11,13 +12,16 @@ Vue.use(VueRouter);
 
 new Vue({
   el: '#app',
+  components: {
+    'auth-notification': AuthorizationNotification,
+  },
   data: {
     channels,
     transition: '',
   },
   methods: {
-    doLogin() {
-      window.location.assign(config.authUrl);
+    notify() {
+      this.$refs.auth.notify();
     },
   },
   watch: {
