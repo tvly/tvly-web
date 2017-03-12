@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <nav class="teal lighten-2">
       <div class="nav-wrapper">
         <router-link :to="categoryLink" class="button-collapse show-on-large">
@@ -240,12 +240,16 @@ export default {
 </script>
 
 <style scoped>
+.page {
+  height: 100vh;
+}
 @media only screen and (min-width: 500px) {
   .flowplayer {
     margin-top: 10px;
-    max-width: 70%;
     left: 50%;
-    transform: translate(-50%, 0)
+    transform: translate(-50%, 0);
+    max-height: calc(100% - 84px);
+    max-width: 95%;
   }
 }
 </style>
