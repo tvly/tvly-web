@@ -1,5 +1,5 @@
 {
     "baseUrl": "/",
     "authUrl": "https://example.com/auth",
-    "logoutUrl": "https://example.com/logout",
+    "logoutUrl": "https://example.com/logout"
 }
