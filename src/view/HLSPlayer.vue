@@ -53,7 +53,6 @@
 
 <script>
 import 'materialize-css/dist/css/materialize.css';
-import 'materialize-css/css/ghpages-materialize.css';
 import 'material-design-icons/iconfont/material-icons.css';
 import 'flowplayer/dist/skin/skin.css';
 import flowplayer from 'flowplayer';

@@ -4,19 +4,20 @@
       <nav class="teal lighten-2">
         <div class="container">
           <div class="nav-wrapper">
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            <a href="#" data-activates="nav-menu" class="button-collapse"><i class="material-icons">menu</i></a>
             <a class="brand-logo">清华大学IPTV<span class="hide-on-small-only badge pink accent-1">beta</span></a>
           </div>
         </div>
       </nav>
-      <ul id="nav-mobile" class="side-nav fixed">
+      <ul id="nav-menu" class="side-nav fixed">
         <li>
           <div class="userView">
             <div class="background">
               <img :src="background">
             </div>
             <a><img class="circle" :src="avatar"></a>
-            <a class="uid"><span class="white-text name">{{uid}}</span></a>
+            <a><span class="white-text name">{{uid}}</span></a>
+            <a><span class="white-text email">{{uid}}</span></a>
           </div>
         </li>
         <li class="search">
@@ -63,7 +64,6 @@
 
 <script>
 import 'materialize-css/dist/css/materialize.css';
-import 'materialize-css/css/ghpages-materialize.css';
 import 'material-design-icons/iconfont/material-icons.css';
 
 import 'materialize-css';
@@ -180,7 +180,7 @@ main {
 }
 
 div.userView {
-  height: 210px;
+  height: 240px;
 }
 
 input#search {
@@ -188,15 +188,48 @@ input#search {
 }
 
 li.search {
-  margin-top: 30px!important;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 180px;
+  margin-top: 1px;
+  padding: 1px 0 0 0;
+  z-index: 2;
+}
+
+li.search .search-wrapper {
+  margin: 0 12px;
+  transition: margin .25s ease;
+}
+
+li.search .search-wrapper input#search {
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  width: 100%;
+  height: 45px;
+  margin: 0;
+  padding: 0 45px 0 15px;
+  border: 0;
+}
+
+li.search .search-wrapper input#search:focus {
+  outline: none;
+}
+
+li.search .search-wrapper.focused {
+  margin: 0;
+}
+
+li.search .search-wrapper i.material-icons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 
 li.search:hover {
   background-color: rgba(0, 0, 0, 0)!important;
-}
-
-a.uid {
-  margin-top: 30px;
 }
 
 @media only screen and (max-width : 992px) {
