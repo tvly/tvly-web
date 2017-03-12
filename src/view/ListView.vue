@@ -47,7 +47,8 @@
     <main>
       <div class="container">
         <div class="row" id="list">
-          <channel-thumbnail v-for="c in filteredList" class="col l4 m6 s12" :channel="c" :key="c.Vid" :detail="detail"></channel-thumbnail>
+          <channel-thumbnail v-for="c in filteredList" class="col l4 m6 s12" :channel="c" :key="c.Vid" :detail="detail"
+            @unauth="$emit('unauth')"></channel-thumbnail>
         </div>
       </div>
     </main>

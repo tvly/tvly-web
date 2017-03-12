@@ -2,7 +2,7 @@
   <div :class="{compact: !detail}">
     <div class="card">
       <div class="card-image" v-if="detail">
-        <img :src="snapshot" @click="$router.push(channelLink)">
+        <img :src="snapshot" @click="$router.push(channelLink)" @error="$emit('unauth')">
         <router-link :to="channelLink" class="btn-floating halfway-fab pink"><i class="material-icons">play_arrow</i></router-link>
       </div>
       <div class="card-content" @click="$router.push(channelLink)">
