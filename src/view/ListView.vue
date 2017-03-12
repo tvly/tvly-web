@@ -117,7 +117,11 @@ export default {
         throw UNKNOWN;
       }
     }).then((text) => {
-      const [type, value] = text.split(':');
+      const iSeq = text.indexOf(':');
+      if (iSeq === -1) {
+        throw UNKNOWN;
+      }
+      const [type, value] = [text.slice(0, iSeq), text.slice(iSeq+1)];
       this.inCampus = (type === 'ip');
       this.uid = value;
     }).catch((e) => {
