@@ -232,6 +232,10 @@ li.search:hover {
   background-color: rgba(0, 0, 0, 0)!important;
 }
 
+.container {
+  width: 93%;
+}
+
 @media only screen and (max-width : 992px) {
   header, main, footer {
     padding-left: 0;
