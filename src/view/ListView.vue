@@ -263,4 +263,8 @@ li.search:hover {
     padding-left: 0;
   }
 }
+
+.side-nav {
+  padding-bottom: 10px!important;
+}
 </style>
