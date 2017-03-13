@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import 'material-design-iconic-font/dist/css/material-design-iconic-font.css';
 export default {
   name: 'iptv-footer',
 };

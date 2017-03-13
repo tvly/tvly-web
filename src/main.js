@@ -7,6 +7,19 @@ import config from '../config.json';
 
 import AuthorizationNotification from './view/AuthorizationNotification.vue';
 
+// Materialize-css
+import 'materialize-css/dist/css/materialize.css';
+import 'materialize-css';
+
+// Material-Design-Icons
+import 'material-design-icons/iconfont/material-icons.css';
+
+// Material-Design-Iconic-Font
+import 'material-design-iconic-font/dist/css/material-design-iconic-font.css';
+
+// Flowplayer
+import 'flowplayer/dist/skin/skin.css';
+
 import './animation.css';
 
 Vue.use(VueRouter);
