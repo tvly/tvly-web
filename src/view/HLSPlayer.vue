@@ -17,7 +17,9 @@
         </ul>
       </div>
     </nav>
-    <div class="player fp-mute"></div>
+    <div class="valign-wrapper player-container grey darken-3">
+      <div class="player fp-mute center-align"></div>
+    </div>
     <div id="help-modal" class="modal">
       <div class="modal-content">
         <h4>键盘绑定</h4>
@@ -246,17 +248,13 @@ export default {
   height: 100vh;
 }
 
-.flowplayer {
-  margin-top: 10px;
-  left: 50%;
-  transform: translate(-50%, 0);
-  max-height: calc(100% - 76px);
-  max-width: 95%;
+.player-container {
+  height: calc(100% - 56px);
 }
 
 @media only screen and (min-width: 601px) {
-  .flowplayer {
-    max-height: calc(100% - 84px);
+  .player-container {
+    height: calc(100% - 64px);
   }
 }
 </style>
