@@ -196,10 +196,6 @@ div.userView {
   height: 240px;
 }
 
-input#search {
-  width: 200px!important;
-}
-
 li.search {
   position: absolute;
   left: 0;
@@ -219,10 +215,10 @@ li.search .search-wrapper input#search {
   display: block;
   font-size: 16px;
   font-weight: 300;
-  width: 100%;
+  width: 180px;
   height: 45px;
   margin: 0;
-  padding: 0 45px 0 15px;
+  padding: 0 15px 0 15px;
   border: 0;
 }
 
