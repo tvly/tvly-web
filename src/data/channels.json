@@ -144,15 +144,15 @@
             },
             {  
                "Name":"凤凰中文",
-               "Vid":"fhwszwt"
+               "Vid":"fhzw"
             },
             {  
                "Name":"凤凰资讯",
-               "Vid":"fhwszxt"
+               "Vid":"fhzx"
             },
             {  
                "Name":"凤凰电影",
-               "Vid":"fhwsdyt"
+               "Vid":"fhdy"
             },
             {  
                "Name":"Discovery",
@@ -160,7 +160,7 @@
             },
             {  
                "Name":"国家地理",
-               "Vid":"gjdl"
+               "Vid":"natlgeo"
             },
             {  
                "Name":"Channel V",
@@ -168,7 +168,7 @@
             },
             {  
                "Name":"星空卫视",
-               "Vid":"xkws"
+               "Vid":"startv"
             },
             {  
                "Name":"Star Sports",
