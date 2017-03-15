@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import {router} from './route/route.js';
-import channels from './data/channels.json';
 import config from '../config.json';
 
 import AuthorizationNotification from './view/AuthorizationNotification.vue';
@@ -24,13 +23,15 @@ import './animation.css';
 
 Vue.use(VueRouter);
 
-new Vue({
+const app = new Vue({
   el: '#app',
   components: {
     'auth-notification': AuthorizationNotification,
   },
   data: {
-    channels,
+    channels: {
+      Categories: [],
+    },
     transition: '',
   },
   methods: {
@@ -53,4 +54,14 @@ new Vue({
     },
   },
   router,
+});
+
+fetch(config.channelsUrl, {
+  credentials: 'always',
+}).then((response) => {
+  if (response.status === 200) {
+    return response.json();
+  }
+}).then((channels) => {
+  app.channels = channels;
 });

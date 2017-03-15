@@ -4,19 +4,13 @@ import URI from 'urijs';
 import ListView from '../view/ListView.vue';
 import HLSPlayer from '../view/HLSPlayer.vue';
 
-import channels from '../data/channels.json';
 import config from '../../config.json';
-
-const categories = channels['Categories'];
 
 const routes = [{
   path: URI('./').absoluteTo(config.baseUrl).toString(),
   redirect: (to) => {
     return {
       name: 'list',
-      params: {
-        category: categories[0]['Name'],
-      },
     };
   },
 }, {

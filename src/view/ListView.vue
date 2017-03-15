@@ -27,7 +27,7 @@
             <i class="material-icons" v-else>search</i>
           </div>
         </li>
-        <li v-for="c in channels['Categories']" @click="hideMenu" :class="{active: c['Name'] == category}">
+        <li v-for="c in channels['Categories']" @click="hideMenu" :class="{active: c['Name'] == currentCategory}">
           <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
         </li>
         <li><div class="divider"></div></li>
@@ -142,12 +142,16 @@ export default {
         return '登录用户';
       }
     },
+    currentCategory() {
+      return this.category || this.channels.Categories[0].Name;
+    },
     channelList() {
       for (const c of this.channels['Categories']) {
-        if (c['Name'] === this.category) {
+        if (c['Name'] === this.currentCategory) {
           return c['Channels'];
         }
       }
+      return [];
     },
     filteredList() {
       return this.channelList.filter((channel) => {
