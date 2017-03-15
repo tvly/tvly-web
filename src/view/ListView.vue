@@ -75,6 +75,8 @@ import {UNAUTHORIZED, UNKNOWN} from '../error.js';
 import thuLogo from '../image/thu.svg';
 import background from '../image/background.jpg';
 
+const detail = window.localStorage.iptvDetail || 'true';
+
 export default {
   props: ['category', 'channels'],
   components: {
@@ -85,7 +87,7 @@ export default {
   data() {
     return {
       avatar: thuLogo,
-      detail: window.localStorage.iptvDetail === 'true',
+      detail: detail === 'true',
       filter: '',
       searching: false,
       withIP: false,
