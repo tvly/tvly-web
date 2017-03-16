@@ -213,7 +213,7 @@ export default {
           this.$emit('unauth');
         }
       });
-      api.on('fullscreen', (e, api, error) => {
+      api.on('fullscreen', () => {
         const lock = screen.lockOrientation || screen.mozLockOrientation ||
                      screen.msLockOrientation;
         if (lock) {
