@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const OfflinePlugin = require('offline-plugin')
 
 const config = require('./config.json')
 
@@ -88,3 +89,8 @@ if (process.env.NODE_ENV === 'production') {
     }),
   ])
 }
+
+// OfflinePlugin show be always the last plugin
+module.exports.plugins = (module.exports.plugins || []).concat([
+    new OfflinePlugin(),
+]);

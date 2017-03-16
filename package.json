@@ -16,6 +16,7 @@
     "material-design-iconic-font": "^2.2.0",
     "material-design-icons": "^3.0.1",
     "materialize-css": "^0.98.0",
+    "offline-plugin": "^4.6.1",
     "urijs": "^1.18.9",
     "vue": "^2.2.4",
     "vue-router": "^2.3.0",

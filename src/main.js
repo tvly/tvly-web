@@ -21,6 +21,10 @@ import 'flowplayer/dist/skin/skin.css';
 
 import './animation.css';
 
+// offline-plugin
+import offlinePlugin from 'offline-plugin/runtime';
+offlinePlugin.install();
+
 Vue.use(VueRouter);
 
 const app = new Vue({
