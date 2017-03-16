@@ -213,6 +213,19 @@ export default {
           this.$emit('unauth');
         }
       });
+      api.on('fullscreen', (e, api, error) => {
+        const lock = screen.lockOrientation || screen.mozLockOrientation ||
+                     screen.msLockOrientation;
+        if (lock) {
+          try {
+            lock('portrait');
+          } catch(e) {
+            // the device does not support rotation
+          }
+        } else if (screen.orientation.lock) {
+          screen.orientation.lock('portrait').then(() => '');
+        }
+      });
     });
   },
   mounted() {
