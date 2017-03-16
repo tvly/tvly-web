@@ -220,10 +220,13 @@ export default {
           try {
             lock('landscape');
           } catch(e) {
+            console.warn('Orientation is not supported on this browser.');
             // the device does not support rotation
           }
         } else if (screen.orientation.lock) {
-          screen.orientation.lock('landscape').then(() => '');
+          screen.orientation.lock('landscape').catch(() => {
+            console.warn('Orientation is not supported on this chrome.');
+          });
         }
       });
     });
