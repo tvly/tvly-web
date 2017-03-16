@@ -56,7 +56,7 @@ const app = new Vue({
 });
 
 fetch(config.channelsUrl, {
-  credentials: 'always',
+  credentials: 'include',
 }).then((response) => {
   if (response.status === 200) {
     return response.json();
