@@ -218,12 +218,12 @@ export default {
                      screen.msLockOrientation;
         if (lock) {
           try {
-            lock('portrait');
+            lock('landscape');
           } catch(e) {
             // the device does not support rotation
           }
         } else if (screen.orientation.lock) {
-          screen.orientation.lock('portrait').then(() => '');
+          screen.orientation.lock('landscape').then(() => '');
         }
       });
     });
