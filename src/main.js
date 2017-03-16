@@ -24,7 +24,6 @@ import './animation.css';
 Vue.use(VueRouter);
 
 const app = new Vue({
-  el: '#app',
   components: {
     'auth-notification': AuthorizationNotification,
   },
@@ -64,4 +63,5 @@ fetch(config.channelsUrl, {
   }
 }).then((channels) => {
   app.channels = channels;
+  app.$mount('#app');
 });
