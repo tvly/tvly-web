@@ -229,6 +229,15 @@ export default {
           });
         }
       });
+      api.on('fullscreen-exit', () => {
+        const unlock = screen.unlockOrientation ||
+                       screen.mozUnlockOrientation ||
+                       screen.msUnlockOrientation ||
+                       (screen.orientation && screen.orientation.unlock);
+        if (unlock) {
+          unlock();
+        }
+      });
     });
   },
   mounted() {
