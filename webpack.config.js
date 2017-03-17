@@ -34,6 +34,12 @@ module.exports = {
       test: /\.css$/,
       loader: 'css-loader',
     }, {
+      test: /\.webmanifest$/,
+      loader: [
+        'file-loader?name=[name].[ext]',
+        'webmanifest-loader',
+      ].join('!'),
+    }, {
       enforce: 'post',
       test: /\.css$/,
       loader: 'style-loader',
