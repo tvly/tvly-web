@@ -223,7 +223,7 @@ export default {
             console.warn('Orientation is not supported on this browser.');
             // the device does not support rotation
           }
-        } else if (screen.orientation.lock) {
+        } else if (screen.orientation && screen.orientation.lock) {
           screen.orientation.lock('landscape').catch(() => {
             console.warn('Orientation is not supported on this chrome.');
           });
@@ -232,10 +232,11 @@ export default {
       api.on('fullscreen-exit', () => {
         const unlock = screen.unlockOrientation ||
                        screen.mozUnlockOrientation ||
-                       screen.msUnlockOrientation ||
-                       (screen.orientation && screen.orientation.unlock);
+                       screen.msUnlockOrientation;
         if (unlock) {
           unlock();
+        } else if (screen.orientation && screen.orientation.unlock) {
+          screen.orientation.unlock();
         }
       });
     });
