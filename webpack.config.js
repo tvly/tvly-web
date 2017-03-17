@@ -98,5 +98,9 @@ if (process.env.NODE_ENV === 'production') {
 
 // OfflinePlugin show be always the last plugin
 module.exports.plugins = (module.exports.plugins || []).concat([
-    new OfflinePlugin(),
+  new OfflinePlugin({
+    externals: [
+      "https://iptv.tsinghua.edu.cn/channels.json",
+    ],
+  }),
 ]);
