@@ -34,11 +34,23 @@ module.exports = {
       test: /\.css$/,
       loader: 'css-loader',
     }, {
+      enforce: 'post',
       test: /\.webmanifest$/,
-      loader: [
-        'file-loader?name=[name].[ext]',
-        'webmanifest-loader',
-      ].join('!'),
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]',
+      },
+    }, {
+      test: /\.webmanifest$/,
+      loader: 'webmanifest-loader',
+      options: {
+        data: {
+          name: '清华大学IPTV',
+          shortName: 'IPTV',
+          description: 'An iptv frontend powered by Tsinghua University.',
+          config,
+        }
+      },
     }, {
       enforce: 'post',
       test: /\.css$/,

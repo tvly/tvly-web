@@ -1,12 +1,12 @@
 {
-	"name": "清华大学 IPTV",
-	"short_name": "清华大学IPTV",
-	"start_url": "/",
+	"name": "<%= data.name %>",
+	"short_name": "<%= data.shortName %>",
+	"start_url": "<%= data.config.baseUrl %>",
 	"display": "standalone",
 	"background_color": "#009688",
 	"lang": "zh-Hans",
 	"theme_color": "#4db6ac",
-	"description": "An iptv frontend powered by Tsinghua University.",
+	"description": "<%= data.description %>",
     "icons": [{
         "src": "./image/logo.svg",
         "sizes": "58x58",
