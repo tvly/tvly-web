@@ -2,5 +2,6 @@
     "baseUrl": "/",
     "authUrl": "https://example.com/auth",
     "logoutUrl": "https://example.com/logout",
-    "channelsUrl": "https://example.com/channels.json"
+    "channelsUrl": "https://example.com/channels.json",
+    "recommendedBrowser": "some browser"
 }

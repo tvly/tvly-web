@@ -16,5 +16,8 @@
             </transition>
             <auth-notification ref="auth"></auth-notification>
         </div>
+        <div id="legacy-browser">
+          <p>如果该页面长时间未加载，可能是因为你的浏览器版本不支持本页面。请换用最新版本的<%= require('../config').recommendedBrowser %>或访问<a href="<%= require('../config').legacyUrl %>">旧版</a>。</p>
+        </div>
     </body>
 </html>

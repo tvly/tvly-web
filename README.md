@@ -11,7 +11,8 @@ The configurations should be put in `config.json`:
     "baseUrl": "/beta/", # It should end with '/'
     "authUrl": "https://example.com/auth", # where to redirect when 403 is found
     "logoutUrl": "https://example.com/logout", # url used to logout
-    "channelsUrl": "https://example.com/channels.json" # url to retrieve channel list
+    "channelsUrl": "https://example.com/channels.json", # url to retrieve channel list
+    "recommendedBrowser": "some browser" # recommended browser for users of legacy browser
 }
 ```
 
