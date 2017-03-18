@@ -47,6 +47,10 @@ const app = new Vue({
       }).then(() => { window.location.reload(); });
     },
   },
+  created() {
+    const div = document.getElementById('legacy-browser');
+    div.outerHTML = '';
+  },
   watch: {
     '$route'(to, from) {
       if (from.name === 'list' && to.name === 'play') { // from list to play

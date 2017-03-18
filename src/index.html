@@ -7,6 +7,11 @@
         <link rel="manifest" href="<%= require('./manifest.webmanifest') %>" />
         <link rel="icon" sizes="192x192" href="<%= require('./image/logo192.png') %>">
         <title>清华大学IPTV</title>
+        <style>
+          #legacy-browser {
+            display: none;
+          }
+        </style>
     </head>
     <body>
         <div id="app">
@@ -19,5 +24,18 @@
         <div id="legacy-browser">
           <p>如果该页面长时间未加载，可能是因为你的浏览器版本不支持本页面。请换用最新版本的<%= require('../config').recommendedBrowser %>或访问<a href="<%= require('../config').legacyUrl %>">旧版</a>。</p>
         </div>
+        <noscript>
+          <p>该页面需要加载javascript。请换用最新版本的<%= require('../config').recommendedBrowser %>或访问<a href="<%= require('../config').legacyUrl %>">旧版</a>。</p>
+        </noscript>
+        <script>
+          window.onload = function() {
+            setTimeout(function() {
+              var div = document.getElementById('legacy-browser');
+              if (div) {
+                div.style.display = 'block';
+              }
+            }, 1000);
+          }
+        </script>
     </body>
 </html>
