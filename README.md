@@ -29,3 +29,7 @@ npm run build
 ```
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Credit
+
+Thanks for the icon made by [Madebyoliver](http://www.flaticon.com/authors/madebyoliver).
