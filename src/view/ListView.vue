@@ -42,6 +42,11 @@
             </div>
           </a>
         </li>
+        <li v-if="legacyUrl && legacyUrl.length">
+          <a :href="legacyUrl">
+            回忆旧版
+          </a>
+        </li>
         <li v-if="uid.length && !withIP">
           <a @click="$emit('logout')">
             登出
@@ -74,6 +79,7 @@ import {UNAUTHORIZED, UNKNOWN} from '../error.js';
 
 import thuLogo from '../image/thu.svg';
 import background from '../image/background.jpg';
+import config from '../../config.json';
 
 const detail = window.localStorage.iptvDetail || 'true';
 
@@ -92,6 +98,7 @@ export default {
       searching: false,
       withIP: false,
       uid: '',
+      legacyUrl: config.legacyUrl,
       background,
     };
   },
