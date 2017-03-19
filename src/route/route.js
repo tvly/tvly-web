@@ -7,16 +7,6 @@ import HLSPlayer from '../view/HLSPlayer.vue';
 import config from '../../config.json';
 
 const routes = [{
-  path: URI('./').absoluteTo(config.baseUrl).toString(),
-  redirect: (to) => {
-    return {
-      name: 'list',
-      params: {
-        category: 'UNKNOWN',
-      },
-    };
-  },
-}, {
   name: 'list',
   path: URI('./list/:category').absoluteTo(config.baseUrl).toString(),
   props: true,
@@ -26,6 +16,16 @@ const routes = [{
   path: URI('./play/:channel').absoluteTo(config.baseUrl).toString(),
   props: true,
   component: HLSPlayer,
+}, {
+  path: '*',
+  redirect: (to) => {
+    return {
+      name: 'list',
+      params: {
+        category: 'UNKNOWN',
+      },
+    };
+  },
 }];
 
 export const router = new VueRouter({
