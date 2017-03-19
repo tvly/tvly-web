@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 
 const config = require('./config.json')
+const manifest = require('./manifest.json')
 
 module.exports = {
   entry: ['babel-polyfill', 'whatwg-fetch', './src/main.js'],
@@ -45,10 +46,8 @@ module.exports = {
       loader: 'webmanifest-loader',
       options: {
         data: {
-          name: '清华大学IPTV',
-          shortName: 'IPTV',
-          description: 'An iptv frontend powered by Tsinghua University.',
           config,
+          manifest,
         }
       },
     }, {

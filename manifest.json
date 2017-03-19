@@ -1,0 +1,7 @@
+{
+    "name": "清华大学IPTV",
+    "shortName": "IPTV",
+    "description": "An iptv frontend powered by Tsinghua University.",
+	"backgroundColor": "#009688",
+	"themeColor": "#4db6ac"
+}

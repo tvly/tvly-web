@@ -1,12 +1,12 @@
 {
-	"name": "<%= data.name %>",
-	"short_name": "<%= data.shortName %>",
+	"name": "<%= data.manifest.name %>",
+	"short_name": "<%= data.manifest.shortName %>",
 	"start_url": "<%= data.config.baseUrl %>",
 	"display": "standalone",
-	"background_color": "#009688",
 	"lang": "zh-Hans",
-	"theme_color": "#4db6ac",
-	"description": "<%= data.description %>",
+	"background_color": "<%= data.manifest.backgroundColor %>",
+	"theme_color": "<%= data.manifest.themeColor %>",
+	"description": "<%= data.manifest.description %>",
     "icons": [{
         "src": "./image/logo.svg",
         "sizes": "58x58",
