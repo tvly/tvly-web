@@ -11,6 +11,9 @@ const routes = [{
   redirect: (to) => {
     return {
       name: 'list',
+      params: {
+        category: 'UNKNOWN',
+      },
     };
   },
 }, {

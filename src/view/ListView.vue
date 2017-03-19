@@ -172,6 +172,16 @@ export default {
     detail(val) {
       window.localStorage.iptvDetail = val.toString();
     },
+    'channels.Categories': {
+      handler(val) {
+        if (!val.includes(this.category) && val.length) {
+          const link = this.categoryLink(val[0]);
+          console.warn(link);
+          this.$router.push(link);
+        }
+      },
+      immediate: true,
+    },
   },
   mounted() {
     jQuery('.button-collapse').sideNav({
