@@ -13,9 +13,9 @@
         <li>
           <div class="userView">
             <div class="background">
-              <img :src="background">
+              <img :src="background" alt="background">
             </div>
-            <a><img class="circle" :src="avatar"></a>
+            <a><img class="circle" :src="avatar" alt="avatar"></a>
             <a><span class="white-text type">{{userType}}</span></a>
             <a><span class="white-text uid">{{uid}}</span></a>
           </div>
