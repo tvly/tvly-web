@@ -176,7 +176,6 @@ export default {
       handler(val) {
         if (!val.includes(this.category) && val.length) {
           const link = this.categoryLink(val[0]);
-          console.warn(link);
           this.$router.push(link);
         }
       },
