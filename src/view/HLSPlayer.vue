@@ -163,6 +163,13 @@ export default {
           channelLink(category.Channels[0]));
       }
     },
+    checkChannel() {
+      const categories = this.channels.Categories;
+      if (this.categoryIndex === -1 && categories.length) {
+        const link = categoryLink(categories[0]);
+        this.$router.push(link);
+      }
+    },
   },
   computed: {
     categoryIndex() {
@@ -202,6 +209,7 @@ export default {
     },
   },
   created() {
+    this.checkChannel();
     flowplayer((api) => {
       api.on('ready', (e, api, video) => {
         const engineName = api.engine.engineName;
