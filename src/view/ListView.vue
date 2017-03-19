@@ -103,14 +103,22 @@ export default {
     };
   },
   methods: {
-    categoryLink,
+    checkCategory() {
+      const categories = this.channels.Categories;
+      if (!categories.includes(this.category) && categories.length) {
+        const link = this.categoryLink(categories[0]);
+        this.$router.push(link);
+      }
+    },
     hideMenu() {
       if (window.innerWidth <= 992) {
         jQuery('.button-collapse').sideNav('hide');
       }
     },
+    categoryLink,
   },
   created() {
+    this.checkCategory();
     window.fetch('https://iptv.tsinghua.edu.cn/thauth/userinfo.php', {
       credentials: 'include',
     }).then((response) => {
@@ -171,15 +179,6 @@ export default {
   watch: {
     detail(val) {
       window.localStorage.iptvDetail = val.toString();
-    },
-    'channels.Categories': {
-      handler(val) {
-        if (!val.includes(this.category) && val.length) {
-          const link = this.categoryLink(val[0]);
-          this.$router.push(link);
-        }
-      },
-      immediate: true,
     },
   },
   mounted() {
