@@ -5,6 +5,7 @@
         <div class="col l6 s12">
           <h5 class="white-text">鸣谢</h5>
           <p class="grey-text text-lighten-5">感谢北邮人提供视频源</p>
+          <p class="grey-text text-lighten-5">感谢<a href="http://www.flaticon.com/authors/madebyoliver" class="grey-text text-lighten-5">Madebyoliver</a>的Logo</p>
         </div>
         <div class="col l4 offset-l2 s12">
           <h5 class="white-text">联系我们</h5>
