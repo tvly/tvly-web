@@ -86,9 +86,7 @@ import config from '../../config.json';
  * @return {bool} - value stored in localStorage or true
  **/
 function getDetail() {
-  const ret = (window.localStorage.iptvDetail || 'true') === 'true';
-  console.warn(ret);
-  return ret;
+  return (window.localStorage.iptvDetail || 'true') === 'true';
 }
 
 export default {
