@@ -81,7 +81,15 @@ import thuLogo from '../image/thu.svg';
 import background from '../image/background.jpg';
 import config from '../../config.json';
 
-const detail = window.localStorage.iptvDetail || 'true';
+/**
+ * Read detail from localStorage
+ * @return {bool} - value stored in localStorage or true
+ **/
+function getDetail() {
+  const ret = (window.localStorage.iptvDetail || 'true') === 'true';
+  console.warn(ret);
+  return ret;
+}
 
 export default {
   props: ['category', 'channels'],
@@ -93,7 +101,7 @@ export default {
   data() {
     return {
       avatar: thuLogo,
-      detail: detail === 'true',
+      detail: getDetail(),
       filter: '',
       searching: false,
       withIP: false,
