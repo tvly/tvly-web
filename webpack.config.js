@@ -114,5 +114,6 @@ module.exports.plugins = (module.exports.plugins || []).concat([
       "https://iptv.tsinghua.edu.cn/channels.json",
     ],
     responseStrategy: 'network-first',
+    cacheName: config.cacheName,
   }),
 ]);
