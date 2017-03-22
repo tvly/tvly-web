@@ -110,9 +110,10 @@ export default {
   },
   methods: {
     checkCategory() {
-      const categories = this.channels.Categories;
-      if (!categories.includes(this.category) && categories.length) {
-        const link = this.categoryLink(categories[0]);
+      const categoryNames = this.channels.Categories.map((c) => c.Name);
+      if (categoryNames.length && !categoryNames.includes(this.category)) {
+        const link = this.categoryLink(this.channels.Categories[0]);
+        console.warn(`${this.category} is not in `, categoryNames);
         this.$router.push(link);
       }
     },
@@ -124,7 +125,6 @@ export default {
     categoryLink,
   },
   created() {
-    this.checkCategory();
     window.fetch('https://iptv.tsinghua.edu.cn/thauth/userinfo.php', {
       credentials: 'include',
     }).then((response) => {
@@ -188,6 +188,7 @@ export default {
     },
   },
   mounted() {
+    this.checkCategory();
     jQuery('.button-collapse').sideNav({
       menuWidth: 250,
       // There is a known [issue](https://github.com/Dogfalo/materialize/issues/4118)
