@@ -1,68 +1,68 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <title><%= require('../manifest.json').name %></title>
-        <meta name="description" content="<%= require('../manifest.json').description %>">
+    <title><%= require('../manifest.json').name %></title>
+    <meta name="description" content="<%= require('../manifest.json').description %>">
 
-        <!--working draft-->
-        <link rel="manifest" href="<%= require('./manifest.webmanifest') %>" />
+    <!--working draft-->
+    <link rel="manifest" href="<%= require('./manifest.webmanifest') %>" />
 
-        <!--Chrome 39 for Android-->
-        <meta name="theme-color" content="<%= require('../manifest.json').themeColor %>">
-        <link rel="icon" sizes="192x192" href="<%= require('./image/logo192.png') %>">
+    <!--Chrome 39 for Android-->
+    <meta name="theme-color" content="<%= require('../manifest.json').themeColor %>">
+    <link rel="icon" sizes="192x192" href="<%= require('./image/logo192.png') %>">
 
-        <!--legacy Chrome on Android-->
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="application-name" content="<%= require('../manifest.json').name %>">
+    <!--legacy Chrome on Android-->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="<%= require('../manifest.json').name %>">
 
-        <!-- Add to homescreen for Safari on iOS -->
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-        <meta name="apple-mobile-web-app-title" content="<%= require('../manifest.json').name %>">
-        <link rel="apple-touch-icon" sizes="48x48" href="<%= require('./image/logo48.png') %>">
-        <link rel="apple-touch-icon" sizes="72x72" href="<%= require('./image/logo72.png') %>">
-        <link rel="apple-touch-icon" sizes="96x96" href="<%= require('./image/logo96.png') %>">
-        <link rel="apple-touch-icon" sizes="144x144" href="<%= require('./image/logo144.png') %>">
-        <link rel="apple-touch-icon" sizes="168x168" href="<%= require('./image/logo168.png') %>">
-        <link rel="apple-touch-icon" sizes="192x192" href="<%= require('./image/logo192.png') %>">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="<%= require('../manifest.json').name %>">
+    <link rel="apple-touch-icon" sizes="48x48" href="<%= require('./image/logo48.png') %>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<%= require('./image/logo72.png') %>">
+    <link rel="apple-touch-icon" sizes="96x96" href="<%= require('./image/logo96.png') %>">
+    <link rel="apple-touch-icon" sizes="144x144" href="<%= require('./image/logo144.png') %>">
+    <link rel="apple-touch-icon" sizes="168x168" href="<%= require('./image/logo168.png') %>">
+    <link rel="apple-touch-icon" sizes="192x192" href="<%= require('./image/logo192.png') %>">
 
-        <!-- Tile icon for Windows 8 (144x144 + tile color) -->
-        <meta name="msapplication-TileImage" content="<%= require('./image/logo144.png') %>">
-        <meta name="msapplication-TileColor" content="<%= require('../manifest.json').themeColor %>">
-        <meta name="msapplication-tap-highlight" content="no">
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="<%= require('./image/logo144.png') %>">
+    <meta name="msapplication-TileColor" content="<%= require('../manifest.json').themeColor %>">
+    <meta name="msapplication-tap-highlight" content="no">
 
-        <style>
-          #legacy-browser {
-            display: none;
+    <style>
+      #legacy-browser {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <transition :name="transition">
+        <router-view :channels="channels" @unauth="notify" @logout="logout">
+        </router-view>
+      </transition>
+      <auth-notification ref="auth"></auth-notification>
+    </div>
+    <div id="legacy-browser">
+      <p>如果该页面长时间未加载，可能是因为你的浏览器版本不支持本页面。请换用最新版本的<%= require('../config').recommendedBrowser %><% if (require('../config').legacyUrl) { %>或访问<a href="<%= require('../config').legacyUrl %>">旧版</a><% } %>。</p>
+    </div>
+    <noscript>
+      <p>该页面需要加载javascript。请换用最新版本的<%= require('../config').recommendedBrowser %><% if (require('../config').legacyUrl) { %>或访问<a href="<%= require('../config').legacyUrl %>">旧版</a><% } %>。</p>
+    </noscript>
+    <script>
+      window.onload = function() {
+        setTimeout(function() {
+          var div = document.getElementById('legacy-browser');
+          if (div) {
+            div.style.display = 'block';
           }
-        </style>
-    </head>
-    <body>
-        <div id="app">
-            <transition :name="transition">
-                <router-view :channels="channels" @unauth="notify" @logout="logout">
-                </router-view>
-            </transition>
-            <auth-notification ref="auth"></auth-notification>
-        </div>
-        <div id="legacy-browser">
-          <p>如果该页面长时间未加载，可能是因为你的浏览器版本不支持本页面。请换用最新版本的<%= require('../config').recommendedBrowser %><% if (require('../config').legacyUrl) { %>或访问<a href="<%= require('../config').legacyUrl %>">旧版</a><% } %>。</p>
-        </div>
-        <noscript>
-          <p>该页面需要加载javascript。请换用最新版本的<%= require('../config').recommendedBrowser %><% if (require('../config').legacyUrl) { %>或访问<a href="<%= require('../config').legacyUrl %>">旧版</a><% } %>。</p>
-        </noscript>
-        <script>
-          window.onload = function() {
-            setTimeout(function() {
-              var div = document.getElementById('legacy-browser');
-              if (div) {
-                div.style.display = 'block';
-              }
-            }, 1000);
-          }
-        </script>
-    </body>
+        }, 1000);
+      }
+    </script>
+  </body>
 </html>
