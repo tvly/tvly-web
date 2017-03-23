@@ -5,7 +5,7 @@
         <div class="container">
           <div class="nav-wrapper">
             <a href="#" data-activates="nav-menu" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a class="brand-logo">清华大学IPTV</a>
+            <a class="brand-logo">{{manifest.appName}}</a>
           </div>
         </div>
       </nav>
@@ -80,6 +80,7 @@ import {UNAUTHORIZED, UNKNOWN} from '../error.js';
 import thuLogo from '../image/thu.svg';
 import background from '../image/background.jpg';
 import config from '../../config.json';
+import manifest from '../../manifest.json';
 
 /**
  * Read detail from localStorage
@@ -101,6 +102,7 @@ export default {
       avatar: thuLogo,
       detail: getDetail(),
       filter: '',
+      appName: manifest.name,
       searching: false,
       withIP: false,
       uid: '',
