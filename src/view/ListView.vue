@@ -59,11 +59,23 @@
       <div class="container">
         <div class="row" id="list">
           <channel-thumbnail v-for="c in filteredList" class="col l4 m6 s12" :channel="c" :key="c.Vid" :detail="detail"
-            @unauth="$emit('unauth')"></channel-thumbnail>
+            @noimage="queryThumbnail"></channel-thumbnail>
         </div>
       </div>
     </main>
+
     <iptv-footer></iptv-footer>
+
+    <div id="no-image" class="modal">
+      <div class="modal-content">
+        <h4>不能加载缩略图</h4>
+        <p>当前不能加载缩略图，是否禁用？</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" @click="detail = false">禁用</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -123,6 +135,9 @@ export default {
       if (window.innerWidth <= 992) {
         jQuery('.button-collapse').sideNav('hide');
       }
+    },
+    queryThumbnail() {
+      jQuery('#no-image').modal('open');
     },
     categoryLink,
   },
@@ -197,6 +212,7 @@ export default {
       closeOnClick: false,
       draggable: false,
     });
+    jQuery('#no-image').modal();
   },
 };
 </script>
