@@ -4,5 +4,6 @@
 	"logoutUrl": "https://example.com/logout",
 	"channelsUrl": "https://example.com/channels.json",
 	"legacyUrl": "https://example.com/legacy",
-	"recommendedBrowser": "some browser"
+	"recommendedBrowser": "some browser",
+	"supportingMailbox": "its@tsinghua.edu.cn"
 }

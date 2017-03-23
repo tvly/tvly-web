@@ -13,7 +13,7 @@
           <h5 class="white-text">联系我们</h5>
           <ul class="zmdi-hc-ul">
             <li><a class="grey-text text-lighten-3" target="_blank" rel="noopener" href="https://github.com/huiyiqun/iptv"><i class="zmdi zmdi-github zmdi-hc-li"></i>Github</a></li>
-            <li><a class="grey-text text-lighten-3" target="_blank" rel="noopener" href="mailto:its@tsinghua.edu.cn"><i class="zmdi zmdi-email zmdi-hc-li"></i>Email</a></li>
+            <li v-if="support && support.length"><a class="grey-text text-lighten-3" target="_blank" rel="noopener" :href="'mailto:' + support"><i class="zmdi zmdi-email zmdi-hc-li"></i>Email</a></li>
           </ul>
         </div>
       </div>
@@ -27,8 +27,15 @@
 </template>
 
 <script>
+import config from '../../config.json';
+
 export default {
   name: 'iptv-footer',
+  data() {
+    return {
+      support: config.supportingMailbox,
+    };
+  },
 };
 </script>
 
