@@ -5,7 +5,7 @@
         <div class="container">
           <div class="nav-wrapper">
             <a href="#" data-activates="nav-menu" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a class="brand-logo">{{manifest.appName}}</a>
+            <a class="brand-logo">{{appName}}</a>
           </div>
         </div>
       </nav>
