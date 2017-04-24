@@ -24,7 +24,7 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 ## User
 
 * [Tsinghua IPTV](https://iptv.tsinghua.edu.cn/)
-* [MUC IPTV](https://iptv.muc.edu.cn/)
+* MUC IPTV
 * [BFSU IPTV](https://tv.bfsu.edu.cn/bfsu/)
 
 ## Credit
