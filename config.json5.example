@@ -1,19 +1,66 @@
 {
-	"name": "中央民族大学IPTV",
-	"shortName": "IPTV",
-	"description": "An iptv frontend powered by MUC.",
+	/*
+	 * basic informations
+	 */
+	// titles, required.
+	"name": "IPTV",
+
+	// required.
+	"shortName": "iptv",
+
+	// required.
+	"description": "An vue.js based iptv frontend.",
+
+	// source of streams, required.
+	"srcCredit": "广电总局",
+
+	// required.
+	"sponsor": "me",
+
+	// optional.
+	"supportingMailbox": "support@example.com",
+
+	// base url of the web app, MUST be ended with slash, required.
+	"baseUrl": "/",
+
+	/*
+	 * urls
+	 */
+	// where to get channel list, required.
+	"channelsUrl": "https://example.com/channels.json",
+
+	// where to get snapshots, required.
+	"snapshotUrl": "https://example.com/snapshot/",
+
+	// where to get hls files, required.
+	"hlsUrl": "https://example.com/hls/",
+
+	// where to redirect to when user authorization is required,
+	// leave it null if there is no auth at all.
+	// optional.
+	"authUrl": null,
+
+	// where to GET when logout is clicked, optional.
+	"logoutUrl": null,
+
+	// url to the legacy version, optional.
+	"legacyUrl": null,
+
+	// url used to query user information, leave it null if you feel confused.
+	// optional.
+	"userInfoUrl": null,
+
+	/*
+	 * others
+	 */
+	// which modern browser do you recommend? required.
+	"recommendedBrowser": "Chrome",
+
+	/*
+	 * colors
+	 * DO NOT CHANGE
+	 */
 	"backgroundColor": "#009688",
 	"themeColor": "#4db6ac",
-	"srcCredit": "清华大学",
-	"userInfoUrl": "https://iptv.tsinghua.edu.cn/thauth/userinfo.php",
-	"snapshotUrl": "https://iptv.tsinghua.edu.cn/snapshot/",
-	"hlsUrl": "https://iptv.tsinghua.edu.cn/hls/",
-	"baseUrl": "/",
-	"authUrl": "https://iptv.tsinghua.edu.cn/",
-	"logoutUrl": "https://iptv.tsinghua.edu.cn/thauth/logout.php",
-	"channelsUrl": "https://iptv.tsinghua.edu.cn/channels.json",
-	"legacyUrl": "https://iptv.tsinghua.edu.cn",
-	"recommendedBrowser": "TUNA浏览器（尚未发布）",
-	"supportingMailbox": "its@tsinghua.edu.cn",
-	"sponsor": "MUC",
+
 }
