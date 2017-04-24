@@ -4,7 +4,7 @@
 
 ## Config
 
-The configurations should be put in `config.json5`, see `config.json5.example`.
+The configurations should be placed at `config.json5`, see [exmaple](config.example.json5).
 
 ## Build Setup
 
