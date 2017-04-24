@@ -50,6 +50,9 @@
 	// optional.
 	"userInfoUrl": null,
 
+	// url of the logo of the sponsor, required.
+	"sponsorLogoUrl": "https://exmaple.com/logo.png",
+
 	/*
 	 * others
 	 */

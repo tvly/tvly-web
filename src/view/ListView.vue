@@ -89,7 +89,6 @@ import IPTVFooter from './IPTVFooter.vue';
 import {categoryLink} from '../route/link.js';
 import {UNAUTHORIZED, UNKNOWN} from '../error.js';
 
-import thuLogo from '../image/thu.svg';
 import background from '../image/background.jpg';
 import config from '../../config.json5';
 
@@ -110,7 +109,7 @@ export default {
   name: 'list-view',
   data() {
     return {
-      avatar: thuLogo,
+      avatar: config.sponsorLogoUrl,
       detail: getDetail(),
       filter: '',
       appName: config.name,
