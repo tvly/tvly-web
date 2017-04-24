@@ -273,6 +273,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('keydown', this.keyHandler);
+    this.player.unload();
   },
 };
 </script>
