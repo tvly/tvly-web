@@ -216,6 +216,9 @@ export default {
     });
     jQuery('#no-image').modal();
   },
+  beforeDestroy() {
+    this.navBtn.sideNav('destroy');
+  },
 };
 </script>
 
