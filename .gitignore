@@ -3,4 +3,4 @@ node_modules/
 dist/
 npm-debug.log
 yarn.lock
-config.json
+config.json5
