@@ -118,6 +118,7 @@ export default {
       searching: false,
       withIP: false,
       uid: '',
+      navBtn: null,
       legacyUrl: config.legacyUrl,
       background,
     };
@@ -133,7 +134,7 @@ export default {
     },
     hideMenu() {
       if (window.innerWidth <= 992) {
-        jQuery('.button-collapse').sideNav('hide');
+        this.navBtn.sideNav('hide');
       }
     },
     queryThumbnail() {
@@ -205,8 +206,9 @@ export default {
     },
   },
   mounted() {
+    this.navBtn = jQuery(this.$el.querySelector('.button-collapse'));
     this.checkCategory();
-    jQuery('.button-collapse').sideNav({
+    this.navBtn.sideNav({
       menuWidth: 250,
       // There is a known [issue](https://github.com/Dogfalo/materialize/issues/4118)
       closeOnClick: false,
