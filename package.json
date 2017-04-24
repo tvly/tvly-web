@@ -12,6 +12,7 @@
     "babel-polyfill": "^6.23.0",
     "flowplayer": "^7.0.2",
     "flowplayer-hlsjs": "flowplayer/flowplayer-hlsjs",
+    "font-awesome": "^4.7.0",
     "fuzzy": "^0.1.3",
     "material-design-iconic-font": "^2.2.0",
     "material-design-icons": "^3.0.1",
