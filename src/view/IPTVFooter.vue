@@ -14,6 +14,7 @@
           <ul class="zmdi-hc-ul">
             <li><a class="grey-text text-lighten-3" target="_blank" rel="noopener" href="https://github.com/huiyiqun/iptv"><i class="zmdi zmdi-github zmdi-hc-li"></i>Github</a></li>
             <li v-if="support && support.length"><a class="grey-text text-lighten-3" target="_blank" rel="noopener" :href="'mailto:' + support"><i class="zmdi zmdi-email zmdi-hc-li"></i>Email</a></li>
+            <li v-if="wechat && wechat.length"><a class="grey-text text-lighten-3"><i class="fa fa-li fa-wechat" aria-hidden="true"></i>{{wechat}}</a></li>
           </ul>
         </div>
       </div>
@@ -35,6 +36,7 @@ export default {
     return {
       support: config.supportingMailbox,
       srcCredit: config.srcCredit,
+      wechat: config.wechat,
       sponsor: config.sponsor,
     };
   },

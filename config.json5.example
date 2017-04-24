@@ -20,6 +20,9 @@
 	// optional.
 	"supportingMailbox": "support@example.com",
 
+	// optional.
+	"wechat": null,
+
 	// base url of the web app, MUST be ended with slash, required.
 	"baseUrl": "/",
 

@@ -16,6 +16,9 @@ import 'material-design-icons/iconfont/material-icons.css';
 // Material-Design-Iconic-Font
 import 'material-design-iconic-font/dist/css/material-design-iconic-font.css';
 
+// Font Awesome
+import 'font-awesome/css/font-awesome.css';
+
 // Flowplayer
 import 'flowplayer/dist/skin/skin.css';
 
