@@ -4,7 +4,7 @@ import URI from 'urijs';
 import ListView from '../view/ListView.vue';
 import HLSPlayer from '../view/HLSPlayer.vue';
 
-import config from '../../config.json';
+import config from '../../config.json5';
 
 const routes = [{
   name: 'list',

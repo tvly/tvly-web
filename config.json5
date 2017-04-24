@@ -1,0 +1,18 @@
+{
+	"name": "中央民族大学IPTV",
+	"shortName": "IPTV",
+	"description": "An iptv frontend powered by MUC.",
+	"backgroundColor": "#009688",
+	"themeColor": "#4db6ac",
+	"srcCredit": "清华大学",
+	"userInfoUrl": "https://iptv.tsinghua.edu.cn/thauth/userinfo.php",
+	"snapshotUrl": "https://iptv.tsinghua.edu.cn/snapshot/",
+    "baseUrl": "/",
+    "authUrl": "https://iptv.tsinghua.edu.cn/",
+    "logoutUrl": "https://iptv.tsinghua.edu.cn/thauth/logout.php",
+    "channelsUrl": "https://iptv.tsinghua.edu.cn/channels.json",
+    "legacyUrl": "https://iptv.tsinghua.edu.cn",
+    "recommendedBrowser": "TUNA浏览器（尚未发布）",
+	"supportingMailbox": "its@tsinghua.edu.cn",
+	"sponsor": "MUC"
+}

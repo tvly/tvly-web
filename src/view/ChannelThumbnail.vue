@@ -15,7 +15,7 @@
 <script>
 
 import {channelLink} from '../route/link.js';
-import config from '../../config.json';
+import config from '../../config.json5';
 
 export default {
   name: 'channel-thumbnail',

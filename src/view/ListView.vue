@@ -91,7 +91,7 @@ import {UNAUTHORIZED, UNKNOWN} from '../error.js';
 
 import thuLogo from '../image/thu.svg';
 import background from '../image/background.jpg';
-import config from '../../config.json';
+import config from '../../config.json5';
 
 /**
  * Read detail from localStorage

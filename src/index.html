@@ -4,24 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title><%= require('../config.json').name %></title>
-    <meta name="description" content="<%= require('../config.json').description %>">
+    <title><%= require('../config.json5').name %></title>
+    <meta name="description" content="<%= require('../config.json5').description %>">
 
     <!--working draft-->
     <link rel="manifest" href="<%= require('./manifest.webmanifest') %>" />
 
     <!--Chrome 39 for Android-->
-    <meta name="theme-color" content="<%= require('../config.json').themeColor %>">
+    <meta name="theme-color" content="<%= require('../config.json5').themeColor %>">
     <link rel="icon" sizes="192x192" href="<%= require('./image/logo192.png') %>">
 
     <!--legacy Chrome on Android-->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="<%= require('../config.json').name %>">
+    <meta name="application-name" content="<%= require('../config.json5').name %>">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="<%= require('../config.json').name %>">
+    <meta name="apple-mobile-web-app-title" content="<%= require('../config.json5').name %>">
     <link rel="apple-touch-icon" sizes="48x48" href="<%= require('./image/logo48.png') %>">
     <link rel="apple-touch-icon" sizes="72x72" href="<%= require('./image/logo72.png') %>">
     <link rel="apple-touch-icon" sizes="96x96" href="<%= require('./image/logo96.png') %>">
@@ -31,7 +31,7 @@
 
     <!-- Tile icon for Windows 8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="<%= require('./image/logo144.png') %>">
-    <meta name="msapplication-TileColor" content="<%= require('../config.json').themeColor %>">
+    <meta name="msapplication-TileColor" content="<%= require('../config.json5').themeColor %>">
     <meta name="msapplication-tap-highlight" content="no">
 
     <style>
@@ -49,10 +49,10 @@
       <auth-notification ref="auth"></auth-notification>
     </div>
     <div id="legacy-browser">
-      <p>如果该页面长时间未加载，可能是因为你的浏览器版本不支持本页面。请换用最新版本的<%= require('../config').recommendedBrowser %><% if (require('../config').legacyUrl) { %>或访问<a href="<%= require('../config').legacyUrl %>">旧版</a><% } %>。</p>
+      <p>如果该页面长时间未加载，可能是因为你的浏览器版本不支持本页面。请换用最新版本的<%= require('../config.json5').recommendedBrowser %><% if (require('../config.json5').legacyUrl) { %>或访问<a href="<%= require('../config.json5').legacyUrl %>">旧版</a><% } %>。</p>
     </div>
     <noscript>
-      <p>该页面需要加载javascript。请换用最新版本的<%= require('../config').recommendedBrowser %><% if (require('../config').legacyUrl) { %>或访问<a href="<%= require('../config').legacyUrl %>">旧版</a><% } %>。</p>
+      <p>该页面需要加载javascript。请换用最新版本的<%= require('../config.json5').recommendedBrowser %><% if (require('../config.json5').legacyUrl) { %>或访问<a href="<%= require('../config.json5').legacyUrl %>">旧版</a><% } %>。</p>
     </noscript>
     <script>
       window.onload = function() {

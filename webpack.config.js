@@ -1,9 +1,11 @@
+require('json5/lib/require')
+
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 
-const config = require('./config.json')
+const config = require('./config.json5')
 
 module.exports = {
   entry: ['babel-polyfill', 'whatwg-fetch', './src/main.js'],
@@ -26,6 +28,9 @@ module.exports = {
         },
         // other vue-loader options go here
       },
+    }, {
+      test: /\.json5$/,
+      loader: 'json5-loader',
     }, {
       test: /\.js$/,
       loader: 'babel-loader',

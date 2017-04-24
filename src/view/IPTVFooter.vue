@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import config from '../../config.json';
+import config from '../../config.json5';
 
 export default {
   name: 'iptv-footer',

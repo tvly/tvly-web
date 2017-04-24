@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import {router} from './route/route.js';
-import config from '../config.json';
+import config from '../config.json5';
 
 import AuthorizationNotification from './view/AuthorizationNotification.vue';
 

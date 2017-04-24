@@ -17,7 +17,7 @@
 <script>
 import jQuery from 'jquery';
 
-import config from '../../config.json';
+import config from '../../config.json5';
 
 export default {
   name: 'auth-notification',
