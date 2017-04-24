@@ -20,13 +20,27 @@ import config from '../../config.json5';
 export default {
   name: 'channel-thumbnail',
   props: ['channel', 'detail'],
+  data() {
+    return {
+      time: Date.now(),
+      interval: null,
+    };
+  },
   computed: {
     snapshot() {
-      return `${config.snapshotUrl}/${this.channel['Vid']}.jpg`;
+      return `${config.snapshotUrl}/${this.channel['Vid']}.jpg?${this.time}`;
     },
     channelLink() {
       return channelLink(this.channel);
     },
+  },
+  created() {
+    this.interval = window.setInterval(() => {
+      this.time = Date.now();
+    }, config.snapshotRefreshInterval || 60 * 1000);
+  },
+  destroyed() {
+    window.clearInterval(this.interval);
   },
 };
 </script>
