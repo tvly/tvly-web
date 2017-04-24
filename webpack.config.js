@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 
 const config = require('./config.json')
-const manifest = require('./manifest.json')
 
 module.exports = {
   entry: ['babel-polyfill', 'whatwg-fetch', './src/main.js'],
@@ -47,7 +46,6 @@ module.exports = {
       options: {
         data: {
           config,
-          manifest,
         }
       },
     }, {
@@ -111,7 +109,7 @@ if (process.env.NODE_ENV === 'production') {
 module.exports.plugins = (module.exports.plugins || []).concat([
   new OfflinePlugin({
     externals: [
-      "https://iptv.tsinghua.edu.cn/channels.json",
+      config.channelsUrl,
     ],
     responseStrategy: 'network-first',
     cacheName: config.cacheName,

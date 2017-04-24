@@ -92,7 +92,6 @@ import {UNAUTHORIZED, UNKNOWN} from '../error.js';
 import thuLogo from '../image/thu.svg';
 import background from '../image/background.jpg';
 import config from '../../config.json';
-import manifest from '../../manifest.json';
 
 /**
  * Read detail from localStorage
@@ -114,7 +113,7 @@ export default {
       avatar: thuLogo,
       detail: getDetail(),
       filter: '',
-      appName: manifest.name,
+      appName: config.name,
       searching: false,
       withIP: false,
       uid: '',
@@ -143,29 +142,31 @@ export default {
     categoryLink,
   },
   created() {
-    window.fetch('https://iptv.tsinghua.edu.cn/thauth/userinfo.php', {
-      credentials: 'include',
-    }).then((response) => {
-      if (response.status === 200) {
-        return response.text();
-      } else if (response.status === 403) {
-        throw UNAUTHORIZED;
-      } else {
-        throw UNKNOWN;
-      }
-    }).then((text) => {
-      const iSeq = text.indexOf(':');
-      if (iSeq === -1) {
-        throw UNKNOWN;
-      }
-      const [type, value] = [text.slice(0, iSeq), text.slice(iSeq+1)];
-      this.withIP = (type === 'ip');
-      this.uid = value;
-    }).catch((e) => {
-      if (e == UNAUTHORIZED) {
-        this.$emit('unauth');
-      }
-    });
+    if (config.userInfoUrl) {
+      window.fetch(config.userInfoUrl, {
+        credentials: 'include',
+      }).then((response) => {
+        if (response.status === 200) {
+          return response.text();
+        } else if (response.status === 403) {
+          throw UNAUTHORIZED;
+        } else {
+          throw UNKNOWN;
+        }
+      }).then((text) => {
+        const iSeq = text.indexOf(':');
+        if (iSeq === -1) {
+          throw UNKNOWN;
+        }
+        const [type, value] = [text.slice(0, iSeq), text.slice(iSeq+1)];
+        this.withIP = (type === 'ip');
+        this.uid = value;
+      }).catch((e) => {
+        if (e == UNAUTHORIZED) {
+          this.$emit('unauth');
+        }
+      });
+    }
   },
   computed: {
     userType() {

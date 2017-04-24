@@ -203,7 +203,7 @@ export default {
         live: true,
         sources: [{
           type: 'application/x-mpegurl',
-          src: `//iptv.tsinghua.edu.cn/hls/${this.channel}.m3u8`,
+          src: `/hls/${this.channel}.m3u8`,
         }],
       };
     },

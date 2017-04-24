@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">鸣谢</h5>
-          <p class="grey-text text-lighten-5">感谢北邮人提供视频源</p>
+          <p v-if="srcCredit.length" class="grey-text text-lighten-5">感谢{{srcCredit}}提供视频源</p>
           <p class="grey-text text-lighten-5">
             感谢 <a href="http://www.flaticon.com/authors/madebyoliver" class="grey-text text-lighten-5">Madebyoliver</a> 的 Logo
           </p>
@@ -20,7 +20,7 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-        Powered by Tsinghua University © 2017
+        Powered by {{sponsor}} © 2017
       </div>
     </div>
   </footer>
@@ -34,6 +34,8 @@ export default {
   data() {
     return {
       support: config.supportingMailbox,
+      srcCredit: config.srcCredit,
+      sponsor: config.sponsor,
     };
   },
 };

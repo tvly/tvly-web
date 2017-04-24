@@ -15,13 +15,14 @@
 <script>
 
 import {channelLink} from '../route/link.js';
+import config from '../../config.json';
 
 export default {
   name: 'channel-thumbnail',
   props: ['channel', 'detail'],
   computed: {
     snapshot() {
-      return `https://iptv.tsinghua.edu.cn/snapshot/${this.channel['Vid']}.jpg`;
+      return `${config.snapshotUrl}/${this.channel['Vid']}.jpg`;
     },
     channelLink() {
       return channelLink(this.channel);
