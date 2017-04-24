@@ -7,6 +7,7 @@
 	"srcCredit": "清华大学",
 	"userInfoUrl": "https://iptv.tsinghua.edu.cn/thauth/userinfo.php",
 	"snapshotUrl": "https://iptv.tsinghua.edu.cn/snapshot/",
+	"hlsUrl": "https://iptv.tsinghua.edu.cn/hls/",
     "baseUrl": "/",
     "authUrl": "https://iptv.tsinghua.edu.cn/",
     "logoutUrl": "https://iptv.tsinghua.edu.cn/thauth/logout.php",

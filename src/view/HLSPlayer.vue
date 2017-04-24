@@ -69,6 +69,8 @@ import swfHls from 'flowplayer/dist/flowplayerhls.swf';
 
 import {categoryLink, channelLink} from '../route/link.js';
 
+import config from '../../config.json5';
+
 engine(flowplayer);
 
 export default {
@@ -203,7 +205,7 @@ export default {
         live: true,
         sources: [{
           type: 'application/x-mpegurl',
-          src: `/hls/${this.channel}.m3u8`,
+          src: `${config.hlsUrl}/${this.channel}.m3u8`,
         }],
       };
     },
