@@ -35,12 +35,16 @@ export default {
     },
   },
   created() {
-    this.interval = window.setInterval(() => {
-      this.time = Date.now();
-    }, config.snapshotRefreshInterval || 60 * 1000);
+    if (config.snapshotRefreshInterval) {
+      this.interval = window.setInterval(() => {
+        this.time = Date.now();
+      }, config.snapshotRefreshInterval * 1000);
+    }
   },
   destroyed() {
-    window.clearInterval(this.interval);
+    if (this.interval !== null) {
+      window.clearInterval(this.interval);
+    }
   },
 };
 </script>

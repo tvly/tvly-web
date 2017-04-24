@@ -62,8 +62,8 @@
 	// which modern browser do you recommend? required.
 	"recommendedBrowser": "Chrome",
 
-	// how often snapshots should be refreshed
-	"snapshotRefreshInterval": 10 * 60 * 1000,
+	// how often snapshots should be refreshed in seconds, optional.
+	"snapshotRefreshInterval": 600,
 
 	/*
 	 * colors
