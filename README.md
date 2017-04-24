@@ -2,7 +2,7 @@
 
 > A Vue.js based iptv frontend
 
-## Config
+## Configuration
 
 The configurations should be placed at `config.json5`, see [exmaple](config.example.json5).
 
