@@ -115,6 +115,7 @@ module.exports.plugins = (module.exports.plugins || []).concat([
   new OfflinePlugin({
     externals: [
       config.channelsUrl,
+      config.sponsorLogoUrl,
     ],
     responseStrategy: 'network-first',
     cacheName: config.cacheName,
