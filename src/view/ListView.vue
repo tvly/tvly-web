@@ -8,7 +8,7 @@
             <a class="brand-logo">{{appName}}</a>
             <ul class="right">
               <li>
-                <cast-controller></cast-controller>
+                <cast-controller ref="cast"></cast-controller>
               </li>
             </ul>
           </div>
@@ -63,7 +63,7 @@
     <main>
       <div class="container">
         <div class="row" id="list">
-          <channel-thumbnail v-for="c in filteredList" class="col l4 m6 s12" :channel="c" :key="c.Vid" :detail="detail"
+          <channel-thumbnail @channel="switchChannel($event)" v-for="c in filteredList" class="col l4 m6 s12" :channel="c" :key="c.Vid" :detail="detail"
             @noimage="queryThumbnail"></channel-thumbnail>
         </div>
       </div>
@@ -92,7 +92,7 @@ import ChannelThumbnail from './ChannelThumbnail.vue';
 import IPTVFooter from './IPTVFooter.vue';
 import CastController from './CastController.vue';
 
-import {categoryLink} from '../route/link.js';
+import {categoryLink, channelLink} from '../route/link.js';
 import {UNAUTHORIZED, UNKNOWN} from '../error.js';
 
 import background from '../image/background.jpg';
@@ -129,6 +129,17 @@ export default {
     };
   },
   methods: {
+    switchChannel(channel) {
+      if (this.$refs.cast.connected) {
+        console.warn(channel);
+        this.$refs.cast.send({
+          action: 'channel',
+          channel: channel,
+        });
+      } else {
+        this.$router.push(channelLink(channel));
+      }
+    },
     checkCategory() {
       const categoryNames = this.channels.Categories.map((c) => c.Name);
       if (categoryNames.length && !categoryNames.includes(this.category)) {

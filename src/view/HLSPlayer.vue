@@ -272,8 +272,11 @@ export default {
     navigator.presentation.receiver.connectionList.then((list) => {
       list.connections.map((conn) => {
         conn.onmessage = (msg) => {
-          this.$router.replace(
-            channelLink(JSON.load(msg)));
+          let data = JSON.parse(msg.data);
+          if (data.action === 'channel') {
+            this.$router.push(channelLink(data.channel));
+          }
+          conn.send('ack');
         };
       });
     });

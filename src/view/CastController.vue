@@ -29,13 +29,21 @@ export default {
       let request = new window.PresentationRequest(['/play/cctv1hd']);
       request.start().then((connection) => {
         this.connection = connection;
+
         connection.onclose = () => { alert('closed'); };
         connection.onterminate = () => { alert('terminated'); };
-
         connection.onconnect = () => {
           this.connected = true;
         };
+        connection.onmessage = (msg) => {
+          console.warn(msg.data);
+        };
       });
+    },
+    send(msg) {
+      if (this.connected) {
+        this.connection.send(JSON.stringify(msg));
+      }
     },
   },
 };
