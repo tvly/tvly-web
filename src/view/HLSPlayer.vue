@@ -269,7 +269,7 @@ export default {
     window.addEventListener('keydown', this.keyHandler);
 
     // as second screen
-    if (navigator.presentation.receiver) {
+    if (navigator.presentation && navigator.presentation.receiver) {
       navigator.presentation.receiver.connectionList.then((list) => {
         list.connections.map((conn) => {
           conn.onmessage = (msg) => {
