@@ -17,10 +17,10 @@
 import {channelLink} from '../route/link.js';
 import config from '../../config.json5';
 
-/*
+/**
  * Generate time serial which increase one
  * every `config.snapshotRefreshInterval` seconds.
- * @returns {number}
+ * @return {number}
  */
 function timeSerial() {
   return Math.floor(Date.now() / config.snapshotRefreshInterval / 1000);
