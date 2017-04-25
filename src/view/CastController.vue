@@ -40,6 +40,8 @@ export default {
         connection.onmessage = (msg) => {
           console.warn(msg.data);
         };
+      }).catch((error) => {
+        window.Materialize.toast(`${error.name}: ${error.message}`);
       });
     },
     send(msg) {
