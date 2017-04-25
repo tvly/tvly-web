@@ -41,7 +41,7 @@ export default {
           console.warn(msg.data);
         };
       }).catch((error) => {
-        window.Materialize.toast(`${error.name}: ${error.message}`);
+        window.Materialize.toast(error.message);
       });
     },
     send(msg) {
