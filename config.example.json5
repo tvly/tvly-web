@@ -17,17 +17,20 @@
 	// required.
 	"sponsor": "me",
 
+	// base url of the web app, MUST be ended with slash, required.
+	"baseUrl": "/",
+
+	/*
+	 * supporting
+	 */
 	// optional.
-	"supportingMailbox": "support@example.com",
+	"mailbox": "support@example.com",
 
 	// optional.
 	"wechat": null,
 
 	// optional.
 	"telegram": null,
-
-	// base url of the web app, MUST be ended with slash, required.
-	"baseUrl": "/",
 
 	/*
 	 * urls
