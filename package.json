@@ -20,7 +20,7 @@
     "offline-plugin": "^4.7.0",
     "urijs": "^1.18.10",
     "vue": "^2.2.6",
-    "vue-router": "^2.5.0",
+    "vue-router": "^2.5.2",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
