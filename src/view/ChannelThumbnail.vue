@@ -17,12 +17,21 @@
 import {channelLink} from '../route/link.js';
 import config from '../../config.json5';
 
+/*
+ * Generate time serial which increase one
+ * every `config.snapshotRefreshInterval` seconds.
+ * @returns {number}
+ */
+function timeSerial() {
+  return Math.floor(Date.now() / config.snapshotRefreshInterval / 1000);
+}
+
 export default {
   name: 'channel-thumbnail',
   props: ['channel', 'detail'],
   data() {
     return {
-      time: Date.now(),
+      time: timeSerial(),
       interval: null,
     };
   },
@@ -42,8 +51,8 @@ export default {
   created() {
     if (config.snapshotRefreshInterval) {
       this.interval = window.setInterval(() => {
-        this.time = Date.now();
-      }, config.snapshotRefreshInterval * 1000);
+        this.time = timeSerial();
+      });
     }
   },
   destroyed() {
