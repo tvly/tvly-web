@@ -60,7 +60,7 @@
 	"userInfoUrl": null,
 
 	// url of the logo of the sponsor, required.
-	"sponsorLogoUrl": "https://exmaple.com/logo.png",
+	"sponsorLogoUrl": "https://example.com/logo.png",
 
 	/*
 	 * others
