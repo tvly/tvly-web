@@ -269,17 +269,19 @@ export default {
     window.addEventListener('keydown', this.keyHandler);
 
     // as second screen
-    navigator.presentation.receiver.connectionList.then((list) => {
-      list.connections.map((conn) => {
-        conn.onmessage = (msg) => {
-          let data = JSON.parse(msg.data);
-          if (data.action === 'channel') {
-            this.$router.push(channelLink(data.channel));
-          }
-          conn.send('ack');
-        };
+    if (navigator.presentation.receiver) {
+      navigator.presentation.receiver.connectionList.then((list) => {
+        list.connections.map((conn) => {
+          conn.onmessage = (msg) => {
+            let data = JSON.parse(msg.data);
+            if (data.action === 'channel') {
+              this.$router.push(channelLink(data.channel));
+            }
+            conn.send('ack');
+          };
+        });
       });
-    });
+    }
   },
   watch: {
     clip(val) {
