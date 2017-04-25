@@ -1,6 +1,6 @@
 <template>
-  <a @click="connect">
-    <i v-if class="material-icons">
+  <a v-if="supported" @click="connect">
+    <i class="material-icons">
       {{ icon }}
     </i>
   </a>
@@ -22,6 +22,9 @@ export default {
       } else {
         return 'cast';
       }
+    },
+    supported() {
+      return window.PresentationRequest !== undefined;
     },
   },
   methods: {
