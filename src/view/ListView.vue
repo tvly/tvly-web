@@ -6,6 +6,11 @@
           <div class="nav-wrapper">
             <a href="#" data-activates="nav-menu" class="button-collapse"><i class="material-icons">menu</i></a>
             <a class="brand-logo">{{appName}}</a>
+            <ul class="right">
+              <li>
+                <cast-controller></cast-controller>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
@@ -85,6 +90,7 @@ import fuzzy from 'fuzzy';
 
 import ChannelThumbnail from './ChannelThumbnail.vue';
 import IPTVFooter from './IPTVFooter.vue';
+import CastController from './CastController.vue';
 
 import {categoryLink} from '../route/link.js';
 import {UNAUTHORIZED, UNKNOWN} from '../error.js';
@@ -104,6 +110,7 @@ export default {
   props: ['category', 'channels'],
   components: {
     ChannelThumbnail,
+    CastController,
     'iptv-footer': IPTVFooter,
   },
   name: 'list-view',

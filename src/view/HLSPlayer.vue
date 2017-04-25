@@ -267,6 +267,16 @@ export default {
     });
     jQuery('.modal').modal();
     window.addEventListener('keydown', this.keyHandler);
+
+    // as second screen
+    navigator.presentation.receiver.connectionList.then((list) => {
+      list.connections.map((conn) => {
+        conn.onmessage = (msg) => {
+          this.$router.replace(
+            channelLink(JSON.load(msg)));
+        };
+      });
+    });
   },
   watch: {
     clip(val) {
