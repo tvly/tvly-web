@@ -23,6 +23,9 @@
 	// optional.
 	"wechat": null,
 
+	// optional.
+	"telegram": null,
+
 	// base url of the web app, MUST be ended with slash, required.
 	"baseUrl": "/",
 
