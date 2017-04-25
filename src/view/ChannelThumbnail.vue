@@ -2,10 +2,10 @@
   <div :class="{compact: !detail}">
     <div class="card">
       <div class="card-image" v-if="detail">
-        <img :src="snapshot" @click="$router.push(channelLink)" @error="$emit('noimage')" :alt="'Snapshot of ' + channel['Name']">
-        <router-link :to="channelLink" class="btn-floating halfway-fab pink"><i class="material-icons">play_arrow</i></router-link>
+        <img :src="snapshot" @click="switchChannel" @error="$emit('noimage')" :alt="'Snapshot of ' + channel['Name']">
+        <a @click="switchChannel" class="btn-floating halfway-fab pink"><i class="material-icons">play_arrow</i></a>
       </div>
-      <div class="card-content" @click="$router.push(channelLink)">
+      <div class="card-content" @click="switchChannel">
         <p class=“title”>{{channel['Name']}}</p>
       </div>
     </div>
@@ -32,6 +32,11 @@ export default {
     },
     channelLink() {
       return channelLink(this.channel);
+    },
+  },
+  methods: {
+    switchChannel() {
+      this.$emit('channel', this.channel);
     },
   },
   created() {
