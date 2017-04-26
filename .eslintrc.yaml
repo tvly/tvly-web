@@ -9,3 +9,6 @@ env:
 rules:
     semi: ["error", "always"]
     no-console: ["error", { "allow": ["warn", "error"] }]
+globals:
+    WEBPACK_APP_VERSION: true
+    WEBPACK_TIMESTAMP: true

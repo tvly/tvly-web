@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 
 const config = require('./config.json5')
+const meta = require('./package')
 
 module.exports = {
   entry: ['babel-polyfill', 'whatwg-fetch', './src/main.js'],
@@ -78,6 +79,10 @@ module.exports = {
     hints: false,
   },
   plugins: [
+    new webpack.DefinePlugin({
+      WEBPACK_APP_VERSION: JSON.stringify(meta.version),
+      WEBPACK_TIMESTAMP: JSON.stringify(Date.now()),
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
     }),

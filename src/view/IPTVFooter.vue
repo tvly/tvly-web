@@ -22,7 +22,7 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-        Powered by {{sponsor}} © 2017
+        Powered by {{sponsor}} © 2017 Ver.{{version}}@{{built.toLocaleString()}}
       </div>
     </div>
   </footer>
@@ -40,6 +40,8 @@ export default {
       wechat: config.wechat,
       telegram: config.telegram,
       sponsor: config.sponsor,
+      version: WEBPACK_APP_VERSION,
+      built: new Date(WEBPACK_TIMESTAMP),
     };
   },
 };
