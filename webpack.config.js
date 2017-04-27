@@ -64,6 +64,9 @@ module.exports = {
       options: {
         name: '[name].[ext]?[hash]',
       },
+    }, {
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      loader: 'img-loader',
     }],
   },
   resolve: {
