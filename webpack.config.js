@@ -1,12 +1,12 @@
-require('json5/lib/require')
+require('json5/lib/require');
 
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const OfflinePlugin = require('offline-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 
-const config = require('./config.json5')
-const meta = require('./package')
+const config = require('./config.json5');
+const meta = require('./package');
 
 module.exports = {
   entry: ['babel-polyfill', 'whatwg-fetch', './src/main.js'],
@@ -24,7 +24,7 @@ module.exports = {
     }, {
       test: /\modernizr-config.json5$/,
       enforce: 'post',
-      loader: "modernizr-loader"
+      loader: 'modernizr-loader',
     }, {
       test: /\.vue$/,
       loader: 'vue-loader',
@@ -56,7 +56,7 @@ module.exports = {
       options: {
         data: {
           config,
-        }
+        },
       },
     }, {
       enforce: 'post',
@@ -92,15 +92,15 @@ module.exports = {
       template: 'src/index.html',
     }),
     new webpack.ProvidePlugin({
-      jQuery: 'jquery',
+      'jQuery': 'jquery',
       'window.jQuery': 'jquery',
     }),
   ],
   devtool: '#eval-source-map',
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+  module.exports.devtool = '#source-map';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
@@ -117,7 +117,7 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
-  ])
+  ]);
 }
 
 // OfflinePlugin show be always the last plugin
