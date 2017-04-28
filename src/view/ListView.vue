@@ -193,7 +193,7 @@ export default {
   computed: {
     allChannels() {
       return [].concat(...this.channels.Categories.map((channels) => {
-        return channels.Channels.map((channel) => [channel.Vid, channel.Name]);
+        return channels.Channels.map((channel) => [channel.Name, channel.Vid]);
       }));
     },
     userType() {
