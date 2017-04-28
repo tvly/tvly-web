@@ -40,7 +40,20 @@ export default {
       recognition.maxAlternatives = 1;
 
       recognition.onresult = (event) => {
-        alert(event.results);
+        const r = event.results[event.results.length - 1][0];
+        alert(`${r.transcript} with confidence ${r.confidence}`);
+      };
+
+      recognition.onspeechend = () => {
+        recognition.stop();
+      };
+
+      recognition.onnomatch = (event) => {
+        alert('wtf');
+      };
+
+      recognition.onerror = (event) => {
+        alert(event.error);
       };
 
       recognition.start();
