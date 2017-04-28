@@ -41,7 +41,8 @@ export default {
 
       recognition.onresult = (event) => {
         const r = event.results[event.results.length - 1][0];
-        alert(`${r.transcript} with confidence ${r.confidence}`);
+        this.$emit('result', r.transcript);
+        console.warn(`${r.transcript} with confidence ${r.confidence}`);
       };
 
       recognition.onspeechend = () => {

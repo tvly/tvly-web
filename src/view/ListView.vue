@@ -29,7 +29,7 @@
           <div class="search-wrapper card" :class="{focused: filter.length || searching}">
             <input id="search" type="search" v-model="filter" @focus="searching = true" @blur="searching = false">
             <i class="material-icons" v-if="filter.length" @click="filter = ''">close</i>
-            <speech-recognition v-else-if="voidSearch" :options="allChannels"></speech-recognition>
+            <speech-recognition v-else-if="voidSearch" @result="filter = $event" :options="allChannels"></speech-recognition>
             <i class="material-icons" v-else>search</i>
           </div>
         </li>
