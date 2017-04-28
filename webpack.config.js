@@ -22,6 +22,10 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'eslint-loader',
     }, {
+      test: /\modernizr-config.json5$/,
+      enforce: 'post',
+      loader: "modernizr-loader"
+    }, {
       test: /\.vue$/,
       loader: 'vue-loader',
       options: {
