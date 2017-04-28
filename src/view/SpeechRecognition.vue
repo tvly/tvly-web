@@ -5,5 +5,6 @@
 <script>
 export default {
   name: 'speech-recognition',
+  props: ['options'],
 };
 </script>

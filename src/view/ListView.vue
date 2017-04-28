@@ -29,7 +29,7 @@
           <div class="search-wrapper card" :class="{focused: filter.length || searching}">
             <input id="search" type="search" v-model="filter" @focus="searching = true" @blur="searching = false">
             <i class="material-icons" v-if="filter.length" @click="filter = ''">close</i>
-            <speech-recognition v-else-if="voidSearch"></speech-recognition>
+            <speech-recognition v-else-if="voidSearch" :options="allChannels"></speech-recognition>
             <i class="material-icons" v-else>search</i>
           </div>
         </li>
@@ -191,6 +191,11 @@ export default {
     }
   },
   computed: {
+    allChannels() {
+      return [].concat(...this.channels.Categories.map((channels) => {
+        return channels.Channels.map((channel) => [channel.Vid, channel.Name]);
+      }));
+    },
     userType() {
       if (!this.uid.length) {
         return '';
