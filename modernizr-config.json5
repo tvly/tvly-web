@@ -1,5 +1,9 @@
 {
 	"minify": true,
+	"options": [
+		"prefixed",
+		"addTest",
+	],
 	"feature-detects": [
 		"speech/speech-recognition",
 	],

@@ -63,6 +63,7 @@
 import flowplayer from 'flowplayer';
 import engine from 'flowplayer-hlsjs';
 import jQuery from 'jquery';
+import Modernizr from 'modernizr';
 
 import swf from 'flowplayer/dist/flowplayer.swf';
 import swfHls from 'flowplayer/dist/flowplayerhls.swf';
@@ -224,28 +225,23 @@ export default {
         }
       });
       api.on('fullscreen', () => {
-        const lock = screen.lockOrientation || screen.mozLockOrientation ||
-                     screen.msLockOrientation;
-        if (lock) {
+        if (Modernizr.lockorientation) {
           try {
-            lock('landscape');
+            Modernizr.prefixed('lockOrientation', screen)('landscape');
           } catch(e) {
-            console.warn('Orientation is not supported on this browser.');
+            console.warn('lockOrientation is not supported on this browser.');
             // the device does not support rotation
           }
-        } else if (screen.orientation && screen.orientation.lock) {
+        } else if (Modernizr.orientationlock) {
           screen.orientation.lock('landscape').catch(() => {
-            console.warn('Orientation is not supported on this chrome.');
+            console.warn('orientation.lock is not supported on this chrome.');
           });
         }
       });
       api.on('fullscreen-exit', () => {
-        const unlock = screen.unlockOrientation ||
-                       screen.mozUnlockOrientation ||
-                       screen.msUnlockOrientation;
-        if (unlock) {
-          unlock();
-        } else if (screen.orientation && screen.orientation.unlock) {
+        if (Modernizr.lockorientation) {
+          Modernizr.prefixed('unlockOrientation', screen)('landscape');
+        } else if (Modernizr.orientationlock) {
           screen.orientation.unlock();
         }
       });

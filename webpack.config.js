@@ -76,6 +76,7 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
+      'modernizr$': path.resolve(__dirname, './modernizr-config.json5'),
     },
   },
   devServer: {
