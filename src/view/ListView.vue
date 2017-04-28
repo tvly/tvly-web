@@ -136,7 +136,6 @@ export default {
   methods: {
     switchChannel(channel) {
       if (this.$refs.cast.connected) {
-        console.warn(channel);
         this.$refs.cast.send({
           action: 'channel',
           channel: channel,
