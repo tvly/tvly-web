@@ -29,6 +29,7 @@
           <div class="search-wrapper card" :class="{focused: filter.length || searching}">
             <input id="search" type="search" v-model="filter" @focus="searching = true" @blur="searching = false">
             <i class="material-icons" v-if="filter.length" @click="filter = ''">close</i>
+            <speech-recognition v-else-if="voidSearch"></speech-recognition>
             <i class="material-icons" v-else>search</i>
           </div>
         </li>
@@ -87,10 +88,12 @@
 <script>
 import jQuery from 'jquery';
 import fuzzy from 'fuzzy';
+import Modernizr from 'modernizr';
 
 import ChannelThumbnail from './ChannelThumbnail.vue';
 import IPTVFooter from './IPTVFooter.vue';
 import CastController from './CastController.vue';
+import SpeechRecognition from './SpeechRecognition.vue';
 
 import {categoryLink, channelLink} from '../route/link.js';
 import {UNAUTHORIZED, UNKNOWN} from '../error.js';
@@ -111,6 +114,7 @@ export default {
   components: {
     ChannelThumbnail,
     CastController,
+    SpeechRecognition,
     'iptv-footer': IPTVFooter,
   },
   name: 'list-view',
@@ -125,6 +129,7 @@ export default {
       uid: '',
       navBtn: null,
       legacyUrl: config.legacyUrl,
+      voidSearch: Modernizr.speechrecognition,
       background,
     };
   },
