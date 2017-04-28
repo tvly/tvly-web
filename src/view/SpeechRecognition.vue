@@ -35,7 +35,7 @@ export default {
       list.addFromString(grammar, 1);
 
       const recognition = new SpeechRecognition();
-      recognition.lang = 'zh-CN';
+      recognition.lang = 'cmn-Hans-CN';
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
