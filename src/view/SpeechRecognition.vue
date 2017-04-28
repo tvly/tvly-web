@@ -49,11 +49,11 @@ export default {
       };
 
       recognition.onnomatch = (event) => {
-        alert('wtf');
+        window.Materialize.toast('识别失败');
       };
 
       recognition.onerror = (event) => {
-        alert(event.error);
+        window.Materialize.toast(event.error);
       };
 
       recognition.start();
