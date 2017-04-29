@@ -38,6 +38,7 @@ export default {
       recognition.lang = 'cmn-Hans-CN';
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
+      recognition.grammars = list;
 
       recognition.onresult = (event) => {
         const r = event.results[event.results.length - 1][0];
