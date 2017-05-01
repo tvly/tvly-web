@@ -5,7 +5,7 @@
  */
 function categoryLink(category) {
   return {
-    name: 'list',
+    name: 'channel',
     params: {
       category: category['Name'],
     },

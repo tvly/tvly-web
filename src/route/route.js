@@ -3,14 +3,20 @@ import URI from 'urijs';
 
 import ListView from '../view/ListView.vue';
 import HLSPlayer from '../view/HLSPlayer.vue';
+import ChannelList from '../view/ChannelList.vue';
 
 import config from '../../config.json5';
 
 const routes = [{
   name: 'list',
-  path: URI('./list/:category').absoluteTo(config.baseUrl).toString(),
+  path: URI('./list/').absoluteTo(config.baseUrl).toString(),
   props: true,
   component: ListView,
+  children: [{
+    name: 'channel',
+    path: 'channel/:category',
+    component: ChannelList,
+  }],
 }, {
   name: 'play',
   path: URI('./play/:channel').absoluteTo(config.baseUrl).toString(),
@@ -20,7 +26,7 @@ const routes = [{
   path: '*',
   redirect: (to) => {
     return {
-      name: 'list',
+      name: 'channel',
       params: {
         category: 'UNKNOWN',
       },

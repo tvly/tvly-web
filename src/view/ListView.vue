@@ -62,12 +62,10 @@
     </header>
 
     <main>
-      <div class="container">
-        <div class="row" id="list">
-          <channel-thumbnail @channel="switchChannel($event)" v-for="c in filteredList" class="col l4 m6 s12" :channel="c" :key="c.Vid" :detail="detail"
-            @noimage="queryThumbnail"></channel-thumbnail>
-        </div>
-      </div>
+      <router-view
+        :filter="filter" :channel-list="channelList" :detail="detail"
+        @noimage="queryThumbnail"
+        @channel="switchChannel($event)"></router-view>
     </main>
 
     <iptv-footer></iptv-footer>
@@ -87,10 +85,8 @@
 
 <script>
 import jQuery from 'jquery';
-import fuzzy from 'fuzzy';
 import Modernizr from 'modernizr';
 
-import ChannelThumbnail from './ChannelThumbnail.vue';
 import IPTVFooter from './IPTVFooter.vue';
 import CastController from './CastController.vue';
 import SpeechRecognition from './SpeechRecognition.vue';
@@ -112,7 +108,6 @@ function getDetail() {
 export default {
   props: ['category', 'channels'],
   components: {
-    ChannelThumbnail,
     CastController,
     SpeechRecognition,
     'iptv-footer': IPTVFooter,
@@ -218,13 +213,6 @@ export default {
         }
       }
       return [];
-    },
-    filteredList() {
-      return this.channelList.filter((channel) => {
-        return (!this.filter.length ||
-                fuzzy.test(this.filter, channel.Name) ||
-                fuzzy.test(this.filter, channel.Vid));
-      });
     },
   },
   watch: {
