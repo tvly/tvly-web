@@ -164,6 +164,7 @@ export default {
     if (config.userInfoUrl) {
       window.fetch(config.userInfoUrl, {
         credentials: 'include',
+        mode: 'cors',
       }).then((response) => {
         if (response.status === 200) {
           return response.text();

@@ -51,6 +51,7 @@ const app = new Vue({
     logout() {
       window.fetch(config.logoutUrl, {
         credentials: 'include',
+        mode: 'cors',
       }).then(() => { window.location.reload(); });
     },
   },
@@ -72,6 +73,7 @@ const app = new Vue({
 
 fetch(config.channelsUrl, {
   credentials: 'include',
+  mode: 'cors',
 }).then((response) => {
   if (response.status === 200) {
     return response.json();
