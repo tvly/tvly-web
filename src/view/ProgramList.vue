@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <ul class="collection">
-      <li v-for="program in currentPrograms" v-if="program" class="collection-item">
+    <div class="collection">
+      <router-link v-for="program in currentPrograms" v-if="program" class="collection-item" :to="{name:'play', params: {channel: program.channel}}">
         {{ program.title }}
-      </li>
-    </ul>
+      </router-link>
+    </div>
   </div>
 </template>
 
