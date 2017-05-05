@@ -252,6 +252,7 @@ export default {
       autoplay: true,
       share: false,
       keyboard: false,
+      chromecast: false,
       swf,
       swfHls,
       hlsjs: {
