@@ -128,6 +128,13 @@ module.exports.plugins = (module.exports.plugins || []).concat([
       config.sponsorLogoUrl,
     ],
     responseStrategy: 'network-first',
-    cacheName: config.cacheName,
+    ServiceWorker: {
+      prefetchRequest: {
+        credentials: 'include',
+        mode: 'cors',
+      },
+      cacheName: config.cacheName,
+    },
+    AppCache: false,
   }),
 ]);
