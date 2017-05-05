@@ -143,6 +143,9 @@ export default {
       }
     },
     checkCategory() {
+      if (this.$route.name != 'channel')
+        return;
+
       const categoryNames = this.channels.Categories.map((c) => c.Name);
       if (categoryNames.length && !categoryNames.includes(this.category)) {
         const link = this.categoryLink(this.channels.Categories[0]);
