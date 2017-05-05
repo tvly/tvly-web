@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <ul class="collection">
-      <li v-for="program in programList" class="collection-item">
+      <li v-for="program in currentPrograms" v-if="program" class="collection-item">
+        {{ program.title }}
       </li>
     </ul>
   </div>
@@ -14,7 +15,7 @@ export default {
   name: 'program-list',
   data() {
     return {
-      programList: [],
+      programList: {},
     };
   },
   props: ['filter', 'channelList'],
@@ -27,8 +28,23 @@ export default {
         return response.json();
       }
     }).then((programList) => {
-      console.warn(programList);
+      this.programList = programList;
     });
+  },
+  computed: {
+    currentPrograms() {
+      // TODO: now should be updated regularly
+      const now = Math.floor(Date.now() / 1000);
+      return Object.entries(this.programList).map(([channel, programs]) => {
+        const currentProgram = programs.find((program) => {
+          return program.start < now && program.stop > now;
+        });
+        if (currentProgram) {
+          currentProgram.channel = channel;
+          return currentProgram;
+        }
+      });
+    },
   },
 };
 </script>
