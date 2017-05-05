@@ -128,6 +128,7 @@ module.exports.plugins = (module.exports.plugins || []).concat([
       config.sponsorLogoUrl,
       config.epgUrl,
     ],
+    autoUpdate: true,
     responseStrategy: 'network-first',
     ServiceWorker: {
       prefetchRequest: {
