@@ -38,6 +38,9 @@
         </li>
         <li><div class="divider"></div></li>
         <li>
+          <router-link :to="{ name: 'program' }">节目列表</router-link>
+        </li>
+        <li>
           <a @click="detail = !detail">
             显示缩略图
             <div class="switch right">

@@ -4,6 +4,7 @@ import URI from 'urijs';
 import ListView from '../view/ListView.vue';
 import HLSPlayer from '../view/HLSPlayer.vue';
 import ChannelList from '../view/ChannelList.vue';
+import ProgramList from '../view/ProgramList.vue';
 
 import config from '../../config.json5';
 
@@ -16,6 +17,10 @@ const routes = [{
     name: 'channel',
     path: 'channel/:category',
     component: ChannelList,
+  }, {
+    name: 'program',
+    path: 'program',
+    component: ProgramList,
   }],
 }, {
   name: 'play',
