@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <div class="collection">
-      <router-link v-for="program in currentPrograms" v-if="program" class="collection-item" :to="{name:'play', params: {channel: program.channel}}">
+      <router-link
+        v-for="program in filteredCurrentPrograms"
+        v-if="program"
+        :key="program.channel"
+        class="collection-item"
+        :to="{name:'play', params: {channel: program.channel}}">
         {{ program.title }}
       </router-link>
     </div>
@@ -9,6 +14,8 @@
 </template>
 
 <script>
+import fuzzy from 'fuzzy';
+
 import config from '../../config.json5';
 
 export default {
@@ -43,6 +50,13 @@ export default {
           currentProgram.channel = channel;
           return currentProgram;
         }
+      });
+    },
+    filteredCurrentPrograms() {
+      return this.currentPrograms.filter((program) => {
+        return program && (!this.filter.length ||
+          fuzzy.test(this.filter, program.channel) ||
+          fuzzy.test(this.filter, program.title));
       });
     },
   },
