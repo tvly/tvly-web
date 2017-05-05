@@ -126,6 +126,7 @@ module.exports.plugins = (module.exports.plugins || []).concat([
     externals: [
       config.channelsUrl,
       config.sponsorLogoUrl,
+      config.epgUrl,
     ],
     responseStrategy: 'network-first',
     ServiceWorker: {
