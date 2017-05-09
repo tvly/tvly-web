@@ -8,7 +8,7 @@ import ProgramList from '../view/ProgramList.vue';
 
 import config from '../../config.json5';
 
-const routes = [{
+const listRoute = {
   name: 'list',
   path: URI('./list/').absoluteTo(config.baseUrl).toString(),
   props: true,
@@ -17,17 +17,25 @@ const routes = [{
     name: 'channel',
     path: 'channel/:category',
     component: ChannelList,
-  }, {
+  }],
+};
+
+if (config.epgUrl && config.epgUrl.length) {
+  listRoute.children.push({
     name: 'program',
     path: 'program',
     component: ProgramList,
-  }],
-}, {
+  });
+}
+
+const playRoute = {
   name: 'play',
   path: URI('./play/:channel').absoluteTo(config.baseUrl).toString(),
   props: true,
   component: HLSPlayer,
-}, {
+};
+
+const defaultRoute = {
   path: '*',
   redirect: (to) => {
     return {
@@ -37,7 +45,13 @@ const routes = [{
       },
     };
   },
-}];
+};
+
+const routes = [
+  listRoute,
+  playRoute,
+  defaultRoute,
+];
 
 export const router = new VueRouter({
   mode: 'history',

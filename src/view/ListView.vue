@@ -37,7 +37,7 @@
           <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
         </li>
         <li><div class="divider"></div></li>
-        <li @click="hideMenu" :class="{active: $route.name == 'program'}">
+        <li v-if="hasEpg" @click="hideMenu" :class="{active: $route.name == 'program'}">
           <router-link :to="{ name: 'program' }">节目列表</router-link>
         </li>
         <li>
@@ -128,6 +128,7 @@ export default {
       navBtn: null,
       legacyUrl: config.legacyUrl,
       voidSearch: Modernizr.speechrecognition,
+      hasEpg: config.epgUrl && config.epgUrl.length,
       background,
     };
   },
