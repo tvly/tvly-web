@@ -13,6 +13,7 @@
           </span>
         </a>
         <ul class="right">
+          <li v-if="currentEpg.length"><a href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
           <li class="hide-on-small-only"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
         </ul>
       </div>
@@ -56,6 +57,26 @@
         </table>
       </div>
     </div>
+    <div id="epg-modal" class="modal">
+      <div class="modal-content">
+        <h4>节目列表</h4>
+        <table class="centered responsive-table">
+          <thead>
+            <tr>
+              <th data-field="title">标题</th>
+              <th data-field="start">时间</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr v-for="program in currentEpg" :class="{'current-program': program.now}">
+              <td>{{program.title}}</td>
+              <td>{{program.start.toLocaleString()}} ~ {{program.stop.toLocaleString()}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -81,6 +102,7 @@ export default {
     return {
       engine: '',
       player: null,
+      epg: {},
     };
   },
   methods: {
@@ -175,6 +197,23 @@ export default {
     },
   },
   computed: {
+    currentEpg() {
+      const current = this.epg[this.channel];
+      if (current) {
+        // TODO: now should be updated regularly
+        const now = Math.floor(Date.now() / 1000);
+        return current.map((program) => {
+          return {
+            start: new Date(program.start * 1000),
+            stop: new Date(program.stop * 1000),
+            title: program.title,
+            now: program.start < now && program.stop > now,
+          };
+        });
+      } else {
+        return [];
+      }
+    },
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
         return category.Channels.findIndex((channel) => {
@@ -246,6 +285,18 @@ export default {
         }
       });
     });
+    if (config.epgUrl && config.epgUrl.length) {
+      window.fetch(config.epgUrl, {
+        credentials: 'include',
+        mode: 'cors',
+      }).then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+      }).then((epg) => {
+        this.epg = epg;
+      });
+    }
   },
   mounted() {
     this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
@@ -305,5 +356,9 @@ export default {
   .player-container {
     height: calc(100% - 64px);
   }
+}
+
+tr.current-program {
+  background-color: #f2f2f2;
 }
 </style>
