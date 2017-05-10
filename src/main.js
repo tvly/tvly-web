@@ -61,7 +61,6 @@ const app = new Vue({
   },
   watch: {
     '$route'(to, from) {
-      console.warn(from.name, to.name);
       if (from.name === 'play') { // left play view
         this.transition = 'slide-right';
       } else {
