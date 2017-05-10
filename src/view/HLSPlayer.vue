@@ -71,15 +71,17 @@
         <table class="centered responsive-table">
           <thead>
             <tr>
+              <th data-field="date">日期</th>
+              <th data-field="time">时间</th>
               <th data-field="title">标题</th>
-              <th data-field="start">时间</th>
             </tr>
           </thead>
 
           <tbody>
             <tr v-for="program in currentEpg" :class="{'current-program': program.now}">
+              <td>{{program.date}}</td>
+              <td>{{program.start}} - {{program.stop}}</td>
               <td>{{program.title}}</td>
-              <td>{{program.start.toLocaleString()}} ~ {{program.stop.toLocaleString()}}</td>
             </tr>
           </tbody>
         </table>
@@ -93,6 +95,7 @@ import flowplayer from 'flowplayer';
 import engine from 'flowplayer-hlsjs';
 import jQuery from 'jquery';
 import Modernizr from 'modernizr';
+import strftime from 'strftime';
 
 import swf from 'flowplayer/dist/flowplayer.swf';
 import swfHls from 'flowplayer/dist/flowplayerhls.swf';
@@ -222,8 +225,9 @@ export default {
       if (current) {
         return current.map((program) => {
           return {
-            start: new Date(program.start * 1000),
-            stop: new Date(program.stop * 1000),
+            date: strftime('%F', new Date(program.start * 1000)),
+            start: strftime('%R', new Date(program.start * 1000)),
+            stop: strftime('%R', new Date(program.stop * 1000)),
             title: program.title,
             now: program.start < this.now && program.stop > this.now,
           };

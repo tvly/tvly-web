@@ -18,6 +18,7 @@
     "material-design-icons": "^3.0.1",
     "materialize-css": "^0.98.2",
     "offline-plugin": "^4.7.0",
+    "strftime": "^0.10.0",
     "urijs": "^1.18.10",
     "vue": "^2.3.3",
     "vue-router": "^2.5.3",
