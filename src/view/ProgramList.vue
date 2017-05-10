@@ -15,6 +15,7 @@
 
 <script>
 import fuzzy from 'fuzzy';
+import {now} from '../time.js';
 
 import config from '../../config.json5';
 
@@ -23,6 +24,8 @@ export default {
   data() {
     return {
       programList: {},
+      now: now(),
+      interval: null,
     };
   },
   props: ['filter', 'channelList'],
@@ -37,14 +40,18 @@ export default {
     }).then((programList) => {
       this.programList = programList;
     });
+    this.interval = setInterval(() => {
+      this.now = now();
+    }, 10 * 1000);
+  },
+  destroyed() {
+    clearInterval(this.interval);
   },
   computed: {
     currentPrograms() {
-      // TODO: now should be updated regularly
-      const now = Math.floor(Date.now() / 1000);
       return Object.entries(this.programList).map(([channel, programs]) => {
         const currentProgram = programs.find((program) => {
-          return program.start < now && program.stop > now;
+          return program.start < this.now && program.stop > this.now;
         });
         if (currentProgram) {
           currentProgram.channel = channel;

@@ -90,6 +90,7 @@ import swf from 'flowplayer/dist/flowplayer.swf';
 import swfHls from 'flowplayer/dist/flowplayerhls.swf';
 
 import {categoryLink, channelLink} from '../route/link.js';
+import {now} from '../time.js';
 
 import config from '../../config.json5';
 
@@ -103,6 +104,7 @@ export default {
       engine: '',
       player: null,
       epg: {},
+      now: now(),
     };
   },
   methods: {
@@ -200,14 +202,12 @@ export default {
     currentEpg() {
       const current = this.epg[this.channel];
       if (current) {
-        // TODO: now should be updated regularly
-        const now = Math.floor(Date.now() / 1000);
         return current.map((program) => {
           return {
             start: new Date(program.start * 1000),
             stop: new Date(program.stop * 1000),
             title: program.title,
-            now: program.start < now && program.stop > now,
+            now: program.start < this.now && program.stop > this.now,
           };
         });
       } else {
@@ -297,6 +297,12 @@ export default {
         this.epg = epg;
       });
     }
+    this.interval = setInterval(() => {
+      this.now = now();
+    }, 10 * 1000);
+  },
+  destroyed() {
+    clearInterval(this.interval);
   },
   mounted() {
     this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {

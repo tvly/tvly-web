@@ -15,6 +15,7 @@
 <script>
 
 import {channelLink} from '../route/link.js';
+import {now} from '../time.js';
 import config from '../../config.json5';
 
 /**
@@ -23,7 +24,7 @@ import config from '../../config.json5';
  * @return {number}
  */
 function timeSerial() {
-  return Math.floor(Date.now() / config.snapshotRefreshInterval / 1000);
+  return Math.floor(now() / config.snapshotRefreshInterval);
 }
 
 export default {
