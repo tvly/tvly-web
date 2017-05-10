@@ -120,14 +120,19 @@ if (process.env.NODE_ENV === 'production') {
   ]);
 }
 
+const externals = [
+  config.channelsUrl,
+  config.sponsorLogoUrl,
+];
+
+if (config.epgUrl && config.epgUrl.length) {
+  externals.append(config.epgUrl);
+}
+
 // OfflinePlugin show be always the last plugin
 module.exports.plugins = (module.exports.plugins || []).concat([
   new OfflinePlugin({
-    externals: [
-      config.channelsUrl,
-      config.sponsorLogoUrl,
-      config.epgUrl,
-    ],
+    externals,
     autoUpdate: true,
     responseStrategy: 'network-first',
     ServiceWorker: {
