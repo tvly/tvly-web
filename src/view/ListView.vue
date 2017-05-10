@@ -38,7 +38,7 @@
         </li>
         <li><div class="divider"></div></li>
         <li v-if="hasEpg" @click="hideMenu" :class="{active: $route.name == 'program'}">
-          <router-link :to="{ name: 'program' }">节目列表</router-link>
+          <router-link :to="{ name: 'program' }">当前节目列表</router-link>
         </li>
         <li>
           <a @click="detail = !detail">
