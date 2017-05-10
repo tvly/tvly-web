@@ -26,6 +26,7 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 * [Tsinghua University](https://iptv.tsinghua.edu.cn/)
 * [Minzu University of China](https://iptv.muc.edu.cn/)
 * [Beijing Foreign Studies University](https://tv.bfsu.edu.cn/)
+* [Nankai University](https://iptv.nankai.edu.cn/)
 
 ## Credit
 
