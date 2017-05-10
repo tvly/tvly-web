@@ -126,7 +126,7 @@ const externals = [
 ];
 
 if (config.epgUrl && config.epgUrl.length) {
-  externals.append(config.epgUrl);
+  externals.push(config.epgUrl);
 }
 
 // OfflinePlugin show be always the last plugin
