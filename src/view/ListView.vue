@@ -338,7 +338,7 @@ li.search:hover {
     font-weight: 300;
 }
 
-@media only screen and (max-width : 992px) {
+@media only screen and (max-width: 992px) {
   header, main, footer {
     padding-left: 0;
   }
