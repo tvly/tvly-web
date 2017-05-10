@@ -53,6 +53,14 @@
               <td>f</td>
               <td>切换全屏</td>
             </tr>
+            <tr>
+              <td>?</td>
+              <td>查看帮助</td>
+            </tr>
+            <tr>
+              <td>p</td>
+              <td>查看节目列表</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -157,10 +165,20 @@ export default {
         case '-':
           this.player.volume(Math.max(this.player.volumeLevel - 0.1, 0));
           break;
-        case 'f':
         case 'F': // keyIdentifier
         case 'U+0046': // keyIdentifier
+        case 'f':
           this.player.fullscreen();
+          break;
+        case 'P': // keyIdentifier
+        case 'U+0050': // keyIdentifier
+        case 'p':
+          jQuery('#epg-modal').modal('open');
+          break;
+        case 'QuestionMark': // KeyIdentifier
+        case 'U+003F': // KeyIdentifier
+        case '?':
+          jQuery('#help-modal').modal('open');
           break;
         default:
           captured = false;
