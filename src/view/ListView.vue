@@ -67,6 +67,7 @@
     <main>
       <router-view
         :filter="filter" :channel-list="channelList" :detail="detail"
+        :channel-map="channelMap"
         @noimage="queryThumbnail"
         @channel="switchChannel($event)"></router-view>
     </main>
@@ -218,6 +219,13 @@ export default {
         }
       }
       return [];
+    },
+    channelMap() {
+      // map channel ID to its name
+      return this.allChannels.reduce((acc, cur, i) => {
+        acc[cur[1]] = cur[0];
+        return acc;
+      }, {});
     },
   },
   watch: {

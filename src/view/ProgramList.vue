@@ -1,15 +1,24 @@
 <template>
   <div class="container">
-    <div class="collection">
-      <router-link
+    <table class="highlight">
+      <thead>
+        <tr>
+          <th>标题</th>
+          <th>频道</th>
+        </tr>
+      </thead>
+
+      <tbody
         v-for="program in filteredCurrentPrograms"
         v-if="program"
         :key="program.channel"
-        class="collection-item"
-        :to="{name:'play', params: {channel: program.channel}}">
-        {{ program.title }}
-      </router-link>
-    </div>
+        @click="$router.push({name:'play', params: {channel: program.channel}})">
+        <tr>
+          <td>{{program.title}}</td>
+          <td>{{ channelMap[program.channel] }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -28,7 +37,7 @@ export default {
       interval: null,
     };
   },
-  props: ['filter', 'channelList'],
+  props: ['filter', 'channelList', 'channelMap'],
   created() {
     window.fetch(config.epgUrl, {
       mode: 'cors',
