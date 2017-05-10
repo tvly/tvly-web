@@ -24,7 +24,7 @@
 
 <script>
 import fuzzy from 'fuzzy';
-import {now} from '../time.js';
+import {mapState} from 'vuex';
 
 import config from '../../config.json5';
 
@@ -33,8 +33,6 @@ export default {
   data() {
     return {
       programList: {},
-      now: now(),
-      interval: null,
     };
   },
   props: ['filter', 'channelList', 'channelMap'],
@@ -49,12 +47,6 @@ export default {
     }).then((programList) => {
       this.programList = programList;
     });
-    this.interval = setInterval(() => {
-      this.now = now();
-    }, 10 * 1000);
-  },
-  destroyed() {
-    clearInterval(this.interval);
   },
   computed: {
     currentPrograms() {
@@ -75,6 +67,9 @@ export default {
           fuzzy.test(this.filter, program.title));
       });
     },
+    ...mapState([
+      'now',
+    ]),
   },
 };
 </script>

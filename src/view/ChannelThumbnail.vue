@@ -13,26 +13,16 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 
 import {channelLink} from '../route/link.js';
-import {now} from '../time.js';
 import config from '../../config.json5';
-
-/**
- * Generate time serial which increase one
- * every `config.snapshotRefreshInterval` seconds.
- * @return {number}
- */
-function timeSerial() {
-  return Math.floor(now() / config.snapshotRefreshInterval);
-}
 
 export default {
   name: 'channel-thumbnail',
   props: ['channel', 'detail'],
   data() {
     return {
-      time: timeSerial(),
       interval: null,
     };
   },
@@ -43,23 +33,17 @@ export default {
     channelLink() {
       return channelLink(this.channel);
     },
+    time() {
+      return Math.floor(this.now / config.snapshotRefreshInterval);
+    },
+    ...mapState([
+      'now',
+    ]),
   },
   methods: {
     switchChannel() {
       this.$emit('channel', this.channel);
     },
-  },
-  created() {
-    if (config.snapshotRefreshInterval) {
-      this.interval = window.setInterval(() => {
-        this.time = timeSerial();
-      });
-    }
-  },
-  destroyed() {
-    if (this.interval !== null) {
-      window.clearInterval(this.interval);
-    }
   },
 };
 </script>

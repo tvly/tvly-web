@@ -96,12 +96,12 @@ import engine from 'flowplayer-hlsjs';
 import jQuery from 'jquery';
 import Modernizr from 'modernizr';
 import strftime from 'strftime';
+import {mapState} from 'vuex';
 
 import swf from 'flowplayer/dist/flowplayer.swf';
 import swfHls from 'flowplayer/dist/flowplayerhls.swf';
 
 import {categoryLink, channelLink} from '../route/link.js';
-import {now} from '../time.js';
 
 import config from '../../config.json5';
 
@@ -115,7 +115,6 @@ export default {
       engine: '',
       player: null,
       epg: {},
-      now: now(),
     };
   },
   methods: {
@@ -271,6 +270,9 @@ export default {
         }],
       };
     },
+    ...mapState([
+      'now',
+    ]),
   },
   created() {
     this.checkChannel();
@@ -319,12 +321,6 @@ export default {
         this.epg = epg;
       });
     }
-    this.interval = setInterval(() => {
-      this.now = now();
-    }, 10 * 1000);
-  },
-  destroyed() {
-    clearInterval(this.interval);
   },
   mounted() {
     this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
