@@ -61,10 +61,11 @@ const app = new Vue({
   },
   watch: {
     '$route'(to, from) {
-      if (from.name === 'list' && to.name === 'play') { // from list to play
-        this.transition = 'slide-left';
-      } else {
+      console.warn(from.name, to.name);
+      if (from.name === 'play') { // left play view
         this.transition = 'slide-right';
+      } else {
+        this.transition = 'slide-left';
       }
     },
   },
