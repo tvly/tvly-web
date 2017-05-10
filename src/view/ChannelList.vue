@@ -1,12 +1,14 @@
 <template>
   <div class="container">
     <div class="row" id="list">
-      <channel-thumbnail
-        v-for="c in filteredList"
-        class="col l4 m6 s12"
-        :channel="c" :key="c.Vid" :detail="detail"
-        @channel="$emit('channel', $event)"
-        @noimage="$emit('noimage', $event)"></channel-thumbnail>
+      <div class="col s12 cards-container">
+        <channel-thumbnail
+          v-for="c in filteredList"
+          :channel="c" :key="c.Vid" :detail="detail"
+          class="card-item"
+          @channel="$emit('channel', $event)"
+          @noimage="$emit('noimage', $event)"></channel-thumbnail>
+      </div>
     </div>
   </div>
 </template>
@@ -33,3 +35,30 @@ export default {
   },
 };
 </script>
+
+<style>
+@media only screen and (max-width: 601px) {
+  .cards-container {
+    column-count: 1;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 992px) {
+  .cards-container {
+    column-count: 2;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1440px) {
+  .cards-container {
+    column-count: 3;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .cards-container {
+    column-count: 4;
+  }
+}
+.card-item {
+  display: inline-block;
+  width: 100%;
+}
+</style>
