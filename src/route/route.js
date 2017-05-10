@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import VueRouter from 'vue-router';
 import URI from 'urijs';
 
@@ -7,6 +8,8 @@ import ChannelList from '../view/ChannelList.vue';
 import ProgramList from '../view/ProgramList.vue';
 
 import config from '../../config.json5';
+
+Vue.use(VueRouter);
 
 const listRoute = {
   name: 'list',

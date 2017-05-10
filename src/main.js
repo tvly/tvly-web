@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
 import Modernizr from 'modernizr';
 
 import {router} from './route/route.js';
+import {store} from './store.js';
 import config from '../config.json5';
 import detects from './detects.js';
 
@@ -29,8 +29,6 @@ import './animation.css';
 // offline-plugin
 import offlinePlugin from 'offline-plugin/runtime';
 offlinePlugin.install();
-
-Vue.use(VueRouter);
 
 Modernizr.addTest(detects);
 
@@ -69,6 +67,7 @@ const app = new Vue({
     },
   },
   router,
+  store,
 });
 
 fetch(config.channelsUrl, {
