@@ -173,14 +173,18 @@ export default {
           break;
         case 'P': // keyIdentifier
         case 'U+0050': // keyIdentifier
-        case 'p':
-          jQuery('#epg-modal').modal('open');
+        case 'p': {
+          const $epgModel = jQuery('#epg-modal');
+          $epgModel.modal($epgModel.hasClass('open') ? 'close' : 'open');
           break;
+        }
         case 'QuestionMark': // KeyIdentifier
         case 'U+003F': // KeyIdentifier
-        case '?':
-          jQuery('#help-modal').modal('open');
+        case '?': {
+          const $helpModel = jQuery('#help-modal');
+          $helpModel.modal($helpModel.hasClass('open') ? 'close' : 'open');
           break;
+        }
         default:
           captured = false;
           console.warn(`Unkown key event: ${event.key}(${event.keyIdentifier})`,
