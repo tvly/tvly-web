@@ -261,7 +261,6 @@ export default {
     },
     clip() {
       return {
-        live: this.existedChannel,
         sources: [{
           type: 'application/x-mpegurl',
           src: `${config.hlsUrl}/${this.channel}.m3u8`,
@@ -310,10 +309,11 @@ export default {
   },
   mounted() {
     this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
-      autoplay: true,
+      autoplay: this.existedChannel,
       share: false,
       keyboard: false,
       chromecast: false,
+      live: true,
       swf,
       swfHls,
       hlsjs: {
