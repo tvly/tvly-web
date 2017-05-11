@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="row" id="list">
-      <div class="col s12 cards-container">
+      <div class="col s12 cards-container"
+        :style="{'column-count': columns}">
         <channel-thumbnail
           v-for="c in filteredList"
           :channel="c" :key="c.Vid" :detail="detail"
@@ -59,6 +60,19 @@ export default {
       }
       return categoryLink(this.$store.getters.defaultCategory);
     },
+    columns() {
+      if (this.windowWidth < 601) {
+        return 1;
+      } else if (this.windowWidth < 992) {
+        return 2;
+      } else if (this.windowWidth < 1440) {
+        return 3;
+      } else if (this.windowWidth < 2000) {
+        return 4;
+      } else {
+        return 6;
+      }
+    },
   },
   methods: {
     resizeHandler(event) {
@@ -76,26 +90,6 @@ export default {
 </script>
 
 <style>
-@media only screen and (max-width: 601px) {
-  .cards-container {
-    column-count: 1;
-  }
-}
-@media only screen and (min-width: 601px) and (max-width: 992px) {
-  .cards-container {
-    column-count: 2;
-  }
-}
-@media only screen and (min-width: 992px) and (max-width: 1440px) {
-  .cards-container {
-    column-count: 3;
-  }
-}
-@media only screen and (min-width: 1440px) {
-  .cards-container {
-    column-count: 4;
-  }
-}
 .card-item {
   display: inline-block;
   width: 100%;
