@@ -130,7 +130,6 @@ export default {
       navBtn: null,
       legacyUrl: config.legacyUrl,
       voidSearch: Modernizr.speechrecognition,
-      hasEpg: config.epgUrl && config.epgUrl.length,
       background,
     };
   },
@@ -208,6 +207,9 @@ export default {
         acc[cur[1]] = cur[0];
         return acc;
       }, {});
+    },
+    hasEpg() {
+      return !!Object.keys(this.$store.state.epg).length;
     },
     ...mapState([
       'channels',
