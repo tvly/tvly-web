@@ -145,17 +145,6 @@ export default {
         this.$router.push(channelLink(channel));
       }
     },
-    checkCategory() {
-      if (this.$route.name != 'channel')
-        return;
-
-      const categoryNames = this.channels.Categories.map((c) => c.Name);
-      if (categoryNames.length && !categoryNames.includes(this.category)) {
-        const link = this.categoryLink(this.channels.Categories[0]);
-        console.warn(`${this.category} is not in `, categoryNames);
-        this.$router.push(link);
-      }
-    },
     hideMenu() {
       if (window.innerWidth <= 992) {
         this.navBtn.sideNav('hide');
@@ -234,7 +223,6 @@ export default {
   },
   mounted() {
     this.navBtn = jQuery(this.$el.querySelector('.button-collapse'));
-    this.checkCategory();
     this.navBtn.sideNav({
       menuWidth: 250,
       // There is a known [issue](https://github.com/Dogfalo/materialize/issues/4118)
