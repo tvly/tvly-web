@@ -26,31 +26,13 @@
 import fuzzy from 'fuzzy';
 import {mapState} from 'vuex';
 
-import config from '../../config.json5';
-
 export default {
   name: 'program-list',
-  data() {
-    return {
-      programList: {},
-    };
-  },
   props: ['filter', 'channelMap'],
-  created() {
-    window.fetch(config.epgUrl, {
-      mode: 'cors',
-      credentials: 'include',
-    }).then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      }
-    }).then((programList) => {
-      this.programList = programList;
-    });
-  },
   computed: {
     currentPrograms() {
-      return Object.entries(this.programList).map(([channel, programs]) => {
+      const programs = this.$store.state.epg;
+      return Object.entries(programs).map(([channel, programs]) => {
         const currentProgram = programs.find((program) => {
           return program.start < this.now && program.stop > this.now;
         });
