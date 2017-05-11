@@ -209,13 +209,6 @@ export default {
           channelLink(category.Channels[0]));
       }
     },
-    checkChannel() {
-      const categories = this.channels.Categories;
-      if (this.categoryIndex === -1 && categories.length) {
-        const link = categoryLink(categories[0]);
-        this.$router.push(link);
-      }
-    },
   },
   computed: {
     currentEPG() {
@@ -235,7 +228,10 @@ export default {
       }
     },
     currentChannel() {
-      return this.$store.getters.channelMap[this.channel] || {};
+      return this.$store.getters.getChannel(this.channel) || {};
+    },
+    existedChannel() {
+      return this.$store.getters.hasChannel(this.channel);
     },
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
@@ -252,14 +248,27 @@ export default {
       const category = this.channels.Categories[this.categoryIndex];
       return category ? categoryLink(category) : {};
     },
+    fallbackUrl() {
+      if (!this.$store.getters.defaultCategory) {
+        // no category to fallback
+        return;
+      }
+      if (this.$store.getters.hasChannel(this.channel)) {
+        // no need to fallback
+        return;
+      }
+      return categoryLink(this.$store.getters.defaultCategory);
+    },
     clip() {
-      return {
-        live: true,
-        sources: [{
-          type: 'application/x-mpegurl',
-          src: `${config.hlsUrl}/${this.channel}.m3u8`,
-        }],
-      };
+      if (this.existedChannel) {
+        return {
+          live: true,
+          sources: [{
+            type: 'application/x-mpegurl',
+            src: `${config.hlsUrl}/${this.channel}.m3u8`,
+          }],
+        };
+      }
     },
     ...mapState([
       'now',
@@ -267,7 +276,6 @@ export default {
     ]),
   },
   created() {
-    this.checkChannel();
     flowplayer((api) => {
       api.on('ready', (e, api, video) => {
         const engineName = api.engine.engineName;
@@ -337,7 +345,14 @@ export default {
   },
   watch: {
     clip(val) {
-      this.player.load(val);
+      if (val) {
+        this.player.load(val);
+      }
+    },
+    fallbackUrl(val) {
+      if (val) {
+        this.$router.push(val);
+      }
     },
   },
   beforeDestroy() {
