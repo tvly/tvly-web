@@ -7,15 +7,6 @@ import config from '../config.json5';
 
 Vue.use(Vuex);
 
-// mutations
-const UPDATE_NOW = 'UPDATE_NOW';
-const SET_CHANNELS = 'SET_CHANNELS';
-const SET_EPG = 'SET_EPG';
-
-// actions
-const FETCH_CHANNELS = 'FETCH_CHANNELS';
-const FETCH_EPG = 'FETCH_EPG';
-
 export const store = new Vuex.Store({
   state: {
     now: now(),
@@ -25,18 +16,18 @@ export const store = new Vuex.Store({
     epg: {},
   },
   mutations: {
-    [UPDATE_NOW](state) {
+    updateNow(state) {
       state.now = now();
     },
-    [SET_CHANNELS](state, channels) {
+    setChannels(state, channels) {
       state.channels = channels;
     },
-    [SET_EPG](state, epg) {
+    setEPG(state, epg) {
       state.epg = epg;
     },
   },
   actions: {
-    [FETCH_CHANNELS](context) {
+    fetchChannels(context) {
       window.fetch(config.channelsUrl, {
         mode: 'cors',
         credentials: 'include',
@@ -47,10 +38,10 @@ export const store = new Vuex.Store({
           console.warn('FATEL: failed to get channels!');
         }
       }).then((channels) => {
-        context.commit(SET_CHANNELS, channels);
+        context.commit('setChannels', channels);
       });
     },
-    [FETCH_EPG](context) {
+    fetchEPG(context) {
       if (config.epgUrl && config.epgUrl.length) {
         window.fetch(config.epgUrl, {
           mode: 'cors',
@@ -62,7 +53,7 @@ export const store = new Vuex.Store({
             console.warn('FATEL: failed to get channels!');
           }
         }).then((epg) => {
-          context.commit(SET_EPG, epg);
+          context.commit('setEPG', epg);
         });
       }
     },
@@ -85,8 +76,8 @@ export const store = new Vuex.Store({
 });
 
 window.setInterval(() => {
-  store.commit(UPDATE_NOW);
+  store.commit('updateNow');
 }, 1000);
 
-store.dispatch(FETCH_CHANNELS);
-store.dispatch(FETCH_EPG);
+store.dispatch('fetchChannels');
+store.dispatch('fetchEPG');
