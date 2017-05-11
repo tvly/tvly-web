@@ -4,7 +4,7 @@
       <div class="col s12 cards-container"
         :style="{'column-count': columns}">
         <channel-thumbnail
-          v-for="c in filteredList"
+          v-for="c in reorderedList"
           :channel="c" :key="c.Vid" :detail="detail"
           class="card-item"
           @channel="$emit('channel', $event)"
@@ -49,6 +49,16 @@ export default {
                 fuzzy.test(this.filter, channel.Vid));
       });
     },
+    reorderedList() {
+      return [].concat(...this.filteredList.reduce((acc, val, i) => {
+        const col = i % this.columns;
+        if (!acc[col]) {
+          acc[col] = [];
+        }
+        acc[col].push(val);
+        return acc;
+      }, new Array(this.columns)));
+    },
     fallbackUrl() {
       if (!this.$store.getters.defaultCategory) {
         // no category to fallback
@@ -92,6 +102,8 @@ export default {
 <style>
 .card-item {
   display: inline-block;
+  overflow: visible;
+  break-inside: avoid;
   width: 100%;
 }
 </style>
