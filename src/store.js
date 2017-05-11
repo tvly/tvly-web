@@ -19,7 +19,9 @@ const FETCH_EPG = 'FETCH_EPG';
 export const store = new Vuex.Store({
   state: {
     now: now(),
-    channels: {},
+    channels: {
+      Categories: [],
+    },
     epg: {},
   },
   mutations: {
@@ -63,6 +65,21 @@ export const store = new Vuex.Store({
           context.commit(SET_EPG, epg);
         });
       }
+    },
+  },
+  getters: {
+    defaultCategory(state) {
+      if (state.channels.Categories.length > 0) {
+        return state.channels.Categories[0];
+      }
+    },
+    channelList(state) {
+      return (categoryName) => {
+        const category = state.channels.Categories.find(
+          (c) => c['Name'] == categoryName
+        );
+        return category ? category.Channels : [];
+      };
     },
   },
 });

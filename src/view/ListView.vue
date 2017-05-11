@@ -90,6 +90,7 @@
 <script>
 import jQuery from 'jquery';
 import Modernizr from 'modernizr';
+import {mapState} from 'vuex';
 
 import IPTVFooter from './IPTVFooter.vue';
 import CastController from './CastController.vue';
@@ -110,7 +111,7 @@ function getDetail() {
 }
 
 export default {
-  props: ['category', 'channels'],
+  props: ['category'],
   components: {
     CastController,
     SpeechRecognition,
@@ -213,12 +214,7 @@ export default {
       }
     },
     channelList() {
-      for (const c of this.channels['Categories']) {
-        if (c['Name'] === this.category) {
-          return c['Channels'];
-        }
-      }
-      return [];
+      return this.$store.getters.channelList(this.category);
     },
     channelMap() {
       // map channel ID to its name
@@ -227,6 +223,9 @@ export default {
         return acc;
       }, {});
     },
+    ...mapState([
+      'channels',
+    ]),
   },
   watch: {
     detail(val) {

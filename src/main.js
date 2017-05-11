@@ -32,7 +32,8 @@ offlinePlugin.install();
 
 Modernizr.addTest(detects);
 
-const app = new Vue({
+new Vue({
+  el: '#app',
   components: {
     'auth-notification': AuthorizationNotification,
   },
@@ -68,16 +69,4 @@ const app = new Vue({
   },
   router,
   store,
-});
-
-fetch(config.channelsUrl, {
-  credentials: 'include',
-  mode: 'cors',
-}).then((response) => {
-  if (response.status === 200) {
-    return response.json();
-  }
-}).then((channels) => {
-  app.channels = channels;
-  app.$mount('#app');
 });
