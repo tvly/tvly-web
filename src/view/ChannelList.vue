@@ -23,8 +23,19 @@ import ChannelThumbnail from './ChannelThumbnail.vue';
 export default {
   name: 'channel-list',
   props: ['filter', 'detail', 'category'],
+  data() {
+    return {
+      windowWidth: document.documentElement.clientWidth,
+    };
+  },
   components: {
     ChannelThumbnail,
+  },
+  mounted() {
+    window.addEventListener('resize', this.resizeHandler);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeHandler);
   },
   computed: {
     channelList() {
@@ -47,6 +58,11 @@ export default {
         return;
       }
       return categoryLink(this.$store.getters.defaultCategory);
+    },
+  },
+  methods: {
+    resizeHandler(event) {
+      this.windowWidth = document.documentElement.clientWidth;
     },
   },
   watch: {
