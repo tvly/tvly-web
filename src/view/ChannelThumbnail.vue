@@ -6,13 +6,16 @@
         <a @click="switchChannel" class="btn-floating halfway-fab pink"><i class="material-icons">play_arrow</i></a>
       </div>
       <div class="card-content" @click="switchChannel">
-        <p class=“title”>{{channel['Name']}}</p>
+        <p class="title">{{channel.Name}}</p>
+        <p v-if="currentProgram">{{currentProgram.title}}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex';
+
 import {channelLink} from '../route/link.js';
 import config from '../../config.json5';
 
@@ -32,8 +35,17 @@ export default {
       return channelLink(this.channel);
     },
     time() {
-      return Math.floor(this.$store.state.now / config.snapshotRefreshInterval);
+      return Math.floor(this.now / config.snapshotRefreshInterval);
     },
+    currentProgram() {
+      const programs = this.$store.state.epg[this.channel.Vid];
+      if (programs) {
+        return programs.find((p) => p.start < this.now && p.stop > this.now);
+      }
+    },
+    ...mapState([
+      'now',
+    ]),
   },
   methods: {
     switchChannel() {
@@ -44,7 +56,7 @@ export default {
 </script>
 
 <style scoped>
-title {
+.title {
   font-size: 13px;
 }
 div.card-content {
