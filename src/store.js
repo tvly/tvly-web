@@ -82,7 +82,7 @@ export const store = new Vuex.Store({
     },
     getChannel(state, getters) {
       return (channelName) => {
-        return getters[channelName];
+        return getters.channelMap[channelName];
       };
     },
     hasChannel(state, getters) {
