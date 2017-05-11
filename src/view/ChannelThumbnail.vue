@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
-
 import {channelLink} from '../route/link.js';
 import config from '../../config.json5';
 
@@ -34,11 +32,8 @@ export default {
       return channelLink(this.channel);
     },
     time() {
-      return Math.floor(this.now / config.snapshotRefreshInterval);
+      return Math.floor(this.$store.state.now / config.snapshotRefreshInterval);
     },
-    ...mapState([
-      'now',
-    ]),
   },
   methods: {
     switchChannel() {
