@@ -94,7 +94,7 @@ export const store = new Vuex.Store({
           ch.Category = c.Name;
           return ch;
         });
-      })).reduce((acc, cur, i) => {
+      })).reduce((acc, cur) => {
         acc[cur.Vid] = cur;
         return acc;
       }, {});
