@@ -13,7 +13,7 @@
           </span>
         </a>
         <ul class="right">
-          <li v-if="currentEpg.length"><a href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
+          <li v-if="currentEPG.length"><a href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
           <li class="hide-on-small-only"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
         </ul>
       </div>
@@ -78,7 +78,7 @@
           </thead>
 
           <tbody>
-            <tr v-for="program in currentEpg" :class="{'current-program': program.now}">
+            <tr v-for="program in currentEPG" :class="{'current-program': program.now}">
               <td>{{program.date}}</td>
               <td>{{program.start}} - {{program.stop}}</td>
               <td>{{program.title}}</td>
@@ -219,7 +219,7 @@ export default {
     },
   },
   computed: {
-    currentEpg() {
+    currentEPG() {
       const current = this.epg[this.channel];
       if (current) {
         return current.map((program) => {

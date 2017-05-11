@@ -37,7 +37,7 @@
           <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
         </li>
         <li><div class="divider"></div></li>
-        <li v-if="hasEpg" @click="hideMenu" :class="{active: $route.name == 'program'}">
+        <li v-if="hasEPG" @click="hideMenu" :class="{active: $route.name == 'program'}">
           <router-link :to="{ name: 'program' }">当前节目列表</router-link>
         </li>
         <li>
@@ -208,7 +208,7 @@ export default {
         return acc;
       }, {});
     },
-    hasEpg() {
+    hasEPG() {
       return !!Object.keys(this.$store.state.epg).length;
     },
     ...mapState([
