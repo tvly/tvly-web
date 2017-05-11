@@ -61,7 +61,6 @@ export default {
 }
 div.card-content {
   padding: 21px;
-  min-height: 90px;
 }
 div.compact div.card {
   margin: 0.5px;
