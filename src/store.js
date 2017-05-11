@@ -72,6 +72,11 @@ export const store = new Vuex.Store({
         return category ? category.Channels : [];
       };
     },
+    hasCategory(state) {
+      return (categoryName) => {
+        return state.channels.Categories.hasOwnProperty(categoryName);
+      };
+    },
   },
 });
 

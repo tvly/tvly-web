@@ -16,11 +16,13 @@
 <script>
 import fuzzy from 'fuzzy';
 
+import {categoryLink} from '../route/link.js';
+
 import ChannelThumbnail from './ChannelThumbnail.vue';
 
 export default {
   name: 'channel-list',
-  props: ['filter', 'channelList', 'detail'],
+  props: ['filter', 'channelList', 'detail', 'category'],
   components: {
     ChannelThumbnail,
   },
@@ -31,6 +33,24 @@ export default {
                 fuzzy.test(this.filter, channel.Name) ||
                 fuzzy.test(this.filter, channel.Vid));
       });
+    },
+    fallbackUrl() {
+      if (!this.$store.getters.defaultCategory) {
+        // no category to fallback
+        return;
+      }
+      if (this.$store.getters.hasCategory(this.category)) {
+        // no need to fallback
+        return;
+      }
+      return categoryLink(this.$store.getters.defaultCategory);
+    },
+  },
+  watch: {
+    fallbackUrl(val) {
+      if (val) {
+        this.$router.push(val);
+      }
     },
   },
 };

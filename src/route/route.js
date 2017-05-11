@@ -20,6 +20,7 @@ const listRoute = {
     name: 'channel',
     path: 'channel/:category',
     component: ChannelList,
+    props: true,
   }],
 };
 
