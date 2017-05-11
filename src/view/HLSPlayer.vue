@@ -239,9 +239,7 @@ export default {
     },
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
-        return category.Channels.findIndex((channel) => {
-          return channel['Vid'] === this.channel;
-        }) !== -1;
+        return category.Name === this.currentChannel.Category;
       });
     },
     channelIndex() {
