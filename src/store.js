@@ -18,4 +18,4 @@ export const store = new Vuex.Store({
 
 window.setInterval(() => {
   store.commit('updateNow');
-}, 10 * 1000);
+}, 1000);
