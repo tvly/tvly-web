@@ -83,7 +83,6 @@ export const store = new Vuex.Store({
     channelMap(state) {
       return [].concat(...state.channels.Categories.map((c) => {
         return c.Channels.map((ch) => {
-          console.warn(ch);
           ch.Category = c.Name;
           return ch;
         });
