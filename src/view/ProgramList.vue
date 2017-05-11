@@ -35,7 +35,7 @@ export default {
       programList: {},
     };
   },
-  props: ['filter', 'channelList', 'channelMap'],
+  props: ['filter', 'channelMap'],
   created() {
     window.fetch(config.epgUrl, {
       mode: 'cors',

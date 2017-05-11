@@ -22,11 +22,14 @@ import ChannelThumbnail from './ChannelThumbnail.vue';
 
 export default {
   name: 'channel-list',
-  props: ['filter', 'channelList', 'detail', 'category'],
+  props: ['filter', 'detail', 'category'],
   components: {
     ChannelThumbnail,
   },
   computed: {
+    channelList() {
+      return this.$store.getters.channelList(this.category);
+    },
     filteredList() {
       return this.channelList.filter((channel) => {
         return (!this.filter.length ||

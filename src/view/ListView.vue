@@ -66,7 +66,7 @@
 
     <main>
       <router-view
-        :filter="filter" :channel-list="channelList" :detail="detail"
+        :filter="filter" :detail="detail"
         :channel-map="channelMap"
         @noimage="queryThumbnail"
         @channel="switchChannel($event)"></router-view>
@@ -201,9 +201,6 @@ export default {
       } else {
         return '登录用户';
       }
-    },
-    channelList() {
-      return this.$store.getters.channelList(this.category);
     },
     channelMap() {
       // map channel ID to its name
