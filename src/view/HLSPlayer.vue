@@ -6,7 +6,7 @@
           <i class="material-icons">arrow_back</i>
         </router-link>
         <a class="brand-logo center">
-          <span class="hide-on-small-only">{{categoryTitle}}/</span>{{channelTitle}}
+          <span class="hide-on-small-only">{{currentChannel.Category}}/</span>{{currentChannel.Name}}
           <span v-if="engine.length" class="hide-on-small-only badge pink accent-1">
             <span class="hide-on-med-and-down">Powered by </span>
             {{engine}}
@@ -108,13 +108,12 @@ import config from '../../config.json5';
 engine(flowplayer);
 
 export default {
-  props: ['channel', 'channels'],
+  props: ['channel'],
   name: 'hls-player',
   data() {
     return {
       engine: '',
       player: null,
-      epg: {},
     };
   },
   methods: {
@@ -220,7 +219,7 @@ export default {
   },
   computed: {
     currentEPG() {
-      const current = this.epg[this.channel];
+      const current = this.$store.state.epg[this.channel];
       if (current) {
         return current.map((program) => {
           return {
@@ -235,6 +234,9 @@ export default {
         return [];
       }
     },
+    currentChannel() {
+      return this.$store.getters.channelMap[this.channel];
+    },
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
         return category.Channels.findIndex((channel) => {
@@ -247,15 +249,6 @@ export default {
       return category.Channels.findIndex((channel) => {
         return channel['Vid'] === this.channel;
       });
-    },
-    channelTitle() {
-      const category = this.channels.Categories[this.categoryIndex];
-      const channel = category.Channels[this.channelIndex];
-      return channel.Name;
-    },
-    categoryTitle() {
-      const category = this.channels.Categories[this.categoryIndex];
-      return category.Name;
     },
     categoryLink() {
       const category = this.channels.Categories[this.categoryIndex];
@@ -272,6 +265,7 @@ export default {
     },
     ...mapState([
       'now',
+      'channels',
     ]),
   },
   created() {
@@ -309,18 +303,6 @@ export default {
         }
       });
     });
-    if (config.epgUrl && config.epgUrl.length) {
-      window.fetch(config.epgUrl, {
-        credentials: 'include',
-        mode: 'cors',
-      }).then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        }
-      }).then((epg) => {
-        this.epg = epg;
-      });
-    }
   },
   mounted() {
     this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
