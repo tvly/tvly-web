@@ -80,6 +80,18 @@ export const store = new Vuex.Store({
     hasCategory(state, getters) {
       return (categoryName) => !!getters.getCategory(categoryName);
     },
+    channelMap(state) {
+      return [].concat(...state.channels.Categories.map((c) => {
+        return c.Channels.map((ch) => {
+          console.warn(ch);
+          ch.Category = c.Name;
+          return ch;
+        });
+      })).reduce((acc, cur, i) => {
+        acc[cur.Vid] = cur;
+        return acc;
+      }, {});
+    },
   },
 });
 
