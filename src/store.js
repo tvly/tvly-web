@@ -64,18 +64,21 @@ export const store = new Vuex.Store({
         return state.channels.Categories[0];
       }
     },
-    channelList(state) {
+    channelList(state, getters) {
       return (categoryName) => {
-        const category = state.channels.Categories.find(
-          (c) => c['Name'] == categoryName
-        );
+        const category = getters.getCategory(categoryName);
         return category ? category.Channels : [];
       };
     },
-    hasCategory(state) {
+    getCategory(state) {
       return (categoryName) => {
-        return state.channels.Categories.hasOwnProperty(categoryName);
+        return state.channels.Categories.find(
+          (c) => c['Name'] == categoryName
+        );
       };
+    },
+    hasCategory(state, getters) {
+      return (categoryName) => !!getters.getCategory(categoryName);
     },
   },
 });
