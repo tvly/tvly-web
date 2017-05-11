@@ -1,15 +1,12 @@
 <template>
   <div class="container">
     <div class="row" id="list">
-      <div class="col s12 cards-container"
-        :style="{'column-count': columns}">
-        <channel-thumbnail
-          v-for="c in reorderedList"
-          :channel="c" :key="c.Vid" :detail="detail"
-          class="card-item"
-          @channel="$emit('channel', $event)"
-          @noimage="$emit('noimage', $event)"></channel-thumbnail>
-      </div>
+      <channel-thumbnail
+        v-for="c in filteredList"
+        class="col l4 m6 s12"
+        :channel="c" :key="c.Vid" :detail="detail"
+        @channel="$emit('channel', $event)"
+        @noimage="$emit('noimage', $event)"></channel-thumbnail>
     </div>
   </div>
 </template>
@@ -24,19 +21,8 @@ import ChannelThumbnail from './ChannelThumbnail.vue';
 export default {
   name: 'channel-list',
   props: ['filter', 'detail', 'category'],
-  data() {
-    return {
-      windowWidth: document.documentElement.clientWidth,
-    };
-  },
   components: {
     ChannelThumbnail,
-  },
-  mounted() {
-    window.addEventListener('resize', this.resizeHandler);
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.resizeHandler);
   },
   computed: {
     channelList() {
@@ -49,16 +35,6 @@ export default {
                 fuzzy.test(this.filter, channel.Vid));
       });
     },
-    reorderedList() {
-      return [].concat(...this.filteredList.reduce((acc, val, i) => {
-        const col = i % this.columns;
-        if (!acc[col]) {
-          acc[col] = [];
-        }
-        acc[col].push(val);
-        return acc;
-      }, new Array(this.columns)));
-    },
     fallbackUrl() {
       if (!this.$store.getters.defaultCategory) {
         // no category to fallback
@@ -70,24 +46,6 @@ export default {
       }
       return categoryLink(this.$store.getters.defaultCategory);
     },
-    columns() {
-      if (this.windowWidth < 601) {
-        return 1;
-      } else if (this.windowWidth < 992) {
-        return 2;
-      } else if (this.windowWidth < 1440) {
-        return 3;
-      } else if (this.windowWidth < 2000) {
-        return 4;
-      } else {
-        return 6;
-      }
-    },
-  },
-  methods: {
-    resizeHandler(event) {
-      this.windowWidth = document.documentElement.clientWidth;
-    },
   },
   watch: {
     fallbackUrl(val) {
@@ -98,12 +56,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.card-item {
-  display: inline-block;
-  overflow: visible;
-  break-inside: avoid;
-  width: 100%;
-}
-</style>
