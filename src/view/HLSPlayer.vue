@@ -235,7 +235,7 @@ export default {
       }
     },
     currentChannel() {
-      return this.$store.getters.channelMap[this.channel];
+      return this.$store.getters.channelMap[this.channel] || {};
     },
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
@@ -252,7 +252,7 @@ export default {
     },
     categoryLink() {
       const category = this.channels.Categories[this.categoryIndex];
-      return categoryLink(category);
+      return category ? categoryLink(category) : {};
     },
     clip() {
       return {
