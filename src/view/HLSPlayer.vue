@@ -260,15 +260,13 @@ export default {
       return categoryLink(this.$store.getters.defaultCategory);
     },
     clip() {
-      if (this.existedChannel) {
-        return {
-          live: true,
-          sources: [{
-            type: 'application/x-mpegurl',
-            src: `${config.hlsUrl}/${this.channel}.m3u8`,
-          }],
-        };
-      }
+      return {
+        live: this.existedChannel,
+        sources: [{
+          type: 'application/x-mpegurl',
+          src: `${config.hlsUrl}/${this.channel}.m3u8`,
+        }],
+      };
     },
     ...mapState([
       'now',
@@ -345,9 +343,7 @@ export default {
   },
   watch: {
     clip(val) {
-      if (val) {
-        this.player.load(val);
-      }
+      this.player.load(val);
     },
     fallbackUrl(val) {
       if (val) {
