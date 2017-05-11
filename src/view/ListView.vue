@@ -67,7 +67,6 @@
     <main>
       <router-view
         :filter="filter" :detail="detail"
-        :channel-map="channelMap"
         @noimage="queryThumbnail"
         @channel="switchChannel($event)"></router-view>
     </main>
@@ -200,13 +199,6 @@ export default {
       } else {
         return '登录用户';
       }
-    },
-    channelMap() {
-      // map channel ID to its name
-      return this.allChannels.reduce((acc, cur, i) => {
-        acc[cur[1]] = cur[0];
-        return acc;
-      }, {});
     },
     hasEPG() {
       return !!Object.keys(this.$store.state.epg).length;

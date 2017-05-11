@@ -15,7 +15,7 @@
         @click="$router.push({name:'play', params: {channel: program.channel}})">
         <tr>
           <td>{{program.title}}</td>
-          <td>{{ channelMap[program.channel] }}</td>
+          <td>{{channelMap[program.channel].Name}}</td>
         </tr>
       </tbody>
     </table>
@@ -24,11 +24,11 @@
 
 <script>
 import fuzzy from 'fuzzy';
-import {mapState} from 'vuex';
+import {mapState, mapGetters} from 'vuex';
 
 export default {
   name: 'program-list',
-  props: ['filter', 'channelMap'],
+  props: ['filter'],
   computed: {
     currentPrograms() {
       const programs = this.$store.state.epg;
@@ -51,6 +51,9 @@ export default {
     },
     ...mapState([
       'now',
+    ]),
+    ...mapGetters([
+      'channelMap',
     ]),
   },
 };
