@@ -10,7 +10,7 @@
 
       <tbody
         v-for="program in filteredCurrentPrograms"
-        v-if="program"
+        v-if="program && channelMap[program.channel]"
         :key="program.channel"
         @click="$router.push({name:'play', params: {channel: program.channel}})">
         <tr>
