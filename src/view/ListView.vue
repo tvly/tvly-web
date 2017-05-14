@@ -12,14 +12,6 @@
     <main>
       <v-sidebar fixed v-model="sidenav">
         <v-list>
-          <v-list-item>
-            <div class="search-wrapper card" :class="{focused: filter.length || searching}">
-              <input id="search" type="search" v-model="filter" @focus="searching = true" @blur="searching = false">
-              <i class="material-icons" v-if="filter.length" @click="filter = ''">close</i>
-              <speech-recognition v-else-if="voidSearch" @result="filter = $event" :options="recognitionOption"></speech-recognition>
-              <i class="material-icons" v-else>search</i>
-            </div>
-          </v-list-item>
           <v-list-item
             v-for="c in channels.Categories" :key="c.Vid"
             :class="{active: c.Name == category}">
@@ -30,6 +22,14 @@
             </v-list-tile>
           </v-list-item>
           <v-divider/>
+          <v-list-item>
+            <v-list-tile>
+              <v-text-field
+                v-model="filter"
+                prepend-icon="search" dark label="搜索"
+                hide-details single-line></v-text-field>
+            </v-list-tile>
+          </v-list-item>
           <v-list-item
             v-if="hasEPG"
             :class="{active: $route.name == 'program'}">
