@@ -6,7 +6,8 @@
 import Modernizr from 'modernizr';
 
 /**
- * Workaround the issue that Modernizr return a function instead of a
+ * Workaround the issue that Modernizr return a function instead of
+ * a Constructor
  * @param {string} prop - the name of class to be prefixed
  * @param {Object} obj - object to be checked
  * @return {class} prefixed class
