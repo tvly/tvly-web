@@ -1,18 +1,12 @@
 <template>
   <v-card hover>
-    <v-card-row v-if="detail" height="auto">
+    <v-card-row v-if="detail" height="auto" @click.native="$router.push(channelLink)">
       <img :src="snapshot"/>
     </v-card-row>
     <v-card-text class="channel">
       <p class="title">{{channel.Name}}</p>
       <p v-if="currentProgram">{{currentProgram.title}}</p>
     </v-card-text>
-    <v-card-row actions>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon class="blue--text" @click.native="$router.push(channelLink)">play_arrow</v-icon>
-      </v-btn>
-    </v-card-row>
   </v-card>
 </template>
 
