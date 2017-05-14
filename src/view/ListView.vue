@@ -3,6 +3,7 @@
     <v-toolbar>
       <v-toolbar-side-icon @click.native.stop="sidenav = !sidenav"/>
       <v-toolbar-title>{{appName}}</v-toolbar-title>
+      <v-spacer></v-spacer>
       <cast-controller ref="cast"></cast-controller>
     </v-toolbar>
     <main>

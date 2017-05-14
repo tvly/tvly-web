@@ -1,9 +1,7 @@
 <template>
-  <a v-if="supported" @click="connect">
-    <i class="material-icons">
-      {{ icon }}
-    </i>
-  </a>
+  <v-btn v-if="supported" icon @click.native="connect">
+    <v-icon>{{icon}}</v-icon>
+  </v-btn>
 </template>
 
 <script>
