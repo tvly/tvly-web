@@ -10,6 +10,9 @@
         {{currentChannel.Name}}
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn icon dark>
+        <i v-show="engineIcon" class="zmdi" :class="[engineIcon]"></i>
+      </v-btn>
       <v-dialog class="mx-2">
         <v-btn icon dark slot="activator" mx-5
           class="hidden-md-and-down">
@@ -225,6 +228,13 @@ export default {
     },
     existedChannel() {
       return this.$store.getters.hasChannel(this.channel);
+    },
+    engineIcon() {
+      return 'zmdi-' + {
+        flash: 'flash',
+        hlsjs: 'language-javascript',
+        html5: 'language-html5',
+      }[this.engine];
     },
     categoryIndex() {
       return this.channels.Categories.findIndex((category) => {
