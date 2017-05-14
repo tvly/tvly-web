@@ -1,13 +1,16 @@
 <template>
   <v-app left-fixed-sidebar>
-    <v-toolbar>
-      <v-toolbar-side-icon @click.native.stop="sidenav = !sidenav"/>
-      <v-toolbar-title>{{appName}}</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <cast-controller ref="cast"></cast-controller>
-    </v-toolbar>
+    <header>
+      <v-toolbar>
+        <v-toolbar-side-icon class="hidden-sm-and-up"
+          @click.native.stop="sidenav = !sidenav"/>
+        <v-toolbar-title>{{appName}}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <cast-controller ref="cast"></cast-controller>
+      </v-toolbar>
+    </header>
     <main>
-      <v-sidebar left fixed drawer v-model="sidenav">
+      <v-sidebar fixed v-model="sidenav">
         <v-list>
           <v-list-item>
             <div class="search-wrapper card" :class="{focused: filter.length || searching}">
