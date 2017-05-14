@@ -1,93 +1,93 @@
 <template>
-  <div id="body" class="grey lighten-4">
-    <header>
-      <nav class="teal lighten-2">
-        <div class="container">
-          <div class="nav-wrapper">
-            <a href="#" data-activates="nav-menu" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a class="brand-logo">{{appName}}</a>
-            <ul class="right">
-              <li>
-                <cast-controller ref="cast"></cast-controller>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <ul id="nav-menu" class="side-nav fixed">
-        <li>
-          <div class="userView">
-            <div class="background">
-              <img :src="background" alt="background">
-            </div>
-            <a><img class="circle" :src="avatar" alt="avatar"></a>
-            <a><span class="white-text type">{{userType}}</span></a>
-            <a><span class="white-text uid">{{uid}}</span></a>
-          </div>
-        </li>
-        <li class="search">
-          <div class="search-wrapper card" :class="{focused: filter.length || searching}">
-            <input id="search" type="search" v-model="filter" @focus="searching = true" @blur="searching = false">
-            <i class="material-icons" v-if="filter.length" @click="filter = ''">close</i>
-            <speech-recognition v-else-if="voidSearch" @result="filter = $event" :options="recognitionOption"></speech-recognition>
-            <i class="material-icons" v-else>search</i>
-          </div>
-        </li>
-        <li v-for="c in channels['Categories']" @click="hideMenu" :class="{active: c['Name'] == category}">
-          <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
-        </li>
-        <li><div class="divider"></div></li>
-        <li v-if="hasEPG" @click="hideMenu" :class="{active: $route.name == 'program'}">
-          <router-link :to="{ name: 'program' }">当前节目列表</router-link>
-        </li>
-        <li>
-          <a @click="detail = !detail">
-            显示缩略图
-            <div class="switch right">
-              <label class="switch">
-                <input type="checkbox" v-model="detail">
-                <span class="lever"></span>
-              </label>
-            </div>
-          </a>
-        </li>
-        <li v-if="legacyUrl && legacyUrl.length">
-          <a :href="legacyUrl">
-            回忆旧版
-          </a>
-        </li>
-        <li v-if="uid.length && !withIP">
-          <a @click="$emit('logout')">
-            登出
-          </a>
-        </li>
-      </ul>
-    </header>
-
+  <v-app left-fixed-sidebar>
+    <v-toolbar>
+      <v-toolbar-side-icon @click.native.stop="sidenav = !sidenav"/>
+      <v-toolbar-title>{{appName}}</v-toolbar-title>
+      <cast-controller ref="cast"></cast-controller>
+    </v-toolbar>
     <main>
+      <v-sidebar left fixed drawer v-model="sidenav">
+        <v-list>
+          <v-list-item>
+            <div class="search-wrapper card" :class="{focused: filter.length || searching}">
+              <input id="search" type="search" v-model="filter" @focus="searching = true" @blur="searching = false">
+              <i class="material-icons" v-if="filter.length" @click="filter = ''">close</i>
+              <speech-recognition v-else-if="voidSearch" @result="filter = $event" :options="recognitionOption"></speech-recognition>
+              <i class="material-icons" v-else>search</i>
+            </div>
+          </v-list-item>
+          <v-list-item
+            v-for="c in channels.Categories" :key="c.Vid"
+            :class="{active: c.Name == category}">
+            <v-list-tile :href="categoryLink(c)" replace router>
+              <v-list-tile-title>
+                {{c.Name}}
+              </v-list-tile-title>
+            </v-list-tile>
+          </v-list-item>
+          <v-divider/>
+          <v-list-item
+            v-if="hasEPG"
+            :class="{active: $route.name == 'program'}">
+            <v-list-tile :href="{name: 'program'}" replace router>
+              <v-list-tile-title>
+                当前节目列表
+              </v-list-tile-title>
+            </v-list-tile>
+          </v-list-item>
+          <v-list-item>
+            <v-list-tile>
+              <v-list-tile-title>
+                显示缩略图
+              </v-list-tile-title>
+              <v-list-tile-action>
+                <v-switch v-model="detail"/>
+              </v-list-tile-action>
+            </v-list-tile>
+          </v-list-item>
+          <v-list-item
+            v-if="legacyUrl && legacyUrl.length">
+            <v-list-tile :href="legacyUrl">
+              <v-list-tile-title>
+                回忆旧版
+              </v-list-tile-title>
+            </v-list-tile>
+          </v-list-item>
+          <v-list-item v-if="uid.length && !withIP">
+            <v-list-tile @click.native.stop="$emit('logout')">
+              <v-list-tile-title>
+                登出
+              </v-list-tile-title>
+            </v-list-tile>
+            </a>
+          </v-list-item>
+        </v-list>
+      </v-sidebar>
       <router-view
         :filter="filter" :detail="detail"
         @noimage="queryThumbnail"
         @channel="switchChannel($event)"></router-view>
     </main>
-
     <iptv-footer></iptv-footer>
 
-    <div id="no-image" class="modal">
-      <div class="modal-content">
-        <h4>不能加载缩略图</h4>
-        <p>当前不能加载缩略图，是否禁用？</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" @click="detail = false">禁用</a>
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
-      </div>
-    </div>
-  </div>
+    <v-dialog v-model="modal">
+      <v-card>
+        <v-card-row>
+          <v-card-title>不能加载缩略图</v-card-title>
+        </v-card-row>
+        <v-card-row>
+          <v-card-text>当前不能加载缩略图，是否禁用？</v-card-text>
+        </v-card-row>
+        <v-card-row actions>
+          <v-btn @click.native="modal = false" flat>取消</v-btn>
+          <v-btn @click.native="modal = false; detail = false" flat>禁用</v-btn>
+        </v-card-row>
+      </v-card>
+    </v-dialog>
+  </v-app>
 </template>
 
 <script>
-import jQuery from 'jquery';
 import Modernizr from 'modernizr';
 import {mapState} from 'vuex';
 
@@ -119,6 +119,8 @@ export default {
   name: 'list-view',
   data() {
     return {
+      sidenav: false,
+      modal: false,
       avatar: config.sponsorLogoUrl,
       detail: getDetail(),
       filter: '',
@@ -149,7 +151,7 @@ export default {
       }
     },
     queryThumbnail() {
-      jQuery('#no-image').modal('open');
+      this.modal = true;
     },
     categoryLink,
   },
@@ -211,117 +213,8 @@ export default {
       window.localStorage.iptvDetail = val.toString();
     },
   },
-  mounted() {
-    this.navBtn = jQuery(this.$el.querySelector('.button-collapse'));
-    this.navBtn.sideNav({
-      menuWidth: 250,
-      // There is a known [issue](https://github.com/Dogfalo/materialize/issues/4118)
-      closeOnClick: false,
-      draggable: true,
-    });
-    jQuery('#no-image').modal();
-  },
   beforeDestroy() {
     this.navBtn.sideNav('destroy');
   },
 };
 </script>
-
-<style scoped>
-header, main, footer {
-  padding-left: 250px;
-}
-
-div.background img {
-  height: 100%;
-  width: 100%;
-}
-
-a {
-  cursor: pointer;
-}
-
-main {
-  padding-top: 10px;
-}
-
-div.userView {
-  height: 240px;
-}
-
-li.search {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 180px;
-  margin-top: 1px;
-  padding: 1px 0 0 0;
-  z-index: 2;
-}
-
-li.search .search-wrapper {
-  margin: 0 12px;
-  transition: margin .25s ease;
-}
-
-li.search .search-wrapper input#search {
-  display: block;
-  font-size: 16px;
-  font-weight: 300;
-  width: 180px;
-  height: 45px;
-  margin: 0;
-  padding: 0 15px 0 15px;
-  border: 0;
-}
-
-li.search .search-wrapper input#search:focus {
-  outline: none;
-}
-
-li.search .search-wrapper.focused {
-  margin: 0;
-}
-
-li.search .search-wrapper i.material-icons {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-li.search:hover {
-  background-color: rgba(0, 0, 0, 0)!important;
-}
-
-.container {
-  width: 93%;
-}
-
-.side-nav .userView .type, .side-nav .userView .uid {
-    line-height: 24px;
-    display: block;
-}
-
-.side-nav .userView .type {
-    font-size: 14px;
-    margin-top: 16px;
-    font-weight: 600;
-}
-
-.side-nav .userView .uid {
-    font-size: 11px;
-    padding-bottom: 16px;
-    font-weight: 300;
-}
-
-@media only screen and (max-width: 992px) {
-  header, main, footer {
-    padding-left: 0;
-  }
-}
-
-.side-nav {
-  padding-bottom: 10px!important;
-}
-</style>
