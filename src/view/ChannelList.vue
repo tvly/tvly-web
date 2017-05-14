@@ -1,14 +1,16 @@
 <template>
-  <div class="container">
-    <div class="row" id="list">
-      <channel-thumbnail
-        v-for="c in filteredList"
-        class="col l4 m6 s12"
-        :channel="c" :key="c.Vid" :detail="detail"
-        @channel="$emit('channel', $event)"
-        @noimage="$emit('noimage', $event)"></channel-thumbnail>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col
+        xs12 sm6 md4 lg3 xl2
+        v-for="c in filteredList" :key="c.Vid">
+        <channel-thumbnail
+          :channel="c" :detail="detail"
+          @channel="$emit('channel', $event)"
+          @noimage="$emit('noimage', $event)"></channel-thumbnail>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
