@@ -13,7 +13,7 @@
       <v-btn icon dark>
         <i v-show="engineIcon" class="zmdi" :class="[engineIcon]"></i>
       </v-btn>
-      <v-dialog class="mx-2">
+      <v-dialog class="mx-2" v-model="helpModal">
         <v-btn icon dark slot="activator" mx-5
           class="hidden-md-and-down">
           <v-icon>keyboard</v-icon>
@@ -40,7 +40,7 @@
           </v-card-row>
         </v-card>
       </v-dialog>
-      <v-dialog class="mx-2">
+      <v-dialog class="mx-2" v-model="epgModal">
         <v-btn icon dark slot="activator"
           v-if="currentEPG.length">
           <v-icon>playlist_play</v-icon>
@@ -76,7 +76,6 @@
 <script>
 import flowplayer from 'flowplayer';
 import engine from 'flowplayer-hlsjs';
-import jQuery from 'jquery';
 import Modernizr from 'modernizr';
 import strftime from 'strftime';
 import {mapState} from 'vuex';
@@ -97,6 +96,8 @@ export default {
     return {
       engine: '',
       player: null,
+      epgModal: false,
+      helpModal: false,
       keybindings: [
         ['ESC', '返回列表'],
         ['+/-', '增减音量'],
@@ -165,18 +166,14 @@ export default {
           break;
         case 'P': // keyIdentifier
         case 'U+0050': // keyIdentifier
-        case 'p': {
-          const $epgModel = jQuery('#epg-modal');
-          $epgModel.modal($epgModel.hasClass('open') ? 'close' : 'open');
+        case 'p':
+          this.epgModal = !this.epgModal;
           break;
-        }
         case 'QuestionMark': // KeyIdentifier
         case 'U+003F': // KeyIdentifier
-        case '?': {
-          const $helpModel = jQuery('#help-modal');
-          $helpModel.modal($helpModel.hasClass('open') ? 'close' : 'open');
+        case '?':
+          this.helpModal = !this.helpModal;
           break;
-        }
         default:
           captured = false;
           console.warn(`Unkown key event: ${event.key}(${event.keyIdentifier})`,
@@ -326,7 +323,6 @@ export default {
       },
       clip: this.clip,
     });
-    jQuery('.modal').modal();
     window.addEventListener('keydown', this.keyHandler);
 
     // as second screen
