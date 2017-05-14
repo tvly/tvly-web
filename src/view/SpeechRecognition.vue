@@ -1,5 +1,5 @@
 <template>
-  <i class="material-icons" @click="recognize">keyboard_voice</i>
+  <v-icon @click="recognize">keyboard_voice</v-icon>
 </template>
 
 <script>
