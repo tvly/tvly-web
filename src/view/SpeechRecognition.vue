@@ -53,11 +53,11 @@ export default {
       };
 
       recognition.onnomatch = (event) => {
-        window.Materialize.toast('识别失败');
+        console.warn('识别失败');
       };
 
       recognition.onerror = (event) => {
-        window.Materialize.toast(event.error);
+        console.warn(event.error);
       };
 
       recognition.start();
