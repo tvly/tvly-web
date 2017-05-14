@@ -1,6 +1,10 @@
 <template>
   <v-app>
     <v-toolbar>
+      <v-btn flat dark icon class="nav-btn"
+        @click.native="$router.push('categoryLink')">
+        <v-icon>arrow_back</v-icon>
+      </v-btn>
       <v-toolbar-title>
         {{currentChannel.Category}}/{{currentChannel.Name}}
       </v-toolbar-title>
@@ -347,21 +351,7 @@ export default {
 </script>
 
 <style scoped>
-.page {
-  height: 100vh;
-}
-
-.player-container {
-  height: calc(100% - 56px);
-}
-
-@media only screen and (min-width: 601px) {
-  .player-container {
-    height: calc(100% - 64px);
-  }
-}
-
-tr.current-program {
-  background-color: #f2f2f2;
+.nav-btn {
+  margin-left: 10px!important;
 }
 </style>
