@@ -145,11 +145,6 @@ export default {
         this.$router.push(channelLink(channel));
       }
     },
-    hideMenu() {
-      if (window.innerWidth <= 992) {
-        this.navBtn.sideNav('hide');
-      }
-    },
     queryThumbnail() {
       this.modal = true;
     },
@@ -212,9 +207,6 @@ export default {
     detail(val) {
       window.localStorage.iptvDetail = val.toString();
     },
-  },
-  beforeDestroy() {
-    this.navBtn.sideNav('destroy');
   },
 };
 </script>
