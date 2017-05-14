@@ -1,16 +1,13 @@
 <template>
-  <div :class="{compact: !detail}">
-    <div class="card hoverable">
-      <div class="card-image" v-if="detail">
-        <img :src="snapshot" @click="switchChannel" @error="$emit('noimage')" :alt="'Snapshot of ' + channel['Name']">
-        <a @click="switchChannel" class="btn-floating halfway-fab pink"><i class="material-icons">play_arrow</i></a>
-      </div>
-      <div class="card-content" @click="switchChannel">
-        <p class="title">{{channel.Name}}</p>
-        <p v-if="currentProgram">{{currentProgram.title}}</p>
-      </div>
-    </div>
-  </div>
+  <v-card hover>
+    <v-card-row v-if="detail" height="auto">
+      <img :src="snapshot"/>
+    </v-card-row>
+    <v-card-text class="channel">
+      <p class="title">{{channel.Name}}</p>
+      <p v-if="currentProgram">{{currentProgram.title}}</p>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -56,21 +53,16 @@ export default {
 </script>
 
 <style scoped>
-.title {
+img {
+  width: 100%;
+}
+
+p.title {
   font-size: 13px;
 }
-div.card-content {
-  padding: 11px;
-  min-height: 70px;
-}
-div.compact div.card {
-  margin: 0.5px;
-  border: 1px;
-}
-div.compact {
-  padding: 0px;
-}
-div.card {
-  cursor: pointer;
+
+.channel {
+  min-height: 80px;
+  padding: 9px;
 }
 </style>

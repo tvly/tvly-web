@@ -2,7 +2,8 @@
   <v-container>
     <v-row>
       <v-col
-        xs12 sm6 md4 lg3 xl2
+        xs12 sm6 md4 lg3 xl3
+        mt-2 mb-2
         v-for="c in filteredList" :key="c.Vid">
         <channel-thumbnail
           :channel="c" :detail="detail"
