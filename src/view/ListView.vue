@@ -64,10 +64,12 @@
           </v-list-item>
         </v-list>
       </v-sidebar>
-      <router-view
-        :filter="filter" :detail="detail"
-        @noimage="queryThumbnail"
-        @channel="switchChannel($event)"></router-view>
+      <v-content>
+        <router-view
+          :filter="filter" :detail="detail"
+          @noimage="queryThumbnail"
+          @channel="switchChannel($event)"></router-view>
+      </v-content>
     </main>
     <iptv-footer></iptv-footer>
 
