@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Vuetify from 'vuetify';
 import Modernizr from 'modernizr';
 
 import {router} from './route/route.js';
@@ -31,6 +32,8 @@ import offlinePlugin from 'offline-plugin/runtime';
 offlinePlugin.install();
 
 Modernizr.addTest(detects);
+
+Vue.use(Vuetify);
 
 new Vue({
   el: '#app',
