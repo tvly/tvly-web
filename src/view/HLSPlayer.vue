@@ -1,93 +1,68 @@
 <template>
-  <div class="page">
-    <nav class="teal lighten-2">
-      <div class="nav-wrapper">
-        <router-link :to="categoryLink" class="button-collapse show-on-large">
-          <i class="material-icons">arrow_back</i>
-        </router-link>
-        <a class="brand-logo center">
-          <span class="hide-on-small-only">{{currentChannel.Category}}/</span>{{currentChannel.Name}}
-          <span v-if="engine.length" class="hide-on-small-only badge pink accent-1">
-            <span class="hide-on-med-and-down">Powered by </span>
-            {{engine}}
-          </span>
-        </a>
-        <ul class="right">
-          <li v-if="currentEPG.length"><a href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
-          <li class="hide-on-small-only"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="valign-wrapper player-container grey darken-3">
+  <v-app>
+    <v-toolbar>
+      <v-toolbar-title>
+        {{currentChannel.Category}}/{{currentChannel.Name}}
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-dialog class="mx-2">
+        <v-btn icon dark slot="activator" mx-5
+          hidden-md-and-down>
+          <v-icon>keyboard</v-icon>
+        </v-btn>
+        <v-card>
+          <v-card-row>
+            <v-card-title>键盘绑定</v-card-title>
+          </v-card-row>
+          <v-card-row>
+            <v-card-text>
+              <v-list two-line dense>
+                <v-list-item
+                  v-for="keybinding in keybindings"
+                  :key="keybinding[0]">
+                  <v-list-tile>
+                    <v-list-tile-content>
+                      <v-list-tile-title v-text="keybinding[0]"></v-list-tile-title>
+                      <v-list-tile-sub-title v-text="keybinding[1]"></v-list-tile-sub-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </v-list-item>
+              </v-list>
+            </v-card-text>
+          </v-card-row>
+        </v-card>
+      </v-dialog>
+      <v-dialog class="mx-2">
+        <v-btn icon dark slot="activator"
+          v-if="currentEPG.length">
+          <v-icon>playlist_play</v-icon>
+        </v-btn>
+        <v-card>
+          <v-card-row>
+            <v-card-title>节目列表</v-card-title>
+          </v-card-row>
+          <v-card-row>
+            <v-card-text>
+              <v-list two-line dense>
+                <v-list-item
+                  v-for="program, idx in currentEPG" :key="idx">
+                  <v-list-tile v-model="program.now">
+                    <v-list-tile-content>
+                      <v-list-tile-title>{{program.title}}</v-list-tile-title>
+                      <v-list-tile-sub-title v-text="program.date"></v-list-tile-sub-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </v-list-item>
+              </v-list>
+            </v-card-text>
+          </v-card-row>
+        </v-card>
+      </v-dialog>
+    </v-toolbar>
+    <main>
       <div class="player fp-mute center-align"></div>
-    </div>
-    <div id="help-modal" class="modal">
-      <div class="modal-content">
-        <h4>键盘绑定</h4>
-        <table class="centered highlight">
-          <thead>
-            <tr>
-              <th data-field="key">按键</th>
-              <th data-field="function">功能</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>ESC</td>
-              <td>返回列表</td>
-            </tr>
-            <tr>
-              <td>+/-</td>
-              <td>增减音量</td>
-            </tr>
-            <tr>
-              <td>左右</td>
-              <td>切换频道</td>
-            </tr>
-            <tr>
-              <td>上下</td>
-              <td>切换分类</td>
-            </tr>
-            <tr>
-              <td>f</td>
-              <td>切换全屏</td>
-            </tr>
-            <tr>
-              <td>?</td>
-              <td>查看帮助</td>
-            </tr>
-            <tr>
-              <td>p</td>
-              <td>查看节目列表</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div id="epg-modal" class="modal">
-      <div class="modal-content">
-        <h4>节目列表</h4>
-        <table class="centered responsive-table">
-          <thead>
-            <tr>
-              <th data-field="date">日期</th>
-              <th data-field="time">时间</th>
-              <th data-field="title">标题</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr v-for="program in currentEPG" :class="{'current-program': program.now}">
-              <td>{{program.date}}</td>
-              <td>{{program.start}} - {{program.stop}}</td>
-              <td>{{program.title}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+    </main>
+  </v-app>
 </template>
 
 <script>
@@ -114,6 +89,15 @@ export default {
     return {
       engine: '',
       player: null,
+      keybindings: [
+        ['ESC', '返回列表'],
+        ['+/-', '增减音量'],
+        ['左右', '切换频道'],
+        ['上下', '切换分类'],
+        ['f', '切换全屏'],
+        ['?', '查看帮助'],
+        ['p', '查看节目列表'],
+      ],
     };
   },
   methods: {
