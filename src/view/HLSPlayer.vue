@@ -6,12 +6,13 @@
         <v-icon>arrow_back</v-icon>
       </v-btn>
       <v-toolbar-title>
-        {{currentChannel.Category}}/{{currentChannel.Name}}
+        <span class="hidden-md-and-down">{{currentChannel.Category}}/</span>
+        {{currentChannel.Name}}
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-dialog class="mx-2">
         <v-btn icon dark slot="activator" mx-5
-          hidden-md-and-down>
+          class="hidden-md-and-down">
           <v-icon>keyboard</v-icon>
         </v-btn>
         <v-card>
