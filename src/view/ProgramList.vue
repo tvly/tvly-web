@@ -1,25 +1,18 @@
 <template>
-  <div class="container">
-    <table class="highlight">
-      <thead>
-        <tr>
-          <th>标题</th>
-          <th>频道</th>
-        </tr>
-      </thead>
-
-      <tbody
-        v-for="program in filteredCurrentPrograms"
-        v-if="program && channelMap[program.channel]"
-        :key="program.channel"
-        @click="$router.push({name:'play', params: {channel: program.channel}})">
-        <tr>
-          <td>{{program.title}}</td>
-          <td>{{channelMap[program.channel].Name}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <v-list two-line>
+    <v-list-item
+      v-for="program in filteredCurrentPrograms"
+      v-if="program && channelMap[program.channel]"
+      :key="program.channel">
+      <v-list-tile avatar router
+        :href="{name:'play', params: {channel: program.channel}}">
+        <v-list-tile-content>
+          <v-list-tile-title>{{program.title}}</v-list-tile-title>
+          <v-list-tile-sub-title>{{channelMap[program.channel].Name}}</v-list-tile-sub-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list-item>
+  </v-list>
 </template>
 
 <script>
