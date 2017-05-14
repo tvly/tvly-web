@@ -10,7 +10,6 @@ import detects from './detects.js';
 import AuthorizationNotification from './view/AuthorizationNotification.vue';
 
 // Materialize-css
-import 'materialize-css/dist/css/materialize.css';
 import 'materialize-css'; // bind Materialize to window
 
 // Material-Design-Icons
@@ -26,6 +25,9 @@ import 'font-awesome/css/font-awesome.css';
 import 'flowplayer/dist/skin/skin.css';
 
 import './animation.css';
+
+// Vuetify
+import 'vuetify/src/stylus/main.styl';
 
 // offline-plugin
 import offlinePlugin from 'offline-plugin/runtime';

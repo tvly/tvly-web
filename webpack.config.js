@@ -44,6 +44,12 @@ module.exports = {
       test: /\.css$/,
       loader: 'css-loader',
     }, {
+      test: /\.styl$/,
+      use: [
+        'css-loader',
+        'stylus-loader',
+      ],
+    }, {
       enforce: 'post',
       test: /\.webmanifest$/,
       loader: 'file-loader',
@@ -60,7 +66,7 @@ module.exports = {
       },
     }, {
       enforce: 'post',
-      test: /\.css$/,
+      test: /\.(css|styl)$/,
       loader: 'style-loader',
     }, {
       test: /\.(png|jpg|gif|svg|woff2|ttf|woff|eot|swf)$/,
