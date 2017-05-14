@@ -10,7 +10,7 @@
       </v-toolbar>
     </header>
     <main>
-      <v-sidebar fixed v-model="sidenav">
+      <v-sidebar fixed v-model="sidenav" class="sidebar">
         <v-list>
           <v-list-item
             v-for="c in channels.Categories" :key="c.Vid"
@@ -216,3 +216,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.sidebar {
+  overflow-x: hidden;
+}
+</style>
