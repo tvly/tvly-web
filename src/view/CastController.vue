@@ -39,7 +39,7 @@ export default {
           console.warn(msg.data);
         };
       }).catch((error) => {
-        window.Materialize.toast(error.message);
+        console.warn(error.message);
       });
     },
     send(msg) {
