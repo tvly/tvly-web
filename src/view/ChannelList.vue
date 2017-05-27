@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <div class="row" id="list">
+    <transition-group appear tag="div" name="channel-list" class="row" id="list">
       <channel-thumbnail
         v-for="c in filteredList"
-        class="col l4 m6 s12"
+        class="col l4 m6 s12 channel-list-item"
         :channel="c" :key="c.Vid" :detail="detail"
         @channel="$emit('channel', $event)"
         @noimage="$emit('noimage', $event)"></channel-thumbnail>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -56,3 +56,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.channel-list-enter, .channel-list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.channel-list-item {
+  transition: all .5s ease;
+}
+</style>
