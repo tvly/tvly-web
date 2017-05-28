@@ -133,6 +133,7 @@ export default {
     applyRatio() {
       const player = this.$el.querySelector('.fp-player');
       const container = this.$el.querySelector('.player-container');
+      const fullscreen = this.player.isFullscreen;
 
       // clear
       Object.assign(player.style, {
@@ -152,9 +153,11 @@ export default {
           player.style.height = container.clientWidth * this.ratio + 'px';
         } else {
           player.style.height = '100%';
-          player.style['margin-left'] =
-            (container.clientWidth - container.clientHeight / this.ratio) / 2
-            + 'px';
+          if (!fullscreen) {
+            player.style['margin-left'] =
+              (container.clientWidth - container.clientHeight / this.ratio) / 2
+              + 'px';
+          }
           player.style.width = container.clientHeight / this.ratio + 'px';
         }
         this.$el.querySelector('video').style['object-fit'] = 'fill';
@@ -344,6 +347,7 @@ export default {
             console.warn('orientation.lock is not supported on this chrome.');
           });
         }
+        this.applyRatio();
       });
       api.on('fullscreen-exit', () => {
         if (Modernizr.lockorientation) {
@@ -351,6 +355,7 @@ export default {
         } else if (Modernizr.orientationlock) {
           screen.orientation.unlock();
         }
+        this.applyRatio();
       });
     });
   },
