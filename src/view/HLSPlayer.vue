@@ -135,6 +135,8 @@ export default {
       const player = this.$el.querySelector('.fp-player');
       const container = this.$el.querySelector('.player-container');
       const fullscreen = this.player.isFullscreen;
+      const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
 
       // clear
       Object.assign(player.style, {
@@ -148,20 +150,20 @@ export default {
       if (this.ratio != null) {
         if (this.ratio === 0) {
           player.style.width = player.style.height = '100%';
-        } else if (container.clientHeight / container.clientWidth > this.ratio) {
+        } else if (containerHeight / containerWidth > this.ratio) {
           player.style.width = '100%';
           player.style['margin-top'] =
-            (container.clientHeight - container.clientWidth * this.ratio) / 2
+            (containerHeight - containerWidth * this.ratio) / 2
             + 'px';
-          player.style.height = container.clientWidth * this.ratio + 'px';
+          player.style.height = containerWidth * this.ratio + 'px';
         } else {
           player.style.height = '100%';
           if (!fullscreen) {
             player.style['margin-left'] =
-              (container.clientWidth - container.clientHeight / this.ratio) / 2
+              (containerWidth - containerHeight / this.ratio) / 2
               + 'px';
           }
-          player.style.width = container.clientHeight / this.ratio + 'px';
+          player.style.width = containerHeight / this.ratio + 'px';
         }
         this.$el.querySelector('video').style['object-fit'] = 'fill';
       }
