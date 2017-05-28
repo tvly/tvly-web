@@ -2,6 +2,7 @@
   <div class="page">
     <ul id="scale-menu" class="dropdown-content">
       <li @click="ratio=null"><a>自动</a></li>
+      <li @click="ratio=0"><a>铺满</a></li>
       <li v-for="ar in allowedAspectRatio" @click="ratio=ar[1]/ar[0]">
         <a>{{ar[0]}}:{{ar[1]}}</a>
       </li>
@@ -145,7 +146,9 @@ export default {
       this.$el.querySelector('video').style['object-fit'] = null;
 
       if (this.ratio != null) {
-        if (container.clientHeight / container.clientWidth > this.ratio) {
+        if (this.ratio === 0) {
+          player.style.width = player.style.height = '100%';
+        } else if (container.clientHeight / container.clientWidth > this.ratio) {
           player.style.width = '100%';
           player.style['margin-top'] =
             (container.clientHeight - container.clientWidth * this.ratio) / 2
