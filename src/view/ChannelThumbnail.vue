@@ -1,6 +1,6 @@
 <template>
   <div :class="{compact: !detail}">
-    <div class="card hoverable">
+    <div class="card" :class="{hoverable: detail}">
       <div class="card-image" v-if="detail">
         <img :src="snapshot" @click="switchChannel" @error="$emit('noimage')" :alt="'Snapshot of ' + channel['Name']">
         <a @click="switchChannel" class="btn-floating halfway-fab pink"><i class="material-icons">play_arrow</i></a>
