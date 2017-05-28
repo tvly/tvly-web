@@ -131,23 +131,33 @@ export default {
   },
   methods: {
     applyRatio() {
-      const player = this.$el.querySelector('.player');
+      const player = this.$el.querySelector('.fp-player');
       const container = this.$el.querySelector('.player-container');
+
+      // clear
+      Object.assign(player.style, {
+        'width': null,
+        'height': null,
+        'margin-top': null,
+        'margin-left': null,
+      });
+      this.$el.querySelector('video').style['object-fit'] = null;
+
       if (this.ratio != null) {
         if (container.clientHeight / container.clientWidth > this.ratio) {
           player.style.width = '100%';
+          player.style['margin-top'] =
+            (container.clientHeight - container.clientWidth * this.ratio) / 2
+            + 'px';
           player.style.height = container.clientWidth * this.ratio + 'px';
         } else {
           player.style.height = '100%';
+          player.style['margin-left'] =
+            (container.clientWidth - container.clientHeight / this.ratio) / 2
+            + 'px';
           player.style.width = container.clientHeight / this.ratio + 'px';
         }
         this.$el.querySelector('video').style['object-fit'] = 'fill';
-      } else { // clear
-        Object.assign(player.style, {
-          'width': null,
-          'height': null,
-        });
-        this.$el.querySelector('video').style['object-fit'] = null;
       }
     },
     keyHandler(event) {
