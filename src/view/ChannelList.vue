@@ -63,7 +63,11 @@ export default {
   transform: translateY(30px);
 }
 
-.channel-list-item {
+.channel-list-enter-active {
+  transition: all .5s ease .5s;
+}
+
+.channel-list-leave-active {
   transition: all .5s ease;
 }
 </style>
