@@ -60,9 +60,14 @@ export default {
 </script>
 
 <style scoped>
-.channel-list-enter, .channel-list-leave-to {
+.channel-list-leave-to {
   opacity: 0;
   transform: translateY(30px);
+}
+
+.channel-list-enter {
+  opacity: 0;
+  transform: translateY(-30px);
 }
 
 .channel-list-item {
