@@ -130,6 +130,26 @@ export default {
     };
   },
   methods: {
+    applyRatio() {
+      const player = this.$el.querySelector('.player');
+      const container = this.$el.querySelector('.player-container');
+      if (this.ratio != null) {
+        if (container.clientHeight / container.clientWidth > this.ratio) {
+          player.style.width = '100%';
+          player.style.height = container.clientWidth * this.ratio + 'px';
+        } else {
+          player.style.height = '100%';
+          player.style.width = container.clientHeight / this.ratio + 'px';
+        }
+        this.$el.querySelector('video').style['object-fit'] = 'fill';
+      } else { // clear
+        Object.assign(player.style, {
+          'width': null,
+          'height': null,
+        });
+        this.$el.querySelector('video').style['object-fit'] = null;
+      }
+    },
     keyHandler(event) {
       let captured = true;
       // workaround for safari
@@ -344,6 +364,7 @@ export default {
     jQuery('.modal').modal();
     jQuery('.dropdown-button').dropdown();
     window.addEventListener('keydown', this.keyHandler);
+    window.addEventListener('resize', this.applyRatio);
 
     // as second screen
     if (navigator.presentation && navigator.presentation.receiver) {
@@ -365,24 +386,7 @@ export default {
       this.player.load(val);
     },
     ratio(val) {
-      const player = this.$el.querySelector('.player');
-      const container = this.$el.querySelector('.player-container');
-      if (val != null) {
-        if (container.clientHeight / container.clientWidth > val) {
-          player.style.width = '100%';
-          player.style.height = container.clientWidth * val + 'px';
-        } else {
-          player.style.height = '100%';
-          player.style.width = container.clientHeight / val + 'px';
-        }
-        this.$el.querySelector('video').style['object-fit'] = 'fill';
-      } else { // clear
-        Object.assign(player.style, {
-          'width': null,
-          'height': null,
-        });
-        this.$el.querySelector('video').style['object-fit'] = null;
-      }
+      this.applyRatio();
     },
     fallbackUrl(val) {
       if (val) {
@@ -392,6 +396,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('keydown', this.keyHandler);
+    window.removeEventListener('resize', this.applyRatio);
     this.player.unload();
   },
 };
