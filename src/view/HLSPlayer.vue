@@ -1,5 +1,11 @@
 <template>
   <div class="page">
+    <ul id="scale-menu" class="dropdown-content">
+      <li @click="ratio=null"><a>自动</a></li>
+      <li v-for="ar in allowedAspectRatio" @click="ratio=ar[1]/ar[0]">
+        <a>{{ar[0]}}:{{ar[1]}}</a>
+      </li>
+    </ul>
     <nav class="teal lighten-2">
       <div class="nav-wrapper">
         <router-link :to="categoryLink" class="button-collapse show-on-large">
@@ -15,6 +21,7 @@
         <ul class="right">
           <li v-if="currentEPG.length"><a href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
           <li class="hide-on-small-only"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
+          <li><a href="#" class="dropdown-button" data-activates="scale-menu"><i class="material-icons">settings_overscan</i></a></li>
         </ul>
       </div>
     </nav>
@@ -112,8 +119,14 @@ export default {
   name: 'hls-player',
   data() {
     return {
+      allowedAspectRatio: [
+        [16, 9],
+        [3, 2],
+        [4, 3],
+      ],
       engine: '',
       player: null,
+      ratio: null,
     };
   },
   methods: {
@@ -315,6 +328,7 @@ export default {
     this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
       autoplay: this.existedChannel,
       share: false,
+      ratio: false,
       keyboard: false,
       chromecast: false,
       live: true,
@@ -328,6 +342,7 @@ export default {
       clip: this.clip,
     });
     jQuery('.modal').modal();
+    jQuery('.dropdown-button').dropdown();
     window.addEventListener('keydown', this.keyHandler);
 
     // as second screen
@@ -349,6 +364,26 @@ export default {
     clip(val) {
       this.player.load(val);
     },
+    ratio(val) {
+      const player = this.$el.querySelector('.player');
+      const container = this.$el.querySelector('.player-container');
+      if (val != null) {
+        if (container.clientHeight / container.clientWidth > val) {
+          player.style.width = '100%';
+          player.style.height = container.clientWidth * val + 'px';
+        } else {
+          player.style.height = '100%';
+          player.style.width = container.clientHeight / val + 'px';
+        }
+        this.$el.querySelector('video').style['object-fit'] = 'fill';
+      } else { // clear
+        Object.assign(player.style, {
+          'width': null,
+          'height': null,
+        });
+        this.$el.querySelector('video').style['object-fit'] = null;
+      }
+    },
     fallbackUrl(val) {
       if (val) {
         this.$router.push(val);
@@ -368,6 +403,7 @@ export default {
 }
 
 .player-container {
+  justify-content: center;
   height: calc(100% - 56px);
 }
 
@@ -379,5 +415,13 @@ export default {
 
 tr.current-program {
   background-color: #f2f2f2;
+}
+
+</style>
+
+<style>
+.player {
+  width: 100%;
+  height: 100%;
 }
 </style>
