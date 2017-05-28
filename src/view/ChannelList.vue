@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <transition-group appear tag="div" name="channel-list" class="row" id="list">
+    <transition-group tag="div"
+      appear name="channel-list" mode="out-in"
+      class="row" id="list">
       <channel-thumbnail
         v-for="c in filteredList"
         class="col l4 m6 s12 channel-list-item"
@@ -61,6 +63,10 @@ export default {
 .channel-list-enter, .channel-list-leave-to {
   opacity: 0;
   transform: translateY(30px);
+}
+
+.channel-list-move {
+  transition: transform .5s ease;
 }
 
 .channel-list-enter-active {
