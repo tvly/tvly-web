@@ -4,8 +4,8 @@
 	"start_url": "<%= data.config.baseUrl %>",
 	"display": "standalone",
 	"lang": "zh-Hans",
-	"background_color": "<%= data.config.backgroundColor %>",
-	"theme_color": "<%= data.config.themeColor %>",
+	"background_color": "<%= data.config.primaryColor %>",
+	"theme_color": "<%= data.config.primaryColor %>",
 	"description": "<%= data.config.description %>",
     "icons": [{
         "src": "./image/logo.svg",

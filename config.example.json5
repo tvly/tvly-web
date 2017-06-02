@@ -76,9 +76,6 @@
 
 	/*
 	 * colors
-	 * DO NOT CHANGE
 	 */
-	"backgroundColor": "#009688",
-	"themeColor": "#4db6ac",
-
+	"primaryColor": "#009688",
 }

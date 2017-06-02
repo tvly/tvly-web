@@ -11,7 +11,7 @@
     <link rel="manifest" href="<%= require('./manifest.webmanifest') %>" />
 
     <!--Chrome 39 for Android-->
-    <meta name="theme-color" content="<%= require('../config.json5').themeColor %>">
+    <meta name="theme-color" content="<%= require('../config.json5').primaryColor %>">
     <link rel="icon" sizes="192x192" href="<%= require('./image/logo192.png') %>">
 
     <!--legacy Chrome on Android-->
@@ -31,7 +31,7 @@
 
     <!-- Tile icon for Windows 8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="<%= require('./image/logo144.png') %>">
-    <meta name="msapplication-TileColor" content="<%= require('../config.json5').themeColor %>">
+    <meta name="msapplication-TileColor" content="<%= require('../config.json5').primaryColor %>">
     <meta name="msapplication-tap-highlight" content="no">
 
     <style>
