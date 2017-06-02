@@ -14,15 +14,12 @@
         </router-link>
         <a class="brand-logo center">
           <span class="hide-on-small-only">{{currentChannel.Category}}/</span>{{currentChannel.Name}}
-          <span v-if="engine.length" class="hide-on-small-only badge">
-            <span class="hide-on-med-and-down">Powered by </span>
-            {{engine}}
-          </span>
         </a>
         <ul class="right">
-          <li v-if="currentEPG.length"><a href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
-          <li class="hide-on-small-only"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
-          <li><a href="#" class="dropdown-button" data-activates="scale-menu"><i class="material-icons">settings_overscan</i></a></li>
+          <li v-if="engineIcon" class="hide-on-small-only icon"><a><i class="zmdi" :class="[engineIcon]"></i></a></li>
+          <li v-if="currentEPG.length" class="icon"><a href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
+          <li class="hide-on-small-only icon"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
+          <li class="icon"><a href="#" class="dropdown-button" data-activates="scale-menu"><i class="material-icons">settings_overscan</i></a></li>
         </ul>
       </div>
     </nav>
@@ -322,6 +319,13 @@ export default {
         }],
       };
     },
+    engineIcon() {
+      return 'zmdi-' + {
+        flash: 'flash',
+        hlsjs: 'language-javascript',
+        html5: 'language-html5',
+      }[this.engine];
+    },
     ...mapState([
       'now',
       'channels',
@@ -440,6 +444,11 @@ export default {
 
 tr.current-program {
   background-color: #f2f2f2;
+}
+
+li.icon {
+  width: 50px;
+  text-align: center;
 }
 
 </style>
