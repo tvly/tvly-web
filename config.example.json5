@@ -75,7 +75,8 @@
 	"snapshotRefreshInterval": 600,
 
 	/*
-	 * colors
+	 * colors, required.
 	 */
-	"primaryColor": "#009688",
+	"primaryColor": "#4db6ac", // teal lighten-2
+	"secondaryColor": "#e91e63", // pink
 }

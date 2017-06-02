@@ -1,7 +1,7 @@
 <template>
   <div id="body" class="grey lighten-4">
     <header>
-      <nav class="teal lighten-2">
+      <nav>
         <div class="container">
           <div class="nav-wrapper">
             <a href="#" data-activates="nav-menu" class="button-collapse"><i class="material-icons">menu</i></a>

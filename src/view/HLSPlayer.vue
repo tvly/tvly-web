@@ -7,14 +7,14 @@
         <a>{{ar[0]}}:{{ar[1]}}</a>
       </li>
     </ul>
-    <nav class="teal lighten-2">
+    <nav>
       <div class="nav-wrapper">
         <router-link :to="categoryLink" class="button-collapse show-on-large">
           <i class="material-icons">arrow_back</i>
         </router-link>
         <a class="brand-logo center">
           <span class="hide-on-small-only">{{currentChannel.Category}}/</span>{{currentChannel.Name}}
-          <span v-if="engine.length" class="hide-on-small-only badge pink accent-1">
+          <span v-if="engine.length" class="hide-on-small-only badge">
             <span class="hide-on-med-and-down">Powered by </span>
             {{engine}}
           </span>

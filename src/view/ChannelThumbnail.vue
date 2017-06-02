@@ -3,7 +3,7 @@
     <div class="card" :class="{hoverable: detail}">
       <div class="card-image" v-if="detail">
         <img :src="snapshot" @click="switchChannel" @error="$emit('noimage')" :alt="'Snapshot of ' + channel['Name']">
-        <a @click="switchChannel" class="btn-floating halfway-fab pink"><i class="material-icons">play_arrow</i></a>
+        <a @click="switchChannel" class="btn-floating halfway-fab"><i class="material-icons">play_arrow</i></a>
       </div>
       <div class="card-content" @click="switchChannel">
         <p class="title">{{channel.Name}}</p>

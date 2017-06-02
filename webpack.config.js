@@ -50,7 +50,10 @@ module.exports = {
         {
           loader: 'sass-loader',
           options: {
-            data: '$primary-color: purple;',
+            data: `
+            $primary-color: ${config.primaryColor};
+            $secondary-color: ${config.secondaryColor};
+            `,
           }
         }
       ]
