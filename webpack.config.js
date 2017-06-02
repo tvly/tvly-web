@@ -44,6 +44,12 @@ module.exports = {
       test: /\.css$/,
       loader: 'css-loader',
     }, {
+      test: /\.scss$/,
+      use: [
+        'css-loader',
+        'sass-loader',
+      ]
+    }, {
       enforce: 'post',
       test: /\.webmanifest$/,
       loader: 'file-loader',
@@ -60,7 +66,7 @@ module.exports = {
       },
     }, {
       enforce: 'post',
-      test: /\.css$/,
+      test: /\.(css|scss)$/,
       loader: 'style-loader',
     }, {
       test: /\.(png|jpg|gif|svg|woff2|ttf|woff|eot|swf)$/,

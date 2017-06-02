@@ -9,7 +9,7 @@ import detects from './detects.js';
 import AuthorizationNotification from './view/AuthorizationNotification.vue';
 
 // Materialize-css
-import 'materialize-css/dist/css/materialize.css';
+import 'materialize-css/sass/materialize.scss';
 import 'materialize-css'; // bind Materialize to window
 
 // Material-Design-Icons
