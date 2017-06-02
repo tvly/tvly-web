@@ -44,10 +44,15 @@ module.exports = {
       test: /\.css$/,
       loader: 'css-loader',
     }, {
-      test: /\.scss$/,
+      test: /materialize.scss$/,
       use: [
         'css-loader',
-        'sass-loader',
+        {
+          loader: 'sass-loader',
+          options: {
+            data: '$primary-color: purple;',
+          }
+        }
       ]
     }, {
       enforce: 'post',
