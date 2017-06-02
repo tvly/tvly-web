@@ -135,6 +135,8 @@ export default {
       const containerWidth = container.clientWidth;
       const containerHeight = container.clientHeight;
 
+      if (player === null) return;
+
       // clear
       Object.assign(player.style, {
         'width': null,
