@@ -460,4 +460,8 @@ li.icon {
   width: 100%;
   height: 100%;
 }
+
+.flowplayer {
+  border-radius: 0!important;
+}
 </style>
