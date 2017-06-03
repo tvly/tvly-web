@@ -113,6 +113,14 @@ import config from '../../config.json5';
 
 engine(flowplayer);
 
+/**
+ * Read starredChannels from localStorage
+ * @return {bool} - value stored in localStorage or true
+ **/
+function getStarredChannels() {
+  return JSON.parse(window.localStorage.starredChannels || '[]');
+}
+
 export default {
   props: ['channel'],
   name: 'hls-player',
@@ -126,7 +134,7 @@ export default {
       engine: '',
       player: null,
       ratio: null,
-      starredChannels: [],
+      starredChannels: getStarredChannels(),
     };
   },
   methods: {
@@ -438,6 +446,9 @@ export default {
       if (val) {
         this.$router.push(val);
       }
+    },
+    starredChannels(val) {
+      window.localStorage.starredChannels = JSON.stringify(val);
     },
   },
   beforeDestroy() {
