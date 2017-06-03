@@ -12,7 +12,7 @@
         <router-link :to="categoryLink" class="button-collapse show-on-large">
           <i class="material-icons">arrow_back</i>
         </router-link>
-        <a class="brand-logo center channel-title">
+        <a class="brand-logo channel-title" :class="{center: notMobile}">
           <span class="hide-on-small-only">{{currentChannel.Category}}/</span>{{currentChannel.Name}}
         </a>
         <ul class="right">
@@ -115,10 +115,18 @@ engine(flowplayer);
 
 /**
  * Read starredChannels from localStorage
- * @return {bool} - value stored in localStorage or true
+ * @return {array} - value stored in localStorage or []
  **/
 function getStarredChannels() {
   return JSON.parse(window.localStorage.starredChannels || '[]');
+}
+
+/**
+ * whether on mobile devices
+ * @return {bool}
+ **/
+function notMobile() {
+  return window.innerWidth > 600;
 }
 
 export default {
@@ -135,9 +143,13 @@ export default {
       player: null,
       ratio: null,
       starredChannels: getStarredChannels(),
+      notMobile: notMobile(),
     };
   },
   methods: {
+    resizeHandler() {
+      this.notMobile = notMobile();
+    },
     star() {
       const idx = this.starredChannels.indexOf(this.channel);
       if (idx !== -1) {
@@ -419,6 +431,7 @@ export default {
     jQuery('.dropdown-button').dropdown();
     window.addEventListener('keydown', this.keyHandler);
     window.addEventListener('resize', this.applyRatio);
+    window.addEventListener('resize', this.resizeHandler);
 
     // as second screen
     if (navigator.presentation && navigator.presentation.receiver) {
@@ -454,6 +467,7 @@ export default {
   beforeDestroy() {
     window.removeEventListener('keydown', this.keyHandler);
     window.removeEventListener('resize', this.applyRatio);
+    window.removeEventListener('resize', this.resizeHandler);
     this.player.unload();
   },
 };
@@ -485,10 +499,17 @@ li.icon {
 }
 
 a.channel-title {
+  left: 60px;
+  transform: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 10ch;
+}
+
+a.channel-title.center {
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
 
