@@ -12,7 +12,7 @@
         <router-link :to="categoryLink" class="button-collapse show-on-large">
           <i class="material-icons">arrow_back</i>
         </router-link>
-        <a class="brand-logo center">
+        <a class="brand-logo center channel-title">
           <span class="hide-on-small-only">{{currentChannel.Category}}/</span>{{currentChannel.Name}}
         </a>
         <ul class="right">
@@ -484,6 +484,12 @@ li.icon {
   text-align: center;
 }
 
+a.channel-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10ch;
+}
 </style>
 
 <style>
