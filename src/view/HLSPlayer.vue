@@ -16,7 +16,8 @@
           <span class="hide-on-small-only">{{currentChannel.Category}}/</span>{{currentChannel.Name}}
         </a>
         <ul class="right">
-          <li v-if="engineIcon" class="hide-on-small-only icon"><a><i class="zmdi" :class="[engineIcon]"></i></a></li>
+          <li v-if="engine.length" class="hide-on-small-only icon"><a><i class="zmdi" :class="[engineIcon]"></i></a></li>
+          <li class="icon" @click="star"><a><i class="material-icons">{{starIcon}}</i></a></li>
           <li v-if="currentEPG.length" class="icon"><a href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
           <li class="hide-on-small-only icon"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
           <li class="icon"><a href="#" class="dropdown-button" data-activates="scale-menu"><i class="material-icons">settings_overscan</i></a></li>
@@ -125,9 +126,18 @@ export default {
       engine: '',
       player: null,
       ratio: null,
+      starredChannels: [],
     };
   },
   methods: {
+    star() {
+      const idx = this.starredChannels.indexOf(this.channel);
+      if (idx !== -1) {
+        this.starredChannels.splice(idx, 1);
+      } else {
+        this.starredChannels.push(this.channel);
+      }
+    },
     applyRatio() {
       const player = this.$el.querySelector('.fp-player');
       const container = this.$el.querySelector('.player-container');
@@ -265,6 +275,9 @@ export default {
     },
   },
   computed: {
+    starred() {
+      return this.starredChannels.includes(this.channel);
+    },
     currentEPG() {
       const current = this.$store.state.epg[this.channel];
       if (current) {
@@ -320,6 +333,13 @@ export default {
           src: `${config.hlsUrl}/${this.channel}.m3u8`,
         }],
       };
+    },
+    starIcon() {
+      if (this.starred) {
+        return 'star';
+      } else {
+        return 'star_border';
+      }
     },
     engineIcon() {
       return 'zmdi-' + {
