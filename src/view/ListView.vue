@@ -10,6 +10,11 @@
               <li>
                 <cast-controller ref="cast"></cast-controller>
               </li>
+              <li>
+                <a @click="detail = !detail">
+                  <i class="material-icons">{{viewIcon}}</i>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -42,17 +47,6 @@
         </li>
         <li v-if="hasEPG" @click="hideMenu" :class="{active: $route.name == 'program'}">
           <router-link :to="{ name: 'program' }">当前节目列表</router-link>
-        </li>
-        <li>
-          <a @click="detail = !detail">
-            显示缩略图
-            <div class="switch right">
-              <label class="switch">
-                <input type="checkbox" v-model="detail">
-                <span class="lever"></span>
-              </label>
-            </div>
-          </a>
         </li>
         <li v-if="legacyUrl && legacyUrl.length">
           <a :href="legacyUrl">
@@ -204,6 +198,13 @@ export default {
     },
     hasEPG() {
       return !!Object.keys(this.$store.state.epg).length;
+    },
+    viewIcon() {
+      if (this.detail) {
+        return 'view_module';
+      } else {
+        return 'view_headline';
+      }
     },
     ...mapState([
       'channels',
