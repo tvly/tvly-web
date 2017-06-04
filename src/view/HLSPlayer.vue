@@ -491,7 +491,6 @@ export default {
       left: 60px;
       transform: none;
 
-
       @media #{$small-and-down} {
         white-space: nowrap;
         overflow: hidden;
