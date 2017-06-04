@@ -55,7 +55,7 @@ export default {
 };
 </script>
 
-<style scoped type="scss">
+<style scoped lang="scss">
 .title {
   font-size: 13px;
 }
