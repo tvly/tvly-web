@@ -112,6 +112,11 @@ export const store = new Vuex.Store({
         return acc;
       }, {});
     },
+    starredChannels(state, getters) {
+      return state.collections.map((col) => {
+        return getters.channelMap[col];
+      }).filter((channel) => !!channel);
+    },
   },
 });
 

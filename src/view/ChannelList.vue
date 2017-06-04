@@ -31,7 +31,7 @@ export default {
       if (this.$route.name === 'channel') {
         return this.$store.getters.channelList(this.category);
       } else {
-        return [];
+        return this.$store.getters.starredChannels;
       }
     },
     filteredList() {
