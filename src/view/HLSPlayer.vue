@@ -473,43 +473,58 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "~materialize-css/sass/components/_mixins.scss";
+@import "~materialize-css/sass/components/_color.scss";
+@import "~materialize-css/sass/components/_variables.scss";
+
 .page {
   height: 100vh;
-}
 
-.player-container {
-  justify-content: center;
-  height: calc(100% - 56px);
-}
+  div.nav-wrapper {
+    li.icon {
+      width: 50px;
+      text-align: center;
+    }
 
-@media only screen and (min-width: 601px) {
-  .player-container {
-    height: calc(100% - 64px);
+    a.channel-title {
+      left: 60px;
+      transform: none;
+
+
+      @media #{$small-and-down} {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 10ch;
+      }
+
+      &.center {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
   }
-}
 
-tr.current-program {
-  background-color: #f2f2f2;
-}
+  .player-container {
+    justify-content: center;
 
-li.icon {
-  width: 50px;
-  text-align: center;
-}
+    @media #{$small-and-down} {
+      height: calc(100% - 56px);
+    }
 
-a.channel-title {
-  left: 60px;
-  transform: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 10ch;
-}
+    @media #{$medium-and-up} {
+      height: calc(100% - 64px);
+    }
+  }
 
-a.channel-title.center {
-  left: 50%;
-  transform: translateX(-50%);
+  div.modal {
+    table {
+      tr.current-program {
+        background-color: #f2f2f2;
+      }
+    }
+  }
 }
 </style>
 

@@ -58,6 +58,13 @@ module.exports = {
         }
       ]
     }, {
+      test: /.scss$/,
+      exclude: /materialize.scss$/,
+      use: [
+        'css-loader',
+        'sass-loader',
+      ]
+    }, {
       enforce: 'post',
       test: /\.webmanifest$/,
       loader: 'file-loader',
