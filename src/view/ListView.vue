@@ -7,9 +7,9 @@
             <a href="#" data-activates="nav-menu" class="button-collapse"><i class="material-icons">menu</i></a>
             <a class="brand-logo">{{appName}}</a>
             <ul class="right">
-              <li>
-                <cast-controller ref="cast"></cast-controller>
-              </li>
+              <!--<li>-->
+                <!--<cast-controller ref="cast"></cast-controller>-->
+              <!--</li>-->
               <li>
                 <a @click="detail = !detail">
                   <i class="material-icons">{{viewIcon}}</i>
