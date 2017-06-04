@@ -55,22 +55,26 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped type="scss">
 .title {
   font-size: 13px;
 }
-div.card-content {
-  padding: 11px;
-  min-height: 70px;
-}
-div.compact div.card {
-  margin: 0.5px;
-  border: 1px;
-}
+
 div.compact {
   padding: 0px;
+
+  div.card {
+    margin: 0.5px;
+    border: 1px;
+  }
 }
+
 div.card {
   cursor: pointer;
+
+  div.card-content {
+    padding: 11px;
+    min-height: 70px;
+  }
 }
 </style>
