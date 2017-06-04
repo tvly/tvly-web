@@ -37,6 +37,9 @@
           <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
         </li>
         <li><div class="divider"></div></li>
+        <li @click="hideMenu" :class="{active: $route.name == 'star'}">
+          <router-link :to="{ name: 'star' }">收藏列表</router-link>
+        </li>
         <li v-if="hasEPG" @click="hideMenu" :class="{active: $route.name == 'program'}">
           <router-link :to="{ name: 'program' }">当前节目列表</router-link>
         </li>
