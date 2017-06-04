@@ -21,6 +21,13 @@ const listRoute = {
     path: 'channel/:category',
     component: ChannelList,
     props: true,
+  }, {
+    name: 'star',
+    path: 'star',
+    component: ChannelList,
+    props: {
+      category: null,
+    },
   }],
 };
 

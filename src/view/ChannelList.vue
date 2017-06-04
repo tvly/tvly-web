@@ -28,7 +28,11 @@ export default {
   },
   computed: {
     channelList() {
-      return this.$store.getters.channelList(this.category);
+      if (this.$route.name === 'channel') {
+        return this.$store.getters.channelList(this.category);
+      } else {
+        return [];
+      }
     },
     filteredList() {
       return this.channelList.filter((channel) => {
@@ -38,11 +42,13 @@ export default {
       });
     },
     fallbackUrl() {
-      if (!this.$store.getters.defaultCategory) {
+      if (this.$route.name !== 'channel') {
+        // not in channel view
+        return;
+      } else if (!this.$store.getters.defaultCategory) {
         // no category to fallback
         return;
-      }
-      if (this.$store.getters.hasCategory(this.category)) {
+      } else if (this.$store.getters.hasCategory(this.category)) {
         // no need to fallback
         return;
       }
