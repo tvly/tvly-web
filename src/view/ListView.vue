@@ -311,7 +311,7 @@ ul.side-nav {
         cursor: pointer;
       }
 
-      &.focus {
+      &.focused {
         margin: 0;
       }
 
