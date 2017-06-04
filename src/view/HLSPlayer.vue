@@ -114,14 +114,6 @@ import config from '../../config.json5';
 engine(flowplayer);
 
 /**
- * Read starredChannels from localStorage
- * @return {array} - value stored in localStorage or []
- **/
-function getStarredChannels() {
-  return JSON.parse(window.localStorage.starredChannels || '[]');
-}
-
-/**
  * whether on mobile devices
  * @return {bool}
  **/
@@ -142,7 +134,6 @@ export default {
       engine: '',
       player: null,
       ratio: null,
-      starredChannels: getStarredChannels(),
       notMobile: notMobile(),
     };
   },
@@ -151,12 +142,7 @@ export default {
       this.notMobile = notMobile();
     },
     star() {
-      const idx = this.starredChannels.indexOf(this.channel);
-      if (idx !== -1) {
-        this.starredChannels.splice(idx, 1);
-      } else {
-        this.starredChannels.push(this.channel);
-      }
+      this.$store.commit('toggleCollection', this.channel);
     },
     applyRatio() {
       const player = this.$el.querySelector('.fp-player');
@@ -296,7 +282,7 @@ export default {
   },
   computed: {
     starred() {
-      return this.starredChannels.includes(this.channel);
+      return this.$store.getters.inCollection(this.channel);
     },
     currentEPG() {
       const current = this.$store.state.epg[this.channel];

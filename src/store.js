@@ -14,6 +14,7 @@ export const store = new Vuex.Store({
       Categories: [],
     },
     epg: {},
+    collections: JSON.parse(window.localStorage.starredChannels || '[]'),
   },
   mutations: {
     updateNow(state) {
@@ -24,6 +25,15 @@ export const store = new Vuex.Store({
     },
     setEPG(state, epg) {
       state.epg = epg;
+    },
+    toggleCollection(state, channel) {
+      const idx = state.collections.indexOf(channel);
+      if (idx !== -1) {
+        state.collections.splice(idx, 1);
+      } else {
+        state.collections.push(channel);
+      }
+      window.localStorage.starredChannels = JSON.stringify(state.collections);
     },
   },
   actions: {
@@ -87,6 +97,9 @@ export const store = new Vuex.Store({
     },
     hasChannel(state, getters) {
       return (channelName) => !!getters.getChannel(channelName);
+    },
+    inCollection(state) {
+      return (channel) => state.collections.includes(channel);
     },
     channelMap(state) {
       return [].concat(...state.channels.Categories.map((c) => {
