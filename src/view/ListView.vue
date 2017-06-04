@@ -227,101 +227,106 @@ export default {
 };
 </script>
 
-<style scoped>
-header, main, footer {
-  padding-left: 250px;
-}
-
-div.background img {
-  height: 100%;
-  width: 100%;
-}
+<style scoped lang="scss">
+@import "~materialize-css/sass/components/_mixins.scss";
+@import "~materialize-css/sass/components/_color.scss";
+@import "~materialize-css/sass/components/_variables.scss";
 
 a {
   cursor: pointer;
+}
+
+header, main, footer {
+  @media #{$large-and-up} {
+    padding-left: 250px;
+  }
+  @media #{$medium-and-down} {
+    padding-left: 0;
+  }
 }
 
 main {
   padding-top: 10px;
 }
 
-div.userView {
-  height: 240px;
-}
-
-li.search {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 180px;
-  margin-top: 1px;
-  padding: 1px 0 0 0;
-  z-index: 2;
-}
-
-li.search .search-wrapper {
-  margin: 0 12px;
-  transition: margin .25s ease;
-}
-
-li.search .search-wrapper input#search {
-  display: block;
-  font-size: 16px;
-  font-weight: 300;
-  width: 180px;
-  height: 45px;
-  margin: 0;
-  padding: 0 15px 0 15px;
-  border: 0;
-}
-
-li.search .search-wrapper input#search:focus {
-  outline: none;
-}
-
-li.search .search-wrapper.focused {
-  margin: 0;
-}
-
-li.search .search-wrapper i.material-icons {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-li.search:hover {
-  background-color: rgba(0, 0, 0, 0)!important;
-}
-
 .container {
   width: 93%;
 }
 
-.side-nav .userView .type, .side-nav .userView .uid {
-    line-height: 24px;
-    display: block;
-}
-
-.side-nav .userView .type {
-    font-size: 14px;
-    margin-top: 16px;
-    font-weight: 600;
-}
-
-.side-nav .userView .uid {
-    font-size: 11px;
-    padding-bottom: 16px;
-    font-weight: 300;
-}
-
-@media only screen and (max-width: 992px) {
-  header, main, footer {
-    padding-left: 0;
-  }
-}
-
-.side-nav {
+ul.side-nav {
   padding-bottom: 10px!important;
+
+  div.userView {
+    height: 240px;
+
+    div.background img {
+      height: 100%;
+      width: 100%;
+    }
+
+    @mixin userView-item {
+      line-height: 24px;
+      display: block;
+    }
+
+    .type {
+      @include userView-item;
+      font-size: 14px;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+
+    .uid {
+      @include userView-item;
+      font-size: 11px;
+      padding-bottom: 16px;
+      font-weight: 300;
+    }
+  }
+
+  li.search {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 180px;
+    margin-top: 1px;
+    padding: 1px 0 0 0;
+    z-index: 2;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0)!important;
+    }
+
+    div.search-wrapper {
+      margin: 0 12px;
+      transition: margin .25s ease;
+
+      i.material-icons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+      }
+
+      &.focus {
+        margin: 0;
+      }
+
+      input#search {
+        display: block;
+        font-size: 16px;
+        font-weight: 300;
+        width: 180px;
+        height: 45px;
+        margin: 0;
+        padding: 0 15px 0 15px;
+        border: 0;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
 }
 </style>
