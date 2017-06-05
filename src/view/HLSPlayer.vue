@@ -186,7 +186,7 @@ export default {
     keyHandler(event) {
       let captured = true;
       // workaround for safari
-      switch(event.key || event.keyIdentifier) {
+      switch (event.key || event.keyIdentifier) {
         case 'Esc': // keyIdentifier
         case 'U+001B': // keyIdentifier
         case 'Escape':
@@ -375,7 +375,7 @@ export default {
         if (Modernizr.lockorientation) {
           try {
             Modernizr.prefixed('lockOrientation', screen)('landscape');
-          } catch(e) {
+          } catch (e) {
             console.warn('lockOrientation is not supported on this browser.');
             // the device does not support rotation
           }
