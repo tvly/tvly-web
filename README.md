@@ -27,6 +27,8 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 * [Minzu University of China](http://iptv.muc.edu.cn/)
 * [Beijing Foreign Studies University](https://tv.bfsu.edu.cn/)
 * [Nankai University](https://iptv.nankai.edu.cn/)
+* [Henan Polytechnic University](http://iptv.hpu.edu.cn)
+* Some other universities in Henan Province
 
 ## Credit
 
