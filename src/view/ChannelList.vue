@@ -16,7 +16,7 @@
 <script>
 import fuzzy from 'fuzzy';
 
-import {categoryLink} from '../route/link.js';
+import { categoryLink } from '../route/link.js';
 
 import ChannelThumbnail from './ChannelThumbnail.vue';
 

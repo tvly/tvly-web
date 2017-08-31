@@ -24,7 +24,7 @@
 
 <script>
 import fuzzy from 'fuzzy';
-import {mapState, mapGetters} from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   name: 'program-list',

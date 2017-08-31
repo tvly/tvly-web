@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import { mapState } from 'vuex';
 
-import {channelLink} from '../route/link.js';
+import { channelLink } from '../route/link.js';
 import config from '../../config.json5';
 
 export default {
