@@ -47,12 +47,14 @@ module.exports = {
       test: /materialize.scss$/,
       use: [
         'css-loader',
+        'resolve-url-loader',
         {
           loader: 'sass-loader',
           options: {
             data: `
             $primary-color: ${config.primaryColor};
             $secondary-color: ${config.secondaryColor};
+            $roboto-font-path: "../dist/fonts/roboto/";
             `,
           },
         },

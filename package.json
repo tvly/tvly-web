@@ -44,6 +44,7 @@
     "json5-loader": "^1.0.1",
     "modernizr": "^3.5.0",
     "modernizr-loader": "^1.0.1",
+    "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "vue-loader": "^13.0.4",

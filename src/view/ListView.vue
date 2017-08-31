@@ -232,7 +232,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~materialize-css/sass/components/_mixins.scss";
 @import "~materialize-css/sass/components/_color.scss";
 @import "~materialize-css/sass/components/_variables.scss";
 
