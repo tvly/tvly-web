@@ -86,14 +86,14 @@
 <script>
 import jQuery from 'jquery';
 import Modernizr from 'modernizr';
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 
 import IPTVFooter from './IPTVFooter.vue';
 import CastController from './CastController.vue';
 import SpeechRecognition from './SpeechRecognition.vue';
 
-import { categoryLink, channelLink } from '../route/link.js';
-import { UNAUTHORIZED, UNKNOWN } from '../error.js';
+import {categoryLink, channelLink} from '../route/link.js';
+import {UNAUTHORIZED, UNKNOWN} from '../error.js';
 
 import background from '../image/background.jpg';
 import config from '../../config.json5';
