@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { now } from './time.js';
+import {now} from './time.js';
 
 import config from '../config.json5';
 

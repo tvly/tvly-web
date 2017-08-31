@@ -26,4 +26,4 @@ function channelLink(channel) {
   };
 }
 
-export { channelLink, categoryLink };
+export {channelLink, categoryLink};

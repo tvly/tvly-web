@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import URI from 'urijs';
+import uri from 'urijs';
 
 import ListView from '../view/ListView.vue';
 import HLSPlayer from '../view/HLSPlayer.vue';
@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 
 const listRoute = {
   name: 'list',
-  path: URI('./list/').absoluteTo(config.baseUrl).toString(),
+  path: uri('./list/').absoluteTo(config.baseUrl).toString(),
   props: true,
   component: ListView,
   children: [{
@@ -41,7 +41,7 @@ if (config.epgUrl && config.epgUrl.length) {
 
 const playRoute = {
   name: 'play',
-  path: URI('./play/:channel').absoluteTo(config.baseUrl).toString(),
+  path: uri('./play/:channel').absoluteTo(config.baseUrl).toString(),
   props: true,
   component: HLSPlayer,
 };
@@ -70,7 +70,7 @@ export const router = new VueRouter({
     if (savedPosition) {
       return savedPosition;
     } else {
-      return { x: 0, y: 0 };
+      return {x: 0, y: 0};
     }
   },
   routes,
