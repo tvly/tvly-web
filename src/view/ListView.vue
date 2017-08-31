@@ -38,14 +38,14 @@
             <i class="material-icons" v-else>search</i>
           </div>
         </li>
-        <li v-for="c in channels['Categories']" @click="hideMenu" :class="{active: c['Name'] == category}">
+        <li v-for="c in channels['Categories']" :class="{active: c['Name'] == category}">
           <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
         </li>
         <li><div class="divider"></div></li>
-        <li @click="hideMenu" :class="{active: $route.name == 'star'}">
+        <li :class="{active: $route.name == 'star'}">
           <router-link :to="{ name: 'star' }">收藏列表</router-link>
         </li>
-        <li v-if="hasEPG" @click="hideMenu" :class="{active: $route.name == 'program'}">
+        <li v-if="hasEPG" :class="{active: $route.name == 'program'}">
           <router-link :to="{ name: 'program' }">当前节目列表</router-link>
         </li>
         <li v-if="legacyUrl && legacyUrl.length">
@@ -140,11 +140,6 @@ export default {
         this.$router.push(channelLink(channel));
       }
     },
-    hideMenu() {
-      if (window.innerWidth <= 992) {
-        this.navBtn.sideNav('hide');
-      }
-    },
     queryThumbnail() {
       jQuery('#no-image').modal('open');
     },
@@ -219,8 +214,7 @@ export default {
     this.navBtn = jQuery(this.$el.querySelector('.button-collapse'));
     this.navBtn.sideNav({
       menuWidth: 250,
-      // There is a known [issue](https://github.com/Dogfalo/materialize/issues/4118)
-      closeOnClick: false,
+      closeOnClick: true,
       draggable: true,
     });
     jQuery('#no-image').modal();
