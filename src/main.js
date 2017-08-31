@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Modernizr from 'modernizr';
 
-import {router} from './route/route.js';
-import {store} from './store.js';
+import { router } from './route/route.js';
+import { store } from './store.js';
 import config from '../config.json5';
 import detects from './detects.js';
 
@@ -51,7 +51,7 @@ new Vue({
       window.fetch(config.logoutUrl, {
         credentials: 'include',
         mode: 'cors',
-      }).then(() => { window.location.reload(); });
+      }).then(() => {window.location.reload();});
     },
   },
   created() {

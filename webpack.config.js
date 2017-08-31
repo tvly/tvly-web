@@ -22,7 +22,7 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'eslint-loader',
     }, {
-      test: /\modernizr-config.json5$/,
+      test: /modernizr-config.json5$/,
       enforce: 'post',
       loader: 'modernizr-loader',
     }, {
@@ -54,16 +54,16 @@ module.exports = {
             $primary-color: ${config.primaryColor};
             $secondary-color: ${config.secondaryColor};
             `,
-          }
-        }
-      ]
+          },
+        },
+      ],
     }, {
       test: /.scss$/,
       exclude: /materialize.scss$/,
       use: [
         'css-loader',
         'sass-loader',
-      ]
+      ],
     }, {
       enforce: 'post',
       test: /\.webmanifest$/,
