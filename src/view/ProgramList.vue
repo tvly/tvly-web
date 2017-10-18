@@ -12,7 +12,7 @@
         v-for="program in filteredCurrentPrograms"
         v-if="program && channelMap[program.channel]"
         :key="program.channel"
-        @click="$router.push({name:'play', params: {channel: program.channel}})">
+        @click="switchChannel(program.channel)">
         <tr>
           <td>{{program.title}}</td>
           <td>{{channelMap[program.channel].Name}}</td>
@@ -25,10 +25,17 @@
 <script>
 import fuzzy from 'fuzzy';
 import {mapState, mapGetters} from 'vuex';
+import {channelLink} from '../route/link.js';
 
 export default {
   name: 'program-list',
   props: ['filter'],
+  methods: {
+    switchChannel(channel) {
+      // TODO: 2nd screen
+      this.$router.push(channelLink(channel, this.$route.name));
+    },
+  },
   computed: {
     currentPrograms() {
       const programs = this.$store.state.epg;

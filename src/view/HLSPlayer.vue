@@ -9,7 +9,7 @@
     </ul>
     <nav>
       <div class="nav-wrapper">
-        <router-link :to="categoryLink" class="button-collapse show-on-large">
+        <router-link :to="backLink" class="button-collapse show-on-large">
           <i class="material-icons">arrow_back</i>
         </router-link>
         <a class="brand-logo channel-title" :class="{center: notMobile}">
@@ -122,7 +122,10 @@ function notMobile() {
 }
 
 export default {
-  props: ['channel'],
+  props: {
+    channel: String,
+    from: String,
+  },
   name: 'hls-player',
   data() {
     return {
@@ -191,7 +194,7 @@ export default {
         case 'U+001B': // keyIdentifier
         case 'Escape':
           if (!this.player.isFullscreen) {
-            this.$router.push(this.categoryLink);
+            this.$router.push(this.backLink);
           }
           break;
         case 'Left': // keyIdentifier
@@ -266,7 +269,8 @@ export default {
       if (nextChannelIndex >= 0 &&
             nextChannelIndex < currentCategory.Channels.length) {
         this.$router.replace(
-          channelLink(currentCategory.Channels[nextChannelIndex]));
+          channelLink(
+            currentCategory.Channels[nextChannelIndex].Vid, this.from));
       }
     },
     switchCategory(offset) {
@@ -276,7 +280,7 @@ export default {
             nextCategoryIndex < categories.length) {
         const category = categories[nextCategoryIndex];
         this.$router.replace(
-          channelLink(category.Channels[0]));
+          channelLink(category.Channels[0].Vid, this.from));
       }
     },
   },
@@ -317,9 +321,15 @@ export default {
         return channel['Vid'] === this.channel;
       });
     },
-    categoryLink() {
-      const category = this.channels.Categories[this.categoryIndex];
-      return category ? categoryLink(category) : {};
+    backLink() {
+      if (this.from != 'channel') {
+        return {
+          name: this.from,
+        };
+      } else {
+        const category = this.channels.Categories[this.categoryIndex];
+        return category ? categoryLink(category) : {};
+      }
     },
     fallbackUrl() {
       if (!this.$store.getters.defaultCategory) {
@@ -426,7 +436,7 @@ export default {
           conn.onmessage = (msg) => {
             let data = JSON.parse(msg.data);
             if (data.action === 'channel') {
-              this.$router.push(channelLink(data.channel));
+              this.$router.push(channelLink(data.channel.Vid, this.from));
             }
             conn.send('ack');
           };

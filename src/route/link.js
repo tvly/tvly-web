@@ -15,13 +15,16 @@ function categoryLink(category) {
 /**
  * object required to jump to channel
  * @param {object} channel - the channel to jump
+ * @param {String} from - jump from which route
  * @return {object} - object used to jump
  */
-function channelLink(channel) {
+function channelLink(channel, from) {
+  console.warn(channel);
   return {
     name: 'play',
     params: {
-      channel: channel['Vid'],
+      channel: channel,
+      from: from,
     },
   };
 }

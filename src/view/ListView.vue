@@ -137,7 +137,7 @@ export default {
           channel: channel,
         });
       } else {
-        this.$router.push(channelLink(channel));
+        this.$router.push(channelLink(channel.Vid, this.$route.name));
       }
     },
     queryThumbnail() {
