@@ -7,7 +7,7 @@
       </div>
       <div class="card-content" @click="switchChannel">
         <p class="title">{{channel.Name}}</p>
-        <p v-if="currentProgram">{{currentProgram.title}}</p>
+        <p class="program-title" v-if="currentProgram">{{currentProgram.title}}</p>
       </div>
     </div>
   </div>
@@ -58,6 +58,12 @@ export default {
 <style scoped lang="scss">
 .title {
   font-size: 13px;
+}
+
+p.program-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 div.compact {
