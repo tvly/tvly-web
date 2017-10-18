@@ -33,9 +33,12 @@ export default {
       request.start().then((connection) => {
         this.connection = connection;
 
-        connection.onclose = () => { this.connected = false; };
-        connection.onterminate = () => { this.connected = false; };
-        connection.onconnect = () => { this.connected = true; };
+        connection.onclose = connection.onterminate = () => {
+          this.connected = false;
+        };
+        connection.onconnect = () => {
+          this.connected = true;
+        };
 
         connection.onmessage = (msg) => {
           console.warn(msg.data);

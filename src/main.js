@@ -51,7 +51,9 @@ new Vue({
       window.fetch(config.logoutUrl, {
         credentials: 'include',
         mode: 'cors',
-      }).then(() => { window.location.reload(); });
+      }).then(() => {
+        window.location.reload();
+      });
     },
   },
   created() {

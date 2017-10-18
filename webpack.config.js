@@ -22,7 +22,7 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'eslint-loader',
     }, {
-      test: /\modernizr-config.json5$/,
+      test: /modernizr-config.json5$/,
       enforce: 'post',
       loader: 'modernizr-loader',
     }, {
@@ -47,23 +47,25 @@ module.exports = {
       test: /materialize.scss$/,
       use: [
         'css-loader',
+        'resolve-url-loader',
         {
           loader: 'sass-loader',
           options: {
             data: `
             $primary-color: ${config.primaryColor};
             $secondary-color: ${config.secondaryColor};
+            $roboto-font-path: "../dist/fonts/roboto/";
             `,
-          }
-        }
-      ]
+          },
+        },
+      ],
     }, {
       test: /.scss$/,
       exclude: /materialize.scss$/,
       use: [
         'css-loader',
         'sass-loader',
-      ]
+      ],
     }, {
       enforce: 'post',
       test: /\.webmanifest$/,

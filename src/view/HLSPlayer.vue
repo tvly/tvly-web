@@ -18,8 +18,8 @@
         <ul class="right">
           <li v-if="engine.length" class="hide-on-small-only icon"><a><i class="zmdi" :class="[engineIcon]"></i></a></li>
           <li class="icon" @click="star"><a><i class="material-icons">{{starIcon}}</i></a></li>
-          <li v-if="currentEPG.length" class="hide-on-small-only icon"><a href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
-          <li class="hide-on-small-only icon"><a href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
+          <li v-if="currentEPG.length" class="hide-on-small-only icon"><a class="modal-trigger" href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
+          <li class="hide-on-small-only icon"><a class="modal-trigger" href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
           <li class="icon"><a href="#" class="dropdown-button" data-activates="scale-menu"><i class="material-icons">settings_overscan</i></a></li>
         </ul>
       </div>
@@ -460,7 +460,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~materialize-css/sass/components/_mixins.scss";
 @import "~materialize-css/sass/components/_color.scss";
 @import "~materialize-css/sass/components/_variables.scss";
 
