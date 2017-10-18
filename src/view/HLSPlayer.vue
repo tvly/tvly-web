@@ -264,23 +264,27 @@ export default {
       }
     },
     switchChannel(offset) {
-      const currentCategory = this.channels.Categories[this.categoryIndex];
-      const nextChannelIndex = this.channelIndex + offset;
-      if (nextChannelIndex >= 0 &&
-            nextChannelIndex < currentCategory.Channels.length) {
-        this.$router.replace(
-          channelLink(
-            currentCategory.Channels[nextChannelIndex].Vid, this.from));
+      if (this.from === 'channel') {
+        const currentCategory = this.channels.Categories[this.categoryIndex];
+        const nextChannelIndex = this.channelIndex + offset;
+        if (nextChannelIndex >= 0 &&
+              nextChannelIndex < currentCategory.Channels.length) {
+          this.$router.replace(
+            channelLink(
+              currentCategory.Channels[nextChannelIndex].Vid, this.from));
+        }
       }
     },
     switchCategory(offset) {
-      const categories = this.channels.Categories;
-      const nextCategoryIndex = this.categoryIndex + offset;
-      if (nextCategoryIndex >= 0 &&
-            nextCategoryIndex < categories.length) {
-        const category = categories[nextCategoryIndex];
-        this.$router.replace(
-          channelLink(category.Channels[0].Vid, this.from));
+      if (this.from === 'channel') {
+        const categories = this.channels.Categories;
+        const nextCategoryIndex = this.categoryIndex + offset;
+        if (nextCategoryIndex >= 0 &&
+              nextCategoryIndex < categories.length) {
+          const category = categories[nextCategoryIndex];
+          this.$router.replace(
+            channelLink(category.Channels[0].Vid, this.from));
+        }
       }
     },
   },
