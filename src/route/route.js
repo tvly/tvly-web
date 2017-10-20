@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import uri from 'urijs';
+import analytics from 'universal-ga';
 
 import ListView from '../view/ListView.vue';
 import HLSPlayer from '../view/HLSPlayer.vue';
@@ -76,3 +77,8 @@ export const router = new VueRouter({
   routes,
 });
 
+if (config.googleAnalytics) {
+  router.afterEach((to, from) => {
+    analytics.pageview(to.path);
+  });
+}

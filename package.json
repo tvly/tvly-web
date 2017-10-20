@@ -20,6 +20,7 @@
     "node-sass": "^4.5.3",
     "offline-plugin": "^4.8.4",
     "strftime": "^0.10.0",
+    "universal-ga": "^1.2.0",
     "urijs": "^1.19.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

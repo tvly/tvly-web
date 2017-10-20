@@ -26,6 +26,12 @@ import 'flowplayer/dist/skin/skin.css';
 
 import './animation.css';
 
+// Google Analytics
+import analytics from 'universal-ga';
+if (config.googleAnalytics) {
+  analytics.initialize(config.googleAnalytics);
+}
+
 // offline-plugin
 import offlinePlugin from 'offline-plugin/runtime';
 offlinePlugin.install();
