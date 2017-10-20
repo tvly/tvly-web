@@ -81,5 +81,5 @@
 	"secondaryColor": "#e91e63", // pink
 
 	// optional
-	"googleAnalystics": null,
+	"googleAnalytics": null,
 }
