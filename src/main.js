@@ -28,7 +28,9 @@ import './animation.css';
 
 // Google Analytics
 import analytics from 'universal-ga';
-analytics.initialize('UA-89649249-2');
+if (config.googleAnalytics) {
+  analytics.initialize(config.googleAnalytics);
+}
 
 // offline-plugin
 import offlinePlugin from 'offline-plugin/runtime';

@@ -77,6 +77,8 @@ export const router = new VueRouter({
   routes,
 });
 
-router.afterEach((to, from) => {
-  analytics.pageview(to.path);
-});
+if (config.googleAnalytics) {
+  router.afterEach((to, from) => {
+    analytics.pageview(to.path);
+  });
+}
