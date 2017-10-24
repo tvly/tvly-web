@@ -198,7 +198,7 @@ export default {
       if (this.detail) {
         return 'view_module';
       } else {
-        return 'view_headline';
+        return 'view_list';
       }
     },
     ...mapState([
