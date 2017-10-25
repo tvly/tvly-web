@@ -124,7 +124,10 @@ function notMobile() {
 export default {
   props: {
     channel: String,
-    from: String,
+    from: {
+      type: String,
+      default: 'channel',
+    },
   },
   name: 'hls-player',
   data() {
