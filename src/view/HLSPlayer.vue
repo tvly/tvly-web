@@ -412,7 +412,7 @@ export default {
   },
   mounted() {
     this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
-      autoplay: this.existedChannel,
+      autoplay: false,
       share: false,
       ratio: false,
       keyboard: false,
