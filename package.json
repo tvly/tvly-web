@@ -11,7 +11,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "flowplayer": "^7.1.2",
-    "flowplayer-hlsjs": "flowplayer/flowplayer-hlsjs",
+    "flowplayer-hlsjs": "github:flowplayer/flowplayer-hlsjs#v1.1.1",
     "font-awesome": "^4.7.0",
     "fuzzy": "^0.1.3",
     "material-design-iconic-font": "^2.2.0",
