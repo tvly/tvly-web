@@ -10,7 +10,7 @@
       </thead>
 
       <tbody
-        v-for="program in filteredCurrentPrograms"
+        v-for="program in sortedCurrentPrograms"
         v-if="program && channelMap[program.channel]"
         :key="program.channel"
         @click="switchChannel(program.channel)">
@@ -63,6 +63,12 @@ export default {
         return program && (!this.filter.length ||
           fuzzy.test(this.filter, program.channel) ||
           fuzzy.test(this.filter, program.title));
+      });
+    },
+    sortedCurrentPrograms() {
+      return this.filteredCurrentPrograms.sort((a, b) => {
+        return (this.hasChannelViewers && a.viewers - b.viewers)
+          || a.channel.localeCompare(b.channel);
       });
     },
     ...mapState([
