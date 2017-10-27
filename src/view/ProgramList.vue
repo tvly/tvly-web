@@ -67,7 +67,7 @@ export default {
     },
     sortedCurrentPrograms() {
       return this.filteredCurrentPrograms.sort((a, b) => {
-        return (this.hasChannelViewers && a.viewers - b.viewers)
+        return (this.hasChannelViewers && b.viewers - a.viewers)
           || a.channel.localeCompare(b.channel);
       });
     },
