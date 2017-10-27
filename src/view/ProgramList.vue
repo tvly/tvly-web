@@ -60,7 +60,7 @@ export default {
     },
     filteredCurrentPrograms() {
       return this.currentPrograms.filter((program) => {
-        return program && (!this.filter.length ||
+        return program && (!this.filter ||
           fuzzy.test(this.filter, program.channel) ||
           fuzzy.test(this.filter, program.title));
       });

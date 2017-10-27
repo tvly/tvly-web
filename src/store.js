@@ -56,7 +56,7 @@ export const store = new Vuex.Store({
       });
     },
     fetchEPG(context) {
-      if (config.epgUrl && config.epgUrl.length) {
+      if (config.epgUrl) {
         window.fetch(config.epgUrl, {
           mode: 'cors',
           credentials: 'include',
@@ -72,7 +72,7 @@ export const store = new Vuex.Store({
       }
     },
     fetchChannelViewers(context) {
-      if (config.channelViewersUrl && config.channelViewersUrl.length) {
+      if (config.channelViewersUrl) {
         window.fetch(config.channelViewersUrl, {
           mode: 'cors',
           credentials: 'include',
@@ -85,7 +85,7 @@ export const store = new Vuex.Store({
         }).then((text) => {
           return text
             .split('\n')
-            .filter((line) => line.length)
+            .filter((line) => line)
             .map((line) => line.replace(/^\s+/, '').split(/\s/));
         }).then((array) => {
           let channelViewers = {};
@@ -160,7 +160,7 @@ window.setInterval(() => {
   store.commit('updateNow');
 }, 1000);
 
-if (config.channelViewersUrl && config.channelViewersUrl.length) {
+if (config.channelViewersUrl) {
   store.dispatch('fetchChannelViewers');
   window.setInterval(() => {
     store.dispatch('fetchChannelViewers');

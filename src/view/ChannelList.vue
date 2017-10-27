@@ -36,7 +36,7 @@ export default {
     },
     filteredList() {
       return this.channelList.filter((channel) => {
-        return (!this.filter.length ||
+        return (!this.filter ||
                 fuzzy.test(this.filter, channel.Name) ||
                 fuzzy.test(this.filter, channel.Vid));
       });

@@ -31,9 +31,9 @@
           </div>
         </li>
         <li class="search">
-          <div class="search-wrapper card" :class="{focused: filter.length || searching}">
+          <div class="search-wrapper card" :class="{focused: filter || searching}">
             <input id="search" type="search" v-model="filter" @focus="searching = true" @blur="searching = false">
-            <i class="material-icons" v-if="filter.length" @click="filter = ''">close</i>
+            <i class="material-icons" v-if="filter" @click="filter = ''">close</i>
             <speech-recognition v-else-if="voidSearch" @result="filter = $event" :options="recognitionOption"></speech-recognition>
             <i class="material-icons" v-else>search</i>
           </div>
@@ -48,12 +48,12 @@
         <li v-if="hasEPG" :class="{active: $route.name == 'program'}">
           <router-link :to="{ name: 'program' }">当前节目列表</router-link>
         </li>
-        <li v-if="legacyUrl && legacyUrl.length">
+        <li v-if="legacyUrl">
           <a :href="legacyUrl">
             回忆旧版
           </a>
         </li>
-        <li v-if="uid.length && !withIP">
+        <li v-if="uid && !withIP">
           <a @click="$emit('logout')">
             登出
           </a>
@@ -179,7 +179,7 @@ export default {
       return allChannels.map((ch) => [ch.Name, ch.Vid]);
     },
     userType() {
-      if (!this.uid.length) {
+      if (!this.uid) {
         return '';
       } else if (this.withIP) {
         if (this.uid.includes(':')) {

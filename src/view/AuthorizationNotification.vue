@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       dismissed: false,
-      auth: config.authUrl && config.authUrl.length !== 0,
+      auth: !!config.authUrl,
     };
   },
   methods: {

@@ -148,7 +148,7 @@ const externals = [
   config.sponsorLogoUrl,
 ];
 
-if (config.epgUrl && config.epgUrl.length) {
+if (config.epgUrl) {
   externals.push(config.epgUrl);
 }
 

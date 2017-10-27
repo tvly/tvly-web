@@ -32,7 +32,7 @@ const listRoute = {
   }],
 };
 
-if (config.epgUrl && config.epgUrl.length) {
+if (config.epgUrl) {
   listRoute.children.push({
     name: 'program',
     path: 'program',
