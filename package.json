@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "flowplayer": "^7.1.2",
+    "flowplayer": "https://github.com/flowplayer/flowplayer/tarball/7.2.1",
     "flowplayer-hlsjs": "github:flowplayer/flowplayer-hlsjs#v1.1.1",
     "font-awesome": "^4.7.0",
     "fuzzy": "^0.1.3",
