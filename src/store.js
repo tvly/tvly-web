@@ -15,6 +15,7 @@ export const store = new Vuex.Store({
     },
     epg: {},
     collections: JSON.parse(window.localStorage.starredChannels || '[]'),
+    channelViewers: {},
   },
   mutations: {
     updateNow(state) {
@@ -25,6 +26,9 @@ export const store = new Vuex.Store({
     },
     setEPG(state, epg) {
       state.epg = epg;
+    },
+    setChannelViewers(state, channelViewers) {
+      state.channelViewers = channelViewers;
     },
     toggleCollection(state, channel) {
       const idx = state.collections.indexOf(channel);
@@ -64,6 +68,33 @@ export const store = new Vuex.Store({
           }
         }).then((epg) => {
           context.commit('setEPG', epg);
+        });
+      }
+    },
+    fetchChannelViewers(context) {
+      if (config.channelViewersUrl && config.channelViewersUrl.length) {
+        window.fetch(config.channelViewersUrl, {
+          mode: 'cors',
+          credentials: 'include',
+        }).then((response) => {
+          if (response.status == 200) {
+            return response.text();
+          } else {
+            console.warn('FATEL: failed to get channel viewers!');
+          }
+        }).then((text) => {
+          return text
+            .split('\n')
+            .filter((line) => line.length)
+            .map((line) => line.replace(/^\s+/, '').split(/\s/));
+        }).then((array) => {
+          let channelViewers = {};
+          for (let [num, channel] of array) {
+            channelViewers[channel] = parseInt(num);
+          }
+          return channelViewers;
+        }).then((channelViewers) => {
+          context.commit('setChannelViewers', channelViewers);
         });
       }
     },
@@ -123,6 +154,12 @@ export const store = new Vuex.Store({
 window.setInterval(() => {
   store.commit('updateNow');
 }, 1000);
+
+if (config.channelViewersUrl && config.channelViewersUrl.length) {
+  window.setInterval(() => {
+    store.dispatch('fetchChannelViewers');
+  }, (config.channelViewersRefreshInterval || 30) * 1000);
+}
 
 store.dispatch('fetchChannels');
 store.dispatch('fetchEPG');

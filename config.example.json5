@@ -47,6 +47,10 @@
 	// where to get hls files, required.
 	"hlsUrl": "https://example.com/hls/",
 
+	// where to get the information about number of viewers of each channel,
+	// optional.
+	"channelViewersUrl": "https://example.com/status.txt",
+
 	// where to redirect to when user authorization is required,
 	// leave it null if there is no auth at all.
 	// optional.
@@ -73,6 +77,10 @@
 
 	// how often snapshots should be refreshed in seconds, optional.
 	"snapshotRefreshInterval": 600,
+
+	// how often should the information about number of viewers of
+	// each channel be refreshed in seconds, optional.
+	"channelViewersRefreshInterval": 30,
 
 	/*
 	 * colors, required.
