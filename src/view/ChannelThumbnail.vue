@@ -6,7 +6,7 @@
         <a @click="switchChannel" class="btn-floating halfway-fab"><i class="material-icons">play_arrow</i></a>
       </div>
       <div class="card-content" @click="switchChannel">
-        <p class="title">{{channel.Name}}</p>
+        <p class="title">{{channel.Name}}<span class="viewers"><i class="material-icons">remove_red_eye</i>{{viewers}}</span></p>
         <p class="program-title" v-if="currentProgram">{{currentProgram.title}}</p>
       </div>
     </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapGetters} from 'vuex';
 
 import {channelLink} from '../route/link.js';
 import config from '../../config.json5';
@@ -43,8 +43,14 @@ export default {
         return programs.find((p) => p.start < this.now && p.stop > this.now);
       }
     },
+    viewers() {
+      return this.getViewers(this.channel.Vid);
+    },
     ...mapState([
       'now',
+    ]),
+    ...mapGetters([
+      'getViewers',
     ]),
   },
   methods: {
@@ -81,6 +87,14 @@ div.card {
   div.card-content {
     padding: 11px;
     min-height: 70px;
+  }
+}
+
+span.viewers {
+  .material-icons {
+    font-size: 11px;
+    margin-left: 20px;
+    margin-right: 4px;
   }
 }
 </style>
