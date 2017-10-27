@@ -118,6 +118,11 @@ export const store = new Vuex.Store({
         );
       };
     },
+    getViewers(state) {
+      return (channel) => {
+        return state.channelViewers[channel] || 0;
+      };
+    },
     hasCategory(state, getters) {
       return (categoryName) => !!getters.getCategory(categoryName);
     },
@@ -156,6 +161,7 @@ window.setInterval(() => {
 }, 1000);
 
 if (config.channelViewersUrl && config.channelViewersUrl.length) {
+  store.dispatch('fetchChannelViewers');
   window.setInterval(() => {
     store.dispatch('fetchChannelViewers');
   }, (config.channelViewersRefreshInterval || 30) * 1000);

@@ -5,6 +5,7 @@
         <tr>
           <th>标题</th>
           <th>频道</th>
+          <th v-if="hasChannelViewers">观众</th>
         </tr>
       </thead>
 
@@ -16,6 +17,7 @@
         <tr>
           <td>{{program.title}}</td>
           <td>{{channelMap[program.channel].Name}}</td>
+          <td v-if="hasChannelViewers">{{program.viewers}}</td>
         </tr>
       </tbody>
     </table>
@@ -26,10 +28,16 @@
 import fuzzy from 'fuzzy';
 import {mapState, mapGetters} from 'vuex';
 import {channelLink} from '../route/link.js';
+import config from '../../config.json5';
 
 export default {
   name: 'program-list',
   props: ['filter'],
+  data() {
+    return {
+      hasChannelViewers: !!config.channelViewersUrl,
+    };
+  },
   methods: {
     switchChannel(channel) {
       // TODO: 2nd screen
@@ -45,6 +53,7 @@ export default {
         });
         if (currentProgram) {
           currentProgram.channel = channel;
+          currentProgram.viewers = this.getViewers(channel);
           return currentProgram;
         }
       });
@@ -61,6 +70,7 @@ export default {
     ]),
     ...mapGetters([
       'channelMap',
+      'getViewers',
     ]),
   },
 };
