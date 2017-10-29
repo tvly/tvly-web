@@ -97,8 +97,11 @@
 </template>
 
 <script>
+// To activate lite hlsjs plugin of flowplayer
+import Hls from 'hls.js';
+window.Hls = Hls;
+
 import flowplayer from 'flowplayer';
-import engine from 'flowplayer-hlsjs';
 import jQuery from 'jquery';
 import Modernizr from 'modernizr';
 import strftime from 'strftime';
@@ -110,8 +113,6 @@ import swfHls from 'flowplayer/dist/flowplayerhls.swf';
 import {categoryLink, channelLink} from '../route/link.js';
 
 import config from '../../config.json5';
-
-engine(flowplayer);
 
 /**
  * whether on mobile devices
@@ -366,9 +367,10 @@ export default {
     },
     engineIcon() {
       return 'zmdi-' + {
-        flash: 'flash',
-        hlsjs: 'language-javascript',
-        html5: 'language-html5',
+        'flash': 'flash',
+        'hlsjs': 'language-javascript',
+        'hlsjs-lite': 'language-javascript',
+        'html5': 'language-html5',
       }[this.engine];
     },
     ...mapState([
