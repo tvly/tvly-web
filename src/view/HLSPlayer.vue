@@ -48,6 +48,10 @@
               <td>增减音量</td>
             </tr>
             <tr>
+              <td>m</td>
+              <td>切换静音</td>
+            </tr>
+            <tr>
               <td>左右</td>
               <td>切换频道</td>
             </tr>
@@ -249,6 +253,12 @@ export default {
         case 'p': {
           const $epgModel = jQuery('#epg-modal');
           $epgModel.modal($epgModel.hasClass('open') ? 'close' : 'open');
+          break;
+        }
+        case 'M': // keyIdentifier
+        case 'U+004D': // keyIdentifier
+        case 'm': {
+          this.player.mute(!this.player.muted);
           break;
         }
         case 'QuestionMark': // KeyIdentifier
