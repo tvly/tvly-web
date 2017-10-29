@@ -33,9 +33,9 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "cross-env": "^5.1.0",
+    "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
-    "eslint": "^4.9.0",
+    "eslint": "^4.10.0",
     "eslint-config-google": "^0.9.1",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-vue": "^2.1.0",
@@ -51,6 +51,6 @@
     "vue-template-compiler": "^2.5.2",
     "webmanifest-loader": "^0.2.1",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.2"
+    "webpack-dev-server": "^2.9.3"
   }
 }
