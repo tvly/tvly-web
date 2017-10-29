@@ -19,7 +19,6 @@ function categoryLink(category) {
  * @return {object} - object used to jump
  */
 function channelLink(channel, from) {
-  console.warn(channel);
   return {
     name: 'play',
     params: {
