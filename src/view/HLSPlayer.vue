@@ -456,6 +456,9 @@ export default {
   watch: {
     clip(val) {
       this.player.load(val);
+      // workaround for the new strategy of flowplayer
+      // XXX: the player maybe muted by the user.
+      this.player.unmute();
     },
     ratio(val) {
       this.applyRatio();
