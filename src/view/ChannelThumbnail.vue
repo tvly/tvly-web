@@ -6,7 +6,13 @@
         <a @click="switchChannel" class="btn-floating halfway-fab"><i class="material-icons">play_arrow</i></a>
       </div>
       <div class="card-content" @click="switchChannel">
-        <p class="title">{{channel.Name}}<span class="viewers"><i class="material-icons">remove_red_eye</i>{{viewers}}</span></p>
+        <p class="title">
+          {{channel.Name}}
+          <span class="viewers">
+            <i class="material-icons" v-if="hasChannelViewers">remove_red_eye</i>
+            {{viewers}}
+          </span>
+        </p>
         <p class="program-title" v-if="currentProgram">{{currentProgram.title}}</p>
       </div>
     </div>
@@ -25,6 +31,7 @@ export default {
   data() {
     return {
       interval: null,
+      hasChannelViewers: !!config.channelViewersUrl,
     };
   },
   computed: {
