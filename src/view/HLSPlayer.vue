@@ -424,6 +424,10 @@ export default {
         this.applyRatio();
       });
     });
+
+    if (config.googleAnalytics) {
+      flowplayer.conf.analytics = config.googleAnalytics;
+    }
   },
   mounted() {
     this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
