@@ -8,8 +8,8 @@
       <div class="card-content" @click="switchChannel">
         <p class="title">
           {{channel.Name}}
-          <span class="viewers">
-            <i class="material-icons" v-if="hasChannelViewers">remove_red_eye</i>
+          <span class="viewers" v-if="hasChannelViewers">
+            <i class="material-icons">remove_red_eye</i>
             {{viewers}}
           </span>
         </p>
