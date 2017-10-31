@@ -21,7 +21,7 @@ npm run build
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-## User
+## Users
 
 * [Tsinghua University](https://iptv.tsinghua.edu.cn/)
 * [Minzu University of China](http://iptv.muc.edu.cn/)
@@ -29,6 +29,9 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 * [Nankai University](https://iptv.nankai.edu.cn/)
 * [Henan Polytechnic University](http://iptv.hpu.edu.cn)
 * [Beijing Union University](http://iptv.buu.edu.cn)
+* [North China University of Water Conservancy and Electric Power](http://tv.ncwu.edu.cn)
+* [Henan University of Urban Construction](http://iptv.hncj.edu.cn)
+* [Henan Polytechnic University](http://iptv.hpu.edu.cn)
 * Some other universities in Henan Province
 
 ## Credit
