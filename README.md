@@ -32,6 +32,7 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 * [North China University of Water Conservancy and Electric Power](http://tv.ncwu.edu.cn)
 * [Henan University of Urban Construction](http://iptv.hncj.edu.cn)
 * [Henan Polytechnic University](http://iptv.hpu.edu.cn)
+* [Zhoukou Normal University](http://tv.zknu.edu.cn)
 * Some other universities in Henan Province
 
 ## Credit
