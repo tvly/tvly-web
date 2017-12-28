@@ -488,6 +488,10 @@ export default {
     window.removeEventListener('resize', this.applyRatio);
     window.removeEventListener('resize', this.resizeHandler);
     this.player.unload();
+    let hlsEngine = flowplayer.engine('hlsjs-lite');
+    if (hlsEngine) {
+      hlsEngine.hls.stopLoad();
+    }
   },
 };
 </script>
