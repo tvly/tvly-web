@@ -487,10 +487,18 @@ export default {
     window.removeEventListener('keydown', this.keyHandler);
     window.removeEventListener('resize', this.applyRatio);
     window.removeEventListener('resize', this.resizeHandler);
-    this.player.unload();
+
+    // Force unload when using hlsjs-lite
     let hlsEngine = flowplayer.engine('hlsjs-lite');
-    if (hlsEngine) {
+    if (hlsEngine && hlsEngine.hls) {
       hlsEngine.hls.stopLoad();
+    }
+
+    // Force unload when using HTML5 video tag
+    let videoTag = jQuery('.fp-player > video')[0];
+    if (videoTag) {
+      videoTag.src = '';
+      videoTag.load();
     }
   },
 };
