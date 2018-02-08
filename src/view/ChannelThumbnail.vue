@@ -1,6 +1,6 @@
 <template>
   <div :class="{compact: !detail}">
-    <div class="card" :class="{hoverable: detail}">
+    <div class="card">
       <div class="card-image" v-if="detail">
         <img :src="snapshot" @click="switchChannel" @error="$emit('noimage')" :alt="'Snapshot of ' + channel['Name']">
         <a @click="switchChannel" class="btn-floating halfway-fab"><i class="material-icons">play_arrow</i></a>
@@ -77,6 +77,12 @@ p.program-title {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+div.selected {
+  div.card {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
 }
 
 div.compact {

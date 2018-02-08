@@ -36,6 +36,10 @@ if (config.googleAnalytics) {
 import offlinePlugin from 'offline-plugin/runtime';
 offlinePlugin.install();
 
+// smoothscroll-polyfill
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
+
 Modernizr.addTest(detects);
 
 new Vue({
