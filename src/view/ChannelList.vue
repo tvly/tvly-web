@@ -88,6 +88,8 @@ export default {
             Math.min(this.channels.Categories.length, this.categoryIndex + 1));
           break;
         case 'Enter':
+        case 'Spacebar': // keyIdentifier
+        case 'U+0020': // keyIdentifier
         case ' ':
           if (this.selectedChannel) {
             this.$emit('channel', this.selectedChannel);
