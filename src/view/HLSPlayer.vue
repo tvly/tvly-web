@@ -210,6 +210,8 @@ export default {
         case 'U+0048': // keyIdentifier
         case 'ArrowLeft':
         case 'h':
+        case 'ChannelDown':
+        case 'PageDown':
           this.switchChannel(-1);
           break;
         case 'Right': // keyIdentifier
@@ -217,14 +219,14 @@ export default {
         case 'U+004C': // keyIdentifier
         case 'ArrowRight':
         case 'l':
+        case 'ChannelUp':
+        case 'PageUp':
           this.switchChannel(1);
           break;
         case 'Up': // keyIdentifier
         case 'K': // keyIdentifier
         case 'U+004B': // keyIdentifier
         case 'ArrowUp':
-        case 'ChannelUp':
-        case 'PageUp':
         case 'k':
           this.switchCategory(-1);
           break;
@@ -232,8 +234,6 @@ export default {
         case 'J': // keyIdentifier
         case 'U+004A': // keyIdentifier
         case 'ArrowDown':
-        case 'ChannelDown':
-        case 'PageDown':
         case 'j':
           this.switchCategory(1);
           break;
