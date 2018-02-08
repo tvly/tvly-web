@@ -17,6 +17,7 @@
 
 <script>
 import fuzzy from 'fuzzy';
+import {mapState} from 'vuex';
 
 import {categoryLink} from '../route/link.js';
 import {ensureVisible} from '../dom.js';
@@ -41,6 +42,17 @@ export default {
     window.removeEventListener('keydown', this.keyHandler);
   },
   methods: {
+    toCategory(index) {
+      let target;
+      if (index < this.channels.Categories.length) {
+        target = categoryLink(this.channels.Categories[index]);
+      } else if (index === this.channels.Categories.length) {
+        target = {name: 'star'};
+      } else {
+        target = {name: 'program'};
+      }
+      this.$router.push(target);
+    },
     keyHandler(event) {
       let captured = true;
       // workaround for safari
@@ -59,6 +71,21 @@ export default {
         case 'l':
           this.selected = Math.min(this.selected + 1,
             this.filteredList.length);
+          break;
+        case 'Up': // keyIdentifier
+        case 'K': // keyIdentifier
+        case 'U+004B': // keyIdentifier
+        case 'ArrowUp':
+        case 'k':
+          this.toCategory(Math.max(0, this.categoryIndex - 1));
+          break;
+        case 'Down': // keyIdentifier
+        case 'J': // keyIdentifier
+        case 'U+004A': // keyIdentifier
+        case 'ArrowDown':
+        case 'j':
+          this.toCategory(
+            Math.min(this.channels.Categories.length, this.categoryIndex + 1));
           break;
         case 'Enter':
         case ' ':
@@ -111,6 +138,15 @@ export default {
       }
       return categoryLink(this.$store.getters.defaultCategory);
     },
+    categoryIndex() {
+      // if category is null, then when are in 'star' page
+      return this.category ? this.channels.Categories.findIndex(
+        (category) => category.Name === this.category
+      ) : this.channels.Categories.length;
+    },
+    ...mapState([
+      'channels',
+    ]),
   },
   watch: {
     fallbackUrl(val) {
