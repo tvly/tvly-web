@@ -101,10 +101,12 @@ export default {
             this.$emit('channel', this.selectedChannel);
           }
           break;
-        default:
+        default: {
           captured = false;
-          console.warn(`Unkown key event: ${event.key}(${event.keyIdentifier})`,
-                       event);
+          const warn = `Unkown key event: ${event.key}(${event.keyIdentifier})`;
+          window.Materialize.toast(warn, 5000);
+          console.warn(warn, event);
+        }
       }
       if (captured) {
         event.preventDefault();
