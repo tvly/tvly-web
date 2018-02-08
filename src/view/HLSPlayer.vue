@@ -248,6 +248,13 @@ export default {
         case 'f':
           this.player.fullscreen();
           break;
+        case 'Enter':
+        case 'Spacebar': // keyIdentifier
+        case 'U+0020': // keyIdentifier
+        case ' ':
+          this.player.play();
+          this.player.fullscreen();
+          break;
         case 'P': // keyIdentifier
         case 'U+0050': // keyIdentifier
         case 'p': {
