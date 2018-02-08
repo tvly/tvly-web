@@ -129,8 +129,9 @@ export default {
       } else {
         const selector = `.channel-list-item:nth-child(${this.selected + 1})`;
         const selectedElement = this.$el.querySelector(selector);
-        console.warn(selectedElement);
-        ensureVisible(selectedElement);
+        if (selectedElement) {
+          ensureVisible(selectedElement);
+        }
       }
     },
   },
