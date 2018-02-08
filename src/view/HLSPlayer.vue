@@ -252,6 +252,8 @@ export default {
         case 'Spacebar': // keyIdentifier
         case 'U+0020': // keyIdentifier
         case ' ':
+        case 'Unidentified': // XXX: Assumed to be enter
+        case 'MediaPlayPause':
           this.player.play();
           this.player.fullscreen();
           break;

@@ -91,6 +91,8 @@ export default {
         case 'Spacebar': // keyIdentifier
         case 'U+0020': // keyIdentifier
         case ' ':
+        case 'MediaPlayPause':
+        case 'Unidentified': // XXX: Assumed to be enter
           if (this.selectedChannel) {
             this.$emit('channel', this.selectedChannel);
           }
