@@ -59,6 +59,12 @@ export default {
           this.selected = Math.min(this.selected + 1,
             this.filteredList.length);
           break;
+        case 'Enter':
+        case ' ':
+          if (this.selectedChannel) {
+            this.$emit('channel', this.selectedChannel);
+          }
+          break;
         default:
           captured = false;
           console.warn(`Unkown key event: ${event.key}(${event.keyIdentifier})`,
