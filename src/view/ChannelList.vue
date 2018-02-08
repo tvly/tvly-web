@@ -4,10 +4,11 @@
       appear name="channel-list" mode="out-in"
       class="row" id="list">
       <channel-thumbnail
-        v-for="c in filteredList"
+        v-for="(c, index) in filteredList"
         class="col l4 m6 s12 channel-list-item"
         :channel="c" :key="c.Vid" :detail="detail"
         :class="{selected: selectedChannel === c}"
+        @mouseover.native="selected = index"
         @channel="$emit('channel', $event)"
         @noimage="$emit('noimage', $event)"></channel-thumbnail>
     </transition-group>
