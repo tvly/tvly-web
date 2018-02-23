@@ -143,7 +143,6 @@ export default {
         case 'ArrowLeft':
         case 'h':
         case 'ChannelDown':
-        case 'PageDown':
           this.selected = Math.max(this.selected - 1, -1);
           break;
         case 'Right': // keyIdentifier
@@ -152,7 +151,6 @@ export default {
         case 'ArrowRight':
         case 'l':
         case 'ChannelUp':
-        case 'PageUp':
           this.selected = Math.min(this.selected + 1,
             this.filteredList.length);
           break;

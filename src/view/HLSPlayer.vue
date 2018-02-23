@@ -483,7 +483,6 @@ export default {
         case 'ArrowLeft':
         case 'h':
         case 'ChannelDown':
-        case 'PageDown':
           this.switchChannel(-1);
           break;
         case 'Right': // keyIdentifier
@@ -492,7 +491,6 @@ export default {
         case 'ArrowRight':
         case 'l':
         case 'ChannelUp':
-        case 'PageUp':
           this.switchChannel(1);
           break;
         case 'Up': // keyIdentifier
