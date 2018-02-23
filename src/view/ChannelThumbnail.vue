@@ -59,9 +59,9 @@ export default {
   },
   computed: {
     snapshot() {
-      return `${format(config.defaultSnapshotUrlTemplate, {
-        Vid: this.channel['Vid'],
-      })}?${this.time}`;
+      return `${format(
+        config.defaultSnapshotUrlTemplate, this.channel
+      )}?${this.time}`;
     },
     channelLink() {
       return channelLink(this.channel);
