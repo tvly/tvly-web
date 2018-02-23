@@ -123,6 +123,15 @@ module.exports = {
 };
 
 if (process.env.NODE_ENV === 'production') {
+  const externals = [
+    config.sponsorLogoUrl,
+    ...config.channelsUrlList,
+  ]
+
+  if (config.epgUrlList) {
+    externals.push(...config.epgUrlList);
+  }
+
   module.exports.devtool = '#source-map';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
@@ -140,31 +149,20 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
+
+    // OfflinePlugin show be always the last plugin
+    new OfflinePlugin({
+      externals,
+      autoUpdate: true,
+      responseStrategy: 'network-first',
+      ServiceWorker: {
+        prefetchRequest: {
+          credentials: 'include',
+          mode: 'cors',
+        },
+        cacheName: config.cacheName,
+      },
+      AppCache: false,
+    }),
   ]);
 }
-
-const externals = [
-  config.sponsorLogoUrl,
-  ...config.channelsUrlList,
-]
-
-if (config.epgUrlList) {
-  externals.push(...config.epgUrlList);
-}
-
-// OfflinePlugin show be always the last plugin
-module.exports.plugins = (module.exports.plugins || []).concat([
-  new OfflinePlugin({
-    externals,
-    autoUpdate: true,
-    responseStrategy: 'network-first',
-    ServiceWorker: {
-      prefetchRequest: {
-        credentials: 'include',
-        mode: 'cors',
-      },
-      cacheName: config.cacheName,
-    },
-    AppCache: false,
-  }),
-]);

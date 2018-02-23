@@ -33,8 +33,8 @@ if (config.googleAnalytics) {
 }
 
 // offline-plugin
-import offlinePlugin from 'offline-plugin/runtime';
-offlinePlugin.install();
+import * as OfflinePlugin from 'offline-plugin/runtime';
+OfflinePlugin.install();
 
 // smoothscroll-polyfill
 import smoothscroll from 'smoothscroll-polyfill';
