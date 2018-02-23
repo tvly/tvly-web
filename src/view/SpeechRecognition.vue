@@ -20,7 +20,7 @@ function prefixedClass(prop, obj) {
 export default {
   name: 'SpeechRecognition',
   props: {
-    options: Object,
+    options: Array,
   },
   methods: {
     recognize() {
