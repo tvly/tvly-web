@@ -15,9 +15,9 @@
         :key="program.channel"
         @click="switchChannel(program.channel)">
         <tr>
-          <td>{{program.title}}</td>
-          <td>{{channelMap[program.channel].Name}}</td>
-          <td v-if="hasChannelViewers">{{program.viewers}}</td>
+          <td>{{ program.title }}</td>
+          <td>{{ channelMap[program.channel].Name }}</td>
+          <td v-if="hasChannelViewers">{{ program.viewers }}</td>
         </tr>
       </tbody>
     </table>
@@ -31,18 +31,14 @@ import {channelLink} from '../route/link.js';
 import config from '../../config.json5';
 
 export default {
-  name: 'program-list',
-  props: ['filter'],
+  name: 'ProgramList',
+  props: {
+    filter: String,
+  },
   data() {
     return {
       hasChannelViewers: !!config.channelViewersUrl,
     };
-  },
-  methods: {
-    switchChannel(channel) {
-      // TODO: 2nd screen
-      this.$router.push(channelLink(channel, this.$route.name));
-    },
   },
   computed: {
     currentPrograms() {
@@ -66,7 +62,7 @@ export default {
       });
     },
     sortedCurrentPrograms() {
-      return this.filteredCurrentPrograms.sort((a, b) => {
+      return this.filteredCurrentPrograms.slice(0).sort((a, b) => {
         return (this.hasChannelViewers && b.viewers - a.viewers)
           || a.channel.localeCompare(b.channel);
       });
@@ -78,6 +74,12 @@ export default {
       'channelMap',
       'getViewers',
     ]),
+  },
+  methods: {
+    switchChannel(channel) {
+      // TODO: 2nd screen
+      this.$router.push(channelLink(channel, this.$route.name));
+    },
   },
 };
 </script>

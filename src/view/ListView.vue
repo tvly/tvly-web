@@ -1,51 +1,86 @@
 <template>
-  <div id="body" class="grey lighten-4">
+  <div
+    id="body"
+    class="grey lighten-4">
     <header>
       <nav>
         <div class="container">
           <div class="nav-wrapper">
-            <a href="#" data-activates="nav-menu" class="button-collapse"><i class="material-icons">menu</i></a>
-            <a class="brand-logo">{{appName}}</a>
+            <a
+              href="#"
+              data-activates="nav-menu"
+              class="button-collapse">
+              <i class="material-icons">menu</i>
+            </a>
+            <a class="brand-logo">{{ appName }}</a>
             <ul class="right">
-              <!--<li>-->
-                <!--<cast-controller ref="cast"></cast-controller>-->
-              <!--</li>-->
               <li>
                 <a @click="detail = !detail">
-                  <i class="material-icons">{{viewIcon}}</i>
+                  <i class="material-icons">{{ viewIcon }}</i>
                 </a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      <ul id="nav-menu" class="side-nav fixed">
+      <ul
+        id="nav-menu"
+        class="side-nav fixed">
         <li>
           <div class="userView">
             <div class="background">
-              <img :src="background" alt="background">
+              <img
+                :src="background"
+                alt="background">
             </div>
-            <a><img class="circle" :src="avatar" alt="avatar"></a>
-            <a><span class="white-text type">{{userType}}</span></a>
-            <a><span class="white-text uid">{{uid}}</span></a>
+            <a>
+              <img
+                class="circle"
+                :src="avatar"
+                alt="avatar">
+            </a>
+            <a><span class="white-text type">{{ userType }}</span></a>
+            <a><span class="white-text uid">{{ uid }}</span></a>
           </div>
         </li>
         <li class="search">
-          <div class="search-wrapper card" :class="{focused: filter || searching}">
-            <input id="search" type="search" v-model="filter" @focus="searching = true" @blur="searching = false">
-            <i class="material-icons" v-if="filter" @click="filter = ''">close</i>
-            <speech-recognition v-else-if="voidSearch" @result="filter = $event" :options="recognitionOption"></speech-recognition>
-            <i class="material-icons" v-else>search</i>
+          <div
+            class="search-wrapper card"
+            :class="{focused: filter || searching}">
+            <input
+              id="search"
+              type="search"
+              v-model="filter"
+              @focus="searching = true"
+              @blur="searching = false">
+            <i
+              class="material-icons"
+              v-if="filter"
+              @click="filter = ''">close</i>
+            <speech-recognition
+              v-else-if="voidSearch"
+              @result="filter = $event"
+              :options="recognitionOption"/>
+            <i
+              class="material-icons"
+              v-else>search</i>
           </div>
         </li>
-        <li v-for="c in channels['Categories']" :class="{active: c['Name'] == category}">
-          <router-link :to="categoryLink(c)" replace>{{c['Name']}}</router-link>
+        <li
+          v-for="c in channels['Categories']"
+          :key="c['Name']"
+          :class="{active: c['Name'] == category}">
+          <router-link
+            :to="categoryLink(c)"
+            replace>{{ c['Name'] }}</router-link>
         </li>
-        <li><div class="divider"></div></li>
+        <li><div class="divider"/></li>
         <li :class="{active: $route.name == 'star'}">
           <router-link :to="{ name: 'star' }">收藏列表</router-link>
         </li>
-        <li v-if="hasEPG" :class="{active: $route.name == 'program'}">
+        <li
+          v-if="hasEPG"
+          :class="{active: $route.name == 'program'}">
           <router-link :to="{ name: 'program' }">当前节目列表</router-link>
         </li>
         <li v-if="legacyUrl">
@@ -63,21 +98,31 @@
 
     <main>
       <router-view
-        :filter="filter" :detail="detail"
+        :filter="filter"
+        :detail="detail"
         @noimage="queryThumbnail"
-        @channel="switchChannel($event)"></router-view>
+        @channel="switchChannel($event)"/>
     </main>
 
-    <iptv-footer></iptv-footer>
+    <iptv-footer/>
 
-    <div id="no-image" class="modal">
+    <div
+      id="no-image"
+      class="modal">
       <div class="modal-content">
         <h4>不能加载缩略图</h4>
         <p>当前不能加载缩略图，是否禁用？</p>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" @click="detail = false">禁用</a>
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">取消</a>
+        <a
+          href="#!"
+          class="modal-action modal-close waves-effect waves-green btn-flat"
+          @click="detail = false">
+        禁用</a>
+        <a
+          href="#!"
+          class="modal-action modal-close waves-effect waves-green btn-flat">
+        取消</a>
       </div>
     </div>
   </div>
@@ -107,13 +152,15 @@ function getDetail() {
 }
 
 export default {
-  props: ['category'],
+  name: 'ListView',
   components: {
     CastController,
     SpeechRecognition,
     'iptv-footer': IPTVFooter,
   },
-  name: 'list-view',
+  props: {
+    category: String,
+  },
   data() {
     return {
       avatar: config.sponsorLogoUrl,
@@ -128,50 +175,6 @@ export default {
       voidSearch: Modernizr.speechrecognition,
       background,
     };
-  },
-  methods: {
-    switchChannel(channel) {
-      if (this.$refs.cast && this.$refs.cast.connected) {
-        this.$refs.cast.send({
-          action: 'channel',
-          channel: channel,
-        });
-      } else {
-        this.$router.push(channelLink(channel.Vid, this.$route.name));
-      }
-    },
-    queryThumbnail() {
-      jQuery('#no-image').modal('open');
-    },
-    categoryLink,
-  },
-  created() {
-    if (config.userInfoUrl) {
-      window.fetch(config.userInfoUrl, {
-        credentials: 'include',
-        mode: 'cors',
-      }).then((response) => {
-        if (response.status === 200) {
-          return response.text();
-        } else if (response.status === 403) {
-          throw UNAUTHORIZED;
-        } else {
-          throw UNKNOWN;
-        }
-      }).then((text) => {
-        const iSeq = text.indexOf(':');
-        if (iSeq === -1) {
-          throw UNKNOWN;
-        }
-        const [type, value] = [text.slice(0, iSeq), text.slice(iSeq+1)];
-        this.withIP = (type === 'ip');
-        this.uid = value;
-      }).catch((e) => {
-        if (e == UNAUTHORIZED) {
-          this.$emit('unauth');
-        }
-      });
-    }
   },
   computed: {
     recognitionOption() {
@@ -210,6 +213,34 @@ export default {
       window.localStorage.iptvDetail = val.toString();
     },
   },
+  created() {
+    if (config.userInfoUrl) {
+      window.fetch(config.userInfoUrl, {
+        credentials: 'include',
+        mode: 'cors',
+      }).then((response) => {
+        if (response.status === 200) {
+          return response.text();
+        } else if (response.status === 403) {
+          throw UNAUTHORIZED;
+        } else {
+          throw UNKNOWN;
+        }
+      }).then((text) => {
+        const iSeq = text.indexOf(':');
+        if (iSeq === -1) {
+          throw UNKNOWN;
+        }
+        const [type, value] = [text.slice(0, iSeq), text.slice(iSeq+1)];
+        this.withIP = (type === 'ip');
+        this.uid = value;
+      }).catch((e) => {
+        if (e == UNAUTHORIZED) {
+          this.$emit('unauth');
+        }
+      });
+    }
+  },
   mounted() {
     this.navBtn = jQuery(this.$el.querySelector('.button-collapse'));
     this.navBtn.sideNav({
@@ -221,6 +252,22 @@ export default {
   },
   beforeDestroy() {
     this.navBtn.sideNav('destroy');
+  },
+  methods: {
+    switchChannel(channel) {
+      if (this.$refs.cast && this.$refs.cast.connected) {
+        this.$refs.cast.send({
+          action: 'channel',
+          channel: channel,
+        });
+      } else {
+        this.$router.push(channelLink(channel.Vid, this.$route.name));
+      }
+    },
+    queryThumbnail() {
+      jQuery('#no-image').modal('open');
+    },
+    categoryLink,
   },
 };
 </script>

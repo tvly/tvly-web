@@ -1,5 +1,7 @@
 <template>
-  <a v-if="supported" @click="connect">
+  <a
+    v-if="supported"
+    @click="connect">
     <i class="material-icons">
       {{ icon }}
     </i>
@@ -8,7 +10,7 @@
 
 <script>
 export default {
-  name: 'cast-controller',
+  name: 'CastController',
   data() {
     return {
       connection: null,

@@ -1,12 +1,14 @@
 <template>
-  <i class="material-icons" @click="recognize">keyboard_voice</i>
+  <i
+    class="material-icons"
+    @click="recognize">keyboard_voice</i>
 </template>
 
 <script>
 import Modernizr from 'modernizr';
 
 /**
- * Workaround the issue that Modernizr return a function instead of a
+ * Workaround the issue that Modernizr return a function instead of a class
  * @param {string} prop - the name of class to be prefixed
  * @param {Object} obj - object to be checked
  * @return {class} prefixed class
@@ -16,8 +18,10 @@ function prefixedClass(prop, obj) {
 }
 
 export default {
-  name: 'speech-recognition',
-  props: ['options'],
+  name: 'SpeechRecognition',
+  props: {
+    options: Object,
+  },
   methods: {
     recognize() {
       const SpeechRecognition = prefixedClass('SpeechRecognition', window);

@@ -1,19 +1,35 @@
 <template>
   <div :class="{compact: !detail}">
     <div class="card">
-      <div class="card-image" v-if="detail">
-        <img :src="snapshot" @click="switchChannel" @error="$emit('noimage')" :alt="'Snapshot of ' + channel['Name']">
-        <a @click="switchChannel" class="btn-floating halfway-fab"><i class="material-icons">play_arrow</i></a>
+      <div
+        class="card-image"
+        v-if="detail">
+        <img
+          :src="snapshot"
+          @click="switchChannel"
+          @error="$emit('noimage')"
+          :alt="'Snapshot of ' + channel['Name']">
+        <a
+          @click="switchChannel"
+          class="btn-floating halfway-fab">
+          <i class="material-icons">play_arrow</i>
+        </a>
       </div>
-      <div class="card-content" @click="switchChannel">
+      <div
+        class="card-content"
+        @click="switchChannel">
         <p class="title">
-          {{channel.Name}}
-          <span class="viewers" v-if="hasChannelViewers">
+          {{ channel.Name }}
+          <span
+            class="viewers"
+            v-if="hasChannelViewers">
             <i class="material-icons">remove_red_eye</i>
-            {{viewers}}
+            {{ viewers }}
           </span>
         </p>
-        <p class="program-title" v-if="currentProgram">{{currentProgram.title}}</p>
+        <p
+          class="program-title"
+          v-if="currentProgram">{{ currentProgram.title }}</p>
       </div>
     </div>
   </div>
@@ -26,8 +42,11 @@ import {channelLink} from '../route/link.js';
 import config from '../../config.json5';
 
 export default {
-  name: 'channel-thumbnail',
-  props: ['channel', 'detail'],
+  name: 'ChannelThumbnail',
+  props: {
+    channel: Object,
+    detail: Boolean,
+  },
   data() {
     return {
       interval: null,

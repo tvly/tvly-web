@@ -1,33 +1,82 @@
 <template>
   <div class="page">
-    <ul id="scale-menu" class="dropdown-content">
+    <ul
+      id="scale-menu"
+      class="dropdown-content">
       <li @click="ratio=null"><a>自动</a></li>
       <li @click="ratio=0"><a>铺满</a></li>
-      <li v-for="ar in allowedAspectRatio" @click="ratio=ar[1]/ar[0]">
-        <a>{{ar[0]}}:{{ar[1]}}</a>
+      <li
+        v-for="ar in allowedAspectRatio"
+        :key="ar"
+        @click="ratio=ar[1]/ar[0]">
+        <a>{{ ar[0] }}:{{ ar[1] }}</a>
       </li>
     </ul>
     <nav>
       <div class="nav-wrapper">
-        <router-link :to="backLink" class="button-collapse show-on-large">
+        <router-link
+          :to="backLink"
+          class="button-collapse show-on-large">
           <i class="material-icons">arrow_back</i>
         </router-link>
-        <a class="brand-logo channel-title" :class="{center: notMobile}">
-          <span class="hide-on-small-only">{{currentChannel.Category}}/</span>{{currentChannel.Name}}
+        <a
+          class="brand-logo channel-title"
+          :class="{center: notMobile}">
+          <span class="hide-on-small-only">
+            {{ currentChannel.Category }}/
+          </span>
+          {{ currentChannel.Name }}
         </a>
         <ul class="right">
-          <li v-if="engine" class="hide-on-small-only icon"><a><i class="zmdi" :class="[engineIcon]"></i></a></li>
-          <li class="icon" @click="star"><a><i class="material-icons">{{starIcon}}</i></a></li>
-          <li v-if="currentEPG" class="hide-on-small-only icon"><a class="modal-trigger" href="#epg-modal" id="epg"><i class="material-icons">playlist_play</i></a></li>
-          <li class="hide-on-small-only icon"><a class="modal-trigger" href="#help-modal" id="help"><i class="material-icons">keyboard</i></a></li>
-          <li class="icon"><a href="#" class="dropdown-button" data-activates="scale-menu"><i class="material-icons">settings_overscan</i></a></li>
+          <li
+            v-if="engine"
+            class="hide-on-small-only icon">
+            <a>
+              <i
+                class="zmdi"
+                :class="[engineIcon]"/>
+            </a>
+          </li>
+          <li
+            class="icon"
+            @click="star">
+            <a><i class="material-icons">{{ starIcon }}</i></a>
+          </li>
+          <li
+            v-if="currentEPG"
+            class="hide-on-small-only icon">
+            <a
+              class="modal-trigger"
+              href="#epg-modal"
+              id="epg">
+              <i class="material-icons">playlist_play</i>
+            </a>
+          </li>
+          <li class="hide-on-small-only icon">
+            <a
+              class="modal-trigger"
+              href="#help-modal"
+              id="help">
+              <i class="material-icons">keyboard</i>
+            </a>
+          </li>
+          <li class="icon">
+            <a
+              href="#"
+              class="dropdown-button"
+              data-activates="scale-menu">
+              <i class="material-icons">settings_overscan</i>
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
     <div class="valign-wrapper player-container grey darken-3">
-      <div class="player fp-mute center-align"></div>
+      <div class="player fp-mute center-align"/>
     </div>
-    <div id="help-modal" class="modal">
+    <div
+      id="help-modal"
+      class="modal">
       <div class="modal-content">
         <h4>键盘绑定</h4>
         <table class="centered highlight">
@@ -75,7 +124,9 @@
         </table>
       </div>
     </div>
-    <div id="epg-modal" class="modal">
+    <div
+      id="epg-modal"
+      class="modal">
       <div class="modal-content">
         <h4>节目列表</h4>
         <table class="centered responsive-table">
@@ -88,10 +139,13 @@
           </thead>
 
           <tbody>
-            <tr v-for="program in currentEPG" :class="{'current-program': program.now}">
-              <td>{{program.date}}</td>
-              <td>{{program.start}} - {{program.stop}}</td>
-              <td>{{program.title}}</td>
+            <tr
+              v-for="program in currentEPG"
+              :key="program.title"
+              :class="{'current-program': program.now}">
+              <td>{{ program.date }}</td>
+              <td>{{ program.start }} - {{ program.stop }}</td>
+              <td>{{ program.title }}</td>
             </tr>
           </tbody>
         </table>
@@ -127,6 +181,7 @@ function notMobile() {
 }
 
 export default {
+  name: 'HLSPlayer',
   props: {
     channel: String,
     from: {
@@ -134,7 +189,6 @@ export default {
       default: 'channel',
     },
   },
-  name: 'hls-player',
   data() {
     return {
       allowedAspectRatio: [
@@ -147,6 +201,205 @@ export default {
       ratio: null,
       notMobile: notMobile(),
     };
+  },
+  computed: {
+    starred() {
+      return this.$store.getters.inCollection(this.channel);
+    },
+    currentEPG() {
+      const current = this.$store.state.epg[this.channel];
+      if (current) {
+        return current.map((program) => {
+          return {
+            date: strftime('%F', new Date(program.start * 1000)),
+            start: strftime('%R', new Date(program.start * 1000)),
+            stop: strftime('%R', new Date(program.stop * 1000)),
+            title: program.title,
+            now: program.start < this.now && program.stop > this.now,
+          };
+        });
+      } else {
+        return [];
+      }
+    },
+    currentChannel() {
+      return this.$store.getters.getChannel(this.channel) || {};
+    },
+    existedChannel() {
+      return this.$store.getters.hasChannel(this.channel);
+    },
+    categoryIndex() {
+      return this.channels.Categories.findIndex((category) => {
+        return category.Name === this.currentChannel.Category;
+      });
+    },
+    channelIndex() {
+      const category = this.channels.Categories[this.categoryIndex];
+      return category.Channels.findIndex((channel) => {
+        return channel['Vid'] === this.channel;
+      });
+    },
+    backLink() {
+      if (this.from != 'channel') {
+        return {
+          name: this.from,
+        };
+      } else {
+        const category = this.channels.Categories[this.categoryIndex];
+        return category ? categoryLink(category) : {};
+      }
+    },
+    fallbackUrl() {
+      if (!this.$store.getters.defaultCategory) {
+        // no category to fallback
+        return;
+      }
+      if (this.$store.getters.hasChannel(this.channel)) {
+        // no need to fallback
+        return;
+      }
+      return categoryLink(this.$store.getters.defaultCategory);
+    },
+    clip() {
+      return {
+        sources: [{
+          type: 'application/x-mpegurl',
+          src: `${config.hlsUrl}/${this.channel}.m3u8`,
+        }],
+      };
+    },
+    starIcon() {
+      if (this.starred) {
+        return 'star';
+      } else {
+        return 'star_border';
+      }
+    },
+    engineIcon() {
+      return 'zmdi-' + {
+        'flash': 'flash',
+        'hlsjs': 'language-javascript',
+        'hlsjs-lite': 'language-javascript',
+        'html5': 'language-html5',
+      }[this.engine];
+    },
+    ...mapState([
+      'now',
+      'channels',
+    ]),
+  },
+  watch: {
+    clip(val) {
+      this.player.load(val);
+    },
+    ratio(val) {
+      this.applyRatio();
+    },
+    fallbackUrl(val) {
+      if (val) {
+        this.$router.push(val);
+      }
+    },
+    starredChannels(val) {
+      window.localStorage.starredChannels = JSON.stringify(val);
+    },
+  },
+  created() {
+    flowplayer((api) => {
+      api.on('ready', (e, api, video) => {
+        const engineName = api.engine.engineName;
+        this.engine = engineName;
+      });
+      api.on('error', (e, api, error) => {
+        if (error.code === 4) {
+          // TODO: how about a 404 response?
+          this.$emit('unauth');
+        }
+      });
+      api.on('fullscreen', () => {
+        if (Modernizr.lockorientation) {
+          try {
+            Modernizr.prefixed('lockOrientation', screen)('landscape');
+          } catch (e) {
+            console.warn('lockOrientation is not supported on this browser.');
+            // the device does not support rotation
+          }
+        } else if (Modernizr.orientationlock) {
+          screen.orientation.lock('landscape').catch(() => {
+            console.warn('orientation.lock is not supported on this chrome.');
+          });
+        }
+        this.applyRatio();
+      });
+      api.on('fullscreen-exit', () => {
+        if (Modernizr.lockorientation) {
+          Modernizr.prefixed('unlockOrientation', screen)('landscape');
+        } else if (Modernizr.orientationlock) {
+          screen.orientation.unlock();
+        }
+        this.applyRatio();
+      });
+    });
+
+    if (config.googleAnalytics) {
+      flowplayer.conf.analytics = config.googleAnalytics;
+    }
+  },
+  mounted() {
+    this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
+      autoplay: this.existedChannel,
+      share: false,
+      ratio: false,
+      keyboard: false,
+      chromecast: false,
+      live: true,
+      swf,
+      swfHls,
+      hlsjs: {
+        xhrSetup: (xhr) => {
+          xhr.withCredentials = true;
+        },
+      },
+      clip: this.clip,
+    });
+    jQuery('.modal').modal();
+    jQuery('.dropdown-button').dropdown();
+    window.addEventListener('keydown', this.keyHandler);
+    window.addEventListener('resize', this.applyRatio);
+    window.addEventListener('resize', this.resizeHandler);
+
+    // as second screen
+    if (navigator.presentation && navigator.presentation.receiver) {
+      navigator.presentation.receiver.connectionList.then((list) => {
+        list.connections.map((conn) => {
+          conn.onmessage = (msg) => {
+            let data = JSON.parse(msg.data);
+            if (data.action === 'channel') {
+              this.$router.push(channelLink(data.channel.Vid, this.from));
+            }
+            conn.send('ack');
+          };
+        });
+      });
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.keyHandler);
+    window.removeEventListener('resize', this.applyRatio);
+    window.removeEventListener('resize', this.resizeHandler);
+
+    // Force unload when using hlsjs-lite
+    let hlsEngine = flowplayer.engine('hlsjs-lite');
+    if (hlsEngine && hlsEngine.hls) {
+      hlsEngine.hls.stopLoad();
+    }
+
+    // Force unload when using HTML5 video tag
+    let videoTag = jQuery('.fp-player > video')[0];
+    if (videoTag) {
+      videoTag.src = '';
+      videoTag.load();
+    }
   },
   methods: {
     resizeHandler() {
@@ -314,205 +567,6 @@ export default {
         }
       }
     },
-  },
-  computed: {
-    starred() {
-      return this.$store.getters.inCollection(this.channel);
-    },
-    currentEPG() {
-      const current = this.$store.state.epg[this.channel];
-      if (current) {
-        return current.map((program) => {
-          return {
-            date: strftime('%F', new Date(program.start * 1000)),
-            start: strftime('%R', new Date(program.start * 1000)),
-            stop: strftime('%R', new Date(program.stop * 1000)),
-            title: program.title,
-            now: program.start < this.now && program.stop > this.now,
-          };
-        });
-      } else {
-        return [];
-      }
-    },
-    currentChannel() {
-      return this.$store.getters.getChannel(this.channel) || {};
-    },
-    existedChannel() {
-      return this.$store.getters.hasChannel(this.channel);
-    },
-    categoryIndex() {
-      return this.channels.Categories.findIndex((category) => {
-        return category.Name === this.currentChannel.Category;
-      });
-    },
-    channelIndex() {
-      const category = this.channels.Categories[this.categoryIndex];
-      return category.Channels.findIndex((channel) => {
-        return channel['Vid'] === this.channel;
-      });
-    },
-    backLink() {
-      if (this.from != 'channel') {
-        return {
-          name: this.from,
-        };
-      } else {
-        const category = this.channels.Categories[this.categoryIndex];
-        return category ? categoryLink(category) : {};
-      }
-    },
-    fallbackUrl() {
-      if (!this.$store.getters.defaultCategory) {
-        // no category to fallback
-        return;
-      }
-      if (this.$store.getters.hasChannel(this.channel)) {
-        // no need to fallback
-        return;
-      }
-      return categoryLink(this.$store.getters.defaultCategory);
-    },
-    clip() {
-      return {
-        sources: [{
-          type: 'application/x-mpegurl',
-          src: `${config.hlsUrl}/${this.channel}.m3u8`,
-        }],
-      };
-    },
-    starIcon() {
-      if (this.starred) {
-        return 'star';
-      } else {
-        return 'star_border';
-      }
-    },
-    engineIcon() {
-      return 'zmdi-' + {
-        'flash': 'flash',
-        'hlsjs': 'language-javascript',
-        'hlsjs-lite': 'language-javascript',
-        'html5': 'language-html5',
-      }[this.engine];
-    },
-    ...mapState([
-      'now',
-      'channels',
-    ]),
-  },
-  created() {
-    flowplayer((api) => {
-      api.on('ready', (e, api, video) => {
-        const engineName = api.engine.engineName;
-        this.engine = engineName;
-      });
-      api.on('error', (e, api, error) => {
-        if (error.code === 4) {
-          // TODO: how about a 404 response?
-          this.$emit('unauth');
-        }
-      });
-      api.on('fullscreen', () => {
-        if (Modernizr.lockorientation) {
-          try {
-            Modernizr.prefixed('lockOrientation', screen)('landscape');
-          } catch (e) {
-            console.warn('lockOrientation is not supported on this browser.');
-            // the device does not support rotation
-          }
-        } else if (Modernizr.orientationlock) {
-          screen.orientation.lock('landscape').catch(() => {
-            console.warn('orientation.lock is not supported on this chrome.');
-          });
-        }
-        this.applyRatio();
-      });
-      api.on('fullscreen-exit', () => {
-        if (Modernizr.lockorientation) {
-          Modernizr.prefixed('unlockOrientation', screen)('landscape');
-        } else if (Modernizr.orientationlock) {
-          screen.orientation.unlock();
-        }
-        this.applyRatio();
-      });
-    });
-
-    if (config.googleAnalytics) {
-      flowplayer.conf.analytics = config.googleAnalytics;
-    }
-  },
-  mounted() {
-    this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
-      autoplay: this.existedChannel,
-      share: false,
-      ratio: false,
-      keyboard: false,
-      chromecast: false,
-      live: true,
-      swf,
-      swfHls,
-      hlsjs: {
-        xhrSetup: (xhr) => {
-          xhr.withCredentials = true;
-        },
-      },
-      clip: this.clip,
-    });
-    jQuery('.modal').modal();
-    jQuery('.dropdown-button').dropdown();
-    window.addEventListener('keydown', this.keyHandler);
-    window.addEventListener('resize', this.applyRatio);
-    window.addEventListener('resize', this.resizeHandler);
-
-    // as second screen
-    if (navigator.presentation && navigator.presentation.receiver) {
-      navigator.presentation.receiver.connectionList.then((list) => {
-        list.connections.map((conn) => {
-          conn.onmessage = (msg) => {
-            let data = JSON.parse(msg.data);
-            if (data.action === 'channel') {
-              this.$router.push(channelLink(data.channel.Vid, this.from));
-            }
-            conn.send('ack');
-          };
-        });
-      });
-    }
-  },
-  watch: {
-    clip(val) {
-      this.player.load(val);
-    },
-    ratio(val) {
-      this.applyRatio();
-    },
-    fallbackUrl(val) {
-      if (val) {
-        this.$router.push(val);
-      }
-    },
-    starredChannels(val) {
-      window.localStorage.starredChannels = JSON.stringify(val);
-    },
-  },
-  beforeDestroy() {
-    window.removeEventListener('keydown', this.keyHandler);
-    window.removeEventListener('resize', this.applyRatio);
-    window.removeEventListener('resize', this.resizeHandler);
-
-    // Force unload when using hlsjs-lite
-    let hlsEngine = flowplayer.engine('hlsjs-lite');
-    if (hlsEngine && hlsEngine.hls) {
-      hlsEngine.hls.stopLoad();
-    }
-
-    // Force unload when using HTML5 video tag
-    let videoTag = jQuery('.fp-player > video')[0];
-    if (videoTag) {
-      videoTag.src = '';
-      videoTag.load();
-    }
   },
 };
 </script>
