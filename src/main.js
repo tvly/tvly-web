@@ -53,6 +53,19 @@ new Vue({
     },
     transition: '',
   },
+  watch: {
+    '$route'(to, from) {
+      if (from.name === 'play') { // left play view
+        this.transition = 'slide-right';
+      } else {
+        this.transition = 'slide-left';
+      }
+    },
+  },
+  created() {
+    const div = document.getElementById('legacy-browser');
+    div.outerHTML = '';
+  },
   methods: {
     notify() {
       this.$refs.auth.notify();
@@ -64,19 +77,6 @@ new Vue({
       }).then(() => {
         window.location.reload();
       });
-    },
-  },
-  created() {
-    const div = document.getElementById('legacy-browser');
-    div.outerHTML = '';
-  },
-  watch: {
-    '$route'(to, from) {
-      if (from.name === 'play') { // left play view
-        this.transition = 'slide-right';
-      } else {
-        this.transition = 'slide-left';
-      }
     },
   },
   router,
