@@ -13,7 +13,7 @@
         :channel="c"
         :key="c.Vid"
         :detail="detail"
-        :class="{selected: selectedChannel === c}"
+        :selected="selectedChannel === c"
         @mousemove.native="selected = index"
         @touchmove.native="selected = index"
         @channel="$emit('channel', $event)"

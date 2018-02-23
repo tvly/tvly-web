@@ -1,6 +1,8 @@
 <template>
   <div :class="{compact: !detail}">
-    <div class="card">
+    <div
+      class="card"
+      :class="{'z-depth-5': selected}">
       <div
         class="card-image"
         v-if="detail">
@@ -47,6 +49,7 @@ export default {
   props: {
     channel: Object,
     detail: Boolean,
+    selected: Boolean,
   },
   data() {
     return {
@@ -99,12 +102,6 @@ p.program-title {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
-
-div.selected {
-  div.card {
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
 }
 
 div.compact {
