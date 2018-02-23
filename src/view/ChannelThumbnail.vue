@@ -37,6 +37,7 @@
 
 <script>
 import {mapState, mapGetters} from 'vuex';
+import format from 'string-template';
 
 import {channelLink} from '../route/link.js';
 import config from '../../config.json5';
@@ -55,7 +56,9 @@ export default {
   },
   computed: {
     snapshot() {
-      return `${config.snapshotUrl}/${this.channel['Vid']}.jpg?${this.time}`;
+      return `${format(config.defaultSnapshotUrlTemplate, {
+        Vid: this.channel['Vid'],
+      })}?${this.time}`;
     },
     channelLink() {
       return channelLink(this.channel);

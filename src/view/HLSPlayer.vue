@@ -164,6 +164,7 @@ import jQuery from 'jquery';
 import Modernizr from 'modernizr';
 import strftime from 'strftime';
 import {mapState} from 'vuex';
+import format from 'string-template';
 
 import swf from 'flowplayer/dist/flowplayer.swf';
 import swfHls from 'flowplayer/dist/flowplayerhls.swf';
@@ -171,6 +172,7 @@ import swfHls from 'flowplayer/dist/flowplayerhls.swf';
 import {categoryLink, channelLink} from '../route/link.js';
 
 import config from '../../config.json5';
+
 
 /**
  * whether on mobile devices
@@ -264,7 +266,10 @@ export default {
       return {
         sources: [{
           type: 'application/x-mpegurl',
-          src: `${config.hlsUrl}/${this.channel}.m3u8`,
+          src: format(config.defaultHlsUrlTemplate, {
+            Vid: this.channel,
+            Category: this.channels.Categories[this.categoryIndex],
+          }),
         }],
       };
     },

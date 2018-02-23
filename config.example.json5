@@ -46,10 +46,10 @@
 	],
 
 	// where to get snapshots, required.
-	"snapshotUrl": "https://example.com/snapshot/",
+	"defaultSnapshotUrlTemplate": "https://example.com/snapshot/{Vid}.jpg",
 
 	// where to get hls files, required.
-	"hlsUrl": "https://example.com/hls/",
+	"defaultHlsUrlTemplate": "https://example.com/hls/{Vid}.m3u8",
 
 	// where to get the information about number of viewers of each channel,
 	// optional.
