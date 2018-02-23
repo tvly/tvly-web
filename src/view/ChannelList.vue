@@ -15,6 +15,7 @@
         :detail="detail"
         :class="{selected: selectedChannel === c}"
         @mousemove.native="selected = index"
+        @touchmove.native="selected = index"
         @channel="$emit('channel', $event)"
         @noimage="$emit('noimage', $event)"/>
     </transition-group>
