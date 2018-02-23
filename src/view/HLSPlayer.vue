@@ -7,7 +7,7 @@
       <li @click="ratio=0"><a>铺满</a></li>
       <li
         v-for="ar in allowedAspectRatio"
-        :key="ar"
+        :key="ar[0]/ar[1]"
         @click="ratio=ar[1]/ar[0]">
         <a>{{ ar[0] }}:{{ ar[1] }}</a>
       </li>
@@ -140,8 +140,8 @@
 
           <tbody>
             <tr
-              v-for="program in currentEPG"
-              :key="program.title"
+              v-for="(program, index) in currentEPG"
+              :key="index"
               :class="{'current-program': program.now}">
               <td>{{ program.date }}</td>
               <td>{{ program.start }} - {{ program.stop }}</td>
