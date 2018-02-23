@@ -14,7 +14,7 @@
         :key="c.Vid"
         :detail="detail"
         :class="{selected: selectedChannel === c}"
-        @mouseover.native="selected = index"
+        @mousemove.native="selected = index"
         @channel="$emit('channel', $event)"
         @noimage="$emit('noimage', $event)"/>
     </transition-group>
