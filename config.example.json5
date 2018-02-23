@@ -36,10 +36,14 @@
 	 * urls
 	 */
 	// where to get channel list, required.
-	"channelsUrl": "https://example.com/channels.json",
+	"channelsUrlList": [
+		"https://example.com/channels.json",
+	],
 
 	// where to get the EPG information, optional.
-	"epgUrl": "https://example.com/epg.json",
+	"epgUrlList": [
+		"https://example.com/epg.json",
+	],
 
 	// where to get snapshots, required.
 	"snapshotUrl": "https://example.com/snapshot/",

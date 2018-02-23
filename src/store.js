@@ -21,11 +21,16 @@ export const store = new Vuex.Store({
     updateNow(state) {
       state.now = now();
     },
-    setChannels(state, channels) {
-      state.channels = channels;
+    addChannels(state, channels) {
+      state.channels = {
+        Categories: [
+          ...state.channels.Categories,
+          ...channels.Categories,
+        ],
+      };
     },
-    setEPG(state, epg) {
-      state.epg = epg;
+    addEPG(state, epg) {
+      state.epg = Object.assign({}, state.epg, epg);
     },
     setChannelViewers(state, channelViewers) {
       state.channelViewers = channelViewers;
@@ -42,22 +47,8 @@ export const store = new Vuex.Store({
   },
   actions: {
     fetchChannels(context) {
-      window.fetch(config.channelsUrl, {
-        mode: 'cors',
-        credentials: 'include',
-      }).then((response) => {
-        if (response.status == 200) {
-          return response.json();
-        } else {
-          console.warn('FATEL: failed to get channels!');
-        }
-      }).then((channels) => {
-        context.commit('setChannels', channels);
-      });
-    },
-    fetchEPG(context) {
-      if (config.epgUrl) {
-        window.fetch(config.epgUrl, {
+      config.channelsUrlList.forEach((url) => {
+        window.fetch(url, {
           mode: 'cors',
           credentials: 'include',
         }).then((response) => {
@@ -66,8 +57,26 @@ export const store = new Vuex.Store({
           } else {
             console.warn('FATEL: failed to get channels!');
           }
-        }).then((epg) => {
-          context.commit('setEPG', epg);
+        }).then((channels) => {
+          context.commit('addChannels', channels);
+        });
+      });
+    },
+    fetchEPG(context) {
+      if (config.epgUrlList) {
+        config.epgUrlList.forEach((url) => {
+          window.fetch(url, {
+            mode: 'cors',
+            credentials: 'include',
+          }).then((response) => {
+            if (response.status == 200) {
+              return response.json();
+            } else {
+              console.warn('FATEL: failed to get channels!');
+            }
+          }).then((epg) => {
+            context.commit('addEPG', epg);
+          });
         });
       }
     },

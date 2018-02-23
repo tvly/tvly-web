@@ -144,12 +144,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const externals = [
-  config.channelsUrl,
   config.sponsorLogoUrl,
-];
+  ...config.channelsUrlList,
+]
 
-if (config.epgUrl) {
-  externals.push(config.epgUrl);
+if (config.epgUrlList) {
+  externals.push(...config.epgUrlList);
 }
 
 // OfflinePlugin show be always the last plugin
