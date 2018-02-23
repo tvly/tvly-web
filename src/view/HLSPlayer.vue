@@ -263,15 +263,14 @@ export default {
       return categoryLink(this.$store.getters.defaultCategory);
     },
     clip() {
-      return {
-        sources: [{
-          type: 'application/x-mpegurl',
-          src: format(config.defaultHlsUrlTemplate, {
-            Vid: this.channel,
-            Category: this.channels.Categories[this.categoryIndex],
-          }),
-        }],
-      };
+      if (this.existedChannel) {
+        return {
+          sources: [{
+            type: 'application/x-mpegurl',
+            src: format(config.defaultHlsUrlTemplate, this.currentChannel),
+          }],
+        };
+      }
     },
     starIcon() {
       if (this.starred) {
@@ -295,7 +294,15 @@ export default {
   },
   watch: {
     clip(val) {
-      this.player.load(val);
+      if (!val) {
+        return;
+      }
+
+      if (this.player) {
+        this.player.load(val);
+      } else if (this.$el) {
+        this.installPlayer();
+      }
     },
     ratio(val) {
       this.applyRatio();
@@ -351,22 +358,10 @@ export default {
     }
   },
   mounted() {
-    this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
-      autoplay: this.existedChannel,
-      share: false,
-      ratio: false,
-      keyboard: false,
-      chromecast: false,
-      live: true,
-      swf,
-      swfHls,
-      hlsjs: {
-        xhrSetup: (xhr) => {
-          xhr.withCredentials = true;
-        },
-      },
-      clip: this.clip,
-    });
+    if (this.existedChannel) {
+      this.installPlayer();
+    }
+
     jQuery('.modal').modal();
     jQuery('.dropdown-button').dropdown();
     window.addEventListener('keydown', this.keyHandler);
@@ -413,14 +408,33 @@ export default {
     star() {
       this.$store.commit('toggleCollection', this.channel);
     },
+    installPlayer() {
+      this.player = flowplayer(this.$el.getElementsByClassName('player')[0], {
+        autoplay: true,
+        share: false,
+        ratio: false,
+        keyboard: false,
+        chromecast: false,
+        live: true,
+        swf,
+        swfHls,
+        hlsjs: {
+          xhrSetup: (xhr) => {
+            xhr.withCredentials = true;
+          },
+        },
+        clip: this.clip,
+      });
+    },
     applyRatio() {
       const player = this.$el.querySelector('.fp-player');
       const container = this.$el.querySelector('.player-container');
+
+      if (player === null) return;
+
       const fullscreen = this.player.isFullscreen;
       const containerWidth = container.clientWidth;
       const containerHeight = container.clientHeight;
-
-      if (player === null) return;
 
       // clear
       Object.assign(player.style, {
@@ -459,7 +473,7 @@ export default {
         case 'Esc': // keyIdentifier
         case 'U+001B': // keyIdentifier
         case 'Escape':
-          if (!this.player.isFullscreen) {
+          if (this.player && !this.player.isFullscreen) {
             this.$router.push(this.backLink);
           }
           break;
@@ -498,17 +512,23 @@ export default {
         case 'Plus': // keyIdentifier
         case 'U+002B': // keyIdentifier
         case '+':
-          this.player.volume(Math.min(this.player.volumeLevel + 0.1, 1));
+          if (this.player) {
+            this.player.volume(Math.min(this.player.volumeLevel + 0.1, 1));
+          }
           break;
         case 'HyphenMinus': // keyIdentifier
         case 'U+002D': // keyIdentifier
         case '-':
-          this.player.volume(Math.max(this.player.volumeLevel - 0.1, 0));
+          if (this.player) {
+            this.player.volume(Math.max(this.player.volumeLevel - 0.1, 0));
+          }
           break;
         case 'F': // keyIdentifier
         case 'U+0046': // keyIdentifier
         case 'f':
-          this.player.fullscreen();
+          if (this.player) {
+            this.player.fullscreen();
+          }
           break;
         case 'Enter':
         case 'Spacebar': // keyIdentifier
@@ -516,8 +536,10 @@ export default {
         case ' ':
         case 'Unidentified': // XXX: Assumed to be enter
         case 'MediaPlayPause':
-          this.player.play();
-          this.player.fullscreen();
+          if (this.player) {
+            this.player.play();
+            this.player.fullscreen();
+          }
           break;
         case 'P': // keyIdentifier
         case 'U+0050': // keyIdentifier
@@ -529,7 +551,9 @@ export default {
         case 'M': // keyIdentifier
         case 'U+004D': // keyIdentifier
         case 'm': {
-          this.player.mute(!this.player.muted);
+          if (this.player) {
+            this.player.mute(!this.player.muted);
+          }
           break;
         }
         case 'QuestionMark': // KeyIdentifier
