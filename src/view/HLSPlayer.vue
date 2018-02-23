@@ -210,6 +210,8 @@ export default {
         case 'U+0048': // keyIdentifier
         case 'ArrowLeft':
         case 'h':
+        case 'ChannelDown':
+        case 'PageDown':
           this.switchChannel(-1);
           break;
         case 'Right': // keyIdentifier
@@ -217,6 +219,8 @@ export default {
         case 'U+004C': // keyIdentifier
         case 'ArrowRight':
         case 'l':
+        case 'ChannelUp':
+        case 'PageUp':
           this.switchChannel(1);
           break;
         case 'Up': // keyIdentifier
@@ -246,6 +250,15 @@ export default {
         case 'F': // keyIdentifier
         case 'U+0046': // keyIdentifier
         case 'f':
+          this.player.fullscreen();
+          break;
+        case 'Enter':
+        case 'Spacebar': // keyIdentifier
+        case 'U+0020': // keyIdentifier
+        case ' ':
+        case 'Unidentified': // XXX: Assumed to be enter
+        case 'MediaPlayPause':
+          this.player.play();
           this.player.fullscreen();
           break;
         case 'P': // keyIdentifier
