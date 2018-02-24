@@ -59,9 +59,12 @@ export default {
   },
   computed: {
     snapshot() {
-      return `${format(
-        config.defaultSnapshotUrlTemplate, this.channel
-      )}?${this.time}`;
+      const currentCategory = this.$store.getters.getCategory(
+        this.channel.Category);
+      const template = (this.channel.snapshotUrlTemplate
+        || currentCategory.snapshotUrlTemplate
+        || config.defaultSnapshotUrlTemplate);
+      return `${format(template, this.channel)}?${this.time}`;
     },
     channelLink() {
       return channelLink(this.channel);

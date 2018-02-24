@@ -22,10 +22,16 @@ export const store = new Vuex.Store({
       state.now = now();
     },
     addChannels(state, channels) {
+      const categories = channels.Categories;
+      const defaults = Object.assign({}, channels);
+      delete defaults.Categories;
+      const categoriesWithDefaults = categories.map((c) => {
+        return Object.assign({}, defaults, c);
+      });
       state.channels = {
         Categories: [
           ...state.channels.Categories,
-          ...channels.Categories,
+          ...categoriesWithDefaults,
         ],
       };
     },

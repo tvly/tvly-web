@@ -264,10 +264,15 @@ export default {
     },
     clip() {
       if (this.existedChannel) {
+        const currentCategory = this.$store.getters.getCategory(
+          this.currentChannel.Category);
+        const template = (this.currentChannel.hlsUrlTemplate
+          || currentCategory.hlsUrlTemplate
+          || config.defaultHlsUrlTemplate);
         return {
           sources: [{
             type: 'application/x-mpegurl',
-            src: format(config.defaultHlsUrlTemplate, this.currentChannel),
+            src: format(template, this.currentChannel),
           }],
         };
       }
