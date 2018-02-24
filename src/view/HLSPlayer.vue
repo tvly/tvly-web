@@ -266,8 +266,8 @@ export default {
       if (this.existedChannel) {
         const currentCategory = this.$store.getters.getCategory(
           this.currentChannel.Category);
-        const template = (this.currentChannel.hlsUrlTemplate
-          || currentCategory.hlsUrlTemplate
+        const template = (this.currentChannel.HlsUrlTemplate
+          || currentCategory.HlsUrlTemplate
           || config.defaultHlsUrlTemplate);
         return {
           sources: [{

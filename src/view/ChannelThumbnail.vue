@@ -61,8 +61,8 @@ export default {
     snapshot() {
       const currentCategory = this.$store.getters.getCategory(
         this.channel.Category);
-      const template = (this.channel.snapshotUrlTemplate
-        || currentCategory.snapshotUrlTemplate
+      const template = (this.channel.SnapshotUrlTemplate
+        || currentCategory.SnapshotUrlTemplate
         || config.defaultSnapshotUrlTemplate);
       return `${format(template, this.channel)}?${this.time}`;
     },
