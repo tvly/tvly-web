@@ -15,9 +15,9 @@
     </div>
     <div class="modal-footer">
       <a
+        v-if="auth"
         href="#!"
         class="modal-action modal-close waves-effect waves-green btn-flat"
-        v-if="auth"
         @click="doLogin">跳转</a>
       <a
         href="#!"

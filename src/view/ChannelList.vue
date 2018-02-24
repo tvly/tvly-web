@@ -1,19 +1,19 @@
 <template>
   <div class="container">
     <transition-group
+      id="list"
       tag="div"
       appear
       name="channel-list"
       mode="out-in"
-      class="row"
-      id="list">
+      class="row">
       <channel-thumbnail
         v-for="(c, index) in filteredList"
-        class="col l4 m6 s12 channel-list-item"
         :channel="c"
         :key="c.Vid"
         :detail="detail"
         :selected="selectedChannel === c"
+        class="col l4 m6 s12 channel-list-item"
         @mousemove.native="selected = index"
         @touchmove.native="selected = index"
         @channel="$emit('channel', $event)"

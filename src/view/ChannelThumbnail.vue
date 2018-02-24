@@ -1,19 +1,19 @@
 <template>
   <div :class="{compact: !detail}">
     <div
-      class="card"
-      :class="{'z-depth-5': selected}">
+      :class="{'z-depth-5': selected}"
+      class="card">
       <div
-        class="card-image"
-        v-if="detail">
+        v-if="detail"
+        class="card-image">
         <img
           :src="snapshot"
+          :alt="'Snapshot of ' + channel['Name']"
           @click="switchChannel"
-          @error="$emit('noimage')"
-          :alt="'Snapshot of ' + channel['Name']">
+          @error="$emit('noimage')">
         <a
-          @click="switchChannel"
-          class="btn-floating halfway-fab">
+          class="btn-floating halfway-fab"
+          @click="switchChannel">
           <i class="material-icons">play_arrow</i>
         </a>
       </div>
@@ -23,15 +23,15 @@
         <p class="title">
           {{ channel.Name }}
           <span
-            class="viewers"
-            v-if="hasChannelViewers">
+            v-if="hasChannelViewers"
+            class="viewers">
             <i class="material-icons">remove_red_eye</i>
             {{ viewers }}
           </span>
         </p>
         <p
-          class="program-title"
-          v-if="currentProgram">{{ currentProgram.title }}</p>
+          v-if="currentProgram"
+          class="program-title">{{ currentProgram.title }}</p>
       </div>
     </div>
   </div>

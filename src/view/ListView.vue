@@ -35,8 +35,8 @@
             </div>
             <a>
               <img
-                class="circle"
                 :src="avatar"
+                class="circle"
                 alt="avatar">
             </a>
             <a><span class="white-text type">{{ userType }}</span></a>
@@ -45,25 +45,25 @@
         </li>
         <li class="search">
           <div
-            class="search-wrapper card"
-            :class="{focused: filter || searching}">
+            :class="{focused: filter || searching}"
+            class="search-wrapper card">
             <input
               id="search"
-              type="search"
               v-model="filter"
+              type="search"
               @focus="searching = true"
               @blur="searching = false">
             <i
-              class="material-icons"
               v-if="filter"
+              class="material-icons"
               @click="filter = ''">close</i>
             <speech-recognition
               v-else-if="voidSearch"
-              @result="filter = $event"
-              :options="recognitionOption"/>
+              :options="recognitionOption"
+              @result="filter = $event"/>
             <i
-              class="material-icons"
-              v-else>search</i>
+              v-else
+              class="material-icons">search</i>
           </div>
         </li>
         <li
@@ -118,11 +118,11 @@
           href="#!"
           class="modal-action modal-close waves-effect waves-green btn-flat"
           @click="detail = false">
-        禁用</a>
+          禁用</a>
         <a
           href="#!"
           class="modal-action modal-close waves-effect waves-green btn-flat">
-        取消</a>
+          取消</a>
       </div>
     </div>
   </div>

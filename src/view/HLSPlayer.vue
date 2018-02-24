@@ -20,8 +20,8 @@
           <i class="material-icons">arrow_back</i>
         </router-link>
         <a
-          class="brand-logo channel-title"
-          :class="{center: notMobile}">
+          :class="{center: notMobile}"
+          class="brand-logo channel-title">
           <span class="hide-on-small-only">
             {{ currentChannel.Category }}/
           </span>
@@ -33,8 +33,8 @@
             class="hide-on-small-only icon">
             <a>
               <i
-                class="zmdi"
-                :class="[engineIcon]"/>
+                :class="[engineIcon]"
+                class="zmdi"/>
             </a>
           </li>
           <li
@@ -46,17 +46,17 @@
             v-if="currentEPG"
             class="hide-on-small-only icon">
             <a
+              id="epg"
               class="modal-trigger"
-              href="#epg-modal"
-              id="epg">
+              href="#epg-modal">
               <i class="material-icons">playlist_play</i>
             </a>
           </li>
           <li class="hide-on-small-only icon">
             <a
+              id="help"
               class="modal-trigger"
-              href="#help-modal"
-              id="help">
+              href="#help-modal">
               <i class="material-icons">keyboard</i>
             </a>
           </li>

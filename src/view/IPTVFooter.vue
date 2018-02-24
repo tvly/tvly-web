@@ -31,10 +31,10 @@
             </li>
             <li v-if="mailbox">
               <a
+                :href="'mailto:' + mailbox"
                 class="grey-text text-lighten-3"
                 target="_blank"
-                rel="noopener"
-                :href="'mailto:' + mailbox">
+                rel="noopener">
                 <i class="zmdi zmdi-email zmdi-hc-li"/>Email
               </a>
             </li>
@@ -45,10 +45,10 @@
             </li>
             <li v-if="telegram">
               <a
+                :href="'https://t.me/joinchat/' + telegram"
                 class="grey-text text-lighten-3"
                 target="_blank"
-                rel="noopener"
-                :href="'https://t.me/joinchat/' + telegram">
+                rel="noopener">
                 <i class="fa fa-li fa-telegram"/>Telegram
               </a>
             </li>
