@@ -72,7 +72,7 @@ export const store = new Vuex.Store({
             if (response.status == 200) {
               return response.json();
             } else {
-              console.warn('FATEL: failed to get channels!');
+              console.warn('FATEL: failed to get EPG!');
             }
           }).then((epg) => {
             context.commit('addEPG', epg);
