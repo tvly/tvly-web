@@ -149,7 +149,6 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
-
     // OfflinePlugin show be always the last plugin
     new OfflinePlugin({
       externals,
@@ -164,5 +163,9 @@ if (process.env.NODE_ENV === 'production') {
       },
       AppCache: false,
     }),
+  ]);
+} else {
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.NamedModulesPlugin(),
   ]);
 }
