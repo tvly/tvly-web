@@ -227,6 +227,9 @@ export default {
     currentChannel() {
       return this.$store.getters.getChannel(this.channel) || {};
     },
+    currentCategory() {
+      return this.channels.Categories[this.categoryIndex];
+    },
     existedChannel() {
       return this.$store.getters.hasChannel(this.channel);
     },
@@ -236,8 +239,7 @@ export default {
       });
     },
     channelIndex() {
-      const category = this.channels.Categories[this.categoryIndex];
-      return category.Channels.findIndex((channel) => {
+      return this.currentCategory.Channels.findIndex((channel) => {
         return channel['Vid'] === this.channel;
       });
     },
@@ -247,8 +249,7 @@ export default {
           name: this.from,
         };
       } else {
-        const category = this.channels.Categories[this.categoryIndex];
-        return category ? categoryLink(category) : {};
+        return this.currentCategory ? categoryLink(this.currentCategory) : {};
       }
     },
     fallbackUrl() {
@@ -264,10 +265,8 @@ export default {
     },
     clip() {
       if (this.existedChannel) {
-        const currentCategory = this.$store.getters.getCategory(
-          this.currentChannel.Category);
         const template = (this.currentChannel.HlsUrlTemplate
-          || currentCategory.HlsUrlTemplate
+          || this.currentCategory.HlsUrlTemplate
           || config.defaultHlsUrlTemplate);
         return {
           sources: [{
@@ -577,13 +576,12 @@ export default {
     },
     switchChannel(offset) {
       if (this.from === 'channel') {
-        const currentCategory = this.channels.Categories[this.categoryIndex];
         const nextChannelIndex = this.channelIndex + offset;
         if (nextChannelIndex >= 0 &&
-              nextChannelIndex < currentCategory.Channels.length) {
+              nextChannelIndex < this.currentCategory.Channels.length) {
           this.$router.replace(
             channelLink(
-              currentCategory.Channels[nextChannelIndex].Vid, this.from));
+              this.currentCategory.Channels[nextChannelIndex].Vid, this.from));
         }
       }
     },
