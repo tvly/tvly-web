@@ -10,6 +10,7 @@
       <channel-thumbnail
         v-for="(c, index) in filteredList"
         :channel="c"
+        :category="category"
         :key="c.Vid"
         :detail="detail"
         :selected="selectedChannel === c"

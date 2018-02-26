@@ -50,6 +50,7 @@ export default {
     channel: Object,
     detail: Boolean,
     selected: Boolean,
+    category: String,
   },
   data() {
     return {
@@ -59,10 +60,9 @@ export default {
   },
   computed: {
     snapshot() {
-      const currentCategory = this.$store.getters.getCategory(
-        this.channel.Category);
       const template = (this.channel.SnapshotUrlTemplate
-        || currentCategory.SnapshotUrlTemplate
+        || (this.category &&
+            this.$store.getters.getCategory(this.category).SnapshotUrlTemplate)
         || config.defaultSnapshotUrlTemplate);
       return `${format(template, this.channel)}?${this.time}`;
     },
