@@ -155,8 +155,9 @@ export const store = new Vuex.Store({
     channelMap(state) {
       return [].concat(...state.channels.Categories.map((c) => {
         return c.Channels.map((ch) => {
-          ch.Category = c.Name;
-          return ch;
+          return Object.assign({}, ch, {
+            Category: c.Name,
+          });
         });
       })).reduce((acc, cur) => {
         acc[cur.Vid] = cur;
