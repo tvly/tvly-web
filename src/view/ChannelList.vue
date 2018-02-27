@@ -33,8 +33,10 @@ import {categoryLink} from '../route/link.js';
 
 import ChannelThumbnail from './ChannelThumbnail.vue';
 
-// set edgeOffset of zenroll to zero
-zenscroll.setup(null, 0);
+// set edgeOffset of zenroll to one
+// this value is proper for it both ensure element is in view and will not
+// reveal the close elements.
+zenscroll.setup(null, 1);
 
 export default {
   name: 'ChannelList',
