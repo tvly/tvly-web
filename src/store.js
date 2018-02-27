@@ -16,6 +16,7 @@ export const store = new Vuex.Store({
     epg: {},
     collections: JSON.parse(window.localStorage.starredChannels || '[]'),
     channelViewers: {},
+    jsonUrlCompleted: 0,
   },
   mutations: {
     updateNow(state) {
@@ -50,6 +51,9 @@ export const store = new Vuex.Store({
       }
       window.localStorage.starredChannels = JSON.stringify(state.collections);
     },
+    channelsUrlCompleted(state) {
+      state.jsonUrlCompleted += 1;
+    },
   },
   actions: {
     fetchChannels(context) {
@@ -65,7 +69,9 @@ export const store = new Vuex.Store({
           }
         }).then((channels) => {
           context.commit('addChannels', channels);
-        });
+        }).then(
+          () => context.commit('channelsUrlCompleted'),
+          () => context.commit('channelsUrlCompleted'));
       });
     },
     fetchEPG(context) {
@@ -116,7 +122,8 @@ export const store = new Vuex.Store({
   },
   getters: {
     defaultCategory(state) {
-      if (state.channels.Categories.length > 0) {
+      if (state.jsonUrlCompleted === config.channelsUrlList.length &&
+          state.channels.Categories.length > 0) {
         return state.channels.Categories[0];
       }
     },
