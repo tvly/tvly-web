@@ -2,7 +2,9 @@
   <div :class="{compact: !detail}">
     <div
       :class="{'z-depth-5': selected}"
-      class="card">
+      class="card"
+      @mousemove="$emit('hover')"
+      @touchmove="$emit('hover')">
       <div
         v-if="detail"
         class="card-image">

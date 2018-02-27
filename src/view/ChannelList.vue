@@ -15,8 +15,7 @@
         :detail="detail"
         :selected="selectedChannel === c"
         class="col l4 m6 s12 channel-list-item"
-        @mousemove.native="selected = index"
-        @touchmove.native="selected = index"
+        @hover="selected = index"
         @channel="$emit('channel', $event)"/>
     </transition-group>
   </div>
@@ -33,6 +32,9 @@ import zenscroll from 'zenscroll';
 import {categoryLink} from '../route/link.js';
 
 import ChannelThumbnail from './ChannelThumbnail.vue';
+
+// set edgeOffset of zenroll to zero
+zenscroll.setup(null, 0);
 
 export default {
   name: 'ChannelList',
