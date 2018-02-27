@@ -26,6 +26,7 @@
 <script>
 import fuzzy from 'fuzzy';
 import {mapGetters} from 'vuex';
+import {debounce} from 'underscore';
 
 window.noZensmooth = true;
 import zenscroll from 'zenscroll';
@@ -50,6 +51,10 @@ export default {
     };
   },
   computed: {
+    selectedElement() {
+      return this.$el.querySelector(
+        `.channel-list-item:nth-child(${this.selected + 1})`);
+    },
     channelList() {
       if (this.$route.name === 'channel') {
         return this.$store.getters.channelList(this.category);
@@ -109,16 +114,17 @@ export default {
       } else if (val === this.filteredList.length) {
         zenscroll.toY(document.documentElement.scrollHeight);
       } else {
-        const selector = `.channel-list-item:nth-child(${this.selected + 1})`;
-        zenscroll.intoView(this.$el.querySelector(selector));
+        zenscroll.intoView(this.selectedElement);
       }
     },
   },
   mounted() {
     window.addEventListener('keydown', this.keyHandler);
+    window.addEventListener('scroll', this.scrollHandler);
   },
   beforeDestroy() {
     window.removeEventListener('keydown', this.keyHandler);
+    window.removeEventListener('scroll', this.scrollHandler);
   },
   methods: {
     toCategory(index) {
@@ -132,6 +138,25 @@ export default {
       }
       this.$router.push(target);
     },
+    scrollHandler: debounce(function(event) {
+      /* eslint-disable no-invalid-this */
+      if (this.selectedElement) {
+        const rect = this.selectedElement.getBoundingClientRect();
+        if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+          // no need to find no selected element
+          return;
+        }
+      }
+      const switchTo = Array.prototype.findIndex.call(
+        this.$el.querySelectorAll('.channel-list-item'),
+        (el) => el.getBoundingClientRect().top >= 0);
+      if (switchTo >= 0) {
+        this.selected = switchTo;
+      } else {
+        this.selected = this.filteredList.length - 1;
+      }
+      /* eslint-enable no-invalid-this */
+    }, 200),
     keyHandler(event) {
       let captured = true;
       // workaround for safari
