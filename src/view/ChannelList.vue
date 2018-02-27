@@ -25,7 +25,7 @@
 
 <script>
 import fuzzy from 'fuzzy';
-import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 
 import {categoryLink} from '../route/link.js';
 import {ensureVisible} from '../dom.js';
@@ -88,7 +88,7 @@ export default {
         (category) => category.Name === this.category
       ) : this.channels.Categories.length;
     },
-    ...mapState([
+    ...mapGetters([
       'channels',
     ]),
   },

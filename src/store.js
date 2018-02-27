@@ -10,31 +10,28 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     now: now(),
-    channels: {
-      Categories: [],
-    },
     epg: {},
     collections: JSON.parse(window.localStorage.starredChannels || '[]'),
     channelViewers: {},
     jsonUrlCompleted: 0,
+
+    // Initialized with an array of empty array
+    // with the length of channelsUrlList
+    fetchedCategories: Array.from(
+      Array(config.channelsUrlList.length)).map(() => []),
   },
   mutations: {
     updateNow(state) {
       state.now = now();
     },
-    addChannels(state, channels) {
+    addChannels(state, {channels, index}) {
       const categories = channels.Categories;
       const defaults = Object.assign({}, channels);
       delete defaults.Categories;
       const categoriesWithDefaults = categories.map((c) => {
         return Object.assign({}, defaults, c);
       });
-      state.channels = {
-        Categories: [
-          ...state.channels.Categories,
-          ...categoriesWithDefaults,
-        ],
-      };
+      Vue.set(state.fetchedCategories, index, categoriesWithDefaults);
     },
     addEPG(state, epg) {
       state.epg = Object.assign({}, state.epg, epg);
@@ -57,7 +54,7 @@ export const store = new Vuex.Store({
   },
   actions: {
     fetchChannels(context) {
-      config.channelsUrlList.forEach((url) => {
+      config.channelsUrlList.forEach((url, index) => {
         window.fetch(url, {
           mode: 'cors',
           credentials: 'include',
@@ -68,7 +65,7 @@ export const store = new Vuex.Store({
             console.warn('FATEL: failed to get channels!');
           }
         }).then((channels) => {
-          context.commit('addChannels', channels);
+          context.commit('addChannels', {channels, index});
         }).then(
           () => context.commit('channelsUrlCompleted'),
           () => context.commit('channelsUrlCompleted'));
@@ -121,10 +118,10 @@ export const store = new Vuex.Store({
     },
   },
   getters: {
-    defaultCategory(state) {
+    defaultCategory(state, getters) {
       if (state.jsonUrlCompleted === config.channelsUrlList.length &&
-          state.channels.Categories.length > 0) {
-        return state.channels.Categories[0];
+          getters.channels.Categories.length > 0) {
+        return getters.channels.Categories[0];
       }
     },
     channelList(state, getters) {
@@ -133,9 +130,9 @@ export const store = new Vuex.Store({
         return category ? category.Channels : [];
       };
     },
-    getCategory(state) {
+    getCategory(state, getters) {
       return (categoryName) => {
-        return state.channels.Categories.find(
+        return getters.channels.Categories.find(
           (c) => c['Name'] == categoryName
         );
       };
@@ -159,8 +156,8 @@ export const store = new Vuex.Store({
     inCollection(state) {
       return (channel) => state.collections.includes(channel);
     },
-    channelMap(state) {
-      return [].concat(...state.channels.Categories.map((c) => {
+    channelMap(state, getters) {
+      return [].concat(...getters.channels.Categories.map((c) => {
         return c.Channels.map((ch) => {
           return Object.assign({}, ch, {
             Category: c.Name,
@@ -175,6 +172,11 @@ export const store = new Vuex.Store({
       return state.collections.map((col) => {
         return getters.channelMap[col];
       }).filter((channel) => !!channel);
+    },
+    channels(state) {
+      return {
+        Categories: [].concat.apply(...state.fetchedCategories),
+      };
     },
   },
 });

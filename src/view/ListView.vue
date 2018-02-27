@@ -131,7 +131,7 @@
 <script>
 import jQuery from 'jquery';
 import Modernizr from 'modernizr';
-import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 
 import IPTVFooter from './IPTVFooter.vue';
 import CastController from './CastController.vue';
@@ -204,7 +204,7 @@ export default {
         return 'view_list';
       }
     },
-    ...mapState([
+    ...mapGetters([
       'channels',
     ]),
   },
