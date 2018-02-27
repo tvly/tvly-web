@@ -27,8 +27,10 @@
 import fuzzy from 'fuzzy';
 import {mapGetters} from 'vuex';
 
+window.noZensmooth = true;
+import zenscroll from 'zenscroll';
+
 import {categoryLink} from '../route/link.js';
-import {ensureVisible} from '../dom.js';
 
 import ChannelThumbnail from './ChannelThumbnail.vue';
 
@@ -103,16 +105,12 @@ export default {
     },
     selected(val) {
       if (val < 0) {
-        window.scrollTo({left: 0, top: 0, behavior: 'smooth'});
+        zenscroll.toY(0);
       } else if (val === this.filteredList.length) {
-        window.scrollTo({left: 0, top: document.body.scrollHeight,
-          behavior: 'smooth'});
+        zenscroll.toY(document.documentElement.scrollHeight);
       } else {
         const selector = `.channel-list-item:nth-child(${this.selected + 1})`;
-        const selectedElement = this.$el.querySelector(selector);
-        if (selectedElement) {
-          ensureVisible(selectedElement);
-        }
+        zenscroll.intoView(this.$el.querySelector(selector));
       }
     },
   },

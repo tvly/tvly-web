@@ -19,7 +19,6 @@
     "materialize-css": "^0.100.2",
     "node-sass": "^4.7.2",
     "offline-plugin": "^4.9.0",
-    "smoothscroll-polyfill": "^0.4.0",
     "strftime": "^0.10.0",
     "string-template": "^1.0.0",
     "universal-ga": "^1.2.0",
@@ -27,7 +26,8 @@
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "zenscroll": "^4.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
