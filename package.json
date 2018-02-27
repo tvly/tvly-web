@@ -1,11 +1,11 @@
 {
   "name": "iptv",
   "description": "A Vue.js based iptv frontend",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Hui Yiqun <huiyiqun@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --host 0.0.0.0",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
