@@ -146,7 +146,7 @@ export default {
       if (this.selectedElement) {
         const rect = this.selectedElement.getBoundingClientRect();
         if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-          // no need to find no selected element
+          // no need to find new selected element
           return;
         }
       }
