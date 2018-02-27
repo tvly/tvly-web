@@ -9,8 +9,7 @@
         <img
           :src="snapshot"
           :alt="'Snapshot of ' + channel['Name']"
-          @click="switchChannel"
-          @error="$emit('noimage')">
+          @click="switchChannel">
         <a
           class="btn-floating halfway-fab"
           @click="switchChannel">

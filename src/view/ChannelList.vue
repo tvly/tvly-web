@@ -17,8 +17,7 @@
         class="col l4 m6 s12 channel-list-item"
         @mousemove.native="selected = index"
         @touchmove.native="selected = index"
-        @channel="$emit('channel', $event)"
-        @noimage="$emit('noimage', $event)"/>
+        @channel="$emit('channel', $event)"/>
     </transition-group>
   </div>
 </template>

@@ -100,31 +100,11 @@
       <router-view
         :filter="filter"
         :detail="detail"
-        @noimage="queryThumbnail"
         @channel="switchChannel($event)"/>
     </main>
 
     <iptv-footer/>
 
-    <div
-      id="no-image"
-      class="modal">
-      <div class="modal-content">
-        <h4>不能加载缩略图</h4>
-        <p>当前不能加载缩略图，是否禁用？</p>
-      </div>
-      <div class="modal-footer">
-        <a
-          href="#!"
-          class="modal-action modal-close waves-effect waves-green btn-flat"
-          @click="detail = false">
-          禁用</a>
-        <a
-          href="#!"
-          class="modal-action modal-close waves-effect waves-green btn-flat">
-          取消</a>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -248,7 +228,6 @@ export default {
       closeOnClick: true,
       draggable: true,
     });
-    jQuery('#no-image').modal();
   },
   beforeDestroy() {
     this.navBtn.sideNav('destroy');
@@ -263,9 +242,6 @@ export default {
       } else {
         this.$router.push(channelLink(channel.Vid, this.$route.name));
       }
-    },
-    queryThumbnail() {
-      jQuery('#no-image').modal('open');
     },
     categoryLink,
   },
