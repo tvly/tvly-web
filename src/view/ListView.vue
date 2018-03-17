@@ -100,6 +100,7 @@
       <router-view
         :filter="filter"
         :detail="detail"
+        :disable-key-binding="searching"
         @channel="switchChannel($event)"/>
     </main>
 

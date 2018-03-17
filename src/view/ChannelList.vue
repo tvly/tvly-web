@@ -47,6 +47,7 @@ export default {
     filter: String,
     detail: Boolean,
     category: String,
+    disableKeyBinding: Boolean,
   },
   data() {
     return {
@@ -161,6 +162,9 @@ export default {
       /* eslint-enable no-invalid-this */
     }, 200),
     keyHandler(event) {
+      if (this.disableKeyBinding) {
+        return;
+      }
       let captured = true;
       // workaround for safari
       switch (event.key || event.keyIdentifier) {
