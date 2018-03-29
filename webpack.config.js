@@ -138,6 +138,8 @@ if (process.env.NODE_ENV === 'production') {
           mode: 'cors',
         },
         cacheName: config.cacheName,
+        // https://github.com/NekR/offline-plugin/issues/351
+        minify: false,
       },
       AppCache: false,
     }),
