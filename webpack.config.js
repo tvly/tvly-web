@@ -10,6 +10,7 @@ const meta = require('./package');
 
 module.exports = {
   entry: ['babel-polyfill', 'whatwg-fetch', './src/main.js'],
+  mode: process.env.NODE_ENV || 'production',
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'build.js',
@@ -103,9 +104,6 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
   },
-  performance: {
-    hints: false,
-  },
   plugins: [
     new webpack.DefinePlugin({
       WEBPACK_APP_VERSION: JSON.stringify(meta.version),
@@ -119,36 +117,16 @@ module.exports = {
       'window.jQuery': 'jquery',
     }),
   ],
-  devtool: '#eval-source-map',
 };
 
 if (process.env.NODE_ENV === 'production') {
   const externals = [
     config.sponsorLogoUrl,
     ...config.channelsUrlList,
+    ...(config.epgUrlList || []),
   ]
 
-  if (config.epgUrlList) {
-    externals.push(...config.epgUrlList);
-  }
-
-  module.exports.devtool = '#source-map';
-  // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"',
-      },
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false,
-      },
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-    }),
     // OfflinePlugin show be always the last plugin
     new OfflinePlugin({
       externals,
@@ -163,9 +141,5 @@ if (process.env.NODE_ENV === 'production') {
       },
       AppCache: false,
     }),
-  ]);
-} else {
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.NamedModulesPlugin(),
   ]);
 }
