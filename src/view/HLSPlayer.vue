@@ -199,7 +199,6 @@ export default {
         [4, 3],
       ],
       engine: '',
-      player: null,
       ratio: null,
       notMobile: notMobile(),
     };
