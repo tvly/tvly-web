@@ -43,7 +43,7 @@
             <a><i class="material-icons">{{ starIcon }}</i></a>
           </li>
           <li
-            v-if="currentEPG"
+            v-if="currentEPG && !currentChannel.Record"
             class="hide-on-small-only icon">
             <a
               id="epg"
@@ -418,7 +418,7 @@ export default {
         ratio: false,
         keyboard: false,
         chromecast: false,
-        live: true,
+        live: !this.currentChannel.Record,
         swf,
         swfHls,
         hlsjs: {
