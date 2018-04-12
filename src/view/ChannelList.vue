@@ -24,7 +24,7 @@
 <script>
 import fuzzy from 'fuzzy';
 import {mapGetters} from 'vuex';
-import {debounce} from 'underscore';
+import {debounce} from 'lodash';
 
 window.noZensmooth = true;
 import zenscroll from 'zenscroll';
