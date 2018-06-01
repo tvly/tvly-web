@@ -165,6 +165,9 @@ export default {
       if (this.disableKeyBinding) {
         return;
       }
+      if (event.altKey || event.ctrlKey) {
+        return;
+      }
       let captured = true;
       // workaround for safari
       switch (event.key || event.keyIdentifier) {

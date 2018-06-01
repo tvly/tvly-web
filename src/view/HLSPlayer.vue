@@ -471,6 +471,10 @@ export default {
     },
     keyHandler(event) {
       let captured = true;
+      if (event.altKey || event.ctrlKey) {
+        console.warn(`Ignored key event as alt or ctrl is pressed`, event);
+        return;
+      }
       // workaround for safari
       switch (event.key || event.keyIdentifier) {
         case 'Esc': // keyIdentifier
