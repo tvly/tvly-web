@@ -34,6 +34,7 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 * [Henan Polytechnic University](http://iptv.hpu.edu.cn)
 * [Zhoukou Normal University](http://tv.zknu.edu.cn)
 * [Nanchang Hangkong University](http://iptv.nchu.edu.cn)
+* [Dalian University of Technology](http://video.dlut.edu.cn)
 * Some other universities in Henan Province
 
 ## Credit
