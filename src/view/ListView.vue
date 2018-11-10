@@ -319,7 +319,7 @@ ul.sidenav {
 
       i.material-icons {
         position: absolute;
-        top: 10px;
+        top: 0px;
         right: 10px;
         cursor: pointer;
       }
