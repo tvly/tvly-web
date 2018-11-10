@@ -616,7 +616,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~materialize-css/sass/materialize.scss";
+// for media variables
+@import "~materialize-css/sass/components/color-variables";
+@import "~materialize-css/sass/components/variables";
 
 .page {
   height: 100vh;
