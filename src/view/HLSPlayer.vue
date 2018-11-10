@@ -156,6 +156,7 @@
 
 <script>
 import Materialize from 'materialize-css';
+import HlsEvents from 'hls.js/src/events';
 
 import flowplayer from 'flowplayer';
 import Modernizr from 'modernizr';
@@ -402,6 +403,15 @@ export default {
     }
   },
   beforeDestroy() {
+    // clean up hls.js
+    if (this.player.engine.hls) {
+      const hls = this.player.engine.hls;
+      hls.stopLoad();
+      hls.trigger(HlsEvents.BUFFER_RESET);
+    }
+
+    this.player.shutdown();
+
     window.removeEventListener('keydown', this.keyHandler);
     window.removeEventListener('resize', this.applyRatio);
     window.removeEventListener('resize', this.resizeHandler);
