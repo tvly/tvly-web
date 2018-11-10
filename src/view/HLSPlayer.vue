@@ -14,11 +14,6 @@
     </ul>
     <nav>
       <div class="nav-wrapper">
-        <router-link
-          :to="backLink"
-          class="button-collapse show-on-large">
-          <i class="material-icons">arrow_back</i>
-        </router-link>
         <a
           :class="{center: notMobile}"
           class="brand-logo channel-title">
@@ -27,6 +22,11 @@
           </span>
           {{ currentChannel.Name }}
         </a>
+        <router-link
+          :to="backLink"
+          class="sidenav-trigger show-on-large">
+          <i class="material-icons">arrow_back</i>
+        </router-link>
         <ul class="right">
           <li
             v-if="engine"
@@ -63,8 +63,8 @@
           <li class="icon">
             <a
               href="#"
-              class="dropdown-button"
-              data-activates="scale-menu">
+              class="dropdown-trigger"
+              data-target="scale-menu">
               <i class="material-icons">settings_overscan</i>
             </a>
           </li>
@@ -362,8 +362,9 @@ export default {
       this.installPlayer();
     }
 
+    // TODO: clean up
     jQuery('.modal').modal();
-    jQuery('.dropdown-button').dropdown();
+    jQuery('.dropdown-trigger').dropdown();
     window.addEventListener('keydown', this.keyHandler);
     window.addEventListener('resize', this.applyRatio);
     window.addEventListener('resize', this.resizeHandler);

@@ -22,79 +22,80 @@
           </div>
         </div>
       </nav>
-    </header>
 
-    <ul
-      id="nav-menu"
-      class="sidenav sidenav-fixed">
-      <li>
-        <div class="user-view">
-          <div class="background">
-            <img
-              :src="background"
-              alt="background">
+      <ul
+        id="nav-menu"
+        class="sidenav sidenav-fixed">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img
+                :src="background"
+                alt="background">
+            </div>
+            <a>
+              <img
+                :src="avatar"
+                class="circle"
+                alt="avatar">
+            </a>
+            <a><span class="white-text type">{{ userType }}</span></a>
+            <a><span class="white-text uid">{{ uid }}</span></a>
           </div>
-          <a>
-            <img
-              :src="avatar"
-              class="circle"
-              alt="avatar">
+        </li>
+        <li class="search">
+          <div
+            :class="{focused: filter || searching}"
+            class="search-wrapper card">
+            <input
+              id="search"
+              v-model="filter"
+              type="search"
+              @focus="searching = true"
+              @blur="searching = false">
+            <i
+              v-if="filter"
+              class="material-icons"
+              @click="filter = ''">close</i>
+            <speech-recognition
+              v-else-if="voidSearch"
+              :options="recognitionOption"
+              @result="filter = $event"/>
+            <i
+              v-else
+              class="material-icons">search</i>
+          </div>
+        </li>
+        <li
+          v-for="c in channels['Categories']"
+          :key="c['Name']"
+          :class="{active: c['Name'] == category}">
+          <router-link
+            :to="categoryLink(c)"
+            replace>{{ c['Name'] }}</router-link>
+        </li>
+        <li><div class="divider"/></li>
+        <li :class="{active: $route.name == 'star'}">
+          <router-link :to="{ name: 'star' }">收藏列表</router-link>
+        </li>
+        <li
+          v-if="hasEPG"
+          :class="{active: $route.name == 'program'}">
+          <router-link :to="{ name: 'program' }">当前节目列表</router-link>
+        </li>
+        <li v-if="legacyUrl">
+          <a :href="legacyUrl">
+            回忆旧版
           </a>
-          <a><span class="white-text type">{{ userType }}</span></a>
-          <a><span class="white-text uid">{{ uid }}</span></a>
-        </div>
-      </li>
-      <li class="search">
-        <div
-          :class="{focused: filter || searching}"
-          class="search-wrapper card">
-          <input
-            id="search"
-            v-model="filter"
-            type="search"
-            @focus="searching = true"
-            @blur="searching = false">
-          <i
-            v-if="filter"
-            class="material-icons"
-            @click="filter = ''">close</i>
-          <speech-recognition
-            v-else-if="voidSearch"
-            :options="recognitionOption"
-            @result="filter = $event"/>
-          <i
-            v-else
-            class="material-icons">search</i>
-        </div>
-      </li>
-      <li
-        v-for="c in channels['Categories']"
-        :key="c['Name']"
-        :class="{active: c['Name'] == category}">
-        <router-link
-          :to="categoryLink(c)"
-          replace>{{ c['Name'] }}</router-link>
-      </li>
-      <li><div class="divider"/></li>
-      <li :class="{active: $route.name == 'star'}">
-        <router-link :to="{ name: 'star' }">收藏列表</router-link>
-      </li>
-      <li
-        v-if="hasEPG"
-        :class="{active: $route.name == 'program'}">
-        <router-link :to="{ name: 'program' }">当前节目列表</router-link>
-      </li>
-      <li v-if="legacyUrl">
-        <a :href="legacyUrl">
-          回忆旧版
-        </a>
-      </li>
-      <li v-if="uid && !withIP">
-        <a @click="$emit('logout')">
-          登出
-        </a>
-      </li>
-    </ul>
+        </li>
+        <li v-if="uid && !withIP">
+          <a @click="$emit('logout')">
+            登出
+          </a>
+        </li>
+      </ul>
+
+    </header>
 
     <main>
       <router-view
@@ -223,7 +224,7 @@ export default {
     }
   },
   mounted() {
-    this.navBtn = Materialize.Sidenav.init(this.$el.querySelector('.side-nav'));
+    this.navBtn = Materialize.Sidenav.init(this.$el.querySelector('.sidenav'));
   },
   beforeDestroy() {
     this.navBtn.destroy();
@@ -268,7 +269,7 @@ main {
   width: 93%;
 }
 
-ul.side-nav {
+ul.sidenav {
   padding-bottom: 10px!important;
 
   div.user-view {
