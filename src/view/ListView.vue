@@ -325,7 +325,7 @@ ul.sidenav {
       }
 
       &.focused {
-        margin: 0;
+        margin: 0 4px;
       }
 
       input#search {
