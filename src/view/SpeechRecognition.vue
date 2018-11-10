@@ -6,6 +6,7 @@
 
 <script>
 import Modernizr from 'modernizr';
+import Materialize from 'materialize-css';
 
 /**
  * Workaround the issue that Modernizr return a function instead of a class
@@ -56,11 +57,11 @@ export default {
       };
 
       recognition.onnomatch = (event) => {
-        window.Materialize.toast('识别失败');
+        Materialize.toast({html: '识别失败'});
       };
 
       recognition.onerror = (event) => {
-        window.Materialize.toast(event.error);
+        Materialize.toast({html: event.error});
       };
 
       recognition.start();

@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import Materialize from 'materialize-css';
+
 export default {
   name: 'CastController',
   data() {
@@ -46,7 +48,7 @@ export default {
           console.warn(msg.data);
         };
       }).catch((error) => {
-        window.Materialize.toast(error.message);
+        Materialize.toast({html: error.message});
       });
     },
     send(msg) {
