@@ -156,7 +156,6 @@
 
 <script>
 import Materialize from 'materialize-css';
-import HlsEvents from 'hls.js/src/events';
 
 import flowplayer from 'flowplayer';
 import Modernizr from 'modernizr';
@@ -403,12 +402,13 @@ export default {
     }
   },
   beforeDestroy() {
-    // clean up hls.js
-    if (this.player.engine.hls) {
-      const hls = this.player.engine.hls;
-      hls.stopLoad();
-      hls.trigger(HlsEvents.BUFFER_RESET);
-    }
+    // clean up
+    this.player.load({
+      sources: [{
+        type: 'application/x-mpegurl',
+        src: '',
+      }],
+    });
 
     this.player.shutdown();
 
