@@ -51,7 +51,6 @@ module.exports = {
             data: `
             $primary-color: ${config.primaryColor};
             $secondary-color: ${config.secondaryColor};
-            $roboto-font-path: "../dist/fonts/roboto/";
             `,
           },
         },
