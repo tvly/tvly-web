@@ -110,10 +110,6 @@ module.exports = {
       template: 'src/index.html',
     }),
     new webpack.ProvidePlugin({
-      // required by flowplayer again
-      'jQuery': 'jquery',
-      'window.jQuery': 'jquery',
-
       // activate hlsjs-lite plugin of flowplayer
       // https://flowplayer.com/help/developers/flowplayer-7/setup#hlsjs-lite
       'window.Hls': 'hls.js',

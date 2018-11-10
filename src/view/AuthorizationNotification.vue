@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import jQuery from 'jquery';
+import Materialize from 'materialize-css';
 
 import config from '../../config.json5';
 
@@ -48,15 +48,17 @@ export default {
     };
   },
   mounted() {
-    jQuery('#auth-notification').modal({
-      dismissible: false,
-      opacity: .5,
-    });
+    this.modal = Materialize.Modal.init(
+        this.$el, {
+          dismissible: false,
+          opacity: .5,
+        }
+    );
   },
   methods: {
     notify() {
       if (!this.dismissed) {
-        jQuery('#auth-notification').modal('open');
+        this.modal.open();
       }
     },
     doLogin() {

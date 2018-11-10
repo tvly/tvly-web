@@ -155,7 +155,7 @@
 </template>
 
 <script>
-import jQuery from 'jquery';
+import Materialize from 'materialize-css';
 
 import flowplayer from 'flowplayer';
 import Modernizr from 'modernizr';
@@ -177,6 +177,18 @@ import config from '../../config.json5';
  **/
 function notMobile() {
   return window.innerWidth > 600;
+}
+
+/**
+ * open Modal if it's closed and close Modal if it's open
+ * @param {Modal} modal - the modal to be toggled
+ **/
+function toggleModal(modal) {
+  if (modal.isOpen) {
+    modal.close();
+  } else {
+    modal.open();
+  }
 }
 
 export default {
@@ -365,8 +377,11 @@ export default {
     }
 
     // TODO: clean up
-    jQuery('.modal').modal();
-    jQuery('.dropdown-trigger').dropdown();
+    this.epgModal = Materialize.Modal.init(
+        this.$el.querySelectorAll('#epg-modal'))[0];
+    this.helpModal = Materialize.Modal.init(
+        this.$el.querySelectorAll('#help-modal'))[0];
+    Materialize.Dropdown.init(this.$el.querySelectorAll('.dropdown-trigger'));
     window.addEventListener('keydown', this.keyHandler);
     window.addEventListener('resize', this.applyRatio);
     window.addEventListener('resize', this.resizeHandler);
@@ -536,8 +551,7 @@ export default {
         case 'P': // keyIdentifier
         case 'U+0050': // keyIdentifier
         case 'p': {
-          const $epgModel = jQuery('#epg-modal');
-          $epgModel.modal($epgModel.hasClass('open') ? 'close' : 'open');
+          toggleModal(this.epgModal);
           break;
         }
         case 'M': // keyIdentifier
@@ -551,8 +565,7 @@ export default {
         case 'QuestionMark': // KeyIdentifier
         case 'U+003F': // KeyIdentifier
         case '?': {
-          const $helpModel = jQuery('#help-modal');
-          $helpModel.modal($helpModel.hasClass('open') ? 'close' : 'open');
+          toggleModal(this.helpModal);
           break;
         }
         default:
