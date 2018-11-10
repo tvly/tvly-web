@@ -160,7 +160,7 @@ import jQuery from 'jquery';
 import flowplayer from 'flowplayer';
 import Modernizr from 'modernizr';
 import strftime from 'strftime';
-import {mapGetters} from 'vuex';
+import {mapGetters, mapState} from 'vuex';
 import format from 'string-template';
 
 import swf from 'flowplayer/dist/flowplayer.swf';
@@ -287,8 +287,10 @@ export default {
         'html5': 'language-html5',
       }[this.engine];
     },
-    ...mapGetters([
+    ...mapState([
       'now',
+    ]),
+    ...mapGetters([
       'channels',
     ]),
   },
