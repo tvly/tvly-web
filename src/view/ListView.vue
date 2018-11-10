@@ -330,6 +330,7 @@ ul.sidenav {
         top: 0px;
         right: 10px;
         cursor: pointer;
+        font-size: 23px;
       }
 
       &.focused {
