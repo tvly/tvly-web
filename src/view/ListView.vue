@@ -278,6 +278,7 @@ main {
 
 ul.sidenav {
   padding-bottom: 10px!important;
+  width: 250px;
 
   div.user-view {
     height: 240px;
