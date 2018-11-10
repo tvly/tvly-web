@@ -8,9 +8,7 @@ env:
     commonjs: true
 parserOptions:
     sourceType: module
-    ecmaVersion: 6
-    ecmaFeatures:
-        experimentalObjectRestSpread: true
+    ecmaVersion: 2018
 rules:
     semi: ["error", "always"]
     no-console: ["error", { "allow": ["warn", "error"] }]

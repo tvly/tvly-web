@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     connect() {
-      let request = new window.PresentationRequest(['/play/cctv1hd']);
+      const request = new window.PresentationRequest(['/play/cctv1hd']);
       request.start().then((connection) => {
         this.connection = connection;
 

@@ -1,8 +1,8 @@
 {
   "presets": [
-    ["env", { "modules": false }]
+    ["@babel/preset-env", { "modules": false }]
   ],
   "plugins": [
-    ["transform-object-rest-spread", { "useBuiltIns": true }]
+    ["@babel/plugin-proposal-object-rest-spread", { "useBuiltIns": true }]
   ]
 }

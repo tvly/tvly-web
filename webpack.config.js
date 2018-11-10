@@ -4,12 +4,13 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const config = require('./config.json5');
 const meta = require('./package');
 
 module.exports = {
-  entry: ['babel-polyfill', 'whatwg-fetch', './src/main.js'],
+  entry: ['@babel/polyfill', 'whatwg-fetch', './src/main.js'],
   mode: process.env.NODE_ENV || 'production',
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -29,11 +30,6 @@ module.exports = {
     }, {
       test: /\.vue$/,
       loader: 'vue-loader',
-      options: {
-        loaders: {
-        },
-        // other vue-loader options go here
-      },
     }, {
       test: /\.json5$/,
       loader: 'json5-loader',
@@ -105,6 +101,7 @@ module.exports = {
     noInfo: true,
   },
   plugins: [
+    new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       WEBPACK_APP_VERSION: JSON.stringify(meta.version),
       WEBPACK_TIMESTAMP: JSON.stringify(Date.now()),
@@ -113,8 +110,13 @@ module.exports = {
       template: 'src/index.html',
     }),
     new webpack.ProvidePlugin({
+      // required by flowplayer again
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
+
+      // activate hlsjs-lite plugin of flowplayer
+      // https://flowplayer.com/help/developers/flowplayer-7/setup#hlsjs-lite
+      'window.Hls': 'hls.js',
     }),
   ],
 };

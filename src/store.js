@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
     // Initialized with an array of empty array
     // with the length of channelsUrlList
     fetchedCategories: Array.from(
-      Array(config.channelsUrlList.length)).map(() => []),
+        Array(config.channelsUrlList.length)).map(() => []),
   },
   mutations: {
     updateNow(state) {
@@ -66,9 +66,7 @@ export const store = new Vuex.Store({
           }
         }).then((channels) => {
           context.commit('addChannels', {channels, index});
-        }).then(
-          () => context.commit('channelsUrlCompleted'),
-          () => context.commit('channelsUrlCompleted'));
+        }).finally(() => context.commit('channelsUrlCompleted'));
       });
     },
     fetchEPG(context) {
@@ -102,12 +100,12 @@ export const store = new Vuex.Store({
           }
         }).then((text) => {
           return text
-            .split('\n')
-            .filter((line) => line)
-            .map((line) => line.replace(/^\s+/, '').split(/\s/));
+              .split('\n')
+              .filter((line) => line)
+              .map((line) => line.replace(/^\s+/, '').split(/\s/));
         }).then((array) => {
-          let channelViewers = {};
-          for (let [num, channel] of array) {
+          const channelViewers = {};
+          for (const [num, channel] of array) {
             channelViewers[channel] = parseInt(num);
           }
           return channelViewers;
@@ -133,7 +131,7 @@ export const store = new Vuex.Store({
     getCategory(state, getters) {
       return (categoryName) => {
         return getters.channels.Categories.find(
-          (c) => c['Name'] == categoryName
+            (c) => c['Name'] == categoryName
         );
       };
     },

@@ -155,12 +155,9 @@
 </template>
 
 <script>
-// To activate lite hlsjs plugin of flowplayer
-import Hls from 'hls.js';
-window.Hls = Hls;
+import jQuery from 'jquery';
 
 import flowplayer from 'flowplayer';
-import jQuery from 'jquery';
 import Modernizr from 'modernizr';
 import strftime from 'strftime';
 import {mapGetters} from 'vuex';
@@ -376,7 +373,7 @@ export default {
       navigator.presentation.receiver.connectionList.then((list) => {
         list.connections.map((conn) => {
           conn.onmessage = (msg) => {
-            let data = JSON.parse(msg.data);
+            const data = JSON.parse(msg.data);
             if (data.action === 'channel') {
               this.$router.push(channelLink(data.channel.Vid, this.from));
             }
@@ -392,13 +389,13 @@ export default {
     window.removeEventListener('resize', this.resizeHandler);
 
     // Force unload when using hlsjs-lite
-    let hlsEngine = flowplayer.engine('hlsjs-lite');
+    const hlsEngine = flowplayer.engine('hlsjs-lite');
     if (hlsEngine && hlsEngine.hls) {
       hlsEngine.hls.stopLoad();
     }
 
     // Force unload when using HTML5 video tag
-    let videoTag = jQuery('.fp-player > video')[0];
+    const videoTag = jQuery('.fp-player > video')[0];
     if (videoTag) {
       videoTag.src = '';
       videoTag.load();
@@ -571,7 +568,7 @@ export default {
         default:
           captured = false;
           console.warn(`Unkown key event: ${event.key}(${event.keyIdentifier})`,
-                       event);
+              event);
       }
       if (captured) {
         event.preventDefault();
@@ -583,8 +580,9 @@ export default {
         if (nextChannelIndex >= 0 &&
               nextChannelIndex < this.currentCategory.Channels.length) {
           this.$router.replace(
-            channelLink(
-              this.currentCategory.Channels[nextChannelIndex].Vid, this.from));
+              channelLink(
+                  this.currentCategory.Channels[nextChannelIndex].Vid,
+                  this.from));
         }
       }
     },
@@ -596,7 +594,7 @@ export default {
               nextCategoryIndex < categories.length) {
           const category = categories[nextCategoryIndex];
           this.$router.replace(
-            channelLink(category.Channels[0].Vid, this.from));
+              channelLink(category.Channels[0].Vid, this.from));
         }
       }
     },
@@ -605,8 +603,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~materialize-css/sass/components/_color.scss";
-@import "~materialize-css/sass/components/_variables.scss";
+@import "~materialize-css/sass/materialize.scss";
 
 .page {
   height: 100vh;

@@ -6,13 +6,12 @@
       <nav>
         <div class="container">
           <div class="nav-wrapper">
+            <a class="brand-logo">{{ appName }}</a>
             <a
-              href="#"
-              data-activates="nav-menu"
-              class="button-collapse">
+              data-target="nav-menu"
+              class="sidenav-trigger">
               <i class="material-icons">menu</i>
             </a>
-            <a class="brand-logo">{{ appName }}</a>
             <ul class="right">
               <li>
                 <a @click="detail = !detail">
@@ -23,78 +22,79 @@
           </div>
         </div>
       </nav>
-      <ul
-        id="nav-menu"
-        class="side-nav fixed">
-        <li>
-          <div class="userView">
-            <div class="background">
-              <img
-                :src="background"
-                alt="background">
-            </div>
-            <a>
-              <img
-                :src="avatar"
-                class="circle"
-                alt="avatar">
-            </a>
-            <a><span class="white-text type">{{ userType }}</span></a>
-            <a><span class="white-text uid">{{ uid }}</span></a>
-          </div>
-        </li>
-        <li class="search">
-          <div
-            :class="{focused: filter || searching}"
-            class="search-wrapper card">
-            <input
-              id="search"
-              v-model="filter"
-              type="search"
-              @focus="searching = true"
-              @blur="searching = false">
-            <i
-              v-if="filter"
-              class="material-icons"
-              @click="filter = ''">close</i>
-            <speech-recognition
-              v-else-if="voidSearch"
-              :options="recognitionOption"
-              @result="filter = $event"/>
-            <i
-              v-else
-              class="material-icons">search</i>
-          </div>
-        </li>
-        <li
-          v-for="c in channels['Categories']"
-          :key="c['Name']"
-          :class="{active: c['Name'] == category}">
-          <router-link
-            :to="categoryLink(c)"
-            replace>{{ c['Name'] }}</router-link>
-        </li>
-        <li><div class="divider"/></li>
-        <li :class="{active: $route.name == 'star'}">
-          <router-link :to="{ name: 'star' }">收藏列表</router-link>
-        </li>
-        <li
-          v-if="hasEPG"
-          :class="{active: $route.name == 'program'}">
-          <router-link :to="{ name: 'program' }">当前节目列表</router-link>
-        </li>
-        <li v-if="legacyUrl">
-          <a :href="legacyUrl">
-            回忆旧版
-          </a>
-        </li>
-        <li v-if="uid && !withIP">
-          <a @click="$emit('logout')">
-            登出
-          </a>
-        </li>
-      </ul>
     </header>
+
+    <ul
+      id="nav-menu"
+      class="sidenav sidenav-fixed">
+      <li>
+        <div class="user-view">
+          <div class="background">
+            <img
+              :src="background"
+              alt="background">
+          </div>
+          <a>
+            <img
+              :src="avatar"
+              class="circle"
+              alt="avatar">
+          </a>
+          <a><span class="white-text type">{{ userType }}</span></a>
+          <a><span class="white-text uid">{{ uid }}</span></a>
+        </div>
+      </li>
+      <li class="search">
+        <div
+          :class="{focused: filter || searching}"
+          class="search-wrapper card">
+          <input
+            id="search"
+            v-model="filter"
+            type="search"
+            @focus="searching = true"
+            @blur="searching = false">
+          <i
+            v-if="filter"
+            class="material-icons"
+            @click="filter = ''">close</i>
+          <speech-recognition
+            v-else-if="voidSearch"
+            :options="recognitionOption"
+            @result="filter = $event"/>
+          <i
+            v-else
+            class="material-icons">search</i>
+        </div>
+      </li>
+      <li
+        v-for="c in channels['Categories']"
+        :key="c['Name']"
+        :class="{active: c['Name'] == category}">
+        <router-link
+          :to="categoryLink(c)"
+          replace>{{ c['Name'] }}</router-link>
+      </li>
+      <li><div class="divider"/></li>
+      <li :class="{active: $route.name == 'star'}">
+        <router-link :to="{ name: 'star' }">收藏列表</router-link>
+      </li>
+      <li
+        v-if="hasEPG"
+        :class="{active: $route.name == 'program'}">
+        <router-link :to="{ name: 'program' }">当前节目列表</router-link>
+      </li>
+      <li v-if="legacyUrl">
+        <a :href="legacyUrl">
+          回忆旧版
+        </a>
+      </li>
+      <li v-if="uid && !withIP">
+        <a @click="$emit('logout')">
+          登出
+        </a>
+      </li>
+    </ul>
 
     <main>
       <router-view
@@ -110,9 +110,9 @@
 </template>
 
 <script>
-import jQuery from 'jquery';
 import Modernizr from 'modernizr';
 import {mapGetters} from 'vuex';
+import Materialize from 'materialize-css';
 
 import IPTVFooter from './IPTVFooter.vue';
 import CastController from './CastController.vue';
@@ -223,15 +223,10 @@ export default {
     }
   },
   mounted() {
-    this.navBtn = jQuery(this.$el.querySelector('.button-collapse'));
-    this.navBtn.sideNav({
-      menuWidth: 250,
-      closeOnClick: true,
-      draggable: true,
-    });
+    this.navBtn = Materialize.Sidenav.init(this.$el.querySelector('.side-nav'));
   },
   beforeDestroy() {
-    this.navBtn.sideNav('destroy');
+    this.navBtn.destroy();
   },
   methods: {
     switchChannel(channel) {
@@ -250,8 +245,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~materialize-css/sass/components/_color.scss";
-@import "~materialize-css/sass/components/_variables.scss";
+@import "~materialize-css/sass/materialize.scss";
 
 a {
   cursor: pointer;
@@ -277,7 +271,7 @@ main {
 ul.side-nav {
   padding-bottom: 10px!important;
 
-  div.userView {
+  div.user-view {
     height: 240px;
 
     div.background img {
@@ -285,20 +279,20 @@ ul.side-nav {
       width: 100%;
     }
 
-    @mixin userView-item {
+    @mixin user-view-item {
       line-height: 24px;
       display: block;
     }
 
     .type {
-      @include userView-item;
+      @include user-view-item;
       font-size: 14px;
       margin-top: 16px;
       font-weight: 600;
     }
 
     .uid {
-      @include userView-item;
+      @include user-view-item;
       font-size: 11px;
       padding-bottom: 16px;
       font-weight: 300;

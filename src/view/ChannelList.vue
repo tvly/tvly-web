@@ -57,7 +57,7 @@ export default {
   computed: {
     selectedElement() {
       return this.$el.querySelector(
-        `.channel-list-item:nth-child(${this.selected + 1})`);
+          `.channel-list-item:nth-child(${this.selected + 1})`);
     },
     channelList() {
       if (this.$route.name === 'channel') {
@@ -96,7 +96,7 @@ export default {
     categoryIndex() {
       // if category is null, then when are in 'star' page
       return this.category ? this.channels.Categories.findIndex(
-        (category) => category.Name === this.category
+          (category) => category.Name === this.category
       ) : this.channels.Categories.length;
     },
     ...mapGetters([
@@ -152,8 +152,8 @@ export default {
         }
       }
       const switchTo = Array.prototype.findIndex.call(
-        this.$el.querySelectorAll('.channel-list-item'),
-        (el) => el.getBoundingClientRect().top >= 0);
+          this.$el.querySelectorAll('.channel-list-item'),
+          (el) => el.getBoundingClientRect().top >= 0);
       if (switchTo >= 0) {
         this.selected = switchTo;
       } else {
@@ -186,7 +186,7 @@ export default {
         case 'l':
         case 'ChannelUp':
           this.selected = Math.min(this.selected + 1,
-            this.filteredList.length);
+              this.filteredList.length);
           break;
         case 'Up': // keyIdentifier
         case 'K': // keyIdentifier
@@ -201,7 +201,8 @@ export default {
         case 'ArrowDown':
         case 'j':
           this.toCategory(
-            Math.min(this.channels.Categories.length, this.categoryIndex + 1));
+              Math.min(this.channels.Categories.length, this.categoryIndex + 1)
+          );
           break;
         case 'Enter':
         case 'Spacebar': // keyIdentifier
@@ -216,7 +217,7 @@ export default {
         default:
           captured = false;
           console.warn(`Unkown key event: ${event.key}(${event.keyIdentifier})`,
-                       event);
+              event);
       }
       if (captured) {
         event.preventDefault();
