@@ -69,26 +69,34 @@
         <li
           v-for="c in channels['Categories']"
           :key="c['Name']"
-          :class="{active: c['Name'] == category}">
+          :class="{active: c['Name'] == category}"
+          class="sidenav-close">
           <router-link
             :to="categoryLink(c)"
             replace>{{ c['Name'] }}</router-link>
         </li>
         <li><div class="divider"/></li>
-        <li :class="{active: $route.name == 'star'}">
+        <li
+          :class="{active: $route.name == 'star'}"
+          class="sidenav-close">
           <router-link :to="{ name: 'star' }">收藏列表</router-link>
         </li>
         <li
           v-if="hasEPG"
-          :class="{active: $route.name == 'program'}">
+          :class="{active: $route.name == 'program'}"
+          class="sidenav-close">
           <router-link :to="{ name: 'program' }">当前节目列表</router-link>
         </li>
-        <li v-if="legacyUrl">
+        <li
+          v-if="legacyUrl"
+          class="sidenav-close">
           <a :href="legacyUrl">
             回忆旧版
           </a>
         </li>
-        <li v-if="uid && !withIP">
+        <li
+          v-if="uid && !withIP"
+          class="sidenav-close">
           <a @click="$emit('logout')">
             登出
           </a>
