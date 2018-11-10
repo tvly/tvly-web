@@ -160,7 +160,6 @@ export default {
       searching: false,
       withIP: false,
       uid: '',
-      navBtn: null,
       legacyUrl: config.legacyUrl,
       voidSearch: Modernizr.speechrecognition,
       background,
