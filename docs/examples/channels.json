@@ -1,0 +1,21 @@
+{  
+	"SnapshotUrlTemplate": "/png/logo-flat.png",
+	"Categories":[  
+		{  
+			"Name":"释放自我",
+			"Channels":[  
+				{  
+					"Name":"原始视频",
+					"Vid":"original",
+					"HlsUrlTemplate":"/live/desktop.m3u8"
+				},
+				{  
+					"Name":"水印视频",
+					"Vid":"watermarked",
+					"HlsUrlTemplate":"/wm/desktop.m3u8"
+				}
+			]
+		}
+	]
+}
+
