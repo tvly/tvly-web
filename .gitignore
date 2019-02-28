@@ -3,7 +3,7 @@ node_modules/
 dist/
 npm-debug.log
 yarn.lock
-config.json5
+/config.json5
 package-lock.json
 
 # Created by https://www.gitignore.io/api/vim
