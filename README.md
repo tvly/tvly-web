@@ -4,7 +4,7 @@
 
 ## Documentation
 
-see docs/
+see [here](docs/)
 
 ## Use cases
 
