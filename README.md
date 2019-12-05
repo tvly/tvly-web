@@ -20,6 +20,7 @@ see [here](docs/)
 * [Zhoukou Normal University](http://tv.zknu.edu.cn)
 * [Nanchang Hangkong University](http://iptv.nchu.edu.cn)
 * [Dalian University of Technology](http://video.dlut.edu.cn)
+* [University of Electronic Science and Technology of China](https://iptv.uestc.edu.cn)
 * Some other universities in Henan Province
 
 ## Credit
